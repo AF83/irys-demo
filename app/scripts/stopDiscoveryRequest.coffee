@@ -59,18 +59,18 @@ class stopDiscoveryRequest
 	<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
 	  <SOAP-ENV:Header/>
 	  <S:Body>
-			<ns7:StopPointsDiscovery xmlns:ns2="http://www.siri.org.uk/siri" xmlns:ns3="http://www.ifopt.org.uk/acsb" xmlns:ns4="http://www.ifopt.org.uk/ifopt" xmlns:ns5="http://datex2.eu/schema/2_0RC1/2_0" xmlns:ns6="http://scma/siri" xmlns:ns7="http://wsdl.siri.org.uk"">
+			<ns7:StopPointsDiscovery xmlns:ns2="http://www.siri.org.uk/siri" xmlns:ns3="http://www.ifopt.org.uk/acsb" xmlns:ns4="http://www.ifopt.org.uk/ifopt" xmlns:ns5="http://datex2.eu/schema/2_0RC1/2_0" xmlns:ns6="http://scma/siri" xmlns:ns7="http://wsdl.siri.org.uk">
 			  <ServiceRequestInfo>
 	        <ns2:RequestTimestamp>{{requestDate}}</ns2:RequestTimestamp>
 	        <ns2:RequestorRef>GVB:DRIS</ns2:RequestorRef>
-	        <ns2:MessageIdentifier>Discovery:Test:0/ns2:MessageIdentifier>
+	        <ns2:MessageIdentifier>Discovery:Test:0</ns2:MessageIdentifier>
 	      </ServiceRequestInfo>
-			  <Request version="1.3" xmlns="">
+			  <Request version="1.3">
 			    <ns2:RequestTimestamp>{{requestDate}}</ns2:RequestTimestamp>
-			    <ns2:RequestorRef>Siri-client</ns2:RequestorRef>
+			    <ns2:RequestorRef>GVB:DRIS</ns2:RequestorRef>
 			    <ns2:MessageIdentifier>Discovery:Test:0</ns2:MessageIdentifier>
 			  </Request>
-			  <RequestExtension xmlns=""/>
+			  <RequestExtension/>
 			</ns7:StopPointsDiscovery>
 	</S:Body>
 	</S:Envelope>"""
@@ -79,18 +79,18 @@ class stopDiscoveryRequest
 	<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
 	  <SOAP-ENV:Header/>
 	  <S:Body>
-			<ns7:LinesDiscovery xmlns:ns2="http://www.siri.org.uk/siri" xmlns:ns3="http://www.ifopt.org.uk/acsb" xmlns:ns4="http://www.ifopt.org.uk/ifopt" xmlns:ns5="http://datex2.eu/schema/2_0RC1/2_0" xmlns:ns6="http://scma/siri" xmlns:ns7="http://wsdl.siri.org.uk"">
+			<ns7:LinesDiscovery xmlns:ns2="http://www.siri.org.uk/siri" xmlns:ns3="http://www.ifopt.org.uk/acsb" xmlns:ns4="http://www.ifopt.org.uk/ifopt" xmlns:ns5="http://datex2.eu/schema/2_0RC1/2_0" xmlns:ns6="http://scma/siri" xmlns:ns7="http://wsdl.siri.org.uk">
 			  <ServiceRequestInfo>
 	        <ns2:RequestTimestamp>{{requestDate}}</ns2:RequestTimestamp>
 	        <ns2:RequestorRef>GVB:DRIS</ns2:RequestorRef>
-	        <ns2:MessageIdentifier>Discovery:Test:0/ns2:MessageIdentifier>
+	        <ns2:MessageIdentifier>Discovery:Test:0</ns2:MessageIdentifier>
 	      </ServiceRequestInfo>
-			  <Request version="1.3" xmlns="">
+			  <Request version="1.3">
 			    <ns2:RequestTimestamp>{{requestDate}}</ns2:RequestTimestamp>
 			    <ns2:RequestorRef>Siri-client</ns2:RequestorRef>
 			    <ns2:MessageIdentifier>Discovery:Test:0</ns2:MessageIdentifier>
 			  </Request>
-			  <RequestExtension xmlns=""/>
+			  <RequestExtension/>
 			</ns7:LinesDiscovery>
 	</S:Body>
 	</S:Envelope>"""
@@ -171,6 +171,11 @@ class stopDiscoveryRequest
     for node in nodes
       handler.parseSiriResponse(node)
       handler.buildStop()
+
+  handleStopDiscoveryResponse: (xmlResponse, handler) ->
+    nodes = xmlResponse.find('PlaceName')
+    handler.buildAutocompleteArray nodes
+
 
 	sendRequest:(xmlRequest, responseHandler, handler) ->
 		$.ajax(
