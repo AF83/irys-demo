@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP-ENV:Header/>
+  <S:Body>
+    <ns7:GetStopMonitoring xmlns:ns2="http://www.siri.org.uk/siri" xmlns:ns3="http://www.ifopt.org.uk/acsb" xmlns:ns4="http://www.ifopt.org.uk/ifopt" xmlns:ns5="http://datex2.eu/schema/2_0RC1/2_0" xmlns:ns6="http://scma/siri" xmlns:ns7="http://wsdl.siri.org.uk">
+      <ServiceRequestInfo>
+        <ns2:RequestTimestamp>2015-07-22T14:15:02.850+02:00</ns2:RequestTimestamp>
+        <ns2:RequestorRef>GVB:DRIS</ns2:RequestorRef>
+        <ns2:MessageIdentifier>StopMonitoring:Test:1</ns2:MessageIdentifier>
+      </ServiceRequestInfo>
+      <Request version="1.3">
+        <ns2:RequestTimestamp>2015-07-22T14:15:02.850+02:00</ns2:RequestTimestamp>
+        <ns2:MessageIdentifier>StopMonitoring:Test:1</ns2:MessageIdentifier>
+        <ns2:PReviewInterval></ns2:PReviewInterval>
+        <ns2:MonitoringRef>NINOXE:StopPoint:SP:15579580:LOC</ns2:MonitoringRef>
+        <ns2:DestinationRef>1</ns2:DestinationRef>
+        <ns2:LineRef>1</ns2:LineRef>
+        <ns2:MaximumStopVisits>5</ns2:MaximumStopVisits>
+        <ns2:MaximumStopVisits>1</ns2:MaximumStopVisits>
+        <ns2:MinimumStopVisitsPerLine>1</ns2:MinimumStopVisitsPerLine>
+        <ns2:StopVisitTypes>arrivals</ns2:StopVisitTypes>
+      </Request>
+      <RequestExtension/>
+    </ns7:GetStopMonitoring>
+  </S:Body>
+</S:Envelope>
