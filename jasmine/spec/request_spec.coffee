@@ -130,7 +130,7 @@ describe "request test", ->
 
 
   request = new stopDiscoveryRequest
-  xmlRequest = request.stopDiscovery(form)
+  xmlRequest = request.getStopMonitoring(form)
 
 
   it "checks the form is parsed correctly", ->
