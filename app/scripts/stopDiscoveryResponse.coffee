@@ -1,5 +1,5 @@
 class stopDiscoveryResponse
-  fallbackResponse: """
+  fallbackStopResponse: """
   <?xml version="1.0" encoding="UTF-8"?>
   <wsdl:StopPointsDiscoveryResponse xmlns:wsdl="http://wsdl.siri.org.uk">
     <StopPointsDiscoveryAnswerInfo>
@@ -1794,18 +1794,155 @@ class stopDiscoveryResponse
     <AnswerExtension/>
   </wsdl:StopPointsDiscoveryResponse>"""
 
-  handleFallbackResponse:() ->
-    nodes = $($.parseXML(@fallbackResponse)).find('AnnotatedStopPointRef')
-    this.buildAutocompleteArray nodes
+  fallbackLineResponse: """
+  <?xml version="1.0" encoding="UTF-8"?>
+  <wsdl:LinesDiscoveryResponse xmlns:wsdl="http://wsdl.siri.org.uk">
+    <LinesDiscoveryAnswerInfo>
+      <siri:ResponseTimestamp xmlns:siri="http://www.siri.org.uk/siri">2015-07-31T10:09:53.078+02:00</siri:ResponseTimestamp>
+      <siri:ProducerRef xmlns:siri="http://www.siri.org.uk/siri">DRYADE</siri:ProducerRef>
+      <siri:Address xmlns:siri="http://www.siri.org.uk/siri">http://chouette.cityway.fr/irys_server</siri:Address>
+      <siri:ResponseMessageIdentifier xmlns:siri="http://www.siri.org.uk/siri">DRYADE:Discovery:7:LOC</siri:ResponseMessageIdentifier>
+      <siri:RequestMessageRef xmlns:siri="http://www.siri.org.uk/siri">Discovery:Test:0</siri:RequestMessageRef>
+    </LinesDiscoveryAnswerInfo>
+    <Answer version="1.3">
+      <siri:ResponseTimestamp xmlns:siri="http://www.siri.org.uk/siri">2015-07-31T10:09:53.078+02:00</siri:ResponseTimestamp>
+      <siri:Status xmlns:siri="http://www.siri.org.uk/siri">true</siri:Status>
+      <siri:AnnotatedLineRef xmlns:siri="http://www.siri.org.uk/siri">
+        <siri:LineRef>NINOXE:Line:15625451:LOC</siri:LineRef>
+        <siri:LineName xml:lang="FR">Ligne 4</siri:LineName>
+        <siri:Monitored>true</siri:Monitored>
+        <siri:Destinations>
+          <siri:Destination>
+            <siri:DestinationRef>NINOXE:StopPoint:BP:15625457:LOC</siri:DestinationRef>
+            <siri:PlaceName xml:lang="FR">Les Bucoliques L4 (A)</siri:PlaceName>
+          </siri:Destination>
+          <siri:Destination>
+            <siri:DestinationRef>NINOXE:StopPoint:BP:15625461:LOC</siri:DestinationRef>
+            <siri:PlaceName xml:lang="FR">Vieux Carton (R)</siri:PlaceName>
+          </siri:Destination>
+        </siri:Destinations>
+      </siri:AnnotatedLineRef>
+      <siri:AnnotatedLineRef xmlns:siri="http://www.siri.org.uk/siri">
+        <siri:LineRef>NINOXE:Line:15624980:LOC</siri:LineRef>
+        <siri:LineName xml:lang="FR">Ligne 6 Jaune</siri:LineName>
+        <siri:Monitored>true</siri:Monitored>
+        <siri:Destinations>
+          <siri:Destination>
+            <siri:DestinationRef>NINOXE:StopPoint:BP:15624989:LOC</siri:DestinationRef>
+            <siri:PlaceName xml:lang="FR">Hotel des compagnons de la musique des alpages (A)</siri:PlaceName>
+          </siri:Destination>
+          <siri:Destination>
+            <siri:DestinationRef>NINOXE:StopPoint:BP:15624994:LOC</siri:DestinationRef>
+            <siri:PlaceName xml:lang="FR">Réserve du jardin (hopital st James) (R)</siri:PlaceName>
+          </siri:Destination>
+        </siri:Destinations>
+      </siri:AnnotatedLineRef>
+      <siri:AnnotatedLineRef xmlns:siri="http://www.siri.org.uk/siri">
+        <siri:LineRef>NINOXE:Line:15626053:LOC</siri:LineRef>
+        <siri:LineName xml:lang="FR">Ligne 5 Magenta</siri:LineName>
+        <siri:Monitored>true</siri:Monitored>
+        <siri:Destinations>
+          <siri:Destination>
+            <siri:DestinationRef>NINOXE:StopPoint:BP:15626054:LOC</siri:DestinationRef>
+            <siri:PlaceName xml:lang="FR">Roux (A)</siri:PlaceName>
+          </siri:Destination>
+          <siri:Destination>
+            <siri:DestinationRef>NINOXE:StopPoint:BP:15626072:LOC</siri:DestinationRef>
+            <siri:PlaceName xml:lang="FR">Pieves (R)</siri:PlaceName>
+          </siri:Destination>
+        </siri:Destinations>
+      </siri:AnnotatedLineRef>
+      <siri:AnnotatedLineRef xmlns:siri="http://www.siri.org.uk/siri">
+        <siri:LineRef>NINOXE:Line:15577792:LOC</siri:LineRef>
+        <siri:LineName xml:lang="FR">Ligne 3 Metro</siri:LineName>
+        <siri:Monitored>true</siri:Monitored>
+        <siri:Destinations>
+          <siri:Destination>
+            <siri:DestinationRef>NINOXE:StopPoint:BP:15577810:LOC</siri:DestinationRef>
+            <siri:PlaceName xml:lang="FR">Cimetière des Sauvages (R)</siri:PlaceName>
+          </siri:Destination>
+          <siri:Destination>
+            <siri:DestinationRef>NINOXE:StopPoint:BP:15577802:LOC</siri:DestinationRef>
+            <siri:PlaceName xml:lang="FR">Magicien Noir (A)</siri:PlaceName>
+          </siri:Destination>
+        </siri:Destinations>
+      </siri:AnnotatedLineRef>
+      <siri:AnnotatedLineRef xmlns:siri="http://www.siri.org.uk/siri">
+        <siri:LineRef>NINOXE:Line:15574334:LOC</siri:LineRef>
+        <siri:LineName xml:lang="FR">Ligne 1 Bleue</siri:LineName>
+        <siri:Monitored>true</siri:Monitored>
+        <siri:Destinations>
+          <siri:Destination>
+            <siri:DestinationRef>NINOXE:StopPoint:BP:15574354:LOC</siri:DestinationRef>
+            <siri:PlaceName xml:lang="FR">La Celeste (R)</siri:PlaceName>
+          </siri:Destination>
+          <siri:Destination>
+            <siri:DestinationRef>NINOXE:StopPoint:BP:15574347:LOC</siri:DestinationRef>
+            <siri:PlaceName xml:lang="FR">Le Bucoliques (A)</siri:PlaceName>
+          </siri:Destination>
+          <siri:Destination>
+            <siri:DestinationRef>NINOXE:StopPoint:BP:15574356:LOC</siri:DestinationRef>
+            <siri:PlaceName xml:lang="FR">Mairie-1 (R)</siri:PlaceName>
+          </siri:Destination>
+        </siri:Destinations>
+      </siri:AnnotatedLineRef>
+      <siri:AnnotatedLineRef xmlns:siri="http://www.siri.org.uk/siri">
+        <siri:LineRef>NINOXE:Line:15568799:LOC</siri:LineRef>
+        <siri:LineName xml:lang="FR">Ligne 2 Verte</siri:LineName>
+        <siri:Monitored>true</siri:Monitored>
+        <siri:Destinations>
+          <siri:Destination>
+            <siri:DestinationRef>NINOXE:StopPoint:BP:15571505:LOC</siri:DestinationRef>
+            <siri:PlaceName xml:lang="FR">Saint Paul (R)</siri:PlaceName>
+          </siri:Destination>
+          <siri:Destination>
+            <siri:DestinationRef>NINOXE:StopPoint:BP:15568807:LOC</siri:DestinationRef>
+            <siri:PlaceName xml:lang="FR">Morne plaine (A)</siri:PlaceName>
+          </siri:Destination>
+        </siri:Destinations>
+      </siri:AnnotatedLineRef>
+      <siri:AnnotatedLineRef xmlns:siri="http://www.siri.org.uk/siri">
+        <siri:LineRef>NINOXE:Line:15627090:LOC</siri:LineRef>
+        <siri:LineName xml:lang="FR">Ligne 7 orange</siri:LineName>
+        <siri:Monitored>true</siri:Monitored>
+        <siri:Destinations>
+          <siri:Destination>
+            <siri:DestinationRef>NINOXE:StopPoint:BP:15574356:LOC</siri:DestinationRef>
+            <siri:PlaceName xml:lang="FR">Mairie-1 (R)</siri:PlaceName>
+          </siri:Destination>
+          <siri:Destination>
+            <siri:DestinationRef>NINOXE:StopPoint:BP:15574343:LOC</siri:DestinationRef>
+            <siri:PlaceName xml:lang="FR">Hôtel des poste (A)</siri:PlaceName>
+          </siri:Destination>
+        </siri:Destinations>
+      </siri:AnnotatedLineRef>
+    </Answer>
+    <AnswerExtension/>
+  </wsdl:LinesDiscoveryResponse>"""
 
-  buildAutocompleteArray:(nodes) ->
+  typeRef:(type) ->
+    if type == 'Stop'
+      type = type + 'Point'
+    type
+
+  handleFallbackResponse:(type) ->
+
+    if type == 'Stop'
+      file = @fallbackStopResponse
+    else
+      file = @fallbackLineResponse
+    nodes = $($.parseXML(file)).find('Annotated'+ this.typeRef(type) + 'Ref')
+
+    this.buildAutocompleteArray nodes, type
+
+  buildAutocompleteArray:(nodes, type) ->
     autocomplete = []
     for node in nodes
 
       autocomplete.push({
-        id: $(node).find('StopPointRef')[0].innerHTML,
-        label: $(node).find('StopName')[0].innerHTML,
-        value: $(node).find('StopName')[0].innerHTML
+        id: $(node).find(this.typeRef(type) + 'Ref')[0].innerHTML,
+        label: $(node).find(type + 'Name')[0].innerHTML,
+        value: $(node).find(type + 'Name')[0].innerHTML
         })
     autocomplete
 
