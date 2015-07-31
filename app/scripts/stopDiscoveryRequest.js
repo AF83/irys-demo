@@ -33,22 +33,26 @@ stopDiscoveryRequest = (function() {
   stopDiscoveryRequest.prototype.errorResponse = "<div class=\"alert alert-danger\" role=\"alert\">{{errorText}}</div>";
 
   stopDiscoveryRequest.prototype.requestDate = function() {
-    var requestDate;
+    var offset, requestDate;
     requestDate = new Date;
+    offset = requestDate.getHours() - requestDate.getTimezoneOffset() / 60;
+    requestDate.setHours(offset.toString());
     requestDate = requestDate.toISOString();
     return requestDate;
   };
 
   stopDiscoveryRequest.prototype.startDate = function() {
     var hours, minutes, offset, ref, requestDate;
-    requestDate = new Date;
     if (this.start) {
+      requestDate = new Date;
       ref = this.start.split(':'), hours = ref[0], minutes = ref[1];
       offset = +hours - requestDate.getTimezoneOffset() / 60;
       requestDate.setHours(offset.toString());
       requestDate.setMinutes(minutes);
+      requestDate = requestDate.toISOString();
+    } else {
+      requestDate = this.requestDate();
     }
-    requestDate = requestDate.toISOString();
     return requestDate;
   };
 

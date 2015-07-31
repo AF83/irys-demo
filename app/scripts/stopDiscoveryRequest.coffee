@@ -99,17 +99,23 @@ class stopDiscoveryRequest
 
 	requestDate:() ->
 		requestDate = new Date
+		offset =   requestDate.getHours() - requestDate.getTimezoneOffset()/60
+		requestDate.setHours(offset.toString())
 		requestDate = requestDate.toISOString()
 		requestDate
 
 	startDate:() ->
-		requestDate = new Date
+
 		if @start
+			requestDate = new Date
 			[hours, minutes] = @start.split(':')
 			offset = +hours - requestDate.getTimezoneOffset()/60
 			requestDate.setHours(offset.toString())
 			requestDate.setMinutes minutes
-		requestDate = requestDate.toISOString()
+			requestDate = requestDate.toISOString()
+		else
+			requestDate = this.requestDate()
+
 		requestDate
 
 
