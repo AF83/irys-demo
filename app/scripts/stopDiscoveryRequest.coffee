@@ -179,16 +179,16 @@ class stopDiscoveryRequest
   sendRequest:(xmlRequest, responseHandler, handler) ->
     $.ajax(
       method: 'POST'
-		  url: 'http://appli.chouette.mobi/irys_server'
-		  context: document.body
-		  crossDomain: true
-		  contentType: 'text/xml'
-		  dataType: 'xml'
-		  headers:
-		    'version': '1.0'
-		    'encoding': 'UTF-8'
-		    'standalone': 'no'
-		  data: xmlRequest).done((response) ->
+      url: 'http://appli.chouette.mobi/irys_server'
+      context: document.body
+      crossDomain: true
+      contentType: 'text/xml'
+      dataType: 'xml'
+      headers:
+        'version': '1.0'
+        'encoding': 'UTF-8'
+        'standalone': 'no'
+      data: xmlRequest).done((response) ->
         xmlDoc = $(response)
         isError = xmlDoc.find('ErrorText')
         if isError.length > 0

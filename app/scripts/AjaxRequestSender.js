@@ -7,7 +7,7 @@
     var pingu = new stopDiscoveryRequest;
     var xmlRequest = pingu.getStopMonitoring('form');
     var chimp = new stopMonitoringCard;
-
+    console.log(xmlRequest)
     pingu.sendRequest(xmlRequest, pingu.handleStopMonitoringResponse, chimp);
 	});
 

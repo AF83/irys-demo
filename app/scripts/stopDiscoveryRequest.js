@@ -132,8 +132,7 @@ stopDiscoveryRequest = (function() {
 
   stopDiscoveryRequest.prototype.sendRequest = function(xmlRequest, responseHandler, handler) {
     $.ajax({
-      method: 'POST'
-    }, {
+      method: 'POST',
       url: 'http://appli.chouette.mobi/irys_server',
       context: document.body,
       crossDomain: true,
