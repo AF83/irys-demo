@@ -2,9 +2,8 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 
 // bower:scss
 @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
-@import "stop-results/stop-results.scss";
 // endbower
-
+@import "stop-results/stop-results.scss";
 .chouette-logo {
   height: 50px;
 }

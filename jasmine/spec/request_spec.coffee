@@ -10,7 +10,8 @@ describe "request test", ->
     "typeVisit": "arrivals"
     "maxStop": "graou"
     "minStLine": "aloha"
-    "onward": "bibibobo"
+    "onward": "bibibobo",
+    "siriVersionAPI": "1.3"
   }
   requestCheck = {
     "MonitoringRef": "toto"
@@ -18,13 +19,28 @@ describe "request test", ->
     "PreviewInterval": "PT5H40M"
     "StopVisitTypes": "arrivals"
     "MaximumStopVisits": "graou"
-    "MaximumStopVisitsPerLine": "aloha"
+    "MinimumStopVisitsPerLine": "aloha"
     "Onwards": "bibibobo"
   }
 
   form = """<form class="form-horizontal" id ="stop-discovery">
                   <fieldset>
                     <legend>Requête</legend>
+                      <div class="form-group" id = "siriVersionAPI"">
+                          <label for="siriVersionAPI" class="col-sm-2 control-label">Version Chouette
+                          </label>
+                          <div class = "col-sm-10">
+                            <label class="radio-inline">
+                              <input type="radio" name="siriVersionAPIOptions" id="siriVersionAPI1" value="1.3" checked = "checked"> 1.3
+                            </label>
+                            <label class="radio-inline">
+                              <input type="radio" name="siriVersionAPIOptions" id="siriVersionAPI2" value="1.4"> 1.4
+                            </label>
+                            <label class="radio-inline">
+                              <input type="radio" name="siriVersionAPIOptions" id="siriVersionAPI3" value="2.0"> 2.0
+                            </label>
+                        </div>
+                      </div>
                       <div class="form-group">
                           <label for="stopId" class="col-lg-2 control-label">StopId</label>
                           <div class="col-lg-10">
@@ -139,6 +155,7 @@ describe "request test", ->
 
   it "checks the request is right", ->
     for prop, expected of requestCheck
-      console.log $.parseXML(xmlRequest).getElementsByTagName(prop)[0]
       expect($.parseXML(xmlRequest).getElementsByTagName(prop)[0].innerHTML).toEqual expected
-
+  it "checks the API version is right", ->
+    requestVersion = $.parseXML(xmlRequest).getElementsByTagName('Request')[0].getAttribute("version")
+    expect(requestVersion).toEqual dataObject.siriVersionAPI

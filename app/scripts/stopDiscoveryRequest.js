@@ -4,9 +4,9 @@ var stopDiscoveryRequest;
 stopDiscoveryRequest = (function() {
   function stopDiscoveryRequest() {}
 
-  stopDiscoveryRequest.prototype.stopId = null;
+  stopDiscoveryRequest.prototype.siriVersionAPI = null;
 
-  stopDiscoveryRequest.prototype.lineId = null;
+  stopDiscoveryRequest.prototype.stopId = null;
 
   stopDiscoveryRequest.prototype.destId = null;
 
@@ -24,11 +24,13 @@ stopDiscoveryRequest = (function() {
 
   stopDiscoveryRequest.prototype.onWard = null;
 
-  stopDiscoveryRequest.prototype.requestTemplate = "<S:Envelope xmlns:S=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\">\n<SOAP-ENV:Header/>\n<S:Body>\n  <ns7:GetStopMonitoring xmlns:ns2=\"http://www.siri.org.uk/siri\" xmlns:ns3=\"http://www.ifopt.org.uk/acsb\" xmlns:ns4=\"http://www.ifopt.org.uk/ifopt\" xmlns:ns5=\"http://datex2.eu/schema/2_0RC1/2_0\" xmlns:ns6=\"http://scma/siri\" xmlns:ns7=\"http://wsdl.siri.org.uk\">\n    <ServiceRequestInfo>\n      <ns2:RequestTimestamp>{{requestDate}}</ns2:RequestTimestamp>\n      <ns2:RequestorRef>GVB:DRIS</ns2:RequestorRef>\n      <ns2:MessageIdentifier>StopMonitoring:Test:1</ns2:MessageIdentifier>\n    </ServiceRequestInfo>\n    <Request version=\"1.3\">\n      <ns2:RequestTimestamp>{{requestDate}}</ns2:RequestTimestamp>\n      <ns2:MessageIdentifier>StopMonitoring:Test:0</ns2:MessageIdentifier>\n		    {{#preview}}\n      <ns2:PreviewInterval>{{preview}}</ns2:PreviewInterval>\n      {{/preview}}\n      <ns2:StartTime>{{startDate}}</ns2:StartTime>\n		    {{#stopId}}\n      <ns2:MonitoringRef>{{stopId}}</ns2:MonitoringRef>\n      {{/stopId}}\n      {{#lineId}}\n      <ns2:LineRef>{{lineId}}</ns2:LineRef>\n      {{/lineId}}\n				{{#destId}}\n				<ns2:DestinationRef>{{destId}}</ns2:DestinationRef>\n				{{/destId}}\n				{{#typeVisit}}\n				<ns2:StopVisitTypes>{{typeVisit}}</ns2:StopVisitTypes>\n				{{/typeVisit}}\n				{{#maxStop}}\n				<ns2:MaximumStopVisits>{{maxStop}}</ns2:MaximumStopVisits>\n				{{/maxStop}}\n				{{#minStLine}}\n				<ns2:MaximumStopVisitsPerLine>{{minStLine}}</ns2:MaximumStopVisitsPerLine>\n		    {{/minStLine}}\n      {{#onward}}\n        <ns2:MaximumNumberOfCalls>\n      		<ns2:Onwards>{{onward}}</ns2:Onwards>\n        </ns2:MaximumNumberOfCalls>\n    	{{/onward}}\n    </Request>\n    <RequestExtension/>\n  </ns7:GetStopMonitoring>\n</S:Body>\n</S:Envelope>";
+  stopDiscoveryRequest.prototype.lineId = null;
 
-  stopDiscoveryRequest.prototype.stopDiscoveryTemplate = "<S:Envelope xmlns:S=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <SOAP-ENV:Header/>\n  <S:Body>\n		<ns7:StopPointsDiscovery xmlns:ns2=\"http://www.siri.org.uk/siri\" xmlns:ns3=\"http://www.ifopt.org.uk/acsb\" xmlns:ns4=\"http://www.ifopt.org.uk/ifopt\" xmlns:ns5=\"http://datex2.eu/schema/2_0RC1/2_0\" xmlns:ns6=\"http://scma/siri\" xmlns:ns7=\"http://wsdl.siri.org.uk\">\n		  <ServiceRequestInfo>\n        <ns2:RequestTimestamp>{{requestDate}}</ns2:RequestTimestamp>\n        <ns2:RequestorRef>GVB:DRIS</ns2:RequestorRef>\n        <ns2:MessageIdentifier>Discovery:Test:0</ns2:MessageIdentifier>\n      </ServiceRequestInfo>\n		  <Request version=\"1.3\">\n		    <ns2:RequestTimestamp>{{requestDate}}</ns2:RequestTimestamp>\n		    <ns2:RequestorRef>GVB:DRIS</ns2:RequestorRef>\n		    <ns2:MessageIdentifier>Discovery:Test:0</ns2:MessageIdentifier>\n		  </Request>\n		  <RequestExtension/>\n		</ns7:StopPointsDiscovery>\n</S:Body>\n</S:Envelope>";
+  stopDiscoveryRequest.prototype.requestTemplate = "<S:Envelope xmlns:S=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\">\n<SOAP-ENV:Header/>\n<S:Body>\n  <ns7:GetStopMonitoring xmlns:ns2=\"http://www.siri.org.uk/siri\" xmlns:ns3=\"http://www.ifopt.org.uk/acsb\" xmlns:ns4=\"http://www.ifopt.org.uk/ifopt\" xmlns:ns5=\"http://datex2.eu/schema/2_0RC1/2_0\" xmlns:ns6=\"http://scma/siri\" xmlns:ns7=\"http://wsdl.siri.org.uk\">\n    <ServiceRequestInfo>\n      <ns2:RequestTimestamp>{{requestDate}}</ns2:RequestTimestamp>\n      <ns2:RequestorRef>GVB:DRIS</ns2:RequestorRef>\n      <ns2:MessageIdentifier>StopMonitoring:Test:0</ns2:MessageIdentifier>\n    </ServiceRequestInfo>\n    <Request version=\"{{siriVersionAPI}}\">\n      <ns2:RequestTimestamp>{{requestDate}}</ns2:RequestTimestamp>\n      <ns2:MessageIdentifier>StopMonitoring:Test:0</ns2:MessageIdentifier>\n		    {{#preview}}\n      <ns2:PreviewInterval>{{preview}}</ns2:PreviewInterval>\n      {{/preview}}\n      <ns2:StartTime>{{startDate}}</ns2:StartTime>\n		    {{#stopId}}\n      <ns2:MonitoringRef>{{stopId}}</ns2:MonitoringRef>\n      {{/stopId}}\n      {{#lineId}}\n      <ns2:LineRef>{{lineId}}</ns2:LineRef>\n      {{/lineId}}\n				{{#destId}}\n				<ns2:DestinationRef>{{destId}}</ns2:DestinationRef>\n				{{/destId}}\n				{{#typeVisit}}\n				<ns2:StopVisitTypes>{{typeVisit}}</ns2:StopVisitTypes>\n				{{/typeVisit}}\n				{{#maxStop}}\n				<ns2:MaximumStopVisits>{{maxStop}}</ns2:MaximumStopVisits>\n				{{/maxStop}}\n				{{#minStLine}}\n				<ns2:MinimumStopVisitsPerLine>{{minStLine}}</ns2:MinimumStopVisitsPerLine>\n		    {{/minStLine}}\n      {{#onward}}\n        <ns2:MaximumNumberOfCalls>\n      		<ns2:Onwards>{{onward}}</ns2:Onwards>\n        </ns2:MaximumNumberOfCalls>\n    	{{/onward}}\n    </Request>\n    <RequestExtension/>\n  </ns7:GetStopMonitoring>\n</S:Body>\n</S:Envelope>";
 
-  stopDiscoveryRequest.prototype.lineDiscoveryTemplate = "<S:Envelope xmlns:S=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <SOAP-ENV:Header/>\n  <S:Body>\n		<ns7:LinesDiscovery xmlns:ns2=\"http://www.siri.org.uk/siri\" xmlns:ns3=\"http://www.ifopt.org.uk/acsb\" xmlns:ns4=\"http://www.ifopt.org.uk/ifopt\" xmlns:ns5=\"http://datex2.eu/schema/2_0RC1/2_0\" xmlns:ns6=\"http://scma/siri\" xmlns:ns7=\"http://wsdl.siri.org.uk\">\n		  <ServiceRequestInfo>\n        <ns2:RequestTimestamp>{{requestDate}}</ns2:RequestTimestamp>\n        <ns2:RequestorRef>GVB:DRIS</ns2:RequestorRef>\n        <ns2:MessageIdentifier>Discovery:Test:0</ns2:MessageIdentifier>\n      </ServiceRequestInfo>\n		  <Request version=\"1.3\">\n		    <ns2:RequestTimestamp>{{requestDate}}</ns2:RequestTimestamp>\n		    <ns2:RequestorRef>Siri-client</ns2:RequestorRef>\n		    <ns2:MessageIdentifier>Discovery:Test:0</ns2:MessageIdentifier>\n		  </Request>\n		  <RequestExtension/>\n		</ns7:LinesDiscovery>\n</S:Body>\n</S:Envelope>";
+  stopDiscoveryRequest.prototype.stopDiscoveryTemplate = "<S:Envelope xmlns:S=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <SOAP-ENV:Header/>\n  <S:Body>\n    <ns7:StopPointsDiscovery xmlns:ns2=\"http://www.siri.org.uk/siri\" xmlns:ns3=\"http://www.ifopt.org.uk/acsb\" xmlns:ns4=\"http://www.ifopt.org.uk/ifopt\" xmlns:ns5=\"http://datex2.eu/schema/2_0RC1/2_0\" xmlns:ns6=\"http://scma/siri\" xmlns:ns7=\"http://wsdl.siri.org.uk\">\n      <ServiceRequestInfo>\n        <ns2:RequestTimestamp>{{requestDate}}</ns2:RequestTimestamp>\n        <ns2:RequestorRef>GVB:DRIS</ns2:RequestorRef>\n        <ns2:MessageIdentifier>Discovery:Test:0</ns2:MessageIdentifier>\n      </ServiceRequestInfo>\n      <Request version=\"{{siriVersionAPI}}\">\n        <ns2:RequestTimestamp>{{requestDate}}</ns2:RequestTimestamp>\n        <ns2:RequestorRef>GVB:DRIS</ns2:RequestorRef>\n        <ns2:MessageIdentifier>Discovery:Test:0</ns2:MessageIdentifier>\n      </Request>\n      <RequestExtension/>\n    </ns7:StopPointsDiscovery>\n</S:Body>\n</S:Envelope>";
+
+  stopDiscoveryRequest.prototype.lineDiscoveryTemplate = "<S:Envelope xmlns:S=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <SOAP-ENV:Header/>\n  <S:Body>\n    <ns7:LinesDiscovery xmlns:ns2=\"http://www.siri.org.uk/siri\" xmlns:ns3=\"http://www.ifopt.org.uk/acsb\" xmlns:ns4=\"http://www.ifopt.org.uk/ifopt\" xmlns:ns5=\"http://datex2.eu/schema/2_0RC1/2_0\" xmlns:ns6=\"http://scma/siri\" xmlns:ns7=\"http://wsdl.siri.org.uk\">\n      <ServiceRequestInfo>\n        <ns2:RequestTimestamp>{{requestDate}}</ns2:RequestTimestamp>\n        <ns2:RequestorRef>GVB:DRIS</ns2:RequestorRef>\n        <ns2:MessageIdentifier>Discovery:Test:0</ns2:MessageIdentifier>\n      </ServiceRequestInfo>\n      <Request version = \"{{siriVersionAPI}}\">\n        <ns2:RequestTimestamp>{{requestDate}}</ns2:RequestTimestamp>\n        <ns2:RequestorRef>Siri-client</ns2:RequestorRef>\n        <ns2:MessageIdentifier>Discovery:Test:0</ns2:MessageIdentifier>\n      </Request>\n      <RequestExtension/>\n    </ns7:LinesDiscovery>\n</S:Body>\n</S:Envelope>";
 
   stopDiscoveryRequest.prototype.errorResponse = "<div class=\"alert alert-danger\" role=\"alert\">{{errorText}}</div>";
 
@@ -60,6 +62,8 @@ stopDiscoveryRequest = (function() {
     var form, i, input, key, len, parseVariables, results;
     parseVariables = ["stopId", "lineId", "destId", "operatorId", "start", "preview", "typeVisit", "maxStop", "minStLine", "onward"];
     form = $(el);
+    this.siriVersionAPI = form.find('input[name="siriVersionAPIOptions"]:checked').val();
+    console.log(this.siriVersionAPI);
     results = [];
     for (i = 0, len = parseVariables.length; i < len; i++) {
       key = parseVariables[i];
@@ -127,8 +131,9 @@ stopDiscoveryRequest = (function() {
   };
 
   stopDiscoveryRequest.prototype.sendRequest = function(xmlRequest, responseHandler, handler) {
-    return $.ajax({
-      method: 'POST',
+    $.ajax({
+      method: 'POST'
+    }, {
       url: 'http://appli.chouette.mobi/irys_server',
       context: document.body,
       crossDomain: true,
@@ -152,7 +157,7 @@ stopDiscoveryRequest = (function() {
         responseHandler(xmlDoc, handler);
       }
     }).fail(function() {
-      alert('epic fail');
+      return alert('epic fail');
     });
   };
 
