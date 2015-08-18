@@ -2,17 +2,15 @@
 var stopMonitoringCard;
 
 stopMonitoringCard = (function() {
-  var generalMessage, monitoredCall;
-
   function stopMonitoringCard() {}
 
   stopMonitoringCard.prototype.stopMonitoredVisit = {};
 
   stopMonitoringCard.prototype.onwardsCall = [];
 
-  monitoredCall = {};
+  stopMonitoringCard.prototype.monitoredCall = {};
 
-  generalMessage = {};
+  stopMonitoringCard.prototype.generalMessage = {};
 
   stopMonitoringCard.prototype.mustacheStopMonitoredVisit = [];
 
@@ -51,17 +49,15 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.buildGeneralMessageJSON = function(node) {
-    var child, i, len, ref, results;
+    var child, i, len, ref;
     if (node.nodeName === 'siri:Content' || node.nodeName === 'siri:Message') {
       ref = node.children;
-      results = [];
       for (i = 0, len = ref.length; i < len; i++) {
         child = ref[i];
-        results.push(this.buildGeneralMessageJSON(child));
+        this.buildGeneralMessageJSON(child);
       }
-      return results;
     } else {
-      return this.generalMessage[this.unSiried(node.nodeName)] = node.innerHTML;
+      this.generalMessage[this.unSiried(node.nodeName)] = node.innerHTML;
     }
   };
 

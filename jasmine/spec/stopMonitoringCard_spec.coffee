@@ -154,8 +154,8 @@ describe "response card test", ->
   it "checks the general message request works", ->
     nodeGeneralMessage = $(generalMessageResponseXML.find('GeneralMessage'))
     console.log nodeGeneralMessage
-    generalMessage = cardProcessor.parseSiriResponse nodeGeneralMessage[0]
-    for prop, expected of cardProcessor.stopMonitoredVisit
+    generalMessage = cardProcessor. buildGeneralMessageJSON nodeGeneralMessage[0]
+    for prop, expected of cardProcessor.generalMessage
       expect(generalMessageResponseXML.find(prop)[0].innerHTML).toEqual expected
 
 

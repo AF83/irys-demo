@@ -36,8 +36,8 @@ describe("response card test", function() {
     var expected, generalMessage, nodeGeneralMessage, prop, ref, results;
     nodeGeneralMessage = $(generalMessageResponseXML.find('GeneralMessage'));
     console.log(nodeGeneralMessage);
-    generalMessage = cardProcessor.parseSiriResponse(nodeGeneralMessage[0]);
-    ref = cardProcessor.stopMonitoredVisit;
+    generalMessage = cardProcessor.buildGeneralMessageJSON(nodeGeneralMessage[0]);
+    ref = cardProcessor.generalMessage;
     results = [];
     for (prop in ref) {
       expected = ref[prop];

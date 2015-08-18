@@ -2,8 +2,8 @@ class stopMonitoringCard
 
   stopMonitoredVisit: {}
   onwardsCall: []
-  monitoredCall = {}
-  generalMessage = {}
+  monitoredCall: {}
+  generalMessage: {}
   mustacheStopMonitoredVisit: []
   mustacheOnwards: []
   mustacheMonitoredCall: []
@@ -65,6 +65,7 @@ class stopMonitoringCard
         this.buildGeneralMessageJSON  child
     else
       this.generalMessage[this.unSiried(node.nodeName)] = node.innerHTML
+    return
 
   addOnwards: (node) ->
     this.onwardsCall = []
