@@ -145,7 +145,7 @@ describe "request test", ->
                   </form>"""
 
 
-  request = new stopDiscoveryRequest
+  request = new stopMonitoringRequest
   xmlRequest = request.getStopMonitoring(form)
 
 

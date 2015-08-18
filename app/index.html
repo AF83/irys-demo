@@ -79,6 +79,7 @@
               <li role="presentation" class = "active"><a href = "#basic-request" aria-controls = "basic-request" data-toggle = "tab">Pour les nuls</a></li>
               <li role="presentation"><a href = "#advanced-request" aria-controls = "advanced-request" data-toggle = "tab">like a boss</a></li>
               <li role="presentation"><a href = "#response" aria-controls = "response" data-toggle = "tab">Résultat</a></li>
+              <li role="presentation"><a href = "#xml-response" aria-controls = "xml-response" data-toggle = "tab">Réponse XML</a></li>
             </ul>
             <div class = "tab-content">
               <div role = "tabpanel" class= "tab-pane fade in active" id="basic-request">
@@ -88,7 +89,7 @@
                   <fieldset>
                     <legend>Requête</legend>
                       <div class="form-group" id = "siriVersionAPI"">
-                          <label for="siriVersionAPI" class="col-sm-2 control-label">Version Chouette
+                          <label for="siriVersionAPI" class="col-sm-2 control-label">Version Siri
                           </label>
                           <div class = "col-sm-10">
                             <label class="radio-inline">
@@ -210,8 +211,13 @@
                           <p class="col-lg-7">passages suivants
                       </div>
                       <div class="form-group">
-                        <div class="col-lg-8 col-lg-offset-4">
+                        <div class="col-lg-4 col-lg-offset-4">
                             <button type="submit" class="btn btn-success">Submit</button>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-lg-4 col-lg-offset-4">
+                            <button type="button" class="btn btn-danger" id="get-general-message">Get General Message</button>
                           </div>
                       </div>
                     </fieldset>
@@ -225,7 +231,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-lg-8 col-lg-offset-4">
-                            <button type="submit" class="btn btn-success" id="smart-request-submit">Submit</button>
+                            <button type="button" class="btn btn-success" id="smart-request-submit">Submit</button>
                           </div>
                       </div>
                   </form>
@@ -233,6 +239,13 @@
                 </div>
                 <div role= "tabpanel" class = "tab-pane fade" id = "response">
                   <h2 class= "text-center">Réponse</h2>
+
+                </div>
+                <div role= "tabpanel" class = "tab-pane fade" id = "xml-response">
+                  <h2 class= "text-center">Réponse XML</h2>
+                  <div>
+                    <textarea rows="20" cols="40" id="xml-response-wrapper" class = "col-xs-12"></textarea>
+                  </div>
 
                 </div>
               </div>
@@ -278,13 +291,14 @@
 
 
     <!-- build:js scripts/main.js -->
+    <script src="lib/codemirror-compressed.js"></script>
     <script src="scripts/main.js"></script>
     <script src="scripts/animations.js"></script>
     <script type="/bower_components/mustache/mustache.js"></script>
     <script src="scripts/request-data-builder.js"></script>
     <script src="scripts/request-builder.js"></script>
     <script src="scripts/AjaxRequestSender.js"></script>
-    <script src="scripts/stopDiscoveryRequest.js"></script>
+    <script src="scripts/stopMonitoringRequest.js"></script>
 
     <script src="scripts/stopMonitoringCard.js"></script>
     <script src="scripts/stopDiscoveryResponse.js"></script>

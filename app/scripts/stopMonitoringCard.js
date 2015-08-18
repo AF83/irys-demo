@@ -2,19 +2,27 @@
 var stopMonitoringCard;
 
 stopMonitoringCard = (function() {
+  var generalMessage, monitoredCall;
+
   function stopMonitoringCard() {}
 
   stopMonitoringCard.prototype.stopMonitoredVisit = {};
+
+  stopMonitoringCard.prototype.onwardsCall = [];
+
+  monitoredCall = {};
+
+  generalMessage = {};
 
   stopMonitoringCard.prototype.mustacheStopMonitoredVisit = [];
 
   stopMonitoringCard.prototype.mustacheOnwards = [];
 
+  stopMonitoringCard.prototype.mustacheMonitoredCall = [];
+
   stopMonitoringCard.prototype.monitoredVehicleJourney = {};
 
-  stopMonitoringCard.prototype.onwardsCall = [];
-
-  stopMonitoringCard.prototype.stopDiscoveryTemplate = "<div class = \"panel panel-default stop-wrapper\">\n  <div class = \"panel-heading\">\n    <div class = \"stop-name\"></div>\n      <h4>{{stopMonitoredVisit.StopPointName}}</h4>\n  </div>\n  <div class = \"panel-body\">\n    {{#mustacheStopMonitoredVisit}}\n      <div>{{key}} : {{value}}</div>\n    {{/mustacheStopMonitoredVisit}}\n    {{#mustacheOnwards}}\n      <h4>OnWards</h4>\n      {{#onWard}}\n        <div>{{key}} : {{value}}</div>\n      {{/onWard}}\n    {{/mustacheOnwards}}\n\n  </div>\n</div>";
+  stopMonitoringCard.prototype.stopDiscoveryTemplate = "<div class = \"panel panel-default stop-wrapper\">\n  <div class = \"panel-heading\">\n    <div class = \"stop-name\"></div>\n      <h4>{{monitoredCall.StopPointName}}</h4>\n  </div>\n  <div class = \"panel-body\">\n    {{#mustacheStopMonitoredVisit}}\n      <div>{{key}} : {{value}}</div>\n    {{/mustacheStopMonitoredVisit}}\n    {{#monitoredCall}}\n      <h4>Monitored Call</h4>\n      {{#mustacheMonitoredCall}}\n        <div>{{key}} : {{value}}</div>\n      {{/mustacheMonitoredCall}}\n    {{/monitoredCall}}\n    {{#mustacheOnwards}}\n      <h4>OnWards</h4>\n      {{#onWard}}\n        <div>{{key}} : {{value}}</div>\n      {{/onWard}}\n    {{/mustacheOnwards}}\n  </div>\n</div>";
 
   stopMonitoringCard.prototype.parseSiriResponse = function(node) {
     var child, i, len, ref;
@@ -27,16 +35,33 @@ stopMonitoringCard = (function() {
 
   stopMonitoringCard.prototype.buildResponseJSON = function(node) {
     var child, i, len, ref;
-    if (node.nodeName === 'siri:FramedVehicleJourneyRef' || node.nodeName === 'siri:MonitoredVehicleJourney' || node.nodeName === 'siri:MonitoredCall') {
+    if (node.nodeName === 'siri:FramedVehicleJourneyRef' || node.nodeName === 'siri:MonitoredVehicleJourney') {
       ref = node.children;
       for (i = 0, len = ref.length; i < len; i++) {
         child = ref[i];
         this.buildResponseJSON(child);
       }
+    } else if (node.nodeName === 'siri:MonitoredCall') {
+      this.addMonitoredCall(node);
     } else if (node.nodeName === 'siri:OnwardCalls') {
       this.addOnwards(node);
     } else {
       this.stopMonitoredVisit[this.unSiried(node.nodeName)] = node.innerHTML;
+    }
+  };
+
+  stopMonitoringCard.prototype.buildGeneralMessageJSON = function(node) {
+    var child, i, len, ref, results;
+    if (node.nodeName === 'siri:Content' || node.nodeName === 'siri:Message') {
+      ref = node.children;
+      results = [];
+      for (i = 0, len = ref.length; i < len; i++) {
+        child = ref[i];
+        results.push(this.buildGeneralMessageJSON(child));
+      }
+      return results;
+    } else {
+      return this.generalMessage[this.unSiried(node.nodeName)] = node.innerHTML;
     }
   };
 
@@ -56,6 +81,16 @@ stopMonitoringCard = (function() {
     }
   };
 
+  stopMonitoringCard.prototype.addMonitoredCall = function(node) {
+    var child, i, len, ref;
+    this.monitoredCall = {};
+    ref = node.children;
+    for (i = 0, len = ref.length; i < len; i++) {
+      child = ref[i];
+      this.monitoredCall[this.unSiried(child.nodeName)] = child.innerHTML;
+    }
+  };
+
   stopMonitoringCard.prototype.unSiried = function(node) {
     return node.replace('siri:', '');
   };
@@ -67,6 +102,20 @@ stopMonitoringCard = (function() {
       v = ref[k];
       if (this.stopMonitoredVisit.hasOwnProperty(k)) {
         this.mustacheStopMonitoredVisit.push({
+          'key': k,
+          'value': v
+        });
+      }
+    }
+  };
+
+  stopMonitoringCard.prototype.buildMustacheMonitoredCall = function() {
+    var k, ref, v;
+    ref = this.monitoredCall;
+    for (k in ref) {
+      v = ref[k];
+      if (this.monitoredCall.hasOwnProperty(k)) {
+        this.mustacheMonitoredCall.push({
           'key': k,
           'value': v
         });
@@ -99,8 +148,10 @@ stopMonitoringCard = (function() {
     var rendered, template;
     this.mustacheStopMonitoredVisit = [];
     this.mustacheOnwards = [];
+    this.mustacheMonitoredCall = [];
     this.buildMustacheStopCard();
     this.buildMustacheOnwards();
+    this.buildMustacheMonitoredCall();
     template = this.stopDiscoveryTemplate;
     Mustache.parse(template);
     rendered = Mustache.render(template, this);

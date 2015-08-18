@@ -2,7 +2,7 @@
 $(document).ready( function() {
 	console.log('\'Allo \'Allo!');
 	$(function() {
-    var stopDSC = new stopDiscoveryRequest;
+    var stopDSC = new stopMonitoringRequest;
     var stopDscRequest = stopDSC.getStopDiscovery();
     var stopDSCResponse = new stopDiscoveryResponse;
 
@@ -30,13 +30,6 @@ $(document).ready( function() {
         .append( "<a>" + item.label + "</a>" )
         .appendTo( ul );
     };
-    $( "#stopName" ).on('focusout', function() {
-      var regEx = /\d{8}/;
-
-      if ( regEx.exec( $(this).val() ) ) {
-        $( "#stopId" ).val("NINOXE:StopPoint:SPOR:" + $(this).val() + ":LOC")
-      }
-    });
 
     $( "#lineName" ).autocomplete({
       minLength: 0,
@@ -74,5 +67,4 @@ $(document).ready( function() {
     	controlType: 'select'
     });
   });
-
 });

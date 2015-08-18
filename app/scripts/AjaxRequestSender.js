@@ -1,24 +1,39 @@
 	$('#stop-discovery').submit(function(e) {
 		e.preventDefault();
     $("#response > .panel").remove()
+
+    var regEx = /\d{8}/;
+
+    if ( regEx.exec( $('#stopName').val() ) ) {
+      $( "#stopId" ).val("NINOXE:StopPoint:SPOR:" + $(this).val() + ":LOC")
+    }
+
 		var dataForRequest = getStopDiscoveryData('form', STOPDISCOVERYDATA);
 		var xmlRequest = stopDiscovery(dataForRequest);
 
-    var pingu = new stopDiscoveryRequest;
-    var xmlRequest = pingu.getStopMonitoring('form');
-    var chimp = new stopMonitoringCard;
+    var request = new stopMonitoringRequest;
+    var xmlRequest = request.getStopMonitoring('form');
+    var responseCard = new stopMonitoringCard;
     console.log(xmlRequest)
-    pingu.sendRequest(xmlRequest, pingu.handleStopMonitoringResponse, chimp);
+    request.sendRequest(xmlRequest, request.handleStopMonitoringResponse, responseCard);
 	});
+
+  $('#get-general-message').on('click', function(e) {
+    var request = new stopMonitoringRequest;
+    var responseCard = new stopMonitoringCard;
+    var generalMessageRequest = request.getGeneralMessage();
+    request.sendRequest(generalMessageRequest, request.handleGeneralMessageResponse, responseCard);
+  });
 
   $('#smart-request-form').submit(function(e) {
     e.preventDefault();
-    $("#response > .panel").remove()
+    $("#response > .panel").remove();
+
     var dataForRequest = $("#xml-request-textarea").val();
 
-    var pingu = new stopDiscoveryRequest;
+    var request = new stopMonitoringRequest;
 
-    var chimp = new stopMonitoringCard;
+    var responseCard = new stopMonitoringCard;
 
-    pingu.sendRequest(dataForRequest, pingu.handleStopMonitoringResponse, chimp);
+    request.sendRequest(dataForRequest, request.handleStopMonitoringResponse, responseCard);
   });

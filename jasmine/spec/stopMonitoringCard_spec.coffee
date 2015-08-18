@@ -100,8 +100,43 @@ describe "response card test", ->
     </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>"""
 
+  generalMessageResponse = """<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:GetGeneralMessageResponse xmlns:wsdl="http://wsdl.siri.org.uk">
+  <ServiceDeliveryInfo>
+    <siri:ResponseTimestamp xmlns:siri="http://www.siri.org.uk/siri">2015-08-18T15:57:51.896+02:00</siri:ResponseTimestamp>
+    <siri:ProducerRef xmlns:siri="http://www.siri.org.uk/siri">DRYADE</siri:ProducerRef>
+    <siri:Address xmlns:siri="http://www.siri.org.uk/siri">http://chouette.cityway.fr/irys_server</siri:Address>
+    <siri:ResponseMessageIdentifier xmlns:siri="http://www.siri.org.uk/siri">DRYADE:GeneralMessage:505:LOC</siri:ResponseMessageIdentifier>
+    <siri:RequestMessageRef xmlns:siri="http://www.siri.org.uk/siri">GeneralMessage:Test:0</siri:RequestMessageRef>
+  </ServiceDeliveryInfo>
+  <Answer>
+    <siri:GeneralMessageDelivery version="1.3" xmlns:siri="http://www.siri.org.uk/siri">
+      <siri:ResponseTimestamp>2015-08-18T15:57:51.896+02:00</siri:ResponseTimestamp>
+      <siri:Status>true</siri:Status>
+      <siri:GeneralMessage formatRef="STIF-IDF">
+        <siri:RecordedAtTime>2015-08-18T03:00:29.862+02:00</siri:RecordedAtTime>
+        <siri:ItemIdentifier>6824</siri:ItemIdentifier>
+        <siri:InfoMessageIdentifier>NINOXE:GeneralMessage:20150818_6</siri:InfoMessageIdentifier>
+        <siri:InfoMessageVersion>1</siri:InfoMessageVersion>
+        <siri:InfoChannelRef>Perturbation</siri:InfoChannelRef>
+        <siri:ValidUntilTime>2015-08-18T17:18:29.862+02:00</siri:ValidUntilTime>
+        <siri:Content xsi:type="siri:IDFGeneralMessageStructure" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <siri:Message>
+            <siri:MessageType>longMessage</siri:MessageType>
+            <siri:MessageText xml:lang="FR">Manifestation au centre ville, prévoir des perturbations sur les lignes de bus</siri:MessageText>
+          </siri:Message>
+        </siri:Content>
+      </siri:GeneralMessage>
+    </siri:GeneralMessageDelivery>
+  </Answer>
+  <AnswerExtension/>
+</wsdl:GetGeneralMessageResponse>"""
   siriResponseXML = ($.parseXML(siriResponse))
   siriResponseXML = $(siriResponseXML)
+
+  generalMessageResponseXML = ($.parseXML(generalMessageResponse))
+  generalMessageResponseXML = $(generalMessageResponseXML)
+
   cardProcessor = new stopMonitoringCard
 
   it "checks the card has the correct properties", ->
@@ -115,5 +150,12 @@ describe "response card test", ->
     onWard = cardProcessor.onwardsCall[0]
     for prop, expected of onWard
       expect(xmlOnwards.find(prop)[0].innerHTML).toEqual expected
+
+  it "checks the general message request works", ->
+    nodeGeneralMessage = $(generalMessageResponseXML.find('GeneralMessage'))
+    console.log nodeGeneralMessage
+    generalMessage = cardProcessor.parseSiriResponse nodeGeneralMessage[0]
+    for prop, expected of cardProcessor.stopMonitoredVisit
+      expect(generalMessageResponseXML.find(prop)[0].innerHTML).toEqual expected
 
 

@@ -1,27 +1,36 @@
 class stopMonitoringCard
 
   stopMonitoredVisit: {}
+  onwardsCall: []
+  monitoredCall = {}
+  generalMessage = {}
   mustacheStopMonitoredVisit: []
   mustacheOnwards: []
+  mustacheMonitoredCall: []
   monitoredVehicleJourney: {}
-  onwardsCall: []
+
   stopDiscoveryTemplate: """
   <div class = "panel panel-default stop-wrapper">
     <div class = "panel-heading">
       <div class = "stop-name"></div>
-        <h4>{{stopMonitoredVisit.StopPointName}}</h4>
+        <h4>{{monitoredCall.StopPointName}}</h4>
     </div>
     <div class = "panel-body">
       {{#mustacheStopMonitoredVisit}}
         <div>{{key}} : {{value}}</div>
       {{/mustacheStopMonitoredVisit}}
+      {{#monitoredCall}}
+        <h4>Monitored Call</h4>
+        {{#mustacheMonitoredCall}}
+          <div>{{key}} : {{value}}</div>
+        {{/mustacheMonitoredCall}}
+      {{/monitoredCall}}
       {{#mustacheOnwards}}
         <h4>OnWards</h4>
         {{#onWard}}
           <div>{{key}} : {{value}}</div>
         {{/onWard}}
       {{/mustacheOnwards}}
-
     </div>
   </div>"""
 
@@ -34,11 +43,13 @@ class stopMonitoringCard
 
   buildResponseJSON: (node) ->
 
-    if node.nodeName == 'siri:FramedVehicleJourneyRef' or node.nodeName == 'siri:MonitoredVehicleJourney' or node.nodeName == 'siri:MonitoredCall'
+    if node.nodeName == 'siri:FramedVehicleJourneyRef' or node.nodeName == 'siri:MonitoredVehicleJourney'
 
       for child in node.children
         this.buildResponseJSON  child
 
+    else if node.nodeName == 'siri:MonitoredCall'
+      this.addMonitoredCall node
     else if node.nodeName == 'siri:OnwardCalls'
       this.addOnwards node
 
@@ -47,6 +58,13 @@ class stopMonitoringCard
 
 
     return
+
+  buildGeneralMessageJSON: (node) ->
+    if node.nodeName == 'siri:Content' or node.nodeName == 'siri:Message'
+      for child in node.children
+        this.buildGeneralMessageJSON  child
+    else
+      this.generalMessage[this.unSiried(node.nodeName)] = node.innerHTML
 
   addOnwards: (node) ->
     this.onwardsCall = []
@@ -57,6 +75,12 @@ class stopMonitoringCard
       @onwardsCall.push(onward)
     return
 
+  addMonitoredCall: (node) ->
+    this.monitoredCall = {}
+    for child in node.children
+      @monitoredCall[this.unSiried(child.nodeName)] = child.innerHTML
+    return
+
   unSiried: (node) ->
     return node.replace('siri:', '')
 
@@ -64,6 +88,15 @@ class stopMonitoringCard
     for k,v of @stopMonitoredVisit
       if @stopMonitoredVisit.hasOwnProperty(k)
         @mustacheStopMonitoredVisit.push({
+          'key' : k,
+          'value' : v
+         })
+    return
+
+  buildMustacheMonitoredCall:() ->
+    for k,v of @monitoredCall
+      if @monitoredCall.hasOwnProperty(k)
+        @mustacheMonitoredCall.push({
           'key' : k,
           'value' : v
          })
@@ -84,9 +117,11 @@ class stopMonitoringCard
   buildStop: () ->
     this.mustacheStopMonitoredVisit = []
     this.mustacheOnwards = []
+    this.mustacheMonitoredCall = []
 
     this.buildMustacheStopCard()
     this.buildMustacheOnwards()
+    this.buildMustacheMonitoredCall()
 
     template = @stopDiscoveryTemplate
     Mustache.parse template
