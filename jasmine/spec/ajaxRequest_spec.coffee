@@ -23,19 +23,19 @@ describe "ajax test", ->
                       <div class="form-group">
                           <label for="stopId" class="col-lg-2 control-label">StopId</label>
                           <div class="col-lg-10">
-                            <input type="text" class="form-control" id="stopId" placeholder="Nom de l'arrêt ou id" value = "toto">
+                            <input type="text" class="form-control" id="stopId" placeholder="Nom de l'arrêt ou id" value = "NINOXE:StopPoint:SP:15625830:LOC">
                           </div>
                       </div>
                       <div class="form-group">
                         <label for="lineId" class="col-lg-2 control-label">LineId</label>
                           <div class="col-lg-10">
-                            <input type="text" class="form-control" id="lineId" placeholder="id de la ligne" value = "tutu">
+                            <input type="text" class="form-control" id="lineId" placeholder="id de la ligne" value = "NINOXE:Line:15625451:LOC">
                           </div>
                       </div>
                       <div class="form-group">
                         <label for="start" class="col-lg-2 control-label">Heure</label>
                           <div class="col-lg-10">
-                            <input type="text" class="form-control" id="start" placeholder="Heure de départ (HH:MM)" value= "23:30">
+                            <input type="text" class="form-control" id="start" placeholder="Heure de départ (HH:MM)" value= "2NINOXE:Line:15625451:LOC">
                           </div>
                       </div>
                       <div class="form-group">
@@ -76,7 +76,7 @@ describe "ajax test", ->
                       <div class="form-group">
                         <label for="maxStop" class="col-lg-2 control-label">Limite de passages</label>
                           <div class="col-lg-10">
-                            <input type="text" class="form-control" id="maxStop" list="time-span-list" placeholder="Intervalle temporel" value = "graou">
+                            <input type="text" class="form-control" id="maxStop" list="time-span-list" placeholder="Intervalle temporel" value = "5">
                             <datalist id="time-span-list">
                               <option>0</option>
                               <option>5</option>
@@ -91,7 +91,7 @@ describe "ajax test", ->
                       <div class="form-group">
                         <label for="minStLine" class="col-lg-2 control-label">MinStLine</label>
                           <div class="col-lg-10">
-                            <input type="text" class="form-control" id="minStLine" list="time-span-list" placeholder="Intervalle temporel" value="aloha">
+                            <input type="text" class="form-control" id="minStLine" list="time-span-list" placeholder="Intervalle temporel" value="2">
                             <datalist id="time-span-list">
                               <option>1</option>
                               <option>2</option>
@@ -104,7 +104,7 @@ describe "ajax test", ->
                        <div class="form-group">
                         <label for="onward" class="col-lg-3 control-label">Onward</label>
                           <div class="col-lg-2">
-                            <input type="text" class="form-control" id="onward" list="time-span-list" placeholder="nbs" value="bibibobo">
+                            <input type="text" class="form-control" id="onward" list="time-span-list" placeholder="nbs" value="2">
                             <datalist id="time-span-list">
                               <option>1</option>
                               <option>2</option>
