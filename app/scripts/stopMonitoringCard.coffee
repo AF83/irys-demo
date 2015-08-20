@@ -7,6 +7,7 @@ class stopMonitoringCard
   mustacheStopMonitoredVisit: []
   mustacheOnwards: []
   mustacheMonitoredCall: []
+  mustacheGeneralMessage: []
   monitoredVehicleJourney: {}
 
   stopDiscoveryTemplate: """
@@ -19,6 +20,12 @@ class stopMonitoringCard
       {{#mustacheStopMonitoredVisit}}
         <div>{{key}} : {{value}}</div>
       {{/mustacheStopMonitoredVisit}}
+      {{#generalMessage}}
+        <h4>General Message</h4>
+        {{#mustacheGeneralMessage}}
+          <div>{{key}} : {{value}}</div>
+        {{/mustacheGeneralMessage}}
+      {{/generalMessage}}
       {{#monitoredCall}}
         <h4>Monitored Call</h4>
         {{#mustacheMonitoredCall}}
@@ -60,7 +67,7 @@ class stopMonitoringCard
     return
 
   buildGeneralMessageJSON: (node) ->
-    if node.nodeName == 'siri:Content' or node.nodeName == 'siri:Message'
+    if node.nodeName == 'siri:Content' or node.nodeName == 'siri:Message' or node.nodeName == 'siri:GeneralMessage'
       for child in node.children
         this.buildGeneralMessageJSON  child
     else
@@ -85,7 +92,15 @@ class stopMonitoringCard
   unSiried: (node) ->
     return node.replace('siri:', '')
 
+  checkSiriObject:(object) ->
+    if jQuery.isEmptyObject object
+      object = null
+    else
+      object
+    object
+
   buildMustacheStopCard:() ->
+    @stopMonitoredVisit = this.checkSiriObject @stopMonitoredVisit
     for k,v of @stopMonitoredVisit
       if @stopMonitoredVisit.hasOwnProperty(k)
         @mustacheStopMonitoredVisit.push({
@@ -95,6 +110,7 @@ class stopMonitoringCard
     return
 
   buildMustacheMonitoredCall:() ->
+    @monitoredCall = this.checkSiriObject @monitoredCall
     for k,v of @monitoredCall
       if @monitoredCall.hasOwnProperty(k)
         @mustacheMonitoredCall.push({
@@ -115,14 +131,26 @@ class stopMonitoringCard
       @mustacheOnwards.push(tempOnward)
     return
 
+  buildGeneralMessage:() ->
+    @generalMessage = this.checkSiriObject @generalMessage
+    for k,v of @generalMessage
+      if @generalMessage.hasOwnProperty(k)
+        @mustacheGeneralMessage.push({
+          'key' : k,
+          'value' : v
+         })
+    return
+
   buildStop: () ->
     this.mustacheStopMonitoredVisit = []
     this.mustacheOnwards = []
     this.mustacheMonitoredCall = []
+    this.mustacheGeneralMessage = []
 
     this.buildMustacheStopCard()
     this.buildMustacheOnwards()
     this.buildMustacheMonitoredCall()
+    this.buildGeneralMessage()
 
     template = @stopDiscoveryTemplate
     Mustache.parse template

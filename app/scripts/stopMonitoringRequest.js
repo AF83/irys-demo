@@ -160,7 +160,7 @@ stopMonitoringRequest = (function() {
       results = [];
       for (i = 0, len = nodes.length; i < len; i++) {
         node = nodes[i];
-        handler.parseSiriResponse(node);
+        handler.buildGeneralMessageJSON(node);
         results.push(handler.buildStop());
       }
       return results;

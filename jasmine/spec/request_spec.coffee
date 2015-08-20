@@ -5,7 +5,7 @@ describe "request test", ->
   dataObject = {
     "stopId": "NINOXE:StopPoint:SP:15625830:LOC"
     "lineId": "NINOXE:Line:15625451:LOC"
-    "start": "2NINOXE:Line:15625451:LOC"
+    "start": "18:30"
     "preview": "PT5H40M"
     "typeVisit": "arrivals"
     "maxStop": "5"
@@ -56,7 +56,7 @@ describe "request test", ->
                       <div class="form-group">
                         <label for="start" class="col-lg-2 control-label">Heure</label>
                           <div class="col-lg-10">
-                            <input type="text" class="form-control" id="start" placeholder="Heure de départ (HH:MM)" value= "2NINOXE:Line:15625451:LOC">
+                            <input type="text" class="form-control" id="start" placeholder="Heure de départ (HH:MM)" value= "18:30">
                           </div>
                       </div>
                       <div class="form-group">
@@ -72,7 +72,7 @@ describe "request test", ->
                       <div class="form-group">
                         <label for="typeVisit" class="col-lg-2 control-label">Type d'arrêt</label>
                           <div class="col-lg-10">
-                            <select class = "form-control" id = "typeVisit" value = "meow">
+                            <select class = "form-control" id = "typeVisit" value = "arrivals">
                               <option>arrivals</option>
                               <option>departures</option>
                               <option>all</option>

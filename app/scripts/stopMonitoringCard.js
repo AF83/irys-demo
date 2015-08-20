@@ -18,9 +18,11 @@ stopMonitoringCard = (function() {
 
   stopMonitoringCard.prototype.mustacheMonitoredCall = [];
 
+  stopMonitoringCard.prototype.mustacheGeneralMessage = [];
+
   stopMonitoringCard.prototype.monitoredVehicleJourney = {};
 
-  stopMonitoringCard.prototype.stopDiscoveryTemplate = "<div class = \"panel panel-default stop-wrapper\">\n  <div class = \"panel-heading\">\n    <div class = \"stop-name\"></div>\n      <h4>{{monitoredCall.StopPointName}}</h4>\n  </div>\n  <div class = \"panel-body\">\n    {{#mustacheStopMonitoredVisit}}\n      <div>{{key}} : {{value}}</div>\n    {{/mustacheStopMonitoredVisit}}\n    {{#monitoredCall}}\n      <h4>Monitored Call</h4>\n      {{#mustacheMonitoredCall}}\n        <div>{{key}} : {{value}}</div>\n      {{/mustacheMonitoredCall}}\n    {{/monitoredCall}}\n    {{#mustacheOnwards}}\n      <h4>OnWards</h4>\n      {{#onWard}}\n        <div>{{key}} : {{value}}</div>\n      {{/onWard}}\n    {{/mustacheOnwards}}\n  </div>\n</div>";
+  stopMonitoringCard.prototype.stopDiscoveryTemplate = "<div class = \"panel panel-default stop-wrapper\">\n  <div class = \"panel-heading\">\n    <div class = \"stop-name\"></div>\n      <h4>{{monitoredCall.StopPointName}}</h4>\n  </div>\n  <div class = \"panel-body\">\n    {{#mustacheStopMonitoredVisit}}\n      <div>{{key}} : {{value}}</div>\n    {{/mustacheStopMonitoredVisit}}\n    {{#generalMessage}}\n      <h4>General Message</h4>\n      {{#mustacheGeneralMessage}}\n        <div>{{key}} : {{value}}</div>\n      {{/mustacheGeneralMessage}}\n    {{/generalMessage}}\n    {{#monitoredCall}}\n      <h4>Monitored Call</h4>\n      {{#mustacheMonitoredCall}}\n        <div>{{key}} : {{value}}</div>\n      {{/mustacheMonitoredCall}}\n    {{/monitoredCall}}\n    {{#mustacheOnwards}}\n      <h4>OnWards</h4>\n      {{#onWard}}\n        <div>{{key}} : {{value}}</div>\n      {{/onWard}}\n    {{/mustacheOnwards}}\n  </div>\n</div>";
 
   stopMonitoringCard.prototype.parseSiriResponse = function(node) {
     var child, i, len, ref;
@@ -50,7 +52,7 @@ stopMonitoringCard = (function() {
 
   stopMonitoringCard.prototype.buildGeneralMessageJSON = function(node) {
     var child, i, len, ref;
-    if (node.nodeName === 'siri:Content' || node.nodeName === 'siri:Message') {
+    if (node.nodeName === 'siri:Content' || node.nodeName === 'siri:Message' || node.nodeName === 'siri:GeneralMessage') {
       ref = node.children;
       for (i = 0, len = ref.length; i < len; i++) {
         child = ref[i];
@@ -91,8 +93,18 @@ stopMonitoringCard = (function() {
     return node.replace('siri:', '');
   };
 
+  stopMonitoringCard.prototype.checkSiriObject = function(object) {
+    if (jQuery.isEmptyObject(object)) {
+      object = null;
+    } else {
+      object;
+    }
+    return object;
+  };
+
   stopMonitoringCard.prototype.buildMustacheStopCard = function() {
     var k, ref, v;
+    this.stopMonitoredVisit = this.checkSiriObject(this.stopMonitoredVisit);
     ref = this.stopMonitoredVisit;
     for (k in ref) {
       v = ref[k];
@@ -107,6 +119,7 @@ stopMonitoringCard = (function() {
 
   stopMonitoringCard.prototype.buildMustacheMonitoredCall = function() {
     var k, ref, v;
+    this.monitoredCall = this.checkSiriObject(this.monitoredCall);
     ref = this.monitoredCall;
     for (k in ref) {
       v = ref[k];
@@ -140,14 +153,31 @@ stopMonitoringCard = (function() {
     }
   };
 
+  stopMonitoringCard.prototype.buildGeneralMessage = function() {
+    var k, ref, v;
+    this.generalMessage = this.checkSiriObject(this.generalMessage);
+    ref = this.generalMessage;
+    for (k in ref) {
+      v = ref[k];
+      if (this.generalMessage.hasOwnProperty(k)) {
+        this.mustacheGeneralMessage.push({
+          'key': k,
+          'value': v
+        });
+      }
+    }
+  };
+
   stopMonitoringCard.prototype.buildStop = function() {
     var rendered, template;
     this.mustacheStopMonitoredVisit = [];
     this.mustacheOnwards = [];
     this.mustacheMonitoredCall = [];
+    this.mustacheGeneralMessage = [];
     this.buildMustacheStopCard();
     this.buildMustacheOnwards();
     this.buildMustacheMonitoredCall();
+    this.buildGeneralMessage();
     template = this.stopDiscoveryTemplate;
     Mustache.parse(template);
     rendered = Mustache.render(template, this);

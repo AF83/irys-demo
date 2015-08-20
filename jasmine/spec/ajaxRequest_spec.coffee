@@ -35,7 +35,7 @@ describe "ajax test", ->
                       <div class="form-group">
                         <label for="start" class="col-lg-2 control-label">Heure</label>
                           <div class="col-lg-10">
-                            <input type="text" class="form-control" id="start" placeholder="Heure de départ (HH:MM)" value= "2NINOXE:Line:15625451:LOC">
+                            <input type="text" class="form-control" id="start" placeholder="Heure de départ (HH:MM)" value= "18:30">
                           </div>
                       </div>
                       <div class="form-group">
@@ -241,7 +241,7 @@ describe "ajax test", ->
 
 
 
-  it "deals right with the request", ->
+  it "checks stopMonitoredVisit is right", ->
 
     doneFn = jasmine.createSpy("success")
 
@@ -253,4 +253,34 @@ describe "ajax test", ->
 
     for prop, expected of SMCard.stopMonitoredVisit
           expect(siriResponseXML.find(prop)[0].innerHTML).toEqual expected
+
+  it "checks monitoredCall is right", ->
+
+    doneFn = jasmine.createSpy("success")
+
+    jasmine.Ajax.stubRequest('http://appli.chouette.mobi/irys_server').andReturn({
+          "responseText": siriResponse
+        });
+    xmlRequest = SMRequest.getStopMonitoring('form')
+    SMRequest.sendRequest(xmlRequest, SMRequest.handleStopMonitoringResponse, SMCard)
+
+    for prop, expected of SMCard.monitoredCall
+          expect(siriResponseXML.find(prop)[0].innerHTML).toEqual expected
+
+  it "checks onWards are right", ->
+
+    doneFn = jasmine.createSpy("success")
+
+    jasmine.Ajax.stubRequest('http://appli.chouette.mobi/irys_server').andReturn({
+          "responseText": siriResponse
+        });
+    xmlRequest = SMRequest.getStopMonitoring('form')
+    SMRequest.sendRequest(xmlRequest, SMRequest.handleStopMonitoringResponse, SMCard)
+
+    xmlOnward = $(siriResponseXML.find('OnwardCall')[0])
+    onWard = SMCard.onwardsCall[0]
+
+    for prop, expected of onWard
+      expect(xmlOnward.find(prop)[0].innerHTML).toEqual expected
+
 
