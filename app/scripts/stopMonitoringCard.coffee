@@ -10,7 +10,7 @@ class stopMonitoringCard
   mustacheGeneralMessage: []
   monitoredVehicleJourney: {}
 
-  stopDiscoveryTemplate: """
+  stopMonitoringTemplate: """
   <div class = "panel panel-default stop-wrapper">
     <div class = "panel-heading">
       <div class = "stop-name"></div>
@@ -20,12 +20,6 @@ class stopMonitoringCard
       {{#mustacheStopMonitoredVisit}}
         <div>{{key}} : {{value}}</div>
       {{/mustacheStopMonitoredVisit}}
-      {{#generalMessage}}
-        <h4>General Message</h4>
-        {{#mustacheGeneralMessage}}
-          <div>{{key}} : {{value}}</div>
-        {{/mustacheGeneralMessage}}
-      {{/generalMessage}}
       {{#monitoredCall}}
         <h4>Monitored Call</h4>
         {{#mustacheMonitoredCall}}
@@ -38,6 +32,22 @@ class stopMonitoringCard
           <div>{{key}} : {{value}}</div>
         {{/onWard}}
       {{/mustacheOnwards}}
+    </div>
+  </div>"""
+
+  generalMessageTemplate: """
+  <div class = "panel panel-default stop-wrapper">
+    <div class = "panel-heading">
+      <div class = "stop-name"></div>
+        <h4>General Message</h4>
+    </div>
+    <div class = "panel-body">
+      {{#generalMessage}}
+        <h4>General Message</h4>
+        {{#mustacheGeneralMessage}}
+          <div>{{key}} : {{value}}</div>
+        {{/mustacheGeneralMessage}}
+      {{/generalMessage}}
     </div>
   </div>"""
 
@@ -141,21 +151,32 @@ class stopMonitoringCard
          })
     return
 
-  buildStop: () ->
+
+  buildStopMonitoring: () ->
     this.mustacheStopMonitoredVisit = []
     this.mustacheOnwards = []
     this.mustacheMonitoredCall = []
-    this.mustacheGeneralMessage = []
+
 
     this.buildMustacheStopCard()
     this.buildMustacheOnwards()
     this.buildMustacheMonitoredCall()
-    this.buildGeneralMessage()
 
-    template = @stopDiscoveryTemplate
+    this.renderCard @stopMonitoringTemplate
+
+  buildGeneralMessage:() ->
+    this.mustacheGeneralMessage = []
+    this.buildGeneralMessage()
+    this.renderCard @generalMessageTemplate
+
+
+  renderCard:(template) ->
+
     Mustache.parse template
     rendered = Mustache.render(template, this)
     $("#response").append(rendered)
+
+
     return
 
 

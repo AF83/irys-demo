@@ -200,7 +200,7 @@ class stopMonitoringRequest
 
     for node in nodes
       handler.parseSiriResponse(node)
-      handler.buildStop()
+      handler.buildStopMonitoring()
 
   handleStopDiscoveryResponse: (xmlResponse, handler) ->
     nodes = xmlResponse.find('PlaceName')
@@ -211,7 +211,7 @@ class stopMonitoringRequest
     if nodes.length > 0
       for node in nodes
         handler.buildGeneralMessageJSON(node)
-        handler.buildStop()
+        handler.buildGeneralMessage
     else
       errorSpan = "<div class='alert alert-success' role='alert'><a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" + "Tout va bien"+ "</div>"
       $('.alert-wrapper').append errorSpan

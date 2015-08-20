@@ -142,7 +142,7 @@ stopMonitoringRequest = (function() {
     for (i = 0, len = nodes.length; i < len; i++) {
       node = nodes[i];
       handler.parseSiriResponse(node);
-      results.push(handler.buildStop());
+      results.push(handler.buildStopMonitoring());
     }
     return results;
   };
@@ -161,7 +161,7 @@ stopMonitoringRequest = (function() {
       for (i = 0, len = nodes.length; i < len; i++) {
         node = nodes[i];
         handler.buildGeneralMessageJSON(node);
-        results.push(handler.buildStop());
+        results.push(handler.buildGeneralMessage);
       }
       return results;
     } else {

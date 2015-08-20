@@ -22,7 +22,9 @@ stopMonitoringCard = (function() {
 
   stopMonitoringCard.prototype.monitoredVehicleJourney = {};
 
-  stopMonitoringCard.prototype.stopDiscoveryTemplate = "<div class = \"panel panel-default stop-wrapper\">\n  <div class = \"panel-heading\">\n    <div class = \"stop-name\"></div>\n      <h4>{{monitoredCall.StopPointName}}</h4>\n  </div>\n  <div class = \"panel-body\">\n    {{#mustacheStopMonitoredVisit}}\n      <div>{{key}} : {{value}}</div>\n    {{/mustacheStopMonitoredVisit}}\n    {{#generalMessage}}\n      <h4>General Message</h4>\n      {{#mustacheGeneralMessage}}\n        <div>{{key}} : {{value}}</div>\n      {{/mustacheGeneralMessage}}\n    {{/generalMessage}}\n    {{#monitoredCall}}\n      <h4>Monitored Call</h4>\n      {{#mustacheMonitoredCall}}\n        <div>{{key}} : {{value}}</div>\n      {{/mustacheMonitoredCall}}\n    {{/monitoredCall}}\n    {{#mustacheOnwards}}\n      <h4>OnWards</h4>\n      {{#onWard}}\n        <div>{{key}} : {{value}}</div>\n      {{/onWard}}\n    {{/mustacheOnwards}}\n  </div>\n</div>";
+  stopMonitoringCard.prototype.stopMonitoringTemplate = "<div class = \"panel panel-default stop-wrapper\">\n  <div class = \"panel-heading\">\n    <div class = \"stop-name\"></div>\n      <h4>{{monitoredCall.StopPointName}}</h4>\n  </div>\n  <div class = \"panel-body\">\n    {{#mustacheStopMonitoredVisit}}\n      <div>{{key}} : {{value}}</div>\n    {{/mustacheStopMonitoredVisit}}\n    {{#monitoredCall}}\n      <h4>Monitored Call</h4>\n      {{#mustacheMonitoredCall}}\n        <div>{{key}} : {{value}}</div>\n      {{/mustacheMonitoredCall}}\n    {{/monitoredCall}}\n    {{#mustacheOnwards}}\n      <h4>OnWards</h4>\n      {{#onWard}}\n        <div>{{key}} : {{value}}</div>\n      {{/onWard}}\n    {{/mustacheOnwards}}\n  </div>\n</div>";
+
+  stopMonitoringCard.prototype.generalMessageTemplate = "<div class = \"panel panel-default stop-wrapper\">\n  <div class = \"panel-heading\">\n    <div class = \"stop-name\"></div>\n      <h4>General Message</h4>\n  </div>\n  <div class = \"panel-body\">\n    {{#generalMessage}}\n      <h4>General Message</h4>\n      {{#mustacheGeneralMessage}}\n        <div>{{key}} : {{value}}</div>\n      {{/mustacheGeneralMessage}}\n    {{/generalMessage}}\n  </div>\n</div>";
 
   stopMonitoringCard.prototype.parseSiriResponse = function(node) {
     var child, i, len, ref;
@@ -168,17 +170,24 @@ stopMonitoringCard = (function() {
     }
   };
 
-  stopMonitoringCard.prototype.buildStop = function() {
-    var rendered, template;
+  stopMonitoringCard.prototype.buildStopMonitoring = function() {
     this.mustacheStopMonitoredVisit = [];
     this.mustacheOnwards = [];
     this.mustacheMonitoredCall = [];
-    this.mustacheGeneralMessage = [];
     this.buildMustacheStopCard();
     this.buildMustacheOnwards();
     this.buildMustacheMonitoredCall();
+    return this.renderCard(this.stopMonitoringTemplate);
+  };
+
+  stopMonitoringCard.prototype.buildGeneralMessage = function() {
+    this.mustacheGeneralMessage = [];
     this.buildGeneralMessage();
-    template = this.stopDiscoveryTemplate;
+    return this.renderCard(this.generalMessageTemplate);
+  };
+
+  stopMonitoringCard.prototype.renderCard = function(template) {
+    var rendered;
     Mustache.parse(template);
     rendered = Mustache.render(template, this);
     $("#response").append(rendered);
