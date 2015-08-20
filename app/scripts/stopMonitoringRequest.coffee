@@ -11,6 +11,9 @@ class stopMonitoringRequest
   minStLine: null
   onWard: null
   lineId: null
+  requestorVersion: null
+  requestorName:null
+
   requestTemplate: """<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
   <SOAP-ENV:Header/>
   <S:Body>
@@ -20,7 +23,7 @@ class stopMonitoringRequest
         <ns2:RequestorRef>GVB:DRIS</ns2:RequestorRef>
         <ns2:MessageIdentifier>StopMonitoring:Test:0</ns2:MessageIdentifier>
       </ServiceRequestInfo>
-      <Request version="{{siriVersionAPI}}">
+      <Request version="{{siriVersion}}">
         <ns2:RequestTimestamp>{{requestDate}}</ns2:RequestTimestamp>
         <ns2:MessageIdentifier>StopMonitoring:Test:0</ns2:MessageIdentifier>
 		    {{#preview}}
@@ -139,7 +142,9 @@ class stopMonitoringRequest
     "maxStop",
     "minStLine",
     "onward",
-    ]
+    "requestorVersion",
+    "requestorName"]
+
     form = $(el)
     this.siriVersionAPI = form.find('input[name="siriVersionAPIOptions"]:checked').val()
     console.log(this.siriVersionAPI)
@@ -158,6 +163,13 @@ class stopMonitoringRequest
     else
       @preview = "PT" + startMValue + "M"
     return
+  siriVersion:() ->
+    if @requestorVersion and @requestorName and @siriVersionAPI == "2.0"
+      siriVersion = @siriVersionAPI + ":" + @requestorName + "-" + @requestorVersion
+    else
+      siriVersion = @siriVersionAPI
+
+    siriVersion
 
   getStopMonitoring:(form) ->
     this.parseForm(form)

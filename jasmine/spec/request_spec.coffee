@@ -156,6 +156,7 @@ describe "request test", ->
   it "checks the request is right", ->
     for prop, expected of requestCheck
       expect($.parseXML(xmlRequest).getElementsByTagName(prop)[0].innerHTML).toEqual expected
+
   it "checks the API version is right", ->
     requestVersion = $.parseXML(xmlRequest).getElementsByTagName('Request')[0].getAttribute("version")
     expect(requestVersion).toEqual dataObject.siriVersionAPI

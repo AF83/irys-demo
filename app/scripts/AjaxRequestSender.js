@@ -8,9 +8,6 @@
       $( "#stopId" ).val("NINOXE:StopPoint:SPOR:" + $(this).val() + ":LOC")
     }
 
-		var dataForRequest = getStopDiscoveryData('form', STOPDISCOVERYDATA);
-		var xmlRequest = stopDiscovery(dataForRequest);
-
     var request = new stopMonitoringRequest;
     var xmlRequest = request.getStopMonitoring('form');
     var responseCard = new stopMonitoringCard;

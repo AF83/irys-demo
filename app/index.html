@@ -77,7 +77,7 @@
           <div class="col-sm-6 col-xs-12 col-lg-8 right-app-panel">
             <ul class="nav nav-tabs" role = "tablist">
               <li role="presentation" class = "active"><a href = "#basic-request" aria-controls = "basic-request" data-toggle = "tab">Pour les nuls</a></li>
-              <li role="presentation"><a href = "#advanced-request" aria-controls = "advanced-request" data-toggle = "tab">like a boss</a></li>
+              <li role="presentation"><a href = "#advanced-request" aria-controls = "advanced-request" data-toggle = "tab">Requête xml</a></li>
               <li role="presentation"><a href = "#response" aria-controls = "response" data-toggle = "tab">Résultat</a></li>
               <li role="presentation"><a href = "#xml-response" aria-controls = "xml-response" data-toggle = "tab">Réponse XML</a></li>
             </ul>
@@ -103,16 +103,28 @@
                             </label>
                         </div>
                       </div>
+                      <div class="form-group hidden" id = "requestorNameWrapper">
+                          <label for="requestorName" class="col-lg-2 control-label">Identifiant</label>
+                          <div class="col-lg-10">
+                            <input type="text" class="form-control" id="requestorName" placeholder="Nom du demandeur">
+                          </div>
+                      </div>
+                      <div class="form-group hidden" id = "requestorVersionWrapper">
+                          <label for="requestorVersion" class="col-lg-2 control-label">Version</label>
+                          <div class="col-lg-10">
+                            <input type="text" class="form-control" id="requestorVersion" placeholder="Nom du demandeur">
+                          </div>
+                      </div>
                       <div class="form-group">
                           <label for="stopName" class="col-lg-2 control-label">StopName</label>
                           <div class="col-lg-10">
-                            <input type="text" class="form-control" id="stopName" placeholder="Nom de l'arrêt ou id" value="toto">
+                            <input type="text" class="form-control" id="stopName" placeholder="Nom de l'arrêt ou id">
                           </div>
                       </div>
                       <div class="form-group hidden">
                           <label for="stopId" class="col-lg-2 control-label">StopId</label>
                           <div class="col-lg-10">
-                            <input type="text" class="form-control" id="stopId" placeholder="Nom de l'arrêt ou id" value="toto">
+                            <input type="text" class="form-control" id="stopId" placeholder="Nom de l'arrêt ou id">
                           </div>
                       </div>
                       <div class="form-group">

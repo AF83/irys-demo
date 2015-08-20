@@ -67,4 +67,25 @@ $(document).ready( function() {
     	controlType: 'select'
     });
   });
+
+  $('#siriVersionAPI3').on('click', function() {
+    if ($('#requestorNameWrapper').hasClass('hidden')) {
+      $('#requestorNameWrapper').removeClass('hidden');
+    };
+
+    if ($('#requestorVersionWrapper').hasClass('hidden')) {
+      $('#requestorVersionWrapper').removeClass('hidden');
+    };
+  });
+
+  $('#siriVersionAPI2, #siriVersionAPI1').on('click', function() {
+
+    if ($('#requestorNameWrapper').hasClass('hidden') == false) {
+      $('#requestorNameWrapper').addClass('hidden');
+    };
+
+    if ($('#requestorVersionWrapper').hasClass('hidden') == false) {
+      $('#requestorVersionWrapper').addClass('hidden');
+    };
+  })
 });

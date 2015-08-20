@@ -131,6 +131,7 @@ describe "response card test", ->
   </Answer>
   <AnswerExtension/>
 </wsdl:GetGeneralMessageResponse>"""
+
   siriResponseXML = ($.parseXML(siriResponse))
   siriResponseXML = $(siriResponseXML)
 
@@ -145,6 +146,7 @@ describe "response card test", ->
     console.log cardProcessor
     for prop, expected of cardProcessor.stopMonitoredVisit
       expect(siriResponseXML.find(prop)[0].innerHTML).toEqual expected
+
   it "checks the onwards are taken care of", ->
     xmlOnwards = $(siriResponseXML.find('OnwardCall')[0])
     onWard = cardProcessor.onwardsCall[0]
