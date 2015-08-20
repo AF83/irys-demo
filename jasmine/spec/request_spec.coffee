@@ -23,7 +23,7 @@ describe "request test", ->
     "Onwards": "2"
   }
 
-  form = """<form class="form-horizontal" id ="stop-discovery">
+  formPrefixSirir13= """<form class="form-horizontal" id ="stop-discovery">
                   <fieldset>
                     <legend>Requête</legend>
                       <div class="form-group" id = "siriVersionAPI"">
@@ -37,9 +37,42 @@ describe "request test", ->
                               <input type="radio" name="siriVersionAPIOptions" id="siriVersionAPI2" value="1.4"> 1.4
                             </label>
                             <label class="radio-inline">
-                              <input type="radio" name="siriVersionAPIOptions" id="siriVersionAPI3" value="2.0"> 2.0
+                              <input type="radio" name="siriVersionAPIOptions" id="siriVersionAPI3" value="2.0" > 2.0
                             </label>
                         </div>
+                      </div>"""
+
+  formPrefixSirir20= """<form class="form-horizontal" id ="stop-discovery">
+                  <fieldset>
+                    <legend>Requête</legend>
+                      <div class="form-group" id = "siriVersionAPI"">
+                          <label for="siriVersionAPI" class="col-sm-2 control-label">Version Chouette
+                          </label>
+                          <div class = "col-sm-10">
+                            <label class="radio-inline">
+                              <input type="radio" name="siriVersionAPIOptions" id="siriVersionAPI1" value="1.3" > 1.3
+                            </label>
+                            <label class="radio-inline">
+                              <input type="radio" name="siriVersionAPIOptions" id="siriVersionAPI2" value="1.4"> 1.4
+                            </label>
+                            <label class="radio-inline">
+                              <input type="radio" name="siriVersionAPIOptions" id="siriVersionAPI3" value="2.0" checked = "checked"> 2.0
+                            </label>
+                        </div>
+                      </div>"""
+
+  form = """
+                      <div class="form-group hidden" id = "requestorNameWrapper">
+                          <label for="requestorName" class="col-lg-2 control-label">Identifiant</label>
+                          <div class="col-lg-10">
+                            <input type="text" class="form-control" id="requestorName" placeholder="Nom du demandeur" value="FR-IDF">
+                          </div>
+                      </div>
+                      <div class="form-group hidden" id = "requestorVersionWrapper">
+                          <label for="requestorVersion" class="col-lg-2 control-label">Version</label>
+                          <div class="col-lg-10">
+                            <input type="text" class="form-control" id="requestorVersion" placeholder="Nom du demandeur" value="2.2">
+                          </div>
                       </div>
                       <div class="form-group">
                           <label for="stopId" class="col-lg-2 control-label">StopId</label>
@@ -144,9 +177,9 @@ describe "request test", ->
                     </fieldset>
                   </form>"""
 
-
   request = new stopMonitoringRequest
-  xmlRequest = request.getStopMonitoring(form)
+  formTest1 = formPrefixSirir13 + form
+  xmlRequest = request.getStopMonitoring(formTest1)
 
 
   it "checks the form is parsed correctly", ->
@@ -160,3 +193,11 @@ describe "request test", ->
   it "checks the API version is right", ->
     requestVersion = $.parseXML(xmlRequest).getElementsByTagName('Request')[0].getAttribute("version")
     expect(requestVersion).toEqual dataObject.siriVersionAPI
+
+  it "checks the API version is right when set to 2", ->
+
+    formTest2 = formPrefixSirir20 + form
+    xmlRequest = request.getStopMonitoring(formTest2)
+
+    requestVersion = $.parseXML(xmlRequest).getElementsByTagName('Request')[0].getAttribute("version")
+    expect(requestVersion).toEqual ("2.0:FR-IDF-2.2")
