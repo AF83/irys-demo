@@ -206,12 +206,22 @@ class stopMonitoringRequest
     nodes = xmlResponse.find('PlaceName')
     handler.buildAutocompleteArray nodes
 
+  handleStopDiscoveryResponseDisplay: (xmlResponse, handler) ->
+    nodes = xmlResponse.find('AnnotatedStopPointRef')
+    for node in nodes
+      handler.buildStopDiscoveryJSON(node)
+      handler.buildStopDiscovery()
+
+  handleLineDiscoveryResponseDisplay: (xmlResponse, handler) ->
+    nodes = xmlResponse.find('AnnotatedLineRef')
+    handler.buildLineDiscovery nodes
+
   handleGeneralMessageResponse: (xmlResponse, handler) ->
     nodes = xmlResponse.find('GeneralMessage')
     if nodes.length > 0
       for node in nodes
         handler.buildGeneralMessageJSON(node)
-        handler.buildGeneralMessage
+        handler.buildGeneralMessage()
     else
       errorSpan = "<div class='alert alert-success' role='alert'><a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" + "Tout va bien"+ "</div>"
       $('.alert-wrapper').append errorSpan

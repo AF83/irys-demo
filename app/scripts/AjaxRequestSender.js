@@ -1,4 +1,4 @@
-	$('#stop-discovery').submit(function(e) {
+	$('#stop-monitoring').submit(function(e) {
 		e.preventDefault();
     $("#response > .panel").remove()
 
@@ -16,8 +16,25 @@
 	});
 
   $('#get-general-message').on('click', function(e) {
+    $("#response > .panel").remove()
     var request = new stopMonitoringRequest;
     var responseCard = new stopMonitoringCard;
+    var generalMessageRequest = request.getGeneralMessage();
+    request.sendRequest(generalMessageRequest, request.handleGeneralMessageResponse, responseCard);
+  });
+
+  $('#stop-discovery').on('click', function(e) {
+    $("#response > .panel").remove()
+    var request = new stopMonitoringRequest;
+    var responseCard = new stopMonitoringCard;
+    var stopDscRequest = request.getStopDiscovery();
+    request.sendRequest(stopDscRequest, request.handleStopDiscoveryResponseDisplay, responseCard);
+  });
+
+  $('#line-discovery').on('click', function(e) {
+    $("#response > .panel").remove()
+    var request = new stopMonitoringRequest;
+    var responseCard = new stopDiscoveryResponse;
     var generalMessageRequest = request.getGeneralMessage();
     request.sendRequest(generalMessageRequest, request.handleGeneralMessageResponse, responseCard);
   });

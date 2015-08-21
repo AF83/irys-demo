@@ -33,7 +33,12 @@
     <div class="header">
       <div class = "container">
         <ul class="nav nav-pills pull-right">
-          <li ><img src="images/chouette-logo.png" class = "chouette-logo"></li>
+          <li >
+            <div class="chouette-action-man">
+              <a href="#" class = "allow-request-action" id = "open-slider">
+                <img src="images/chouette-logo.png" class = "chouette-logo">
+              </a>
+          </li>
         </ul>
         <h3 class="text-muted">chouette</h3>
       </div>
@@ -42,7 +47,7 @@
       <div class = "alert-wrapper"></div>
       <div class="col-xs-12 app-wrapper">
         <div class = "text-center">
-          <h1> Youhou le hibou </h1>
+          <h1> Démonstrateur Siri</h1>
         </div>
         <div class="text-wrapper">
           <h1 class="text-center"> Lorem</h1>
@@ -65,18 +70,10 @@
             </p>
           </div>
         </div>
-        <div class = "col-lg-6 slider-action-area" >
-            <div class="chouette-action-man">
-              <a href="#" class = "allow-request-action" id = "open-slider">
-                <img src="images/chouette-logo.png" class = "chouette-logo">
-              </a>
-            </div>
-
-        </div>
         <div class="right-panel-wrapper">
           <div class="col-sm-6 col-xs-12 col-lg-8 right-app-panel">
             <ul class="nav nav-tabs" role = "tablist">
-              <li role="presentation" class = "active"><a href = "#basic-request" aria-controls = "basic-request" data-toggle = "tab">Pour les nuls</a></li>
+              <li role="presentation" class = "active"><a href = "#basic-request" aria-controls = "basic-request" data-toggle = "tab">Requête asistée</a></li>
               <li role="presentation"><a href = "#advanced-request" aria-controls = "advanced-request" data-toggle = "tab">Requête xml</a></li>
               <li role="presentation"><a href = "#response" aria-controls = "response" data-toggle = "tab">Résultat</a></li>
               <li role="presentation"><a href = "#xml-response" aria-controls = "xml-response" data-toggle = "tab">Réponse XML</a></li>
@@ -85,7 +82,24 @@
               <div role = "tabpanel" class= "tab-pane fade in active" id="basic-request">
                 <a href = "#" id = "close-slider">Close</a>
                 <h2 class="text-center"> Construire votre requête Siri</h2>
-                <form class="form-horizontal" id ="stop-discovery">
+                <form class="form-horizontal" id ="canned-requests">
+                  <fieldset>
+                    <legend>Requête préenregistrées</legend>
+                    <div class="form-group">
+                      <div class="col-xs-4">
+                        <button type="button" class="btn btn-primary" id="stop-discovery">Stop Discovery</button>
+                      </div>
+                      <div class="col-xs-4">
+                        <button type="button" class="btn btn-info" id="line-discovery">Line Discovery</button>
+                      </div>
+                      <div class="col-xs-4">
+                        <button type="button" class="btn btn-success" id="get-general-message">Get General Message</button>
+                      </div>
+                    </div>
+                  </fieldset>
+                </form>
+
+                <form class="form-horizontal" id ="stop-monitoring">
                   <fieldset>
                     <legend>Requête</legend>
                       <div class="form-group" id = "siriVersionAPI"">
@@ -161,27 +175,27 @@
                             <input type="text" class="form-control" id="preview" list="time-span-list" placeholder="Intervalle temporel">
                             <datalist id="time-span-list">
                               <option>0</option>
-                              <option>5</option>
-                              <option>10</option>
-                              <option>15</option>
-                              <option>20</option>
-                              <option>25</option>
                               <option>30</option>
+                              <option>60</option>
+                              <option>90</option>
+                              <option>120</option>
+                              <option>150</option>
+                              <option>180</option>
                             </datalist>
                           </div>
                       </div>
                       <div class="form-group">
                         <label for="maxStop" class="col-lg-2 control-label">Limite de passages</label>
                           <div class="col-lg-10">
-                            <input type="text" class="form-control" id="maxStop" list="time-span-list" placeholder="Nombre maxi d'arrets">
-                            <datalist id="time-span-list">
+                            <input type="text" class="form-control" id="maxStop" list="max-stop-list" placeholder="Nombre maxi d'arrets">
+                            <datalist id="max-stop-list">
                               <option>0</option>
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
                               <option>5</option>
-                              <option>10</option>
-                              <option>15</option>
-                              <option>20</option>
-                              <option>25</option>
-                              <option>30</option>
+                              <option>6</option>
                             </datalist>
                           </div>
                       </div>
@@ -213,14 +227,9 @@
                           <p class="col-lg-7">passages suivants
                       </div>
                       <div class="form-group">
-                        <div class="col-lg-4 col-lg-offset-4">
-                            <button type="submit" class="btn btn-success">Submit</button>
-                          </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="col-lg-4 col-lg-offset-4">
-                            <button type="button" class="btn btn-danger" id="get-general-message">Get General Message</button>
-                          </div>
+                        <div class="col-xs-12 text-center">
+                          <button type="submit" class="btn btn-success">Envoyer la requête</button>
+                        </div>
                       </div>
                     </fieldset>
                   </form>
@@ -233,7 +242,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-lg-8 col-lg-offset-4">
-                            <button type="button" class="btn btn-success" id="smart-request-submit">Submit</button>
+                            <button type="button" class="btn btn-success" id="smart-request-submit">Envoyer la requête</button>
                           </div>
                       </div>
                   </form>

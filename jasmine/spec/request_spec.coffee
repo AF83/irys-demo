@@ -178,7 +178,7 @@ describe "request test", ->
           </form>"""
 
   request = new stopMonitoringRequest
-  formTest1 = formPrefixSirir13 + form
+  formTest1 = formPrefixSiri13 + form
   xmlRequest = request.getStopMonitoring(formTest1)
 
 

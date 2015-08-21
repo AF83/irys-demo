@@ -1,7 +1,5 @@
 describe "ajax test", ->
 
-
-
   form = """<form class="form-horizontal" id ="stop-discovery">
                   <fieldset>
                     <legend>Requête</legend>
@@ -274,6 +272,7 @@ describe "ajax test", ->
     jasmine.Ajax.stubRequest('http://appli.chouette.mobi/irys_server').andReturn({
           "responseText": siriResponse
         });
+
     xmlRequest = SMRequest.getStopMonitoring('form')
     SMRequest.sendRequest(xmlRequest, SMRequest.handleStopMonitoringResponse, SMCard)
 

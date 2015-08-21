@@ -4,11 +4,17 @@ class stopMonitoringCard
   onwardsCall: []
   monitoredCall: {}
   generalMessage: {}
+  stopDiscovery: {}
+  monitoredVehicleJourney: {}
+
+  stopDiscoveryLines: []
   mustacheStopMonitoredVisit: []
   mustacheOnwards: []
+  mustacheStopDiscoveries: []
   mustacheMonitoredCall: []
   mustacheGeneralMessage: []
-  monitoredVehicleJourney: {}
+  mustacheStopLines: []
+
 
   stopMonitoringTemplate: """
   <div class = "panel panel-default stop-wrapper">
@@ -23,13 +29,13 @@ class stopMonitoringCard
       {{#monitoredCall}}
         <h4>Monitored Call</h4>
         {{#mustacheMonitoredCall}}
-          <div>{{key}} : {{value}}</div>
+          <div class = "indented-response">{{key}} : {{value}}</div>
         {{/mustacheMonitoredCall}}
       {{/monitoredCall}}
       {{#mustacheOnwards}}
         <h4>OnWards</h4>
         {{#onWard}}
-          <div>{{key}} : {{value}}</div>
+          <div class = "indented-response">{{key}} : {{value}}</div>
         {{/onWard}}
       {{/mustacheOnwards}}
     </div>
@@ -51,8 +57,28 @@ class stopMonitoringCard
     </div>
   </div>"""
 
+  stopDiscoveryTemplate: """
+  <div class = "panel panel-default stop-wrapper">
+    <div class = "panel-heading">
+      <div class = "stop-name"></div>
+        <h4>{{stopDiscovery.StopName}}</h4>
+    </div>
+    <div class = "panel-body">
+      {{#mustacheStopDiscoveries}}
+        <div>{{key}} : {{value}}</div>
+      {{/mustacheStopDiscoveries}}
+      <h4>Lines</h4>
+      {{#mustacheStopLines}}
+        {{#line}}
+          <div class = "indented-response">{{key}} : {{value}}</div>
+        {{/line}}
+      {{/mustacheStopLines}}
+    </div>
+  </div>"""
+
 
   parseSiriResponse: (node) ->
+    @stopMonitoredVisit = {}
     for child in node.children
       this.buildResponseJSON child
 
@@ -69,7 +95,6 @@ class stopMonitoringCard
       this.addMonitoredCall node
     else if node.nodeName == 'siri:OnwardCalls'
       this.addOnwards node
-
     else
       this.stopMonitoredVisit[this.unSiried(node.nodeName)] = node.innerHTML
 
@@ -84,6 +109,15 @@ class stopMonitoringCard
       this.generalMessage[this.unSiried(node.nodeName)] = node.innerHTML
     return
 
+  buildStopDiscoveryJSON: (node) ->
+    for child in node.children
+      if child.nodeName == 'siri:Lines'
+        this.addStopLine child
+      else
+        @stopDiscovery[this.unSiried(child.nodeName)] = child.innerHTML
+    return
+
+
   addOnwards: (node) ->
     this.onwardsCall = []
     for child in node.children
@@ -91,6 +125,14 @@ class stopMonitoringCard
       for grandChild in child.children
         onward[this.unSiried(grandChild.nodeName)] = grandChild.innerHTML
       @onwardsCall.push(onward)
+    return
+
+  addStopLine: (node) ->
+    @stopDiscoveryLines = []
+    for child in node.children
+      line= {}
+      line[this.unSiried(child.nodeName)] = child.innerHTML
+      @stopDiscoveryLines.push(line)
     return
 
   addMonitoredCall: (node) ->
@@ -110,7 +152,6 @@ class stopMonitoringCard
     object
 
   buildMustacheStopCard:() ->
-    @stopMonitoredVisit = this.checkSiriObject @stopMonitoredVisit
     for k,v of @stopMonitoredVisit
       if @stopMonitoredVisit.hasOwnProperty(k)
         @mustacheStopMonitoredVisit.push({
@@ -141,11 +182,32 @@ class stopMonitoringCard
       @mustacheOnwards.push(tempOnward)
     return
 
-  buildGeneralMessage:() ->
+  buildMustacheStopLines:() ->
+    for line in @stopDiscoveryLines
+      tempLine = {'line': []}
+      for k,v of line
+        if line.hasOwnProperty(k)
+          tempLine.line.push({
+            'key' : k,
+            'value' : v
+           })
+      @mustacheStopLines.push(tempLine)
+    return
+
+  buildMustacheGeneralMessage:() ->
     @generalMessage = this.checkSiriObject @generalMessage
     for k,v of @generalMessage
       if @generalMessage.hasOwnProperty(k)
         @mustacheGeneralMessage.push({
+          'key' : k,
+          'value' : v
+         })
+    return
+
+  buildMustacheStopDiscovery:() ->
+    for k,v of @stopDiscovery
+      if @stopDiscovery.hasOwnProperty(k)
+        @mustacheStopDiscoveries.push({
           'key' : k,
           'value' : v
          })
@@ -162,13 +224,22 @@ class stopMonitoringCard
     this.buildMustacheOnwards()
     this.buildMustacheMonitoredCall()
 
+
     this.renderCard @stopMonitoringTemplate
 
   buildGeneralMessage:() ->
     this.mustacheGeneralMessage = []
-    this.buildGeneralMessage()
+    this.buildMustacheGeneralMessage()
     this.renderCard @generalMessageTemplate
 
+  buildStopDiscovery: () ->
+    @mustacheStopDiscoveries = []
+    @mustacheStopLines = []
+
+    this.buildMustacheStopDiscovery()
+    this.buildMustacheStopLines()
+
+    this.renderCard @stopDiscoveryTemplate
 
   renderCard:(template) ->
 

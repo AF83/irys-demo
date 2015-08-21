@@ -153,6 +153,24 @@ stopMonitoringRequest = (function() {
     return handler.buildAutocompleteArray(nodes);
   };
 
+  stopMonitoringRequest.prototype.handleStopDiscoveryResponseDisplay = function(xmlResponse, handler) {
+    var i, len, node, nodes, results;
+    nodes = xmlResponse.find('AnnotatedStopPointRef');
+    results = [];
+    for (i = 0, len = nodes.length; i < len; i++) {
+      node = nodes[i];
+      handler.buildStopDiscoveryJSON(node);
+      results.push(handler.buildStopDiscovery());
+    }
+    return results;
+  };
+
+  stopMonitoringRequest.prototype.handleLineDiscoveryResponseDisplay = function(xmlResponse, handler) {
+    var nodes;
+    nodes = xmlResponse.find('AnnotatedLineRef');
+    return handler.buildLineDiscovery(nodes);
+  };
+
   stopMonitoringRequest.prototype.handleGeneralMessageResponse = function(xmlResponse, handler) {
     var errorSpan, i, len, node, nodes, results;
     nodes = xmlResponse.find('GeneralMessage');
@@ -161,7 +179,7 @@ stopMonitoringRequest = (function() {
       for (i = 0, len = nodes.length; i < len; i++) {
         node = nodes[i];
         handler.buildGeneralMessageJSON(node);
-        results.push(handler.buildGeneralMessage);
+        results.push(handler.buildGeneralMessage());
       }
       return results;
     } else {
