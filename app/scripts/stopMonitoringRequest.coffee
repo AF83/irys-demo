@@ -203,8 +203,8 @@ class stopMonitoringRequest
       handler.buildStopMonitoring()
 
   handleStopDiscoveryResponse: (xmlResponse, handler) ->
-    nodes = xmlResponse.find('PlaceName')
-    handler.buildAutocompleteArray nodes
+    nodes = xmlResponse.find('AnnotatedStopPointRef')
+    handler.buildAutocompleteArray(nodes, "Stop")
 
   handleStopDiscoveryResponseDisplay: (xmlResponse, handler) ->
     nodes = xmlResponse.find('AnnotatedStopPointRef')
@@ -214,7 +214,9 @@ class stopMonitoringRequest
 
   handleLineDiscoveryResponseDisplay: (xmlResponse, handler) ->
     nodes = xmlResponse.find('AnnotatedLineRef')
-    handler.buildLineDiscovery nodes
+    for node in nodes
+      handler.buildLineDiscoveryJSON(node)
+      handler.buildLineDiscovery(nodes, "Line")
 
   handleGeneralMessageResponse: (xmlResponse, handler) ->
     nodes = xmlResponse.find('GeneralMessage')

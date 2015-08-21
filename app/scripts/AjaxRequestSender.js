@@ -34,9 +34,9 @@
   $('#line-discovery').on('click', function(e) {
     $("#response > .panel").remove()
     var request = new stopMonitoringRequest;
-    var responseCard = new stopDiscoveryResponse;
-    var generalMessageRequest = request.getGeneralMessage();
-    request.sendRequest(generalMessageRequest, request.handleGeneralMessageResponse, responseCard);
+    var responseCard = new stopMonitoringCard;
+    var lineDscRequest = request.getLineDiscovery();
+    request.sendRequest(lineDscRequest, request.handleLineDiscoveryResponseDisplay, responseCard);
   });
 
   $('#smart-request-form').submit(function(e) {

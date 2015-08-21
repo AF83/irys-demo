@@ -7,49 +7,39 @@ $(document).ready( function() {
     var stopDSCResponse = new stopDiscoveryResponse;
 
 
-    var availableStations = stopDSC.sendRequest(stopDscRequest, stopDSC.handleStopDiscoveryResponse, stopDSCResponse);
-    var availableStations = stopDSCResponse.handleFallbackResponse("Stop");
+    var availableStations;
+    availableStations = stopDSC.sendRequest(stopDscRequest, stopDSC.handleStopDiscoveryResponse, stopDSCResponse);
+
     var availableLines = stopDSCResponse.handleFallbackResponse("Line");
 
-    $( "#stopName" ).autocomplete({
-      minLength: 0,
-      source: availableStations,
-      focus: function( event, ui ) {
-        $( "#stopName" ).val( ui.item.label );
-        return false;
-      },
-      select: function( event, ui ) {
-        $( "#stopName" ).val( ui.item.label );
-        $( "#stopId" ).val( ui.item.id );
+    setTimeout(function() {
+      console.log(availableStations);
+      console.log("wait for Ajax");
 
-        return false;
-      }
-    })
-    .autocomplete( "instance" )._renderItem = function( ul, item ) {
-      return $( "<li>" )
-        .append( "<a>" + item.label + "</a>" )
-        .appendTo( ul );
-    };
 
-    $( "#lineName" ).autocomplete({
-      minLength: 0,
-      source: availableLines,
-      focus: function( event, ui ) {
-        $( "#lineName" ).val( ui.item.label );
-        return false;
-      },
-      select: function( event, ui ) {
-        $( "#lineName" ).val( ui.item.label );
-        $( "#lineId" ).val( ui.item.id );
+      $( "#lineName" ).autocomplete({
+        minLength: 0,
+        source: availableLines,
+        focus: function( event, ui ) {
+          $( "#lineName" ).val( ui.item.label );
+          return false;
+        },
+        select: function( event, ui ) {
+          $( "#lineName" ).val( ui.item.label );
+          $( "#lineId" ).val( ui.item.id );
 
-        return false;
-      }
-    })
-    .autocomplete( "instance" )._renderItem = function( ul, item ) {
-      return $( "<li>" )
-        .append( "<a>" + item.label + "</a>" )
-        .appendTo( ul );
-    };
+          return false;
+        }
+      })
+      .autocomplete( "instance" )._renderItem = function( ul, item ) {
+        return $( "<li>" )
+          .append( "<a>" + item.label + "</a>" )
+          .appendTo( ul );
+      };
+    },
+    5000);
+
+    console.log(availableStations);
 
     $( "#lineName" ).on('focusout', function() {
       var regEx = /\d{8}/;

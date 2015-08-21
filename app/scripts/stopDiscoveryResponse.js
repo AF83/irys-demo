@@ -37,7 +37,23 @@ stopDiscoveryResponse = (function() {
         value: $(node).find(type + 'Name')[0].innerHTML
       });
     }
-    return autocomplete;
+    console.log("autocomplete done");
+    autocomplete;
+    $('#stopName').autocomplete({
+      minLength: 0,
+      source: autocomplete,
+      focus: function(event, ui) {
+        $('#stopName').val(ui.item.label);
+        return false;
+      },
+      select: function(event, ui) {
+        $('#stopName').val(ui.item.label);
+        $('#stopId').val(ui.item.id);
+        return false;
+      }
+    }).autocomplete('instance')._renderItem = function(ul, item) {
+      return $('<li>').append('<a>' + item.label + '</a>').appendTo(ul);
+    };
   };
 
   stopDiscoveryResponse.prototype.buildStopIdStopNameHash = function(nodes) {

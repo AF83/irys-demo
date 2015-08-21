@@ -5,15 +5,19 @@ class stopMonitoringCard
   monitoredCall: {}
   generalMessage: {}
   stopDiscovery: {}
+  lineDiscovery: {}
   monitoredVehicleJourney: {}
 
   stopDiscoveryLines: []
+  lineDirections: []
   mustacheStopMonitoredVisit: []
   mustacheOnwards: []
   mustacheStopDiscoveries: []
   mustacheMonitoredCall: []
   mustacheGeneralMessage: []
   mustacheStopLines: []
+  mustacheLineDiscovery: []
+  mustacheLineDirections: []
 
 
   stopMonitoringTemplate: """
@@ -76,6 +80,25 @@ class stopMonitoringCard
     </div>
   </div>"""
 
+  lineDiscoveryTemplate: """
+  <div class = "panel panel-default stop-wrapper">
+    <div class = "panel-heading">
+      <div class = "stop-name"></div>
+        <h4>{{lineDiscovery.LineName}}</h4>
+    </div>
+    <div class = "panel-body">
+      {{#mustacheLineDiscovery}}
+        <div>{{key}} : {{value}}</div>
+      {{/mustacheLineDiscovery}}
+      <h4>Lines</h4>
+      {{#mustacheLineDirections}}
+        {{#line}}
+          <div class = "indented-response">{{key}} : {{value}}</div>
+        {{/line}}
+      {{/mustacheLineDirections}}
+    </div>
+  </div>"""
+
 
   parseSiriResponse: (node) ->
     @stopMonitoredVisit = {}
@@ -117,6 +140,22 @@ class stopMonitoringCard
         @stopDiscovery[this.unSiried(child.nodeName)] = child.innerHTML
     return
 
+  buildLineDiscoveryJSON: (node) ->
+    for child in node.children
+      if child.nodeName == 'siri:Destinations'
+        this.addLineDirection child
+      else
+        @lineDiscovery[this.unSiried(child.nodeName)] = child.innerHTML
+    return
+
+  addLineDirection:(node) ->
+    @lineDirections = []
+    for child in node.children
+      lineDirection= {}
+      for grandChild in child.children
+        lineDirection[this.unSiried(grandChild.nodeName)] = grandChild.innerHTML
+      @lineDirections.push(lineDirection)
+    return
 
   addOnwards: (node) ->
     this.onwardsCall = []
@@ -182,6 +221,15 @@ class stopMonitoringCard
       @mustacheOnwards.push(tempOnward)
     return
 
+  buildMustacheStopDiscovery:() ->
+    for k,v of @stopDiscovery
+      if @stopDiscovery.hasOwnProperty(k)
+        @mustacheStopDiscoveries.push({
+          'key' : k,
+          'value' : v
+         })
+    return
+
   buildMustacheStopLines:() ->
     for line in @stopDiscoveryLines
       tempLine = {'line': []}
@@ -194,6 +242,27 @@ class stopMonitoringCard
       @mustacheStopLines.push(tempLine)
     return
 
+  buildMustacheLineDiscovery:() ->
+    for k,v of @lineDiscovery
+      if @lineDiscovery.hasOwnProperty(k)
+        @mustacheLineDiscovery.push({
+          'key' : k,
+          'value' : v
+         })
+    return
+
+  buildMustacheLineDirections:() ->
+    for line in @lineDirections
+      tempLine = {'line': []}
+      for k,v of line
+        if line.hasOwnProperty(k)
+          tempLine.line.push({
+            'key' : k,
+            'value' : v
+           })
+      @mustacheLineDirections.push(tempLine)
+    return
+
   buildMustacheGeneralMessage:() ->
     @generalMessage = this.checkSiriObject @generalMessage
     for k,v of @generalMessage
@@ -204,14 +273,7 @@ class stopMonitoringCard
          })
     return
 
-  buildMustacheStopDiscovery:() ->
-    for k,v of @stopDiscovery
-      if @stopDiscovery.hasOwnProperty(k)
-        @mustacheStopDiscoveries.push({
-          'key' : k,
-          'value' : v
-         })
-    return
+
 
 
   buildStopMonitoring: () ->
@@ -219,11 +281,9 @@ class stopMonitoringCard
     this.mustacheOnwards = []
     this.mustacheMonitoredCall = []
 
-
     this.buildMustacheStopCard()
     this.buildMustacheOnwards()
     this.buildMustacheMonitoredCall()
-
 
     this.renderCard @stopMonitoringTemplate
 
@@ -240,6 +300,15 @@ class stopMonitoringCard
     this.buildMustacheStopLines()
 
     this.renderCard @stopDiscoveryTemplate
+
+  buildLineDiscovery: () ->
+    @mustacheLineDiscovery = []
+    @mustacheLineDirections = []
+
+    this.buildMustacheLineDiscovery()
+    this.buildMustacheLineDirections()
+
+    this.renderCard @lineDiscoveryTemplate
 
   renderCard:(template) ->
 

@@ -149,8 +149,8 @@ stopMonitoringRequest = (function() {
 
   stopMonitoringRequest.prototype.handleStopDiscoveryResponse = function(xmlResponse, handler) {
     var nodes;
-    nodes = xmlResponse.find('PlaceName');
-    return handler.buildAutocompleteArray(nodes);
+    nodes = xmlResponse.find('AnnotatedStopPointRef');
+    return handler.buildAutocompleteArray(nodes, "Stop");
   };
 
   stopMonitoringRequest.prototype.handleStopDiscoveryResponseDisplay = function(xmlResponse, handler) {
@@ -166,9 +166,15 @@ stopMonitoringRequest = (function() {
   };
 
   stopMonitoringRequest.prototype.handleLineDiscoveryResponseDisplay = function(xmlResponse, handler) {
-    var nodes;
+    var i, len, node, nodes, results;
     nodes = xmlResponse.find('AnnotatedLineRef');
-    return handler.buildLineDiscovery(nodes);
+    results = [];
+    for (i = 0, len = nodes.length; i < len; i++) {
+      node = nodes[i];
+      handler.buildLineDiscoveryJSON(node);
+      results.push(handler.buildLineDiscovery(nodes, "Line"));
+    }
+    return results;
   };
 
   stopMonitoringRequest.prototype.handleGeneralMessageResponse = function(xmlResponse, handler) {

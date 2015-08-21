@@ -1944,7 +1944,21 @@ class stopDiscoveryResponse
         label: $(node).find(type + 'Name')[0].innerHTML,
         value: $(node).find(type + 'Name')[0].innerHTML
         })
+    console.log "autocomplete done"
     autocomplete
+    $('#stopName').autocomplete(
+      minLength: 0
+      source: autocomplete
+      focus: (event, ui) ->
+        $('#stopName').val ui.item.label
+        false
+      select: (event, ui) ->
+        $('#stopName').val ui.item.label
+        $('#stopId').val ui.item.id
+        false
+    ).autocomplete('instance')._renderItem = (ul, item) ->
+      $('<li>').append('<a>' + item.label + '</a>').appendTo ul
+    return
 
   buildStopIdStopNameHash:(nodes) ->
     nodes = $($.parseXML(@fallbackResponse)).find('AnnotatedStopPointRef')
