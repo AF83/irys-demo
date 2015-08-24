@@ -182,19 +182,19 @@ describe "request test", ->
   xmlRequest = request.getStopMonitoring(formTest1)
 
 
-  it "checks the form is parsed correctly", ->
+  it "checks the form is parsed correctly for StopMonitoring", ->
     for prop, expected of dataObject
       expect(request[prop]).toEqual expected
 
-  it "checks the request is right", ->
+  it "checks the Stop Monitoring request is right", ->
     for prop, expected of requestCheck
       expect($.parseXML(xmlRequest).getElementsByTagName(prop)[0].innerHTML).toEqual expected
 
-  it "checks the API version is right", ->
+  it "checks the Siri version is right", ->
     requestVersion = $.parseXML(xmlRequest).getElementsByTagName('Request')[0].getAttribute("version")
     expect(requestVersion).toEqual dataObject.siriVersionAPI
 
-  it "checks the API version is right when set to 2", ->
+  it "checks the Siri version is right when set to 2", ->
 
     formTest2 = formPrefixSiri20 + form
     xmlRequest = request.getStopMonitoring(formTest2)

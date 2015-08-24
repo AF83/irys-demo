@@ -206,6 +206,10 @@ class stopMonitoringRequest
     nodes = xmlResponse.find('AnnotatedStopPointRef')
     handler.buildAutocompleteArray(nodes, "Stop")
 
+  handleLineDiscoveryResponse: (xmlResponse, handler) ->
+    nodes = xmlResponse.find('AnnotatedLineRef')
+    handler.buildAutocompleteArray(nodes, "Line")
+
   handleStopDiscoveryResponseDisplay: (xmlResponse, handler) ->
     nodes = xmlResponse.find('AnnotatedStopPointRef')
     for node in nodes
@@ -222,6 +226,7 @@ class stopMonitoringRequest
     nodes = xmlResponse.find('GeneralMessage')
     if nodes.length > 0
       for node in nodes
+        handler.generalMessage = {}
         handler.buildGeneralMessageJSON(node)
         handler.buildGeneralMessage()
     else

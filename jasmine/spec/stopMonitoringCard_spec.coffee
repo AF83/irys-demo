@@ -132,6 +132,30 @@ describe "response card test", ->
   <AnswerExtension/>
 </wsdl:GetGeneralMessageResponse>"""
 
+  siriGeneralMessageResponseForHTML = """<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"><SOAP-ENV:Header/><SOAP-ENV:Body><wsdl:GetGeneralMessageResponse xmlns:wsdl="http://wsdl.siri.org.uk"><ServiceDeliveryInfo><siri:ResponseTimestamp xmlns:siri="http://www.siri.org.uk/siri">2015-08-24T14:38:10.661+02:00</siri:ResponseTimestamp><siri:ProducerRef xmlns:siri="http://www.siri.org.uk/siri">DRYADE</siri:ProducerRef><siri:Address xmlns:siri="http://www.siri.org.uk/siri">http://chouette.cityway.fr/irys_server</siri:Address><siri:ResponseMessageIdentifier xmlns:siri="http://www.siri.org.uk/siri">DRYADE:GeneralMessage:834:LOC</siri:ResponseMessageIdentifier><siri:RequestMessageRef xmlns:siri="http://www.siri.org.uk/siri">GeneralMessage:Test:0</siri:RequestMessageRef></ServiceDeliveryInfo><Answer><siri:GeneralMessageDelivery xmlns:siri="http://www.siri.org.uk/siri" version="1.3"><siri:ResponseTimestamp>2015-08-24T14:38:10.661+02:00</siri:ResponseTimestamp><siri:Status>true</siri:Status><siri:GeneralMessage formatRef="STIF-IDF"><siri:RecordedAtTime>2015-08-24T03:00:29.268+02:00</siri:RecordedAtTime><siri:ItemIdentifier>6893</siri:ItemIdentifier><siri:InfoMessageIdentifier>NINOXE:GeneralMessage:20150824_5</siri:InfoMessageIdentifier><siri:InfoMessageVersion>1</siri:InfoMessageVersion><siri:InfoChannelRef>Perturbation</siri:InfoChannelRef><siri:ValidUntilTime>2015-08-24T15:10:29.268+02:00</siri:ValidUntilTime><siri:Content xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="siri:IDFGeneralMessageStructure"><siri:StopPointRef>NINOXE:StopPoint:BP:15568803:LOC</siri:StopPointRef><siri:Message><siri:MessageType>longMessage</siri:MessageType><siri:MessageText xml:lang="FR">L'arrêt Mairie (A) est déplacé Rue de Paris</siri:MessageText></siri:Message></siri:Content></siri:GeneralMessage><siri:GeneralMessage formatRef="STIF-IDF"><siri:RecordedAtTime>2015-08-24T03:00:29.272+02:00</siri:RecordedAtTime><siri:ItemIdentifier>6894</siri:ItemIdentifier><siri:InfoMessageIdentifier>NINOXE:GeneralMessage:20150824_6</siri:InfoMessageIdentifier><siri:InfoMessageVersion>1</siri:InfoMessageVersion><siri:InfoChannelRef>Perturbation</siri:InfoChannelRef><siri:ValidUntilTime>2015-08-24T17:13:29.272+02:00</siri:ValidUntilTime><siri:Content xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="siri:IDFGeneralMessageStructure"><siri:StopPointRef>NINOXE:StopPoint:SP:15625831:LOC</siri:StopPointRef><siri:Message><siri:MessageType>longMessage</siri:MessageType><siri:MessageText xml:lang="FR">L'arrêt St Julien n'est pas desservi</siri:MessageText></siri:Message></siri:Content></siri:GeneralMessage><siri:GeneralMessage formatRef="STIF-IDF"><siri:RecordedAtTime>2015-08-24T03:00:29.276+02:00</siri:RecordedAtTime><siri:ItemIdentifier>6895</siri:ItemIdentifier><siri:InfoMessageIdentifier>NINOXE:GeneralMessage:20150824_7</siri:InfoMessageIdentifier><siri:InfoMessageVersion>1</siri:InfoMessageVersion><siri:InfoChannelRef>Perturbation</siri:InfoChannelRef><siri:ValidUntilTime>2015-08-24T15:17:29.276+02:00</siri:ValidUntilTime><siri:Content xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="siri:IDFGeneralMessageStructure"><siri:LineRef>NINOXE:Line:15627090:LOC</siri:LineRef><siri:Message><siri:MessageType>longMessage</siri:MessageType><siri:MessageText xml:lang="FR">La ligne 7 est fermée toute la journée</siri:MessageText></siri:Message></siri:Content></siri:GeneralMessage></siri:GeneralMessageDelivery></Answer><AnswerExtension/></wsdl:GetGeneralMessageResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>"""
+
+  expectedGeneralMessageHTMLCard = """
+  <div class="panel panel-default stop-wrapper">
+  <div class="panel-heading">
+    <div class="stop-name"></div>
+      <h4>General Message</h4>
+  </div>
+  <div class="panel-body">
+      <h4>General Message</h4>
+        <div>RecordedAtTime : 2015-08-24T03:00:29.268+02:00</div>
+        <div>ItemIdentifier : 6893</div>
+        <div>InfoMessageIdentifier : NINOXE:GeneralMessage:20150824_5</div>
+        <div>InfoMessageVersion : 1</div>
+        <div>InfoChannelRef : Perturbation</div>
+        <div>ValidUntilTime : 2015-08-24T15:10:29.268+02:00</div>
+        <div>StopPointRef : NINOXE:StopPoint:BP:15568803:LOC</div>
+        <div>MessageType : longMessage</div>
+        <div>MessageText : L'arrêt Mairie (A) est déplacé Rue de Paris</div>
+  </div>
+</div>"""
+
+  responseDOM = """<div id = "response"></div>"""
+
   siriResponseXML = ($.parseXML(siriResponse))
   siriResponseXML = $(siriResponseXML)
 
@@ -140,7 +164,7 @@ describe "response card test", ->
 
   cardProcessor = new stopMonitoringCard
 
-  it "checks the card has the correct properties", ->
+  it "checks the Stop Monitoring card has the correct properties", ->
     node = siriResponseXML.find('MonitoredStopVisit')
     cardProcessor.parseSiriResponse(node[0])
     console.log cardProcessor
@@ -156,8 +180,9 @@ describe "response card test", ->
   it "checks the general message request works", ->
     nodeGeneralMessage = $(generalMessageResponseXML.find('GeneralMessage'))
     console.log nodeGeneralMessage
-    generalMessage = cardProcessor. buildGeneralMessageJSON nodeGeneralMessage[0]
+    generalMessage = cardProcessor.buildGeneralMessageJSON nodeGeneralMessage[0]
     for prop, expected of cardProcessor.generalMessage
       expect(generalMessageResponseXML.find(prop)[0].innerHTML).toEqual expected
+
 
 

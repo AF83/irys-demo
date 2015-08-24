@@ -37,18 +37,24 @@ stopDiscoveryResponse = (function() {
         value: $(node).find(type + 'Name')[0].innerHTML
       });
     }
-    console.log("autocomplete done");
-    autocomplete;
-    $('#stopName').autocomplete({
+    if (type === 'Stop') {
+      this.initiateAutocomplete(autocomplete, 'stop');
+    } else if (type === 'Line') {
+      this.initiateAutocomplete(autocomplete, 'line');
+    }
+  };
+
+  stopDiscoveryResponse.prototype.initiateAutocomplete = function(collection, type) {
+    return $('#' + type + 'Name').autocomplete({
       minLength: 0,
-      source: autocomplete,
+      source: collection,
       focus: function(event, ui) {
-        $('#stopName').val(ui.item.label);
+        $('#' + type + 'Name').val(ui.item.label);
         return false;
       },
       select: function(event, ui) {
-        $('#stopName').val(ui.item.label);
-        $('#stopId').val(ui.item.id);
+        $('#' + type + 'Name').val(ui.item.label);
+        $('#' + type + 'Id').val(ui.item.id);
         return false;
       }
     }).autocomplete('instance')._renderItem = function(ul, item) {

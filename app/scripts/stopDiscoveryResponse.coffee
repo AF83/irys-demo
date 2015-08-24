@@ -1937,28 +1937,34 @@ class stopDiscoveryResponse
 
   buildAutocompleteArray:(nodes, type) ->
     autocomplete = []
-    for node in nodes
 
+    for node in nodes
       autocomplete.push({
         id: $(node).find(this.typeRef(type) + 'Ref')[0].innerHTML,
         label: $(node).find(type + 'Name')[0].innerHTML,
         value: $(node).find(type + 'Name')[0].innerHTML
         })
-    console.log "autocomplete done"
-    autocomplete
-    $('#stopName').autocomplete(
+
+    if type == 'Stop'
+      this.initiateAutocomplete(autocomplete, 'stop')
+    else if type == 'Line'
+      this.initiateAutocomplete(autocomplete, 'line')
+    return
+
+
+  initiateAutocomplete:(collection, type) ->
+    $('#' + type + 'Name').autocomplete(
       minLength: 0
-      source: autocomplete
+      source: collection
       focus: (event, ui) ->
-        $('#stopName').val ui.item.label
+        $('#' + type + 'Name').val ui.item.label
         false
       select: (event, ui) ->
-        $('#stopName').val ui.item.label
-        $('#stopId').val ui.item.id
+        $('#' + type + 'Name').val ui.item.label
+        $('#' + type + 'Id').val ui.item.id
         false
     ).autocomplete('instance')._renderItem = (ul, item) ->
       $('<li>').append('<a>' + item.label + '</a>').appendTo ul
-    return
 
   buildStopIdStopNameHash:(nodes) ->
     nodes = $($.parseXML(@fallbackResponse)).find('AnnotatedStopPointRef')

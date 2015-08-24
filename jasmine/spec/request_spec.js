@@ -29,7 +29,7 @@ describe("request test", function() {
   request = new stopMonitoringRequest;
   formTest1 = formPrefixSiri13 + form;
   xmlRequest = request.getStopMonitoring(formTest1);
-  it("checks the form is parsed correctly", function() {
+  it("checks the form is parsed correctly for StopMonitoring", function() {
     var expected, prop, results;
     results = [];
     for (prop in dataObject) {
@@ -38,7 +38,7 @@ describe("request test", function() {
     }
     return results;
   });
-  it("checks the request is right", function() {
+  it("checks the Stop Monitoring request is right", function() {
     var expected, prop, results;
     results = [];
     for (prop in requestCheck) {
@@ -47,12 +47,12 @@ describe("request test", function() {
     }
     return results;
   });
-  it("checks the API version is right", function() {
+  it("checks the Siri version is right", function() {
     var requestVersion;
     requestVersion = $.parseXML(xmlRequest).getElementsByTagName('Request')[0].getAttribute("version");
     return expect(requestVersion).toEqual(dataObject.siriVersionAPI);
   });
-  return it("checks the API version is right when set to 2", function() {
+  return it("checks the Siri version is right when set to 2", function() {
     var formTest2, requestVersion;
     formTest2 = formPrefixSiri20 + form;
     xmlRequest = request.getStopMonitoring(formTest2);

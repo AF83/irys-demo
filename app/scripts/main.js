@@ -4,40 +4,14 @@ $(document).ready( function() {
 	$(function() {
     var stopDSC = new stopMonitoringRequest;
     var stopDscRequest = stopDSC.getStopDiscovery();
+    var lineDscRequest = stopDSC.getLineDiscovery();
     var stopDSCResponse = new stopDiscoveryResponse;
 
 
     var availableStations;
     availableStations = stopDSC.sendRequest(stopDscRequest, stopDSC.handleStopDiscoveryResponse, stopDSCResponse);
 
-    var availableLines = stopDSCResponse.handleFallbackResponse("Line");
-
-    setTimeout(function() {
-      console.log(availableStations);
-      console.log("wait for Ajax");
-
-
-      $( "#lineName" ).autocomplete({
-        minLength: 0,
-        source: availableLines,
-        focus: function( event, ui ) {
-          $( "#lineName" ).val( ui.item.label );
-          return false;
-        },
-        select: function( event, ui ) {
-          $( "#lineName" ).val( ui.item.label );
-          $( "#lineId" ).val( ui.item.id );
-
-          return false;
-        }
-      })
-      .autocomplete( "instance" )._renderItem = function( ul, item ) {
-        return $( "<li>" )
-          .append( "<a>" + item.label + "</a>" )
-          .appendTo( ul );
-      };
-    },
-    5000);
+    var availableLines = stopDSC.sendRequest(lineDscRequest, stopDSC.handleLineDiscoveryResponse, stopDSCResponse);
 
     console.log(availableStations);
 
