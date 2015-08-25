@@ -1,4 +1,4 @@
-describe "request test", ->
+describe "Requests are right", ->
   dateIso = new Date
   dateIso = dateIso.toISOString()
 

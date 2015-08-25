@@ -1,4 +1,5 @@
 class stopDiscoveryResponse
+  autocomplete: {}
   fallbackStopResponse: """
   <?xml version="1.0" encoding="UTF-8"?>
   <wsdl:StopPointsDiscoveryResponse xmlns:wsdl="http://wsdl.siri.org.uk">
@@ -1936,26 +1937,26 @@ class stopDiscoveryResponse
     this.buildAutocompleteArray nodes, type
 
   buildAutocompleteArray:(nodes, type) ->
-    autocomplete = []
+    @autocomplete = []
 
     for node in nodes
-      autocomplete.push({
+      @autocomplete.push({
         id: $(node).find(this.typeRef(type) + 'Ref')[0].innerHTML,
         label: $(node).find(type + 'Name')[0].innerHTML,
         value: $(node).find(type + 'Name')[0].innerHTML
         })
 
     if type == 'Stop'
-      this.initiateAutocomplete(autocomplete, 'stop')
+      this.initiateAutocomplete('stop')
     else if type == 'Line'
-      this.initiateAutocomplete(autocomplete, 'line')
+      this.initiateAutocomplete('line')
     return
 
 
-  initiateAutocomplete:(collection, type) ->
+  initiateAutocomplete:(type) ->
     $('#' + type + 'Name').autocomplete(
       minLength: 0
-      source: collection
+      source: @autocomplete
       focus: (event, ui) ->
         $('#' + type + 'Name').val ui.item.label
         false
