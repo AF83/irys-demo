@@ -136,15 +136,14 @@ stopMonitoringRequest = (function() {
   };
 
   stopMonitoringRequest.prototype.handleStopMonitoringResponse = function(xmlResponse, handler) {
-    var i, len, node, nodes, results;
+    var i, len, node, nodes;
     nodes = xmlResponse.find('MonitoredStopVisit');
-    results = [];
     for (i = 0, len = nodes.length; i < len; i++) {
       node = nodes[i];
       handler.parseSiriResponse(node);
-      results.push(handler.buildStopMonitoring());
+      handler.buildStopMonitoring();
     }
-    return results;
+    return this.renderXML(xmlResponse[0]);
   };
 
   stopMonitoringRequest.prototype.handleStopDiscoveryResponse = function(xmlResponse, handler) {
@@ -160,45 +159,48 @@ stopMonitoringRequest = (function() {
   };
 
   stopMonitoringRequest.prototype.handleStopDiscoveryResponseDisplay = function(xmlResponse, handler) {
-    var i, len, node, nodes, results;
+    var i, len, node, nodes;
     nodes = xmlResponse.find('AnnotatedStopPointRef');
-    results = [];
     for (i = 0, len = nodes.length; i < len; i++) {
       node = nodes[i];
       handler.buildStopDiscoveryJSON(node);
-      results.push(handler.buildStopDiscovery());
+      handler.buildStopDiscovery();
     }
-    return results;
+    return stopMonitoringRequest.prototype.renderXML(xmlResponse[0]);
   };
 
   stopMonitoringRequest.prototype.handleLineDiscoveryResponseDisplay = function(xmlResponse, handler) {
-    var i, len, node, nodes, results;
+    var i, len, node, nodes;
     nodes = xmlResponse.find('AnnotatedLineRef');
-    results = [];
     for (i = 0, len = nodes.length; i < len; i++) {
       node = nodes[i];
       handler.buildLineDiscoveryJSON(node);
-      results.push(handler.buildLineDiscovery(nodes, "Line"));
+      handler.buildLineDiscovery(nodes, "Line");
     }
-    return results;
+    return stopMonitoringRequest.prototype.renderXML(xmlResponse[0]);
   };
 
   stopMonitoringRequest.prototype.handleGeneralMessageResponse = function(xmlResponse, handler) {
-    var errorSpan, i, len, node, nodes, results;
+    var errorSpan, i, len, node, nodes;
     nodes = xmlResponse.find('GeneralMessage');
     if (nodes.length > 0) {
-      results = [];
       for (i = 0, len = nodes.length; i < len; i++) {
         node = nodes[i];
         handler.generalMessage = {};
         handler.buildGeneralMessageJSON(node);
-        results.push(handler.buildGeneralMessage());
+        handler.buildGeneralMessage();
       }
-      return results;
+      return stopMonitoringRequest.prototype.renderXML(xmlResponse[0]);
     } else {
       errorSpan = "<div class='alert alert-success' role='alert'><a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" + "Tout va bien" + "</div>";
       return $('.alert-wrapper').append(errorSpan);
     }
+  };
+
+  stopMonitoringRequest.prototype.renderXML = function(response) {
+    var xmlText;
+    xmlText = new XMLSerializer().serializeToString(response);
+    return $('#xml-response-wrapper').val(xmlText);
   };
 
   stopMonitoringRequest.prototype.sendRequest = function(xmlRequest, responseHandler, handler) {
@@ -216,16 +218,14 @@ stopMonitoringRequest = (function() {
       },
       data: xmlRequest
     }).done(function(response) {
-      var errorSpan, errorText, isError, xmlDoc, xmlText;
+      var errorSpan, errorText, isError, xmlDoc;
       xmlDoc = $(response);
-      xmlText = new XMLSerializer().serializeToString(response);
       isError = xmlDoc.find('ErrorText');
       if (isError.length > 0) {
         errorText = isError[0].innerHTML;
         errorSpan = "<div class='alert alert-danger' role='alert'><a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" + errorText + "</div>";
         $('.alert-wrapper').append(errorSpan);
       } else {
-        $('#xml-response-wrapper').val(xmlText);
         responseHandler(xmlDoc, handler);
       }
     }).fail(function() {

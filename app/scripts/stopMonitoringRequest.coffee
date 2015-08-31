@@ -201,6 +201,7 @@ class stopMonitoringRequest
     for node in nodes
       handler.parseSiriResponse(node)
       handler.buildStopMonitoring()
+    this.renderXML(xmlResponse[0])
 
   handleStopDiscoveryResponse: (xmlResponse, handler) ->
     nodes = xmlResponse.find('AnnotatedStopPointRef')
@@ -215,12 +216,15 @@ class stopMonitoringRequest
     for node in nodes
       handler.buildStopDiscoveryJSON(node)
       handler.buildStopDiscovery()
+    stopMonitoringRequest.prototype.renderXML(xmlResponse[0])
 
   handleLineDiscoveryResponseDisplay: (xmlResponse, handler) ->
     nodes = xmlResponse.find('AnnotatedLineRef')
     for node in nodes
       handler.buildLineDiscoveryJSON(node)
       handler.buildLineDiscovery(nodes, "Line")
+
+    stopMonitoringRequest.prototype.renderXML(xmlResponse[0])
 
   handleGeneralMessageResponse: (xmlResponse, handler) ->
     nodes = xmlResponse.find('GeneralMessage')
@@ -229,9 +233,14 @@ class stopMonitoringRequest
         handler.generalMessage = {}
         handler.buildGeneralMessageJSON(node)
         handler.buildGeneralMessage()
+      stopMonitoringRequest.prototype.renderXML(xmlResponse[0])
     else
       errorSpan = "<div class='alert alert-success' role='alert'><a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" + "Tout va bien"+ "</div>"
       $('.alert-wrapper').append errorSpan
+
+  renderXML:(response) ->
+    xmlText = new XMLSerializer().serializeToString(response)
+    $('#xml-response-wrapper').val(xmlText)
 
   sendRequest:(xmlRequest, responseHandler, handler) ->
     $.ajax(
@@ -247,14 +256,12 @@ class stopMonitoringRequest
         'standalone': 'no'
       data: xmlRequest).done((response) ->
         xmlDoc = $(response)
-        xmlText = new XMLSerializer().serializeToString(response)
         isError = xmlDoc.find('ErrorText')
         if isError.length > 0
           errorText = isError[0].innerHTML
           errorSpan = "<div class='alert alert-danger' role='alert'><a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" + errorText+ "</div>"
           $('.alert-wrapper').append errorSpan
         else
-          $('#xml-response-wrapper').val(xmlText)
           responseHandler(xmlDoc, handler)
         return
       ).fail ->
