@@ -40,17 +40,21 @@
               </a>
           </li>
         </ul>
-        <h3 class="text-muted">chouette</h3>
+        <h3 class="text-muted">Démonstrateur Siri</h3>
       </div>
     </div>
     <div class = "page-wrapper">
       <div class = "alert-wrapper"></div>
+      <div class = "hero-banner">
+        <div class = "hero-banner-wrapper">
+          <div class = "hero-banner-pic">
+          </div>
+        </div>
+      </div>
       <div class="col-xs-12 app-wrapper">
         <div class = "text-center">
-          <h1> Démonstrateur Siri</h1>
         </div>
         <div class="text-wrapper">
-          <h1 class="text-center"> Lorem</h1>
           <div class="explaination-text">
             <h2 class = "text-center">Mode d'emploi</h2>
             <h4>Nom Arrêt</h4>
@@ -89,7 +93,6 @@
             </ul>
             <div class = "tab-content">
               <div role = "tabpanel" class= "tab-pane fade in active" id="basic-request">
-                <a href = "#" id = "close-slider">Close</a>
                 <h2 class="text-center"> Construire votre requête Siri</h2>
                 <form class="form-horizontal" id ="canned-requests">
                   <fieldset>
@@ -127,50 +130,50 @@
                         </div>
                       </div>
                       <div class="form-group hidden" id = "requestorNameWrapper">
-                          <label for="requestorName" class="col-lg-2 control-label">Identifiant</label>
-                          <div class="col-lg-10">
+                          <label for="requestorName" class="col-lg-3 control-label">Identifiant</label>
+                          <div class="col-lg-9">
                             <input type="text" class="form-control" id="requestorName" placeholder="Nom du demandeur">
                           </div>
                       </div>
                       <div class="form-group hidden" id = "requestorVersionWrapper">
-                          <label for="requestorVersion" class="col-lg-2 control-label">Version</label>
-                          <div class="col-lg-10">
+                          <label for="requestorVersion" class="col-lg-3 control-label">Version</label>
+                          <div class="col-lg-9">
                             <input type="text" class="form-control" id="requestorVersion" placeholder="Nom du demandeur">
                           </div>
                       </div>
                       <div class="form-group">
-                          <label for="stopName" class="col-lg-2 control-label">Nom arrêt</label>
-                          <div class="col-lg-10">
+                          <label for="stopName" class="col-lg-3 control-label">Nom arrêt</label>
+                          <div class="col-lg-9">
                             <input type="text" class="form-control" id="stopName" placeholder="Nom de l'arrêt ou id">
                           </div>
                       </div>
                       <div class="form-group hidden">
-                          <label for="stopId" class="col-lg-2 control-label">StopId</label>
-                          <div class="col-lg-10">
+                          <label for="stopId" class="col-lg-3 control-label">StopId</label>
+                          <div class="col-lg-9">
                             <input type="text" class="form-control" id="stopId" placeholder="Nom de l'arrêt ou id">
                           </div>
                       </div>
                       <div class="form-group">
-                        <label for="lineName" class="col-lg-2 control-label">Nom de la ligne</label>
-                          <div class="col-lg-10">
+                        <label for="lineName" class="col-lg-3 control-label">Nom de la ligne</label>
+                          <div class="col-lg-9">
                             <input type="text" class="form-control" id="lineName" placeholder="id de la ligne">
                           </div>
                       </div>
                       <div class="form-group hidden">
-                        <label for="lineId" class="col-lg-2 control-label">LineId</label>
-                          <div class="col-lg-10">
+                        <label for="lineId" class="col-lg-3 control-label">LineId</label>
+                          <div class="col-lg-9">
                             <input type="text" class="form-control" id="lineId" placeholder="id de la ligne">
                           </div>
                       </div>
                       <div class="form-group">
-                        <label for="start" class="col-lg-2 control-label">Heure</label>
-                          <div class="col-lg-10">
+                        <label for="start" class="col-lg-3 control-label">Heure</label>
+                          <div class="col-lg-9">
                             <input type="text" class="form-control" id="start" placeholder="Heure de départ (HH:MM)">
                           </div>
                       </div>
                       <div class="form-group">
-                        <label for="typeVisit" class="col-lg-2 control-label">Type d'arrêt</label>
-                          <div class="col-lg-10">
+                        <label for="typeVisit" class="col-lg-3 control-label">Type d'arrêt</label>
+                          <div class="col-lg-9">
                             <select class = "form-control" id = "typeVisit">
                               <option>arrivals</option>
                               <option>departures</option>
@@ -179,8 +182,8 @@
                           </div>
                       </div>
                       <div class="form-group">
-                        <label for="preview" class="col-lg-2 control-label">Intervalle temporel (mn)</label>
-                          <div class="col-lg-10">
+                        <label for="preview" class="col-lg-3 control-label">Intervalle temporel (mn)</label>
+                          <div class="col-lg-9">
                             <input type="text" class="form-control" id="preview" list="time-span-list" placeholder="Intervalle temporel">
                             <datalist id="time-span-list">
                               <option>0</option>
@@ -194,8 +197,8 @@
                           </div>
                       </div>
                       <div class="form-group">
-                        <label for="maxStop" class="col-lg-2 control-label">Limite de passages</label>
-                          <div class="col-lg-10">
+                        <label for="maxStop" class="col-lg-3 control-label">Limite de passages</label>
+                          <div class="col-lg-9">
                             <input type="text" class="form-control" id="maxStop" list="max-stop-list" placeholder="Nombre maxi d'arrets">
                             <datalist id="max-stop-list">
                               <option>0</option>
@@ -209,8 +212,8 @@
                           </div>
                       </div>
                       <div class="form-group">
-                        <label for="minStLine" class="col-lg-2 control-label">MinStLine</label>
-                          <div class="col-lg-10">
+                        <label for="minStLine" class="col-lg-3 control-label">MinStLine</label>
+                          <div class="col-lg-9">
                             <input type="text" class="form-control" id="minStLine" list="time-span-list" placeholder="Nombre d'arrets mini par ligne">
                             <datalist id="time-span-list">
                               <option>1</option>
@@ -223,7 +226,7 @@
                         </div>
                        <div class="form-group">
                         <label for="onward" class="col-lg-3 control-label">Onward</label>
-                          <div class="col-lg-2">
+                          <div class="col-lg-3">
                             <input type="text" class="form-control" id="onward" list="time-span-list" placeholder="nbs">
                             <datalist id="time-span-list">
                               <option>1</option>
@@ -233,7 +236,7 @@
                               <option>5</option>
                             </datalist>
                           </div>
-                          <p class="col-lg-7">passages suivants
+                          <p class="col-lg-6">passages suivants
                       </div>
                       <div class="form-group">
                         <div class="col-xs-12 text-center">
@@ -300,9 +303,6 @@
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-    <script src="/bower_components/bootstrap-material-design/scripts/material.js"></script>
-    <script src="/bower_components/bootstrap-material-design/scripts/ripples.js"></script>
-
 
     <script src="//cdn.jsdelivr.net/jquery.ui.timepicker.addon/1.4.5/jquery-ui-sliderAccess.js" ></script>
 
@@ -332,12 +332,6 @@
       e.src='https://www.google-analytics.com/analytics.js';
       r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
       ga('create','UA-XXXXX-X');ga('send','pageview');
-    </script>
-    <script type="text/javascript">
-      $(document).ready(function() {
-                      // This command is used to initialize some elements and make them work properly
-        $.material.init();
-      });
     </script>
   </body>
 </html>

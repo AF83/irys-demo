@@ -17,6 +17,28 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
   max-width: 600px;
 
 }
+.hero-banner {
+  height: 420px;
+  width: 100%;
+  position: relative;
+  .hero-banner-wrapper {
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left:0;
+    right:0;
+    .hero-banner-pic {
+      background: url(../images/tramway.png) no-repeat center center;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      height: 100%;
+      width: 100%;
+    }
+
+  }
+}
 .text-wrapper {
   float:left;
   min-width: 200px;
@@ -30,6 +52,7 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 }
 .page-wrapper {
   overflow: hidden;
+  margin-top: -20px;
 }
 :app-wrapper {
   height::100%;;
@@ -44,6 +67,11 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
   box-shadow: -2px 1px 1px #ccc;
   padding-bottom:80px;
   overflow:hidden;
+  .form-group {
+    p {
+      margin: 5px 0;
+    }
+  }
 
 }
 .right-panel-wrapper {
