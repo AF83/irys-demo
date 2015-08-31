@@ -13,8 +13,6 @@ $(document).ready( function() {
 
     stopDSC.sendRequest(lineDscRequest, stopDSC.handleLineDiscoveryResponse, stopDSCResponse);
 
-    console.log(availableStations);
-
     $( "#lineName" ).on('focusout', function() {
       var regEx = /\d{8}/;
 

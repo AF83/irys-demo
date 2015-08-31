@@ -147,7 +147,6 @@ class stopMonitoringRequest
 
     form = $(el)
     this.siriVersionAPI = form.find('input[name="siriVersionAPIOptions"]:checked').val()
-    console.log(this.siriVersionAPI)
     for key in parseVariables
       input = form.find('#' + key)
       this[key] = input.val()
@@ -201,7 +200,7 @@ class stopMonitoringRequest
     for node in nodes
       handler.parseSiriResponse(node)
       handler.buildStopMonitoring()
-    this.renderXML(xmlResponse[0])
+    stopMonitoringRequest.prototype.renderXML(xmlResponse[0])
 
   handleStopDiscoveryResponse: (xmlResponse, handler) ->
     nodes = xmlResponse.find('AnnotatedStopPointRef')

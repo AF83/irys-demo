@@ -69,7 +69,6 @@ stopMonitoringRequest = (function() {
     parseVariables = ["stopId", "lineId", "destId", "operatorId", "start", "preview", "typeVisit", "maxStop", "minStLine", "onward", "requestorVersion", "requestorName"];
     form = $(el);
     this.siriVersionAPI = form.find('input[name="siriVersionAPIOptions"]:checked').val();
-    console.log(this.siriVersionAPI);
     results = [];
     for (i = 0, len = parseVariables.length; i < len; i++) {
       key = parseVariables[i];
@@ -143,7 +142,7 @@ stopMonitoringRequest = (function() {
       handler.parseSiriResponse(node);
       handler.buildStopMonitoring();
     }
-    return this.renderXML(xmlResponse[0]);
+    return stopMonitoringRequest.prototype.renderXML(xmlResponse[0]);
   };
 
   stopMonitoringRequest.prototype.handleStopDiscoveryResponse = function(xmlResponse, handler) {
