@@ -1,4 +1,4 @@
-describe "Mock Ajax requests", ->
+describe "By mocking the Ajax Request it", ->
 
   form = """<form class="form-horizontal" id ="stop-discovery">
                   <fieldset>

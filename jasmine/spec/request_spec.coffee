@@ -1,4 +1,4 @@
-describe "Requests are right", ->
+describe "For the requests it", ->
   dateIso = new Date
   dateIso = dateIso.toISOString()
 
@@ -177,6 +177,72 @@ describe "Requests are right", ->
             </fieldset>
           </form>"""
 
+  formGeneralMessage = """<form class="form-horizontal" id ="canned-requests">
+                  <fieldset>
+                    <legend>Requête préenregistrées</legend>
+                    <div class="form-group" id = "siriGeneralVersionAPI"">
+                        <label for="siriGeneralVersionAPI" class="col-sm-4 control-label">Version Siri
+                        </label>
+                        <div class = "col-sm-8">
+                          <label class="radio-inline">
+                            <input type="radio" name="siriVersionAPIOptions" id="siriGeneralVersionAPI1" value="1.3" checked = "checked"> 1.3
+                          </label>
+                          <label class="radio-inline">
+                            <input type="radio" name="siriVersionAPIOptions" id="siriGeneralVersionAPI2" value="1.4"> 1.4
+                          </label>
+                          <label class="radio-inline">
+                            <input type="radio" name="siriVersionAPIOptions" id="siriGeneralVersionAPI3" value="2.0" checked = "checked" > 2.0
+                          </label>
+                      </div>
+                    </div>
+                    <div class="form-group hidden" id = "requestorNameWrapper">
+                      <label for="requestorName" class="col-lg-4 control-label">Identifiant</label>
+                      <div class="col-lg-8">
+                        <input type="text" class="form-control" id="requestorName" placeholder="Nom du demandeur" value = "FR-IDF">
+                      </div>
+                    </div>
+                    <div class="form-group hidden" id = "requestorVersionWrapper">
+                      <label for="requestorVersion" class="col-lg-4 control-label">Version</label>
+                      <div class="col-lg-8">
+                        <input type="text" class="form-control" id="requestorVersion" placeholder="Version du demandeur" value = "2.2">
+                      </div>
+                    </div>
+                    <div class="form-group hidden" id = "destinationRefWrapper">
+                      <label for="destinationRef" class="col-lg-4 control-label">Destinations</label>
+                      <div class="col-lg-8">
+                        <input type="text" class="form-control" id="destinationRef" placeholder="destinations" value = "myDestination">
+                      </div>
+                    </div>
+                    <div class="form-group hidden" id = "groupOfLinesRefWrapper">
+                      <label for="groupOfLinesRef" class="col-lg-4 control-label">Réseaux et groupes de lignes</label>
+                      <div class="col-lg-8">
+                        <input type="text" class="form-control" id="groupOfLinesRef" placeholder="réseaux et groupes de lignes" value= "STIF">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-xs-4">
+                        <button type="button" class="btn btn-primary" id="stop-discovery">Stop Discovery</button>
+                      </div>
+                      <div class="col-xs-4">
+                        <button type="button" class="btn btn-info" id="line-discovery">Line Discovery</button>
+                      </div>
+                      <div class="col-xs-4">
+                        <button type="button" class="btn btn-warning" id="get-general-message">Get General Message</button>
+                      </div>
+                    </div>
+                  </fieldset>
+                </form>"""
+  dataObjectGM = {
+    "groupOfLinesRef": "STIF"
+    "destinationRef": "myDestination"
+    "siriVersionAPI": "2.0"
+  }
+  requestCheckGM = {
+    "GroupOfLinesRef": "STIF"
+    "DestinationRef": "myDestination"
+  }
+
+
   request = new stopMonitoringRequest
   formTest1 = formPrefixSiri13 + form
   xmlRequest = request.getStopMonitoring(formTest1)
@@ -186,9 +252,19 @@ describe "Requests are right", ->
     for prop, expected of dataObject
       expect(request[prop]).toEqual expected
 
+  it "checks the form is parsed correctly for GeneralMessage when siri Version set to 2.0", ->
+    request.getGeneralMessage(formGeneralMessage)
+    for prop, expected of dataObjectGM
+      expect(request[prop]).toEqual expected
+
   it "checks the Stop Monitoring request is right", ->
     for prop, expected of requestCheck
       expect($.parseXML(xmlRequest).getElementsByTagName(prop)[0].innerHTML).toEqual expected
+
+  it "checks the GeneralMessage request is right when siri Version set to 2.0", ->
+    gmRequest = request.getGeneralMessage(formGeneralMessage)
+    for prop, expected of requestCheckGM
+      expect($.parseXML(gmRequest).getElementsByTagName(prop)[0].innerHTML).toEqual expected
 
   it "checks the Siri version is right", ->
     requestVersion = $.parseXML(xmlRequest).getElementsByTagName('Request')[0].getAttribute("version")

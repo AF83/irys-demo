@@ -30,24 +30,35 @@ $(document).ready( function() {
     });
   });
 
-  $('#siriVersionAPI3').on('click', function() {
-    if ($('#requestorNameWrapper').hasClass('hidden')) {
-      $('#requestorNameWrapper').removeClass('hidden');
-    };
-
-    if ($('#requestorVersionWrapper').hasClass('hidden')) {
-      $('#requestorVersionWrapper').removeClass('hidden');
-    };
+  $('#siriVersionAPI3, #siriGeneralVersionAPI3').on('click', function() {
+    var hiddenFields = []
+    hiddenFields = $(this).parentsUntil('.form-horizontal').find('.hidden')
+    hiddenFields.each(function(index, elt) {
+      $(elt).removeClass('hidden');
+    });
   });
 
-  $('#siriVersionAPI2, #siriVersionAPI1').on('click', function() {
+  $('#siriVersionAPI2, #siriVersionAPI1, #siriGeneralVersionAPI2, #siriGeneralVersionAPI1').on('click', function() {
 
-    if ($('#requestorNameWrapper').hasClass('hidden') == false) {
-      $('#requestorNameWrapper').addClass('hidden');
+    var nodeName = $(this).parentsUntil('.form-horizontal').find('#requestorNameWrapper')
+    var nodeVersion = $(this).parentsUntil('.form-horizontal').find('#requestorVersionWrapper')
+    var hiddenArray = [nodeName, nodeVersion];
+
+    if ($(this).prop('id') == "siriGeneralVersionAPI1" || $(this).prop('id') == "siriGeneralVersionAPI2") {
+      var nodeDestinationRef =  $(this).parentsUntil('.form-horizontal').find('#destinationRefWrapper')
+      var nodeGroupDestination = $(this).parentsUntil('.form-horizontal').find('#groupOfLinesRefWrapper')
+      hiddenArray = hiddenArray.concat([nodeDestinationRef, nodeGroupDestination]);
+    } else {
+      var nodeMinimumStopVisitPerLine = $(this).parentsUntil('.form-horizontal').find('#minimumStopVisitPerLineViaWrapper')
+      hiddenArray = hiddenArray.concat([nodeMinimumStopVisitPerLine]);
     };
 
-    if ($('#requestorVersionWrapper').hasClass('hidden') == false) {
-      $('#requestorVersionWrapper').addClass('hidden');
-    };
-  })
+    hiddenArray.forEach(function(elt) {
+      if (elt.hasClass('hidden') == false) {
+        elt.addClass('hidden');
+      }
+    });
+
+  });
+
 });

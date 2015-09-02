@@ -1,3 +1,61 @@
+#response {
+  .line-4 {
+    border-color: lighten(#BE90D4, 20);
+    .panel-heading {
+      background-color: #BE90D4;
+      color: white;
+      border-color: lighten(#BE90D4, 20);
+    }
+  }
+  .line-1-blue {
+    border-color: lighten(#81CFE0, 20);
+    .panel-heading {
+      background-color: #81CFE0;
+      color: white;
+      border-color: lighten(#81CFE0, 20);
+    }
+  }
+  .line-2-green {
+    border-color: lighten(#2ECC71, 20);
+    .panel-heading {
+      background-color: #2ECC71;
+      color: white;
+      border-color: lighten(#2ECC71, 20);
+    }
+  }
+  .line-3-metro {
+    border-color: lighten(#F5AB35, 20);
+    .panel-heading {
+      background-color: #F5AB35;
+      color: black;
+      border-color: lighten(#F5AB35, 20);
+    }
+  }
+  .line-5-magenta {
+    border-color: lighten(#CF000F, 20);
+    .panel-heading {
+      background-color: #CF000F;
+      color: black;
+      border-color: lighten(#CF000F, 20);
+    }
+  }
+  .line-6-yellow {
+    border-color: lighten(#F5AB35, 20);
+    .panel-heading {
+      background-color: #F5AB35;
+      color: black;
+      border-color: lighten(#F5AB35, 20);
+    }
+  }
+  .line-7-orange {
+    border-color: lighten(#F9690E, 20);
+    .panel-heading {
+      background-color: #F9690E;
+      color: black;
+      border-color: lighten(#F9690E, 20);
+    }
+  }
+}
 .stop-wrapper {
   width: 80%;
   max-width: 600px;

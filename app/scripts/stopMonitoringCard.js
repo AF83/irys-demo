@@ -38,13 +38,23 @@ stopMonitoringCard = (function() {
 
   stopMonitoringCard.prototype.mustacheLineDirections = [];
 
-  stopMonitoringCard.prototype.stopMonitoringTemplate = "<div class = \"panel panel-default stop-wrapper\">\n  <div class = \"panel-heading\">\n    <div class = \"stop-name\"></div>\n      <h4>{{monitoredCall.StopPointName}}</h4>\n  </div>\n  <div class = \"panel-body\">\n    {{#mustacheStopMonitoredVisit}}\n      <div>{{key}} : {{value}}</div>\n    {{/mustacheStopMonitoredVisit}}\n    {{#monitoredCall}}\n      <h4>Monitored Call</h4>\n      {{#mustacheMonitoredCall}}\n        <div class = \"indented-response\">{{key}} : {{value}}</div>\n      {{/mustacheMonitoredCall}}\n    {{/monitoredCall}}\n    {{#mustacheOnwards}}\n      <h4>OnWards</h4>\n      {{#onWard}}\n        <div class = \"indented-response\">{{key}} : {{value}}</div>\n      {{/onWard}}\n    {{/mustacheOnwards}}\n  </div>\n</div>";
+  stopMonitoringCard.prototype.stopMonitoringTemplate = "<div class = \"panel panel-default stop-wrapper {{lineColor}}\">\n  <div class = \"panel-heading\">\n    <div class = \"stop-name\"></div>\n      <h4>{{monitoredCall.StopPointName}}</h4>\n  </div>\n  <div class = \"panel-body\">\n    {{#mustacheStopMonitoredVisit}}\n      <div>{{key}} : {{value}}</div>\n    {{/mustacheStopMonitoredVisit}}\n    {{#monitoredCall}}\n      <h4>Monitored Call</h4>\n      {{#mustacheMonitoredCall}}\n        <div class = \"indented-response\">{{key}} : {{value}}</div>\n      {{/mustacheMonitoredCall}}\n    {{/monitoredCall}}\n    {{#mustacheOnwards}}\n      <h4>OnWards</h4>\n      {{#onWard}}\n        <div class = \"indented-response\">{{key}} : {{value}}</div>\n      {{/onWard}}\n    {{/mustacheOnwards}}\n  </div>\n</div>";
 
   stopMonitoringCard.prototype.generalMessageTemplate = "<div class = \"panel panel-default stop-wrapper\">\n  <div class = \"panel-heading\">\n    <div class = \"stop-name\"></div>\n      <h4>General Message</h4>\n  </div>\n  <div class = \"panel-body\">\n    {{#generalMessage}}\n      <h4>General Message</h4>\n      {{#mustacheGeneralMessage}}\n        <div>{{key}} : {{value}}</div>\n      {{/mustacheGeneralMessage}}\n    {{/generalMessage}}\n  </div>\n</div>";
 
-  stopMonitoringCard.prototype.stopDiscoveryTemplate = "<div class = \"panel panel-default stop-wrapper\">\n  <div class = \"panel-heading\">\n    <div class = \"stop-name\"></div>\n      <h4>{{stopDiscovery.StopName}}</h4>\n  </div>\n  <div class = \"panel-body\">\n    {{#mustacheStopDiscoveries}}\n      <div>{{key}} : {{value}}</div>\n    {{/mustacheStopDiscoveries}}\n    <h4>Lines</h4>\n    {{#mustacheStopLines}}\n      {{#line}}\n        <div class = \"indented-response\">{{key}} : {{value}}</div>\n      {{/line}}\n    {{/mustacheStopLines}}\n  </div>\n</div>";
+  stopMonitoringCard.prototype.stopDiscoveryTemplate = "<div class = \"panel panel-default stop-wrapper {{lineColor}}\">\n  <div class = \"panel-heading\">\n    <div class = \"stop-name\"></div>\n      <h4>{{stopDiscovery.StopName}}</h4>\n  </div>\n  <div class = \"panel-body\">\n    {{#mustacheStopDiscoveries}}\n      <div>{{key}} : {{value}}</div>\n    {{/mustacheStopDiscoveries}}\n    <h4>Lines</h4>\n    {{#mustacheStopLines}}\n      {{#line}}\n        <div class = \"indented-response\">{{key}} : {{value}}</div>\n      {{/line}}\n    {{/mustacheStopLines}}\n  </div>\n</div>";
 
-  stopMonitoringCard.prototype.lineDiscoveryTemplate = "<div class = \"panel panel-default stop-wrapper\">\n  <div class = \"panel-heading\">\n    <div class = \"stop-name\"></div>\n      <h4>{{lineDiscovery.LineName}}</h4>\n  </div>\n  <div class = \"panel-body\">\n    {{#mustacheLineDiscovery}}\n      <div>{{key}} : {{value}}</div>\n    {{/mustacheLineDiscovery}}\n    <h4>Lines</h4>\n    {{#mustacheLineDirections}}\n      {{#line}}\n        <div class = \"indented-response\">{{key}} : {{value}}</div>\n      {{/line}}\n    {{/mustacheLineDirections}}\n  </div>\n</div>";
+  stopMonitoringCard.prototype.lineDiscoveryTemplate = "<div class = \"panel panel-default stop-wrapper {{lineColor}}\">\n  <div class = \"panel-heading\">\n    <div class = \"stop-name\"></div>\n      <h4>{{lineDiscovery.LineName}}</h4>\n  </div>\n  <div class = \"panel-body\">\n    {{#mustacheLineDiscovery}}\n      <div>{{key}} : {{value}}</div>\n    {{/mustacheLineDiscovery}}\n    <h4>Lines</h4>\n    {{#mustacheLineDirections}}\n      {{#line}}\n        <div class = \"indented-response\">{{key}} : {{value}}</div>\n      {{/line}}\n    {{/mustacheLineDirections}}\n  </div>\n</div>";
+
+  stopMonitoringCard.prototype.lineColors = {
+    "NINOXE:Line:15625451:LOC": "line-4",
+    "NINOXE:Line:15624980:LOC": "line-6-yellow",
+    "NINOXE:Line:15626053:LOC": "line-5-magenta",
+    "NINOXE:Line:15577792:LOC": "line-3-metro",
+    "NINOXE:Line:15574334:LOC": "line-1-blue",
+    "NINOXE:Line:15568799:LOC": "line-2-green",
+    "NINOXE:Line:15627090:LOC": "line-7-orange"
+  };
 
   stopMonitoringCard.prototype.parseSiriResponse = function(node) {
     var child, i, len, ref;
@@ -177,6 +187,18 @@ stopMonitoringCard = (function() {
       object;
     }
     return object;
+  };
+
+  stopMonitoringCard.prototype.lineColor = function() {
+    var line;
+    if (this.stopMonitoredVisit.LineRef) {
+      line = this.stopMonitoredVisit.LineRef;
+    } else if (this.stopDiscovery.LineRef) {
+      line = this.stopDiscovery.LineRef;
+    } else if (this.lineDiscovery.LineRef) {
+      line = this.lineDiscovery.LineRef;
+    }
+    return this.lineColors[line];
   };
 
   stopMonitoringCard.prototype.buildMustacheStopCard = function() {

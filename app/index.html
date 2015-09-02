@@ -97,6 +97,45 @@
                 <form class="form-horizontal" id ="canned-requests">
                   <fieldset>
                     <legend>Requête préenregistrées</legend>
+                    <div class="form-group" id = "siriGeneralVersionAPI"">
+                        <label for="siriGeneralVersionAPI" class="col-sm-4 control-label">Version Siri
+                        </label>
+                        <div class = "col-sm-8">
+                          <label class="radio-inline">
+                            <input type="radio" name="siriVersionAPIOptions" id="siriGeneralVersionAPI1" value="1.3" checked = "checked"> 1.3
+                          </label>
+                          <label class="radio-inline">
+                            <input type="radio" name="siriVersionAPIOptions" id="siriGeneralVersionAPI2" value="1.4"> 1.4
+                          </label>
+                          <label class="radio-inline">
+                            <input type="radio" name="siriVersionAPIOptions" id="siriGeneralVersionAPI3" value="2.0"> 2.0
+                          </label>
+                      </div>
+                    </div>
+                    <div class="form-group hidden" id = "requestorNameWrapper">
+                      <label for="requestorName" class="col-lg-4 control-label">Identifiant</label>
+                      <div class="col-lg-8">
+                        <input type="text" class="form-control" id="requestorName" placeholder="Nom du demandeur">
+                      </div>
+                    </div>
+                    <div class="form-group hidden" id = "requestorVersionWrapper">
+                      <label for="requestorVersion" class="col-lg-4 control-label">Version</label>
+                      <div class="col-lg-8">
+                        <input type="text" class="form-control" id="requestorVersion" placeholder="Version du demandeur">
+                      </div>
+                    </div>
+                    <div class="form-group hidden" id = "destinationRefWrapper">
+                      <label for="destinationRef" class="col-lg-4 control-label">Destinations</label>
+                      <div class="col-lg-8">
+                        <input type="text" class="form-control" id="destinationRef" placeholder="destinations">
+                      </div>
+                    </div>
+                    <div class="form-group hidden" id = "groupOfLinesRefWrapper">
+                      <label for="groupOfLinesRef" class="col-lg-4 control-label">Réseaux et groupes de lignes</label>
+                      <div class="col-lg-8">
+                        <input type="text" class="form-control" id="groupOfLinesRef" placeholder="réseaux et groupes de lignes">
+                      </div>
+                    </div>
                     <div class="form-group">
                       <div class="col-xs-4">
                         <button type="button" class="btn btn-primary" id="stop-discovery">Stop Discovery</button>
@@ -138,8 +177,14 @@
                       <div class="form-group hidden" id = "requestorVersionWrapper">
                           <label for="requestorVersion" class="col-lg-4 control-label">Version</label>
                           <div class="col-lg-8">
-                            <input type="text" class="form-control" id="requestorVersion" placeholder="Nom du demandeur">
+                            <input type="text" class="form-control" id="requestorVersion" placeholder="Version du demandeur">
                           </div>
+                      </div>
+                      <div class="form-group hidden" id="minimumStopVisitPerLineViaWrapper">
+                        <label for="minimumStopVisitPerLineVia" class="col-lg-4 control-label">Minimum de passages par itinéraire</label>
+                        <div class="col-lg-8">
+                          <input type="text" class="form-control" id="minimumStopVisitPerLineVia" placeholder="Minimum de passages par itinéraire">
+                        </div>
                       </div>
                       <div class="form-group">
                           <label for="stopName" class="col-lg-4 control-label">Nom arrêt</label>
@@ -214,8 +259,8 @@
                       <div class="form-group">
                         <label for="minStLine" class="col-lg-4 control-label">MinStLine</label>
                           <div class="col-lg-8">
-                            <input type="text" class="form-control" id="minStLine" list="time-span-list" placeholder="Nombre d'arrets mini par ligne">
-                            <datalist id="time-span-list">
+                            <input type="text" class="form-control" id="minStLine" list="minStLine-list" placeholder="Nombre d'arrets mini par ligne">
+                            <datalist id="minStLine-list">
                               <option>1</option>
                               <option>2</option>
                               <option>3</option>
@@ -239,7 +284,7 @@
                           <p class="col-lg-4">passages suivants
                       </div>
                       <div class="form-group">
-                        <div class="col-xs-12 text-center">
+                        <div class="col-xs-12 col-sm-6 col-lg-4 text-center">
                           <button type="submit" class="btn btn-success">Envoyer la requête</button>
                         </div>
                       </div>
@@ -253,7 +298,7 @@
                       <textarea class = "form-control xml-paste-zone" id="xml-request-textarea" placeholder = "Copier votre requête xml"></textarea>
                     </div>
                     <div class="form-group">
-                        <div class="col-lg-8 col-lg-offset-4">
+                        <div class="col xs-12 col-sm-6 col-lg-4">
                             <button type="button" class="btn btn-success" id="smart-request-submit">Envoyer la requête</button>
                           </div>
                       </div>

@@ -13,6 +13,9 @@ class stopMonitoringRequest
   lineId: null
   requestorVersion: null
   requestorName:null
+  minimumStopVisitPerLineVia: null
+  groupOfLinesRef: null
+  destinationRef: null
 
   requestTemplate: """<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
   <SOAP-ENV:Header/>
@@ -36,18 +39,21 @@ class stopMonitoringRequest
         {{#lineId}}
         <ns2:LineRef>{{lineId}}</ns2:LineRef>
         {{/lineId}}
-				{{#destId}}
-				<ns2:DestinationRef>{{destId}}</ns2:DestinationRef>
-				{{/destId}}
+				{{#destinationRef}}
+				<ns2:DestinationRef>{{destinationRef}}</ns2:DestinationRef>
+				{{/destinationRef}}
 				{{#typeVisit}}
 				<ns2:StopVisitTypes>{{typeVisit}}</ns2:StopVisitTypes>
 				{{/typeVisit}}
 				{{#maxStop}}
 				<ns2:MaximumStopVisits>{{maxStop}}</ns2:MaximumStopVisits>
 				{{/maxStop}}
-				{{#minStLine}}
-				<ns2:MinimumStopVisitsPerLine>{{minStLine}}</ns2:MinimumStopVisitsPerLine>
-		    {{/minStLine}}
+        {{#minStLine}}
+        <ns2:MinimumStopVisitsPerLine>{{minStLine}}</ns2:MinimumStopVisitsPerLine>
+        {{/minStLine}}
+				{{#minimumStopVisitPerLineVia}}
+				<ns2:MinimumStopVisitsPerLineVia>{{minimumStopVisitPerLineVia}}</ns2:MinimumStopVisitsPerLineVia>
+		    {{/minimumStopVisitPerLineVia}}
         {{#onward}}
           <ns2:MaximumNumberOfCalls>
         		<ns2:Onwards>{{onward}}</ns2:Onwards>
@@ -99,9 +105,15 @@ class stopMonitoringRequest
           <ns2:RequestorRef>Siri-client</ns2:RequestorRef>
           <ns2:MessageIdentifier>GeneralMessage:Test:0</ns2:MessageIdentifier>
         </ServiceRequestInfo>
-        <Request version="1.3">
+        <Request version="{{siriVersion}}">
           <ns2:RequestTimestamp>{{requestDate}}</ns2:RequestTimestamp>
           <ns2:MessageIdentifier>GeneralMessage:Test:0</ns2:MessageIdentifier>
+          {{#destinationRef}}
+          <ns2:DestinationRef>{{destinationRef}}</ns2:DestinationRef>
+          {{/destinationRef}}
+          {{#groupOfLinesRef}}
+          <ns2:GroupOfLinesRef>{{groupOfLinesRef}}</ns2:GroupOfLinesRef>
+          {{/groupOfLinesRef}}
         </Request>
         <RequestExtension xmlns=""/>
       </ns7:GetGeneralMessage>
@@ -143,7 +155,9 @@ class stopMonitoringRequest
     "minStLine",
     "onward",
     "requestorVersion",
-    "requestorName"]
+    "requestorName",
+    "destinationRef",
+    "groupOfLinesRef"];
 
     form = $(el)
     this.siriVersionAPI = form.find('input[name="siriVersionAPIOptions"]:checked').val()
@@ -180,6 +194,7 @@ class stopMonitoringRequest
     Mustache.render(template, this)
 
   getStopDiscovery:() ->
+
     template = @stopDiscoveryTemplate
     Mustache.parse template
     Mustache.render(template, this)
@@ -189,7 +204,8 @@ class stopMonitoringRequest
     Mustache.parse template
     Mustache.render(template, this)
 
-  getGeneralMessage:() ->
+  getGeneralMessage:(form) ->
+    this.parseForm(form)
     template = @generalMessageTemplate
     Mustache.parse template
     Mustache.render(template, this)
@@ -242,9 +258,14 @@ class stopMonitoringRequest
     $('#xml-response-wrapper').val(xmlText)
 
   sendRequest:(xmlRequest, responseHandler, handler) ->
+    if @siriVersionAPI == "2.0"
+      serverUrl = "urlSiriV2"
+    else
+      serverUrl = 'http://appli.chouette.mobi/irys_server'
+
     $.ajax(
       method: 'POST'
-      url: 'http://appli.chouette.mobi/irys_server'
+      url: serverUrl
       context: document.body
       crossDomain: true
       contentType: 'text/xml'

@@ -21,7 +21,7 @@ class stopMonitoringCard
 
 
   stopMonitoringTemplate: """
-  <div class = "panel panel-default stop-wrapper">
+  <div class = "panel panel-default stop-wrapper {{lineColor}}">
     <div class = "panel-heading">
       <div class = "stop-name"></div>
         <h4>{{monitoredCall.StopPointName}}</h4>
@@ -62,7 +62,7 @@ class stopMonitoringCard
   </div>"""
 
   stopDiscoveryTemplate: """
-  <div class = "panel panel-default stop-wrapper">
+  <div class = "panel panel-default stop-wrapper {{lineColor}}">
     <div class = "panel-heading">
       <div class = "stop-name"></div>
         <h4>{{stopDiscovery.StopName}}</h4>
@@ -81,7 +81,7 @@ class stopMonitoringCard
   </div>"""
 
   lineDiscoveryTemplate: """
-  <div class = "panel panel-default stop-wrapper">
+  <div class = "panel panel-default stop-wrapper {{lineColor}}">
     <div class = "panel-heading">
       <div class = "stop-name"></div>
         <h4>{{lineDiscovery.LineName}}</h4>
@@ -99,6 +99,16 @@ class stopMonitoringCard
     </div>
   </div>"""
 
+  lineColors: {
+    "NINOXE:Line:15625451:LOC": "line-4",
+    "NINOXE:Line:15624980:LOC": "line-6-yellow",
+    "NINOXE:Line:15626053:LOC": "line-5-magenta",
+    "NINOXE:Line:15577792:LOC": "line-3-metro",
+    "NINOXE:Line:15574334:LOC": "line-1-blue",
+    "NINOXE:Line:15568799:LOC": "line-2-green",
+    "NINOXE:Line:15627090:LOC": "line-7-orange"
+
+  }
 
   parseSiriResponse: (node) ->
     @stopMonitoredVisit = {}
@@ -189,6 +199,16 @@ class stopMonitoringCard
     else
       object
     object
+  lineColor:() ->
+
+    if @stopMonitoredVisit.LineRef
+      line = @stopMonitoredVisit.LineRef
+    else if @stopDiscovery.LineRef
+      line = @stopDiscovery.LineRef
+    else if @lineDiscovery.LineRef
+      line = @lineDiscovery.LineRef
+
+    @lineColors[line]
 
   buildMustacheStopCard:() ->
     for k,v of @stopMonitoredVisit

@@ -9,7 +9,7 @@
     }
 
     var request = new stopMonitoringRequest;
-    var xmlRequest = request.getStopMonitoring('form');
+    var xmlRequest = request.getStopMonitoring('#stop-monitoring');
     var responseCard = new stopMonitoringCard;
     console.log(xmlRequest)
     request.sendRequest(xmlRequest, request.handleStopMonitoringResponse, responseCard);
@@ -19,7 +19,7 @@
     $("#response > .panel").remove()
     var request = new stopMonitoringRequest;
     var responseCard = new stopMonitoringCard;
-    var generalMessageRequest = request.getGeneralMessage();
+    var generalMessageRequest = request.getGeneralMessage('#canned-requests');
     request.sendRequest(generalMessageRequest, request.handleGeneralMessageResponse, responseCard);
   });
 
