@@ -148,6 +148,7 @@ stopMonitoringRequest = (function() {
       node = nodes[i];
       handler.parseSiriResponse(node);
       handler.buildStopMonitoring();
+      handler.buildFancyStopMonitoring();
     }
     return stopMonitoringRequest.prototype.renderXML(xmlResponse[0]);
   };

@@ -216,6 +216,7 @@ class stopMonitoringRequest
     for node in nodes
       handler.parseSiriResponse(node)
       handler.buildStopMonitoring()
+      handler.buildFancyStopMonitoring()
     stopMonitoringRequest.prototype.renderXML(xmlResponse[0])
 
   handleStopDiscoveryResponse: (xmlResponse, handler) ->

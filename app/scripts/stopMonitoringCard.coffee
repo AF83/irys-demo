@@ -45,6 +45,37 @@ class stopMonitoringCard
     </div>
   </div>"""
 
+  stopMonitoringFancyTemplate: """
+  <li class = "fancy-stop-wrapper">
+    <div class = "line-header {{lineColor}}">
+      <h4>{{monitoredCall.StopPointName}}</h4>
+    </div>
+    <div class = "stop-info col-xs-3">
+      <div class = "stop-info-property">
+        <p>
+          Ligne
+        </p>
+      </div>
+      <div class = "stop-info-value">
+        <p>
+          {{stopMonitoredVisit.LineRef}}
+        </p>
+      </div>
+    </div>
+    <div class = "stop-info  col-xs-3">
+      <div class = "stop-info-property">
+        <p>
+          Heure d'arrivée
+        </p>
+      </div>
+      <div class = "stop-info-value {{monitoredCall.ArrivalStatus}}">
+        <p>
+          {{monitoredCall.AimedArrivalTime}}
+        </p>
+      </div>
+    </div>
+  </li>"""
+
   generalMessageTemplate: """
   <div class = "panel panel-default stop-wrapper">
     <div class = "panel-heading">
@@ -306,6 +337,10 @@ class stopMonitoringCard
     this.buildMustacheMonitoredCall()
 
     this.renderCard @stopMonitoringTemplate
+
+  buildFancyStopMonitoring: () ->
+
+    this.renderCard @stopMonitoringFancyTemplate
 
   buildGeneralMessage:() ->
     this.mustacheGeneralMessage = []
