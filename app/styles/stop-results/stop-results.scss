@@ -187,7 +187,12 @@
         &:last-child{padding-right:15px;}
       }
 
-      .stop-info-property{text-transform:uppercase;}
+      .stop-info-property{
+        text-transform:uppercase;
+
+        .glyphicon+span{margin-left:0.25em;}
+      }
+
       .stop-info-property,.stop-info-value{
         text-align:center;font-size:0.85em;
         padding:7px 4px 4px 4px;

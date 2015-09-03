@@ -54,7 +54,8 @@ class stopMonitoringCard
       <div class = "stop-info col-xs-4">
         <div class = "stop-info-property">
           <p>
-            Ligne
+            <span class="glyphicon glyphicon-road"></span>
+            <span>Ligne</span>
           </p>
         </div>
         <div class = "stop-info-value">
@@ -64,7 +65,8 @@ class stopMonitoringCard
       <div class = "stop-info col-xs-4">
         <div class = "stop-info-property">
           <p>
-            Heure d'arrivée
+            <span class="glyphicon glyphicon-time"></span>
+            <span>Heure d'arrivée</span>
           </p>
         </div>
         <div class = "stop-info-value {{monitoredCall.ArrivalStatus}}">
@@ -76,7 +78,8 @@ class stopMonitoringCard
       <div class = "stop-info col-xs-4">
         <div class = "stop-info-property">
           <p>
-            Status
+            <span class="glyphicon glyphicon-signal"></span>
+            <span>Status</span>
           </p>
         </div>
         <div class = "stop-info-value {{monitoredCall.ArrivalStatus}}">
@@ -94,7 +97,10 @@ class stopMonitoringCard
         <div class="row">
           <div class="stop-info col-xs-6">
             <div class="stop-info-property">
-              <p>Heure d'arrivée</p>
+              <p>
+                <span class="glyphicon glyphicon-time"></span>
+                <span>Heure d'arrivée</span>
+              </p>
             </div>
             <div class="stop-info-value {{ArrivalStatus}}">
               <p>{{AimedArrivalTime}}</p>
@@ -102,7 +108,10 @@ class stopMonitoringCard
           </div>
           <div class="stop-info col-xs-6">
             <div class="stop-info-property">
-              <p>Status</p>
+              <p>
+                <span class="glyphicon glyphicon-signal"></span>
+                <span>Status</span>
+              </p>
             </div>
             <div class="stop-info-value">
               <p>{{ArrivalStatus}}</p>
