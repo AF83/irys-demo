@@ -35,8 +35,8 @@ stopDiscoveryResponse = (function() {
       node = nodes[i];
       this.autocomplete.push({
         id: $(node).find(this.typeRef(type) + 'Ref')[0].innerHTML,
-        label: $(node).find(type + 'Name')[0].innerHTML,
-        value: $(node).find(type + 'Name')[0].innerHTML
+        label: $(node).find(type + 'Name')[0].innerHTML + ' ' + $(node).find(this.typeRef(type) + 'Ref')[0].innerHTML.replace('NINOXE:StopPoint:SP:', ''),
+        value: $(node).find(type + 'Name')[0].innerHTML + ' ' + $(node).find(this.typeRef(type) + 'Ref')[0].innerHTML
       });
     }
     if (type === 'Stop') {

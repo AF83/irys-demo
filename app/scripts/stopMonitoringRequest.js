@@ -142,7 +142,8 @@ stopMonitoringRequest = (function() {
   };
 
   stopMonitoringRequest.prototype.handleStopMonitoringResponse = function(xmlResponse, handler) {
-    var i, len, node, nodes;
+    var i, len, node, nodes, siriVersionToDisplay;
+    siriVersionToDisplay = xmlResponse.find('StopMonitoringDelivery')[0].getAttribute('version');
     nodes = xmlResponse.find('MonitoredStopVisit');
     for (i = 0, len = nodes.length; i < len; i++) {
       node = nodes[i];
@@ -150,7 +151,9 @@ stopMonitoringRequest = (function() {
       handler.buildStopMonitoring();
       handler.buildFancyStopMonitoring();
     }
-    return stopMonitoringRequest.prototype.renderXML(xmlResponse[0]);
+    stopMonitoringRequest.prototype.renderXML(xmlResponse[0]);
+    stopMonitoringRequest.prototype.renderNodesLength(nodes.length);
+    return stopMonitoringRequest.prototype.renderSiriVersion(siriVersionToDisplay);
   };
 
   stopMonitoringRequest.prototype.handleStopDiscoveryResponse = function(xmlResponse, handler) {
@@ -208,6 +211,24 @@ stopMonitoringRequest = (function() {
     var xmlText;
     xmlText = new XMLSerializer().serializeToString(response);
     return $('#xml-response-wrapper').val(xmlText);
+  };
+
+  stopMonitoringRequest.prototype.renderNodesLength = function(l) {
+    var el, i, len, ref;
+    ref = $('.response-counter');
+    for (i = 0, len = ref.length; i < len; i++) {
+      el = ref[i];
+      $(el).text("Nombre d'arrêts: " + l);
+    }
+  };
+
+  stopMonitoringRequest.prototype.renderSiriVersion = function(l) {
+    var el, i, len, ref;
+    ref = $('.siri-version-display');
+    for (i = 0, len = ref.length; i < len; i++) {
+      el = ref[i];
+      $(el).text("Version Siri: " + l);
+    }
   };
 
   stopMonitoringRequest.prototype.sendRequest = function(xmlRequest, responseHandler, handler) {

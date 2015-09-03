@@ -48,15 +48,7 @@ stopMonitoringCard = (function() {
 
   stopMonitoringCard.prototype.lineDiscoveryTemplate = "<div class = \"panel panel-default stop-wrapper {{lineColor}}\">\n  <div class = \"panel-heading\">\n    <div class = \"stop-name\"></div>\n      <h4>{{lineDiscovery.LineName}}</h4>\n  </div>\n  <div class = \"panel-body\">\n    {{#mustacheLineDiscovery}}\n      <div>{{key}} : {{value}}</div>\n    {{/mustacheLineDiscovery}}\n    <h4>Lines</h4>\n    {{#mustacheLineDirections}}\n      {{#line}}\n        <div class = \"indented-response\">{{key}} : {{value}}</div>\n      {{/line}}\n    {{/mustacheLineDirections}}\n  </div>\n</div>";
 
-  stopMonitoringCard.prototype.lineColors = {
-    "NINOXE:Line:15625451:LOC": "line-4",
-    "NINOXE:Line:15624980:LOC": "line-6-yellow",
-    "NINOXE:Line:15626053:LOC": "line-5-magenta",
-    "NINOXE:Line:15577792:LOC": "line-3-metro",
-    "NINOXE:Line:15574334:LOC": "line-1-blue",
-    "NINOXE:Line:15568799:LOC": "line-2-green",
-    "NINOXE:Line:15627090:LOC": "line-7-orange"
-  };
+  stopMonitoringCard.prototype.lineColors = {};
 
   stopMonitoringCard.prototype.parseSiriResponse = function(node) {
     var child, i, len, ref;
@@ -192,13 +184,19 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.lineColor = function() {
-    var line;
+    var line, lineInventory;
+    lineInventory = Object.keys(this.lineColors).length + 1;
     if (this.stopMonitoredVisit.LineRef) {
       line = this.stopMonitoredVisit.LineRef;
     } else if (this.stopDiscovery.LineRef) {
       line = this.stopDiscovery.LineRef;
     } else if (this.lineDiscovery.LineRef) {
       line = this.lineDiscovery.LineRef;
+    }
+    if (this.lineColors[line]) {
+      this.lineColors[line];
+    } else {
+      this.lineColors[line] = "line-" + lineInventory;
     }
     return this.lineColors[line];
   };
@@ -385,7 +383,7 @@ stopMonitoringCard = (function() {
     var rendered;
     Mustache.parse(template);
     rendered = Mustache.render(template, this);
-    $("#fancy-response").append(rendered);
+    $("#fancy-response").find('ul').append(rendered);
   };
 
   return stopMonitoringCard;

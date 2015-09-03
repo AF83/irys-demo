@@ -2,7 +2,7 @@
 		e.preventDefault();
     $("#response > .panel").remove()
 
-    var regEx = /\d{8}/;
+    var regEx = /^\d{8}/;
 
     if ( regEx.exec( $('#stopName').val() ) ) {
       $( "#stopId" ).val("NINOXE:StopPoint:SPOR:" + $(this).val() + ":LOC")

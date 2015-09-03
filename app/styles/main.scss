@@ -6,7 +6,8 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 @import "stop-results/stop-results.scss";
 @import "code-mirror/code-mirror.css";
 .chouette-logo {
-  height: 50px;
+  margin-top: -20px;
+  height: 80px;
 }
 
 #stop-monitoring, #canned-requests, .xml-validation-form {

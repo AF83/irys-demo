@@ -211,6 +211,7 @@ class stopMonitoringRequest
     Mustache.render(template, this)
 
   handleStopMonitoringResponse: (xmlResponse, handler) ->
+    siriVersionToDisplay = xmlResponse.find('StopMonitoringDelivery')[0].getAttribute('version')
     nodes = xmlResponse.find('MonitoredStopVisit')
 
     for node in nodes
@@ -218,6 +219,8 @@ class stopMonitoringRequest
       handler.buildStopMonitoring()
       handler.buildFancyStopMonitoring()
     stopMonitoringRequest.prototype.renderXML(xmlResponse[0])
+    stopMonitoringRequest.prototype.renderNodesLength(nodes.length)
+    stopMonitoringRequest.prototype.renderSiriVersion(siriVersionToDisplay)
 
   handleStopDiscoveryResponse: (xmlResponse, handler) ->
     nodes = xmlResponse.find('AnnotatedStopPointRef')
@@ -257,6 +260,15 @@ class stopMonitoringRequest
   renderXML:(response) ->
     xmlText = new XMLSerializer().serializeToString(response)
     $('#xml-response-wrapper').val(xmlText)
+
+  renderNodesLength:(l) ->
+    for el in $('.response-counter')
+      $(el).text("Nombre d'arrêts: " + l)
+    return
+  renderSiriVersion:(l) ->
+    for el in $('.siri-version-display')
+      $(el).text("Version Siri: " + l)
+    return
 
   sendRequest:(xmlRequest, responseHandler, handler) ->
     if @siriVersionAPI == "2.0"

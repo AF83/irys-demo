@@ -142,16 +142,7 @@ class stopMonitoringCard
     </div>
   </div>"""
 
-  lineColors: {
-    "NINOXE:Line:15625451:LOC": "line-4",
-    "NINOXE:Line:15624980:LOC": "line-6-yellow",
-    "NINOXE:Line:15626053:LOC": "line-5-magenta",
-    "NINOXE:Line:15577792:LOC": "line-3-metro",
-    "NINOXE:Line:15574334:LOC": "line-1-blue",
-    "NINOXE:Line:15568799:LOC": "line-2-green",
-    "NINOXE:Line:15627090:LOC": "line-7-orange"
-
-  }
+  lineColors: {}
 
   parseSiriResponse: (node) ->
     @stopMonitoredVisit = {}
@@ -243,13 +234,18 @@ class stopMonitoringCard
       object
     object
   lineColor:() ->
-
+    lineInventory = Object.keys(@lineColors).length + 1
     if @stopMonitoredVisit.LineRef
       line = @stopMonitoredVisit.LineRef
     else if @stopDiscovery.LineRef
       line = @stopDiscovery.LineRef
     else if @lineDiscovery.LineRef
       line = @lineDiscovery.LineRef
+
+    if  @lineColors[line]
+      @lineColors[line]
+    else
+      @lineColors[line] = "line-" + lineInventory
 
     @lineColors[line]
 
@@ -387,7 +383,7 @@ class stopMonitoringCard
 
     Mustache.parse template
     rendered = Mustache.render(template, this)
-    $("#fancy-response").append(rendered)
+    $("#fancy-response").find('ul').append(rendered)
 
 
     return
