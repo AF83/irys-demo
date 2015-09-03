@@ -74,6 +74,18 @@ class stopMonitoringCard
         </p>
       </div>
     </div>
+    <div class = "stop-info  col-xs-3">
+      <div class = "stop-info-property">
+        <p>
+          Status
+        </p>
+      </div>
+      <div class = "stop-info-value">
+        <p>
+          {{monitoredCall.ArrivalStatus}}
+        </p>
+      </div>
+    </div>
   </li>"""
 
   generalMessageTemplate: """
@@ -340,7 +352,7 @@ class stopMonitoringCard
 
   buildFancyStopMonitoring: () ->
 
-    this.renderCard @stopMonitoringFancyTemplate
+    this.renderFancyCard @stopMonitoringFancyTemplate
 
   buildGeneralMessage:() ->
     this.mustacheGeneralMessage = []
@@ -370,6 +382,12 @@ class stopMonitoringCard
     Mustache.parse template
     rendered = Mustache.render(template, this)
     $("#response").append(rendered)
+
+  renderFancyCard:(template) ->
+
+    Mustache.parse template
+    rendered = Mustache.render(template, this)
+    $("#fancy-response").append(rendered)
 
 
     return

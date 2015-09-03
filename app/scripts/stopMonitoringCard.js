@@ -40,7 +40,7 @@ stopMonitoringCard = (function() {
 
   stopMonitoringCard.prototype.stopMonitoringTemplate = "<div class = \"panel panel-default stop-wrapper {{lineColor}}\">\n  <div class = \"panel-heading\">\n    <div class = \"stop-name\"></div>\n      <h4>{{monitoredCall.StopPointName}}</h4>\n  </div>\n  <div class = \"panel-body\">\n    {{#mustacheStopMonitoredVisit}}\n      <div>{{key}} : {{value}}</div>\n    {{/mustacheStopMonitoredVisit}}\n    {{#monitoredCall}}\n      <h4>Monitored Call</h4>\n      {{#mustacheMonitoredCall}}\n        <div class = \"indented-response\">{{key}} : {{value}}</div>\n      {{/mustacheMonitoredCall}}\n    {{/monitoredCall}}\n    {{#mustacheOnwards}}\n      <h4>OnWards</h4>\n      {{#onWard}}\n        <div class = \"indented-response\">{{key}} : {{value}}</div>\n      {{/onWard}}\n    {{/mustacheOnwards}}\n  </div>\n</div>";
 
-  stopMonitoringCard.prototype.stopMonitoringFancyTemplate = "<li class = \"fancy-stop-wrapper\">\n  <div class = \"line-header {{lineColor}}\">\n    <h4>{{monitoredCall.StopPointName}}</h4>\n  </div>\n  <div class = \"stop-info col-xs-3\">\n    <div class = \"stop-info-property\">\n      <p>\n        Ligne\n      </p>\n    </div>\n    <div class = \"stop-info-value\">\n      <p>\n        {{stopMonitoredVisit.LineRef}}\n      </p>\n    </div>\n  </div>\n  <div class = \"stop-info  col-xs-3\">\n    <div class = \"stop-info-property\">\n      <p>\n        Heure d'arrivée\n      </p>\n    </div>\n    <div class = \"stop-info-value {{monitoredCall.ArrivalStatus}}\">\n      <p>\n        {{monitoredCall.AimedArrivalTime}}\n      </p>\n    </div>\n  </div>\n</li>";
+  stopMonitoringCard.prototype.stopMonitoringFancyTemplate = "<li class = \"fancy-stop-wrapper\">\n  <div class = \"line-header {{lineColor}}\">\n    <h4>{{monitoredCall.StopPointName}}</h4>\n  </div>\n  <div class = \"stop-info col-xs-3\">\n    <div class = \"stop-info-property\">\n      <p>\n        Ligne\n      </p>\n    </div>\n    <div class = \"stop-info-value\">\n      <p>\n        {{stopMonitoredVisit.LineRef}}\n      </p>\n    </div>\n  </div>\n  <div class = \"stop-info  col-xs-3\">\n    <div class = \"stop-info-property\">\n      <p>\n        Heure d'arrivée\n      </p>\n    </div>\n    <div class = \"stop-info-value {{monitoredCall.ArrivalStatus}}\">\n      <p>\n        {{monitoredCall.AimedArrivalTime}}\n      </p>\n    </div>\n  </div>\n  <div class = \"stop-info  col-xs-3\">\n    <div class = \"stop-info-property\">\n      <p>\n        Status\n      </p>\n    </div>\n    <div class = \"stop-info-value\">\n      <p>\n        {{monitoredCall.ArrivalStatus}}\n      </p>\n    </div>\n  </div>\n</li>";
 
   stopMonitoringCard.prototype.generalMessageTemplate = "<div class = \"panel panel-default stop-wrapper\">\n  <div class = \"panel-heading\">\n    <div class = \"stop-name\"></div>\n      <h4>General Message</h4>\n  </div>\n  <div class = \"panel-body\">\n    {{#generalMessage}}\n      <h4>General Message</h4>\n      {{#mustacheGeneralMessage}}\n        <div>{{key}} : {{value}}</div>\n      {{/mustacheGeneralMessage}}\n    {{/generalMessage}}\n  </div>\n</div>";
 
@@ -349,7 +349,7 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.buildFancyStopMonitoring = function() {
-    return this.renderCard(this.stopMonitoringFancyTemplate);
+    return this.renderFancyCard(this.stopMonitoringFancyTemplate);
   };
 
   stopMonitoringCard.prototype.buildGeneralMessage = function() {
@@ -378,7 +378,14 @@ stopMonitoringCard = (function() {
     var rendered;
     Mustache.parse(template);
     rendered = Mustache.render(template, this);
-    $("#response").append(rendered);
+    return $("#response").append(rendered);
+  };
+
+  stopMonitoringCard.prototype.renderFancyCard = function(template) {
+    var rendered;
+    Mustache.parse(template);
+    rendered = Mustache.render(template, this);
+    $("#fancy-response").append(rendered);
   };
 
   return stopMonitoringCard;
