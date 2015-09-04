@@ -5,10 +5,6 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 // endbower
 @import "stop-results/stop-results.scss";
 @import "code-mirror/code-mirror.css";
-.chouette-logo {
-  margin-top: -20px;
-  height: 80px;
-}
 
 #stop-monitoring-form, #canned-requests, .xml-validation-form {
   margin-bottom: 10px;
@@ -51,7 +47,7 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 }
 .page-wrapper {
   overflow: hidden;
-  margin-top: -20px;
+  //margin-top: -20px;
 }
 :app-wrapper {
   height::100%;;
@@ -111,10 +107,10 @@ textarea.xml-paste-zone {
 }
 
 /* Space out content a bit */
-body {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
+// body {
+//   padding-top: 20px;
+//   padding-bottom: 20px;
+// }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
@@ -168,26 +164,70 @@ body {
 }
 
 /* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  .container {
-    max-width: 730px;
+// @media screen and (min-width: 768px) {
+//   .container {
+//     max-width: 730px;
+//   }
+
+//   /* Remove the padding we set earlier */
+//   .header,
+//   .marketing,
+//   .footer {
+//     padding-left: 0;
+//     padding-right: 0;
+//   }
+
+//   /* Space out the masthead */
+//   .header {
+//     margin-bottom: 30px;
+//   }
+
+//   /* Remove the bottom border on the jumbotron for visual effect */
+//   .jumbotron {
+//     border-bottom: 0;
+//   }
+// }
+
+// Fancy header
+.fancy-header{
+  border:none;
+
+  .container{
+    @include clearfix;padding-top:10px;padding-bottom:10px;
+    height:80px;
   }
 
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
+  h3{float:left;margin:0;padding:0;line-height:60px;}
 
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
+  .chouette-action-man{
+    float:right;
 
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
+    a{
+      display:block;
+
+      .chouette-logo {
+        height:60px;width:auto;
+      }
+    }
   }
 }
+// Fancy Navbar
+.fancy-navbar{
+  border:none;@include border-radius(0);
+
+  .dropdown-menu{
+    border:none;@include border-radius(0);padding:0;
+
+    >li>a{padding:10px 20px;}
+  }
+}
+
+.dropdown-inverse>.dropdown-menu{
+    background-color:#222;
+
+    >li>a{
+      color:#9d9d9d;
+
+      &:hover{background-color:#090909;color:#fff;}
+    }
+  }
