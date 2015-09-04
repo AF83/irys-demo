@@ -65,7 +65,7 @@ $(document).ready( function() {
     $(el).toggle();
   }
 
-  $('.navbar-nav > li > ul > li > a').on('click', function() {
+  $('.navbar-nav > li > ul > li > a, .backlinking a').on('click', function() {
     var target = this.getAttribute('href');
     $('.i-m-there').each(function(index, el) {
       $(el).toggle();
@@ -73,6 +73,10 @@ $(document).ready( function() {
     });
 
     superToggle(target);
+
+    if ($('#stop-monitoring').hasClass('i-m-there')) {
+      $('#stop-monitoring-form-wrapper').show();
+    };
 
   });
 

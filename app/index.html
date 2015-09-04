@@ -128,7 +128,7 @@
               </p>
             </div>
           </div>
-          <div class="right-panel-wrapper" id ="stop-monitoring-form-wrapper">>
+          <div class="right-panel-wrapper" id ="stop-monitoring-form-wrapper" style = "display: block">
             <div class="col-sm-8 col-xs-12 col-lg-7 right-app-panel">
               <h2 class="text-center"> Construire votre requête Siri</h2>
               <form class="form-horizontal" id ="stop-monitoring-form">
@@ -463,6 +463,20 @@
         <div class="right-panel-wrapper" id="response-panel-wrapper" style = "display: none;">
           <div class="col-sm-8 col-xs-12 col-lg-7 right-app-panel">
             <div id = "response">
+              <div class = "backlinking">
+                <div class = "pull-left">
+                  <a href="#stop-monitoring-form-wrapper">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <span>Retouner au formulaire</span>
+                  </a>
+                </div>
+                <div class = "pull-right">
+                  <a href="#fancy-response-panel-wrapper">
+                    <span>Vue réduite</span>
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                  </a>
+                </div>
+              </div>
               <h2 class= "text-center">Réponse</h2>
               <h4 class = "response-counter"></h4>
               <h4 class = "siri-version-display"></h4>
@@ -471,6 +485,20 @@
         </div>
         <div class="right-panel-wrapper" style = "display: none;" id="fancy-response-panel-wrapper">
           <div class="col-sm-8 col-xs-12 col-lg-7 right-app-panel">
+            <div class = "backlinking">
+              <div class = "pull-left">
+                <a href="#stop-monitoring-form-wrapper">
+                  <span class="glyphicon glyphicon-chevron-left"></span>
+                  <span>Retouner au formulaire</span>
+                </a>
+              </div>
+              <div class = "pull-right">
+                <a href="#response-panel-wrapper">
+                  <span>Vue complète</span>
+                  <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+              </div>
+            </div>
             <div id = "fancy-response">
               <h2 class= "text-center">Réponse</h2>
               <h4 class = "response-counter"></h4>
