@@ -413,7 +413,9 @@ class stopMonitoringCard
 
     Mustache.parse template
     rendered = Mustache.render(template, this)
+
     $("#response").append(rendered)
+    $('#response').toggle()
 
   renderFancyCard:(template) ->
 

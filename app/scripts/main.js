@@ -60,6 +60,10 @@ $(document).ready( function() {
     });
 
   });
+  function superToggle(el) {
+    $(el).addClass('i-m-there');
+    $(el).toggle();
+  }
 
   $('.navbar-nav > li > ul > li > a').on('click', function() {
     var target = this.getAttribute('href');
@@ -68,10 +72,10 @@ $(document).ready( function() {
       $(el).removeClass('i-m-there');
     });
 
-    $(target).addClass('i-m-there');
-    $(target).toggle();
+    superToggle(target);
+
   });
 
-  $('#bs-example-navbar-collapse-1 > ul > li.dropdown.open > ul > li:nth-child(5) > a').click();
+  superToggle('#stop-monitoring');
 
 });
