@@ -30,15 +30,17 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div class="header fancy-header">
+    <div class="header">
       <div class = "container">
-        <h3>Démonstrateur Siri</h3>
-
-        <div class="chouette-action-man">
-          <a href="#" class = "allow-request-action" id = "open-slider">
-            <img src="images/logo_afimb.jpg" class = "chouette-logo">
-          </a>
-        </div>
+        <ul class="nav nav-pills pull-right">
+          <li >
+            <div class="chouette-action-man">
+              <a href="#" class = "allow-request-action" id = "open-slider">
+                <img src="images/logo_afimb.jpg" class = "chouette-logo">
+              </a>
+          </li>
+        </ul>
+        <h3 class="text-muted">Démonstrateur Siri</h3>
       </div>
     </div>
     <div class = "page-wrapper">
@@ -49,436 +51,284 @@
           </div>
         </div>
       </div>
-      <nav class="navbar navbar-inverse fancy-navbar">
-        <div class="container">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Requêtes</a>
-          </div>
-
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-              <li class="dropdown dropdown-inverse">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Stops <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href = "#stop-monitoring" aria-controls = "stop-monitoring" >Service Stop Monitoring (SM)</a></li>
-                  <li><a href = "#service-stop-timetable" aria-controls = "service-stop-timetable">Service Stop Timetable</a></li>
-                </ul>
-              <li class="dropdown dropdown-inverse">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Connections <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href = "#service-connection-monitoring" aria-controls = "service-connection-monitoring">Service Connection Monitoring (CM)</a></li>
-                  <li><a href = "#service-connection-timetable" aria-controls = "service-connection-timetable">Service Connection Timetable (CT)</a></li>
-                </ul>
-              <li class="dropdown dropdown-inverse">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Autres Services <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href = "#service--production-timetable" aria-controls = "service--production-timetable">Service Production Timetable (PT)</a></li>
-                  <li><a href = "#service-estimated-timetable" aria-controls = "service-estimated-timetable">Service Estimated Timetable (ET)</a></li>
-                  <li><a href = "#service-stop-timetable" aria-controls = "service-stop-timetable">Service Production Timetable (PT)</a></li>
-                  <li><a href = "#service-stop-timetable" aria-controls = "service-stop-timetable">Service Estimated Timetable (ET)</a></li>
-                  <li><a href = "#service-general-message" aria-controls = "service-general-message">Service General Message (GM)</a></li>
-                  <li><a href = "#service-facility-monitoring" aria-controls = "service-facility-monitoring">Service Facility Monitoring (FM)</a></li>
-                  <li><a href = "#service-situation-exchange" aria-controls = "service-situation-exchange">Service Situation Exchange (SX)</a></li>
-                  <li><a href = "#service-discovery" aria-controls = "service-discovery">Service Discovery</a></li>
-                </ul>
-              <!--<li class="active"><a href = "#stop-monitoring" aria-controls = "stop-monitoring">Stop Monitoring (SM)<span class="sr-only">(current)</span></a></li>-->
-            </ul>
-          </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-      </nav>
-
-      <div class="container">
-        <div id = 'stop-monitoring' class = "i-m-there">
-        <div class="col-xs-12 app-wrapper">
-        <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
-        <div class="explaination-text">
-        <h2 class = "text-center">Mode d'emploi</h2>
-        <p> Le service SIRI Stop Monitoring fournit une vue centrée sur l'arrêt concernant les arrivées et les départs de véhicules à un arrêt désigné. Il peut être utilisé par les systèmes d'affichage et les services de présentation divers en vue de fournir en temps réel les informations relatives aux horaires et aux courses sur les panneaux de départ et les autres systèmes d'affichage au niveau de l'arrêt et à distance.</p>
-
-        <h4>Nom Arrêt</h4>
-        <p> Arrêt de référence pour la requête. Renseigner soit le nom de l'arrêt, soit son id (8 chiffres)
-        </p>
-        <h4>Nom de la ligne</h4>
-        <p> Filtre les résultats pour la ligne choisie. Renseigner soit le nom de la ligne, soit son id (8 chiffres)
-        </p>
-        <h4>Heure</h4>
-        <p> Heure de début de la requête
-        </p>
-        <h4>Type d'arrêt</h4>
-        <p> Filtre les résultats sur le type d'arrête sélectionné.
-        </p>
-        <h4>Intervalle Temporel</h4>
-        <p> Filtre les résultats sur le le laps de temps voulu. Le poit de départ est soit l'instant de la requête, soit l'heure choisie.
-        </p>
-        <h4>Limite de passesges</h4>
-        <p> Nombre de passages maximums affichés
-        </p>
-        <h4>MinStLine</h4>
-        <p> Nombre minimum d'arrêts par ligne
-        </p>
-        <h4>Onwards</h4>
-        <p> Nombre d'onwards par arrêt.
-        </p>
+      <div class="col-xs-12 app-wrapper">
+        <div class = "text-center">
         </div>
-        </div>
-        <div class="right-panel-wrapper">
-        <div class="col-sm-8 col-xs-12 col-lg-7 right-app-panel">
-        <h2 class="text-center"> Construire votre requête Siri</h2>
-        <form class="form-horizontal" id ="stop-monitoring-form">
-          <fieldset>
-            <legend>Requête</legend>
-              <div class="form-group" id = "siriVersionAPI">
-                  <label for="siriVersionAPI" class="col-sm-4 control-label">Version Siri
-                  </label>
-                  <div class = "col-sm-8">
-                    <label class="radio-inline">
-                      <input type="radio" name="siriVersionAPIOptions" id="siriVersionAPI1" value="1.3" checked = "checked"> 1.3
-                    </label>
-                    <label class="radio-inline">
-                      <input type="radio" name="siriVersionAPIOptions" id="siriVersionAPI2" value="1.4"> 1.4
-                    </label>
-                    <label class="radio-inline">
-                      <input type="radio" name="siriVersionAPIOptions" id="siriVersionAPI3" value="2.0"> 2.0
-                    </label>
-                </div>
-              </div>
-              <div class="form-group hidden" id = "requestorNameWrapper">
-                  <label for="requestorName" class="col-lg-4 control-label">Identifiant</label>
-                  <div class="col-lg-8">
-                    <input type="text" class="form-control" id="requestorName" placeholder="Nom du demandeur">
-                  </div>
-              </div>
-              <div class="form-group hidden" id = "requestorVersionWrapper">
-                  <label for="requestorVersion" class="col-lg-4 control-label">Version</label>
-                  <div class="col-lg-8">
-                    <input type="text" class="form-control" id="requestorVersion" placeholder="Version du demandeur">
-                  </div>
-              </div>
-              <div class="form-group hidden" id="minimumStopVisitPerLineViaWrapper">
-                <label for="minimumStopVisitPerLineVia" class="col-lg-4 control-label">Minimum de passages par itinéraire</label>
-                <div class="col-lg-8">
-                  <input type="text" class="form-control" id="minimumStopVisitPerLineVia" placeholder="Minimum de passages par itinéraire">
-                </div>
-              </div>
-              <div class="form-group">
-                  <label for="stopName" class="col-lg-4 control-label">Nom arrêt</label>
-                  <div class="col-lg-8">
-                    <input type="text" class="form-control" id="stopName" placeholder="Nom de l'arrêt ou id">
-                  </div>
-              </div>
-              <div class="form-group hidden">
-                  <label for="stopId" class="col-lg-4 control-label">StopId</label>
-                  <div class="col-lg-8">
-                    <input type="text" class="form-control" id="stopId" placeholder="Nom de l'arrêt ou id">
-                  </div>
-              </div>
-              <div class="form-group">
-                <label for="lineName" class="col-lg-4 control-label">Nom de la ligne</label>
-                  <div class="col-lg-8">
-                    <input type="text" class="form-control" id="lineName" placeholder="id de la ligne">
-                  </div>
-              </div>
-              <div class="form-group hidden">
-                <label for="lineId" class="col-lg-4 control-label">LineId</label>
-                  <div class="col-lg-8">
-                    <input type="text" class="form-control" id="lineId" placeholder="id de la ligne">
-                  </div>
-              </div>
-              <div class="form-group">
-                <label for="start" class="col-lg-4 control-label">Heure</label>
-                  <div class="col-lg-8">
-                    <input type="text" class="form-control" id="start" placeholder="Heure de départ (HH:MM)">
-                  </div>
-              </div>
-              <div class="form-group">
-                <label for="typeVisit" class="col-lg-4 control-label">Type d'arrêt</label>
-                  <div class="col-lg-8">
-                    <select class = "form-control" id = "typeVisit">
-                      <option>arrivals</option>
-                      <option>departures</option>
-                      <option>all</option>
-                    </select>
-                  </div>
-              </div>
-              <div class="form-group">
-                <label for="preview" class="col-lg-4 control-label">Intervalle temporel (mn)</label>
-                  <div class="col-lg-8">
-                    <input type="text" class="form-control" id="preview" list="time-span-list" placeholder="Intervalle temporel">
-                    <datalist id="time-span-list">
-                      <option>0</option>
-                      <option>30</option>
-                      <option>60</option>
-                      <option>90</option>
-                      <option>120</option>
-                      <option>150</option>
-                      <option>180</option>
-                    </datalist>
-                  </div>
-              </div>
-              <div class="form-group">
-                <label for="maxStop" class="col-lg-4 control-label">Limite de passages</label>
-                  <div class="col-lg-8">
-                    <input type="text" class="form-control" id="maxStop" list="max-stop-list" placeholder="Nombre maxi d'arrets">
-                    <datalist id="max-stop-list">
-                      <option>0</option>
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                      <option>6</option>
-                    </datalist>
-                  </div>
-              </div>
-              <div class="form-group">
-                <label for="minStLine" class="col-lg-4 control-label">MinStLine</label>
-                  <div class="col-lg-8">
-                    <input type="text" class="form-control" id="minStLine" list="minStLine-list" placeholder="Nombre d'arrets mini par ligne">
-                    <datalist id="minStLine-list">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                    </datalist>
-                  </div>
-                </div>
-               <div class="form-group">
-                <label for="onward" class="col-lg-4 control-label">Onward</label>
-                  <div class="col-lg-4">
-                    <input type="text" class="form-control" id="onward" list="time-span-list" placeholder="nbs">
-                    <datalist id="time-span-list">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                    </datalist>
-                  </div>
-                  <p class="col-lg-4">passages suivants
-              </div>
-              <div class="form-group">
-                <div class="col-xs-12 col-sm-6 col-lg-4 text-center">
-                  <button type="submit" class="btn btn-success">Envoyer la requête</button>
-                </div>
-              </div>
-            </fieldset>
-          </form>
-        </div>
-        </div>
-        </div>
-        </div>
-        <div id = 'get-general-message' class = "i-m-there">
-        <div class="col-xs-12 app-wrapper">
-        <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
-        <div class="explaination-text">
-        <h2 class = "text-center">Get General Message (GM)</h2>
-        <p> Le service SIRI General Message est utilisé pour échanger des messages informatifs entre des individus identifiés dans un format structuré libre ou arbitraire. Il permet l'envoi et la révocation des messages. En plus du contenu réel, des périodes de validité sont affectées aux messages.
-        </p>
-        </div>
-        </div>
-        <div class="right-panel-wrapper">
-        <div class="col-sm-8 col-xs-12 col-lg-7 right-app-panel">
-        <h2 class="text-center"> Construire votre requête General Message</h2>
-        <form class="form-horizontal" id ="canned-requests">
-          <fieldset>
-            <div class="form-group" id = "siriGeneralVersionAPI">
-              <label for="siriGeneralVersionAPI" class="col-sm-4 control-label">Version Siri
-              </label>
-              <div class = "col-sm-8">
-                <label class="radio-inline">
-                  <input type="radio" name="siriVersionAPIOptions" id="siriGeneralVersionAPI1" value="1.3" checked = "checked"> 1.3
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="siriVersionAPIOptions" id="siriGeneralVersionAPI2" value="1.4"> 1.4
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="siriVersionAPIOptions" id="siriGeneralVersionAPI3" value="2.0"> 2.0
-                </label>
-              </div>
-            </div>
-            <div class="form-group hidden" id = "requestorNameWrapper">
-              <label for="requestorName" class="col-lg-4 control-label">Identifiant</label>
-              <div class="col-lg-8">
-                <input type="text" class="form-control" id="requestorName" placeholder="Nom du demandeur">
-              </div>
-            </div>
-            <div class="form-group hidden" id = "requestorVersionWrapper">
-              <label for="requestorVersion" class="col-lg-4 control-label">Version</label>
-              <div class="col-lg-8">
-                <input type="text" class="form-control" id="requestorVersion" placeholder="Version du demandeur">
-              </div>
-            </div>
-            <div class="form-group hidden" id = "destinationRefWrapper">
-              <label for="destinationRef" class="col-lg-4 control-label">Destinations</label>
-              <div class="col-lg-8">
-                <input type="text" class="form-control" id="destinationRef" placeholder="destinations">
-              </div>
-            </div>
-            <div class="form-group hidden" id = "groupOfLinesRefWrapper">
-              <label for="groupOfLinesRef" class="col-lg-4 control-label">Réseaux et groupes de lignes</label>
-              <div class="col-lg-8">
-                <input type="text" class="form-control" id="groupOfLinesRef" placeholder="réseaux et groupes de lignes">
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-xs-4">
-                <button type="button" class="btn btn-warning" id="get-general-message">Get General Message</button>
-              </div>
-            </div>
-          </fieldset>
-        </form>
-        </div>
-        </div>
-        </div>
-        </div>
-        <div id = 'service-discovery' class = "i-m-there">
-        <div class="col-xs-12 app-wrapper">
-        <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
-        <div class="explaination-text">
-        <h2 class = "text-center">Service Discovery</h2>
-        <p> Les services de découverte des données d'application sont spécifiques au contenu correspondant des Services fonctionnels SIRI. Ils permettent par exemple d'identifier les arrêts gérés par un service SIRI Stop Monitoring donné ou de connaître les codes de Catégorie de produit utilisés. Ces services de découverte peuvent s'avérer particulièrement utiles à l'heure de réduire les coûts d'approvisionnement et de réapprovisionnement. En général, un service de couverture implique une demande simple, parfois exécutée par le client, visant à identifier les valeurs des données de référence pouvant être reprises dans les demandes. Il s'agit entre autres des emplacements, des points ou des ensembles de données de référence (LIGNES ou DESTINATIONS prises en charge par exemple). Avec SIRI, les services de découverte sont facultatifs et sont traités dans le cadre d'un type de service spécifique.
-        </p>
-        </div>
-        </div>
-        <div class="right-panel-wrapper">
-        <div class="col-sm-8 col-xs-12 col-lg-7 right-app-panel">
-        <h2 class="text-center"> Construire votre requête General Message</h2>
-        <form class="form-horizontal" id ="canned-requests">
-          <fieldset>
-              <div class="form-group" id = "siriGeneralVersionAPI">
-                <label for="siriGeneralVersionAPI" class="col-sm-4 control-label">Version Siri</label>
-                <div class = "col-sm-8">
-                  <label class="radio-inline">
-                    <input type="radio" name="siriVersionAPIOptions" id="siriGeneralVersionAPI1" value="1.3" checked = "checked"> 1.3
-                  </label>
-                  <label class="radio-inline">
-                    <input type="radio" name="siriVersionAPIOptions" id="siriGeneralVersionAPI2" value="1.4"> 1.4
-                  </label>
-                  <label class="radio-inline">
-                    <input type="radio" name="siriVersionAPIOptions" id="siriGeneralVersionAPI3" value="2.0"> 2.0
-                  </label>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-xs-4">
-                  <button type="button" class="btn btn-primary" id="stop-discovery">Stop Discovery</button>
-                </div>
-                <div class="col-xs-4">
-                  <button type="button" class="btn btn-info" id="line-discovery">Line Discovery</button>
-                </div>
-              </div>
-          </fieldset>
-        </form>
-        </div>
-        </div>
-        </div>
-        </div>
-        <div id = 'stop-timetable' class = "i-m-there">
-        <div class="col-xs-12 app-wrapper">
         <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
           <div class="explaination-text">
             <h2 class = "text-center">Mode d'emploi</h2>
-            <p> Le service SIRI Stop Timetable fournit une vue centrée sur l'arrêt concernant les arrivées et les départs de véhicules graphiqués à un arrêt désigné. Il peut être utilisé pour réduire le volume d'informations à transmettre en temps réel aux arrêts et aux affichages en tant que données de référence pour le service Stop Monitoring, ainsi que pour fournir un flux de données aux horaires statiques.</p>
+            <h4>Nom Arrêt</h4>
+            <p> Arrêt de référence pour la requête. Renseigner soit le nom de l'arrêt, soit son id (8 chiffres)
+            </p>
+            <h4>Nom de la ligne</h4>
+            <p> Filtre les résultats pour la ligne choisie. Renseigner soit le nom de la ligne, soit son id (8 chiffres)
+            </p>
+            <h4>Heure</h4>
+            <p> Heure de début de la requête
+            </p>
+            <h4>Type d'arrêt</h4>
+            <p> Filtre les résultats sur le type d'arrête sélectionné.
+            </p>
+            <h4>Intervalle Temporel</h4>
+            <p> Filtre les résultats sur le le laps de temps voulu. Le poit de départ est soit l'instant de la requête, soit l'heure choisie.
+            </p>
+            <h4>Limite de passesges</h4>
+            <p> Nombre de passages maximums affichés
+            </p>
+            <h4>MinStLine</h4>
+            <p> Nombre minimum d'arrêts par ligne
+            </p>
+            <h4>Onwards</h4>
+            <p> Nombre d'onwards par arrêt.
+            </p>
           </div>
         </div>
-        </div>
-        </div>
-        <div id = 'stop-estimated-timetable' class = "i-m-there">
-        <div class="col-xs-12 app-wrapper">
-        <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
-          <div class="explaination-text">
-            <h2 class = "text-center">Service Estimated Timetable</h2>
-            <p> Le service SIRI Estimated Timetable permet la diffusion d'informations concernant la progression réelle des Courses suivant les lignes d'un service spécifique, en détaillant les heures de départ et d'arrivée prévues à des arrêts spécifiques sur un itinéraire planifié. Les informations comprendront des données enregistrées pour les arrêts qui ont été passés, ainsi que des données prévues pour les arrêts qui n'ont pas encore été passés. En outre, le service Estimated Timetable permet d'annuler, d'ajouter ou de modifier des Courses.</p>
-          </div>
-        </div>
-        </div>
-        </div>
-        <div id = 'service-production-timetable' class = "i-m-there">
-        <div class="col-xs-12 app-wrapper">
-        <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
-          <div class="explaination-text">
-            <h2 class = "text-center">Service Production Timetable</h2>
-            <p> Le service SIRI Production Timetable permet la diffusion d'informations concernant la progression planifiée de véhicules exploitant un service spécifique, identifiée par l'heure d'arrivée et de départ des véhicules à des arrêts spécifiques sur un itinéraire planifié pour un jour d'exploitation particulier.</p>
-          </div>
-        </div>
-        </div>
-        </div>
-        <div id = 'service-stop-timetable' class = "i-m-there">
-        <div class="col-xs-12 app-wrapper">
-        <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
-          <div class="explaination-text">
-            <h2 class = "text-center">Service Stop Timetable</h2>
-            <p>Le service SIRI Stop Timetable fournit une vue centrée sur l'arrêt concernant les arrivées et les départs de véhicules graphiqués à un arrêt désigné. Il peut être utilisé pour réduire le volume d'informations à transmettre en temps réel aux arrêts et aux affichages en tant que données de référence pour le service Stop Monitoring, ainsi que pour fournir un flux de données aux horaires statiques.</p>
-          </div>
-        </div>
-        </div>
-        </div>
-        <div id = 'service-connection-timetable' class = "i-m-there">
-        <div class="col-xs-12 app-wrapper">
-        <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
-          <div class="explaination-text">
-            <h2 class = "text-center">Service Connection Timetable</h2>
-            <p>Le service SIRI Connection Timetable peut être utilisé pour fournir des informations concernant les arrivées planifiées d'un véhicule amenant à l'exploitant d'un service partant de correspondance. L'exploitant du service partant peut alors planifier comment garantir la correspondance, soit par rapport au véhicule prévu soit par rapport à un véhicule différent.</p>
-          </div>
-        </div>
-        </div>
-        </div><div id = "service-connection-monitoring" class = "i-m-there">
-        <div class="col-xs-12 app-wrapper">
-        <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
-          <div class="explaination-text">
-            <h2 class = "text-center">Service Connection Monitoring</h2>
-            <p>Le service SIRI Connection Monitoring est utilisé pour fournir des informations concernant les arrivées planifiées d'un véhicule amenant à l'exploitant d'un service partant de correspondance. L'exploitant du service partant peut alors gérer le service de manière à garantir la correspondance, en se basant sur la marche actuelle du véhicule.</p>
-          </div>
-        </div>
-        </div>
-        </div>
-        <div id = 'service-facility-monitoring' class = "i-m-there">
-        <div class="col-xs-12 app-wrapper">
-        <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
-          <div class="explaination-text">
-            <h2 class = "text-center">Service Facility Monitoring</h2>
-            <p>Le service SIRI Facility Monitoring permet la mise à jour des informations d'état des équipements et des services (disponibilité des ascenseurs, des escaliers mécaniques, des guichets automatiques, des palettes dans les bus, etc.)</p>
-          </div>
-        </div>
-        </div>
-        </div>
-        <div id = 'service-situation-exchange' class = "i-m-there">
-        <div class="col-xs-12 app-wrapper">
-        <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
-          <div class="explaination-text">
-            <h2 class = "text-center">Service Situation Exchange</h2>
-            <p>Le service SIRI Situation Exchange permet de diffuser des informations détaillées et structurées sur les perturbations (cause et conséquences), aussi bien pour les perturbations planifiées (travaux, manifestation, etc.) que pour les perturbations intervenant en cours d'exploitation (incident voyageur, accident sur le réseau routier, conditions météo, etc.).</p>
-          </div>
-        </div>
-        </div>
-        </div>
-        <div class = "hidden" id = "response">
-        <h2 class= "text-center">Réponse</h2>
-        <h4 class = "response-counter"></h4>
-        <h4 class = "siri-version-display"></h4>
+        <div class="right-panel-wrapper">
+          <div class="col-sm-8 col-xs-12 col-lg-7 right-app-panel">
+            <ul class="nav nav-tabs" role = "tablist">
+              <li role="presentation" class = "active"><a href = "#basic-request" aria-controls = "basic-request" data-toggle = "tab">Requête asistée</a></li>
+              <li role="presentation"><a href = "#advanced-request" aria-controls = "advanced-request" data-toggle = "tab">Requête xml</a></li>
+              <li role="presentation"><a href = "#response" aria-controls = "response" data-toggle = "tab">Résultat</a></li>
+              <li role="presentation"><a href = "#fancy-response" aria-controls = "fancy-response" data-toggle = "tab">Résultat joli</a></li>
+              <li role="presentation"><a href = "#xml-response" aria-controls = "xml-response" data-toggle = "tab">Réponse XML</a></li>
+            </ul>
+            <div class = "tab-content">
+              <div role = "tabpanel" class= "tab-pane fade in active" id="basic-request">
+                <h2 class="text-center"> Construire votre requête Siri</h2>
+                <form class="form-horizontal" id ="canned-requests">
+                  <fieldset>
+                    <legend>Requête préenregistrées</legend>
+                    <div class="form-group" id = "siriGeneralVersionAPI"">
+                        <label for="siriGeneralVersionAPI" class="col-sm-4 control-label">Version Siri
+                        </label>
+                        <div class = "col-sm-8">
+                          <label class="radio-inline">
+                            <input type="radio" name="siriVersionAPIOptions" id="siriGeneralVersionAPI1" value="1.3" checked = "checked"> 1.3
+                          </label>
+                          <label class="radio-inline">
+                            <input type="radio" name="siriVersionAPIOptions" id="siriGeneralVersionAPI2" value="1.4"> 1.4
+                          </label>
+                          <label class="radio-inline">
+                            <input type="radio" name="siriVersionAPIOptions" id="siriGeneralVersionAPI3" value="2.0"> 2.0
+                          </label>
+                      </div>
+                    </div>
+                    <div class="form-group hidden" id = "requestorNameWrapper">
+                      <label for="requestorName" class="col-lg-4 control-label">Identifiant</label>
+                      <div class="col-lg-8">
+                        <input type="text" class="form-control" id="requestorName" placeholder="Nom du demandeur">
+                      </div>
+                    </div>
+                    <div class="form-group hidden" id = "requestorVersionWrapper">
+                      <label for="requestorVersion" class="col-lg-4 control-label">Version</label>
+                      <div class="col-lg-8">
+                        <input type="text" class="form-control" id="requestorVersion" placeholder="Version du demandeur">
+                      </div>
+                    </div>
+                    <div class="form-group hidden" id = "destinationRefWrapper">
+                      <label for="destinationRef" class="col-lg-4 control-label">Destinations</label>
+                      <div class="col-lg-8">
+                        <input type="text" class="form-control" id="destinationRef" placeholder="destinations">
+                      </div>
+                    </div>
+                    <div class="form-group hidden" id = "groupOfLinesRefWrapper">
+                      <label for="groupOfLinesRef" class="col-lg-4 control-label">Réseaux et groupes de lignes</label>
+                      <div class="col-lg-8">
+                        <input type="text" class="form-control" id="groupOfLinesRef" placeholder="réseaux et groupes de lignes">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-xs-4">
+                        <button type="button" class="btn btn-primary" id="stop-discovery">Stop Discovery</button>
+                      </div>
+                      <div class="col-xs-4">
+                        <button type="button" class="btn btn-info" id="line-discovery">Line Discovery</button>
+                      </div>
+                      <div class="col-xs-4">
+                        <button type="button" class="btn btn-warning" id="get-general-message">Get General Message</button>
+                      </div>
+                    </div>
+                  </fieldset>
+                </form>
 
-        </div>
-        <div class = "hidden" id = "fancy-response">
-        <h2 class= "text-center">Réponse</h2>
-        <h4 class = "response-counter"></h4>
-        <h4 class = "siri-version-display"></h4>
-        <ul class="fancy-wrapper" id = "fancy-wrapper"></ul>
-        </div>
-        <div class = "hidden" id = "xml-response">
-        <h2 class= "text-center">Réponse XML</h2>
-        <div>
-        <textarea rows="20" cols="40" id="xml-response-wrapper" class = "col-xs-12"></textarea>
-        </div>
-        </div>
+                <form class="form-horizontal" id ="stop-monitoring">
+                  <fieldset>
+                    <legend>Requête</legend>
+                      <div class="form-group" id = "siriVersionAPI"">
+                          <label for="siriVersionAPI" class="col-sm-4 control-label">Version Siri
+                          </label>
+                          <div class = "col-sm-8">
+                            <label class="radio-inline">
+                              <input type="radio" name="siriVersionAPIOptions" id="siriVersionAPI1" value="1.3" checked = "checked"> 1.3
+                            </label>
+                            <label class="radio-inline">
+                              <input type="radio" name="siriVersionAPIOptions" id="siriVersionAPI2" value="1.4"> 1.4
+                            </label>
+                            <label class="radio-inline">
+                              <input type="radio" name="siriVersionAPIOptions" id="siriVersionAPI3" value="2.0"> 2.0
+                            </label>
+                        </div>
+                      </div>
+                      <div class="form-group hidden" id = "requestorNameWrapper">
+                          <label for="requestorName" class="col-lg-4 control-label">Identifiant</label>
+                          <div class="col-lg-8">
+                            <input type="text" class="form-control" id="requestorName" placeholder="Nom du demandeur">
+                          </div>
+                      </div>
+                      <div class="form-group hidden" id = "requestorVersionWrapper">
+                          <label for="requestorVersion" class="col-lg-4 control-label">Version</label>
+                          <div class="col-lg-8">
+                            <input type="text" class="form-control" id="requestorVersion" placeholder="Version du demandeur">
+                          </div>
+                      </div>
+                      <div class="form-group hidden" id="minimumStopVisitPerLineViaWrapper">
+                        <label for="minimumStopVisitPerLineVia" class="col-lg-4 control-label">Minimum de passages par itinéraire</label>
+                        <div class="col-lg-8">
+                          <input type="text" class="form-control" id="minimumStopVisitPerLineVia" placeholder="Minimum de passages par itinéraire">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="stopName" class="col-lg-4 control-label">Nom arrêt</label>
+                          <div class="col-lg-8">
+                            <input type="text" class="form-control" id="stopName" placeholder="Nom de l'arrêt ou id">
+                          </div>
+                      </div>
+                      <div class="form-group hidden">
+                          <label for="stopId" class="col-lg-4 control-label">StopId</label>
+                          <div class="col-lg-8">
+                            <input type="text" class="form-control" id="stopId" placeholder="Nom de l'arrêt ou id">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="lineName" class="col-lg-4 control-label">Nom de la ligne</label>
+                          <div class="col-lg-8">
+                            <input type="text" class="form-control" id="lineName" placeholder="id de la ligne">
+                          </div>
+                      </div>
+                      <div class="form-group hidden">
+                        <label for="lineId" class="col-lg-4 control-label">LineId</label>
+                          <div class="col-lg-8">
+                            <input type="text" class="form-control" id="lineId" placeholder="id de la ligne">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="start" class="col-lg-4 control-label">Heure</label>
+                          <div class="col-lg-8">
+                            <input type="text" class="form-control" id="start" placeholder="Heure de départ (HH:MM)">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="typeVisit" class="col-lg-4 control-label">Type d'arrêt</label>
+                          <div class="col-lg-8">
+                            <select class = "form-control" id = "typeVisit">
+                              <option>arrivals</option>
+                              <option>departures</option>
+                              <option>all</option>
+                            </select>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="preview" class="col-lg-4 control-label">Intervalle temporel (mn)</label>
+                          <div class="col-lg-8">
+                            <input type="text" class="form-control" id="preview" list="time-span-list" placeholder="Intervalle temporel">
+                            <datalist id="time-span-list">
+                              <option>0</option>
+                              <option>30</option>
+                              <option>60</option>
+                              <option>90</option>
+                              <option>120</option>
+                              <option>150</option>
+                              <option>180</option>
+                            </datalist>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="maxStop" class="col-lg-4 control-label">Limite de passages</label>
+                          <div class="col-lg-8">
+                            <input type="text" class="form-control" id="maxStop" list="max-stop-list" placeholder="Nombre maxi d'arrets">
+                            <datalist id="max-stop-list">
+                              <option>0</option>
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                              <option>6</option>
+                            </datalist>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="minStLine" class="col-lg-4 control-label">MinStLine</label>
+                          <div class="col-lg-8">
+                            <input type="text" class="form-control" id="minStLine" list="minStLine-list" placeholder="Nombre d'arrets mini par ligne">
+                            <datalist id="minStLine-list">
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                            </datalist>
+                          </div>
+                        </div>
+                       <div class="form-group">
+                        <label for="onward" class="col-lg-4 control-label">Onward</label>
+                          <div class="col-lg-4">
+                            <input type="text" class="form-control" id="onward" list="time-span-list" placeholder="nbs">
+                            <datalist id="time-span-list">
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                            </datalist>
+                          </div>
+                          <p class="col-lg-4">passages suivants
+                      </div>
+                      <div class="form-group">
+                        <div class="col-xs-12 col-sm-6 col-lg-4 text-center">
+                          <button type="submit" class="btn btn-success">Envoyer la requête</button>
+                        </div>
+                      </div>
+                    </fieldset>
+                  </form>
+                </div>
+                <div role= "tabpanel" class = "tab-pane fade" id = "advanced-request">
+                  <h2 class= "text-center">Tester votre requête xml</h2>
+                  <form class="form-horizontal xml-validation-form" id="smart-request-form">
+                    <div class="form-group">
+                      <textarea class = "form-control xml-paste-zone" id="xml-request-textarea" placeholder = "Copier votre requête xml"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <div class="col xs-12 col-sm-6 col-lg-4">
+                            <button type="button" class="btn btn-success" id="smart-request-submit">Envoyer la requête</button>
+                          </div>
+                      </div>
+                  </form>
+
+                </div>
+                <div role= "tabpanel" class = "tab-pane fade" id = "response">
+                  <h2 class= "text-center">Réponse</h2>
+                  <h4 class = "response-counter"></h4>
+                  <h4 class = "siri-version-display"></h4>
+
+                </div>
+                <div role= "tabpanel" class = "tab-pane fade" id = "fancy-response">
+                  <h2 class= "text-center">Réponse</h2>
+                  <h4 class = "response-counter"></h4>
+                  <h4 class = "siri-version-display"></h4>
+                  <ul class="fancy-wrapper" id = "fancy-wrapper"></ul
+
+                </div>
+                <div role= "tabpanel" class = "tab-pane fade" id = "xml-response">
+                  <h2 class= "text-center">Réponse XML</h2>
+                  <div>
+                    <textarea rows="20" cols="40" id="xml-response-wrapper" class = "col-xs-12"></textarea>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
