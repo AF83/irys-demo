@@ -263,6 +263,9 @@ stopMonitoringRequest = (function() {
         $('.alert-wrapper').append(errorSpan);
       } else {
         responseHandler(xmlDoc, handler);
+        $('#stop-monitoring-form-wrapper').toggle();
+        $('#response-panel-wrapper').toggle();
+        $('#response-panel-wrapper').addClass('i-m-there');
       }
     }).fail(function() {});
     alert('epic fail');

@@ -378,7 +378,7 @@ stopMonitoringCard = (function() {
     var rendered;
     Mustache.parse(template);
     rendered = Mustache.render(template, this);
-    return $("#response").append(rendered);
+    $("#response").append(rendered);
   };
 
   stopMonitoringCard.prototype.renderFancyCard = function(template) {

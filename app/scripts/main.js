@@ -60,18 +60,26 @@ $(document).ready( function() {
     });
 
   });
+  function superToggle(el) {
+    $(el).addClass('i-m-there');
+    $(el).toggle();
+  }
 
-  $('.navbar-nav > li > ul > li > a').on('click', function() {
+  $('.navbar-nav > li > ul > li > a, .backlinking a').on('click', function() {
     var target = this.getAttribute('href');
     $('.i-m-there').each(function(index, el) {
       $(el).toggle();
       $(el).removeClass('i-m-there');
     });
 
-    $(target).addClass('i-m-there');
-    $(target).toggle();
+    superToggle(target);
+
+    if ($('#stop-monitoring').hasClass('i-m-there')) {
+      $('#stop-monitoring-form-wrapper').show();
+    };
+
   });
 
-  $('#bs-example-navbar-collapse-1 > ul > li.dropdown.open > ul > li:nth-child(5) > a').click();
+  superToggle('#stop-monitoring');
 
 });
