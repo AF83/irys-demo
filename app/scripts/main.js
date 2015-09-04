@@ -61,4 +61,17 @@ $(document).ready( function() {
 
   });
 
+  $('.navbar-nav > li > ul > li > a').on('click', function() {
+    var target = this.getAttribute('href');
+    $('.i-m-there').each(function(index, el) {
+      $(el).toggle();
+      $(el).removeClass('i-m-there');
+    });
+
+    $(target).addClass('i-m-there');
+    $(target).toggle();
+  });
+
+  $('#bs-example-navbar-collapse-1 > ul > li.dropdown.open > ul > li:nth-child(5) > a').click();
+
 });
