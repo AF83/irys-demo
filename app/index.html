@@ -71,32 +71,32 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Stops <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href = "#stop-monitoring" aria-controls = "stop-monitoring" >Service Stop Monitoring (SM)</a></li>
-                  <li><a href="#">Service Stop Timetable</a></li>
+                  <li><a href = "#service-stop-timetable" aria-controls = "service-stop-timetable">Service Stop Timetable</a></li>
                 </ul>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Connections <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Service Connection Monitoring (CM)</a></li>
-                  <li><a href="#">Service Connection Timetable (CT)</a></li>
+                  <li><a href = "#service-connection-monitoring" aria-controls = "service-connection-monitoring">Service Connection Monitoring (CM)</a></li>
+                  <li><a href = "#service-connection-timetable" aria-controls = "service-connection-timetable">Service Connection Timetable (CT)</a></li>
                 </ul>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Autres Services <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Service Production Timetable (PT)</a></li>
-                  <li><a href="#">Service Estimated Timetable (ET)</a></li>
-                  <li><a href="#">Service Production Timetable (PT)</a></li>
-                  <li><a href="#">Service Estimated Timetable (ET)</a></li>
-                  <li><a href="#">Service General Message (GM)</a></li>
-                  <li><a href="#">Service Facility Monitoring (FM)</a></li>
-                  <li><a href="#">Service Situation Exchange (SX)</a></li>
-                  <li><a href="#">Service Discovery</a></li>
+                  <li><a href = "#service--production-timetable" aria-controls = "service--production-timetable">Service Production Timetable (PT)</a></li>
+                  <li><a href = "#service-estimated-timetable" aria-controls = "service-estimated-timetable">Service Estimated Timetable (ET)</a></li>
+                  <li><a href = "#service-stop-timetable" aria-controls = "service-stop-timetable">Service Production Timetable (PT)</a></li>
+                  <li><a href = "#service-stop-timetable" aria-controls = "service-stop-timetable">Service Estimated Timetable (ET)</a></li>
+                  <li><a href = "#service-general-message" aria-controls = "service-general-message">Service General Message (GM)</a></li>
+                  <li><a href = "#service-facility-monitoring" aria-controls = "service-facility-monitoring">Service Facility Monitoring (FM)</a></li>
+                  <li><a href = "#service-situation-exchange" aria-controls = "service-situation-exchange">Service Situation Exchange (SX)</a></li>
+                  <li><a href = "#service-discovery" aria-controls = "service-discovery">Service Discovery</a></li>
                 </ul>
-              <li class="active"><a href="#">Stop Monitoring (SM)<span class="sr-only">(current)</span></a></li>
+              <li class="active"><a href = "#stop-monitoring" aria-controls = "stop-monitoring">Stop Monitoring (SM)<span class="sr-only">(current)</span></a></li>
             </ul>
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
       </nav>
-      <div id = 'stop-monitoring'>
+      <div id = 'stop-monitoring' class = "i-m-there">
         <div class="col-xs-12 app-wrapper">
           <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
             <div class="explaination-text">
@@ -276,7 +276,7 @@
           </div>
         </div>
       </div>
-      <div id = 'get-general-message'>
+      <div id = 'get-general-message' class = "i-m-there">
         <div class="col-xs-12 app-wrapper">
           <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
             <div class="explaination-text">
@@ -340,12 +340,12 @@
           </div>
         </div>
       </div>
-      <div id = 'get-general-message'>
+      <div id = 'service-discovery' class = "i-m-there">
         <div class="col-xs-12 app-wrapper">
           <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
             <div class="explaination-text">
-              <h2 class = "text-center">Get General Message (GM)</h2>
-              <p> Le service SIRI General Message est utilisé pour échanger des messages informatifs entre des individus identifiés dans un format structuré libre ou arbitraire. Il permet l'envoi et la révocation des messages. En plus du contenu réel, des périodes de validité sont affectées aux messages.
+              <h2 class = "text-center">Service Discovery</h2>
+              <p> Les services de découverte des données d'application sont spécifiques au contenu correspondant des Services fonctionnels SIRI. Ils permettent par exemple d'identifier les arrêts gérés par un service SIRI Stop Monitoring donné ou de connaître les codes de Catégorie de produit utilisés. Ces services de découverte peuvent s'avérer particulièrement utiles à l'heure de réduire les coûts d'approvisionnement et de réapprovisionnement. En général, un service de couverture implique une demande simple, parfois exécutée par le client, visant à identifier les valeurs des données de référence pouvant être reprises dans les demandes. Il s'agit entre autres des emplacements, des points ou des ensembles de données de référence (LIGNES ou DESTINATIONS prises en charge par exemple). Avec SIRI, les services de découverte sont facultatifs et sont traités dans le cadre d'un type de service spécifique.
               </p>
             </div>
           </div>
@@ -382,7 +382,7 @@
           </div>
         </div>
       </div>
-          <div id = 'stop-timetable'>
+          <div id = 'stop-timetable' class = "i-m-there">
             <div class="col-xs-12 app-wrapper">
               <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
                 <div class="explaination-text">
@@ -392,7 +392,7 @@
               </div>
             </div>
           </div>
-          <div id = 'stop-estimated-timetable'>
+          <div id = 'stop-estimated-timetable' class = "i-m-there">
             <div class="col-xs-12 app-wrapper">
               <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
                 <div class="explaination-text">
@@ -402,7 +402,7 @@
               </div>
             </div>
           </div>
-          <div id = 'service-production-timetable'>
+          <div id = 'service-production-timetable' class = "i-m-there">
             <div class="col-xs-12 app-wrapper">
               <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
                 <div class="explaination-text">
@@ -412,7 +412,7 @@
               </div>
             </div>
           </div>
-          <div id = 'service-stop-timetable'>
+          <div id = 'service-stop-timetable' class = "i-m-there">
             <div class="col-xs-12 app-wrapper">
               <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
                 <div class="explaination-text">
@@ -422,7 +422,7 @@
               </div>
             </div>
           </div>
-          <div id = 'service-connection-timetable'>
+          <div id = 'service-connection-timetable' class = "i-m-there">
             <div class="col-xs-12 app-wrapper">
               <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
                 <div class="explaination-text">
@@ -431,7 +431,7 @@
                 </div>
               </div>
             </div>
-          </div><div id = "service-connection-monitoring">
+          </div><div id = "service-connection-monitoring" class = "i-m-there">
             <div class="col-xs-12 app-wrapper">
               <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
                 <div class="explaination-text">
@@ -441,7 +441,7 @@
               </div>
             </div>
           </div>
-          <div id = 'service-facility-monitoring'>
+          <div id = 'service-facility-monitoring' class = "i-m-there">
             <div class="col-xs-12 app-wrapper">
               <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
                 <div class="explaination-text">
@@ -451,7 +451,7 @@
               </div>
             </div>
           </div>
-          <div id = 'service-situation-exchange'>
+          <div id = 'service-situation-exchange' class = "i-m-there">
             <div class="col-xs-12 app-wrapper">
               <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
                 <div class="explaination-text">
