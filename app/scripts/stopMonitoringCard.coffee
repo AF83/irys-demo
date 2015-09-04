@@ -46,46 +46,82 @@ class stopMonitoringCard
   </div>"""
 
   stopMonitoringFancyTemplate: """
-  <li class = "fancy-stop-wrapper">
-    <div class = "line-header {{lineColor}}">
+  <li class = "fancy-stop-wrapper {{lineColor}}">
+    <div class = "line-header">
       <h4>{{monitoredCall.StopPointName}}</h4>
     </div>
-    <div class = "stop-info col-xs-3">
-      <div class = "stop-info-property">
-        <p>
-          Ligne
-        </p>
+    <div class="row">
+      <div class = "stop-info col-xs-4">
+        <div class = "stop-info-property">
+          <p>
+            <span class="glyphicon glyphicon-road"></span>
+            <span>Ligne</span>
+          </p>
+        </div>
+        <div class = "stop-info-value">
+          <p>{{stopMonitoredVisit.PublishedLineName}}</p>
+        </div>
       </div>
-      <div class = "stop-info-value">
-        <p>
-          {{stopMonitoredVisit.LineRef}}
-        </p>
+      <div class = "stop-info col-xs-4">
+        <div class = "stop-info-property">
+          <p>
+            <span class="glyphicon glyphicon-time"></span>
+            <span>Heure d'arrivée</span>
+          </p>
+        </div>
+        <div class = "stop-info-value {{monitoredCall.ArrivalStatus}}">
+          <p>
+            {{monitoredCall.AimedArrivalTime}}
+          </p>
+        </div>
+      </div>
+      <div class = "stop-info col-xs-4">
+        <div class = "stop-info-property">
+          <p>
+            <span class="glyphicon glyphicon-signal"></span>
+            <span>Status</span>
+          </p>
+        </div>
+        <div class = "stop-info-value {{monitoredCall.ArrivalStatus}}">
+          <p>{{monitoredCall.ArrivalStatus}}</p>
+        </div>
       </div>
     </div>
-    <div class = "stop-info  col-xs-3">
-      <div class = "stop-info-property">
-        <p>
-          Heure d'arrivée
-        </p>
-      </div>
-      <div class = "stop-info-value {{monitoredCall.ArrivalStatus}}">
-        <p>
-          {{monitoredCall.AimedArrivalTime}}
-        </p>
-      </div>
-    </div>
-    <div class = "stop-info  col-xs-3">
-      <div class = "stop-info-property">
-        <p>
-          Status
-        </p>
-      </div>
-      <div class = "stop-info-value">
-        <p>
-          {{monitoredCall.ArrivalStatus}}
-        </p>
-      </div>
-    </div>
+
+    <ul class="fancy-wrapper onwards">
+    {{#onwardsCall}}
+      <li class="fancy-stop-wrapper">
+        <div class="line-header">
+          <h4>{{StopPointName}}</h4>
+        </div>
+        <div class="row">
+          <div class="stop-info col-xs-6">
+            <div class="stop-info-property">
+              <p>
+                <span class="glyphicon glyphicon-time"></span>
+                <span>Heure d'arrivée</span>
+              </p>
+            </div>
+            <div class="stop-info-value {{ArrivalStatus}}">
+              <p>{{AimedArrivalTime}}</p>
+            </div>
+          </div>
+          <div class="stop-info col-xs-6">
+            <div class="stop-info-property">
+              <p>
+                <span class="glyphicon glyphicon-signal"></span>
+                <span>Status</span>
+              </p>
+            </div>
+            <div class="stop-info-value">
+              <p>{{ArrivalStatus}}</p>
+            </div>
+          </div>
+        </div>
+      </li>
+    {{/onwardsCall}}
+    </ul>
+
   </li>"""
 
   generalMessageTemplate: """
@@ -255,7 +291,7 @@ class stopMonitoringCard
         @mustacheStopMonitoredVisit.push({
           'key' : k,
           'value' : v
-         })
+        })
     return
 
   buildMustacheMonitoredCall:() ->
@@ -265,7 +301,7 @@ class stopMonitoringCard
         @mustacheMonitoredCall.push({
           'key' : k,
           'value' : v
-         })
+        })
     return
 
   buildMustacheOnwards:() ->
@@ -276,7 +312,7 @@ class stopMonitoringCard
           tempOnward.onWard.push({
             'key' : k,
             'value' : v
-           })
+          })
       @mustacheOnwards.push(tempOnward)
     return
 
@@ -286,7 +322,7 @@ class stopMonitoringCard
         @mustacheStopDiscoveries.push({
           'key' : k,
           'value' : v
-         })
+        })
     return
 
   buildMustacheStopLines:() ->
@@ -297,7 +333,7 @@ class stopMonitoringCard
           tempLine.line.push({
             'key' : k,
             'value' : v
-           })
+          })
       @mustacheStopLines.push(tempLine)
     return
 
@@ -307,7 +343,7 @@ class stopMonitoringCard
         @mustacheLineDiscovery.push({
           'key' : k,
           'value' : v
-         })
+        })
     return
 
   buildMustacheLineDirections:() ->
@@ -318,7 +354,7 @@ class stopMonitoringCard
           tempLine.line.push({
             'key' : k,
             'value' : v
-           })
+          })
       @mustacheLineDirections.push(tempLine)
     return
 
@@ -329,7 +365,7 @@ class stopMonitoringCard
         @mustacheGeneralMessage.push({
           'key' : k,
           'value' : v
-         })
+        })
     return
 
 
@@ -383,7 +419,7 @@ class stopMonitoringCard
 
     Mustache.parse template
     rendered = Mustache.render(template, this)
-    $("#fancy-response").find('ul').append(rendered)
+    $("#fancy-response").find('#fancy-wrapper').append(rendered)
 
 
     return
