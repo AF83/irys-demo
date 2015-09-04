@@ -84,8 +84,7 @@
                 <ul class="dropdown-menu">
                   <li><a href = "#service--production-timetable" aria-controls = "service--production-timetable">Service Production Timetable (PT)</a></li>
                   <li><a href = "#service-estimated-timetable" aria-controls = "service-estimated-timetable">Service Estimated Timetable (ET)</a></li>
-                  <li><a href = "#service-stop-timetable" aria-controls = "service-stop-timetable">Service Production Timetable (PT)</a></li>
-                  <li><a href = "#service-stop-timetable" aria-controls = "service-stop-timetable">Service Estimated Timetable (ET)</a></li>
+                  <li><a href = "#service-stop-timetable" aria-controls = "service-stop-timetable">Service Stop Timetable (PT)</a></li>
                   <li><a href = "#service-general-message" aria-controls = "service-general-message">Service General Message (GM)</a></li>
                   <li><a href = "#service-facility-monitoring" aria-controls = "service-facility-monitoring">Service Facility Monitoring (FM)</a></li>
                   <li><a href = "#service-situation-exchange" aria-controls = "service-situation-exchange">Service Situation Exchange (SX)</a></li>
@@ -97,7 +96,7 @@
         </div><!-- /.container-fluid -->
       </nav>
       <div id = 'stop-monitoring' style = "display: none;">
-        <div class="col-xs-12 app-wrapper">
+        <div class="app-wrapper">
           <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
             <div class="explaination-text">
               <h2 class = "text-center">Mode d'emploi</h2>
@@ -129,7 +128,7 @@
               </p>
             </div>
           </div>
-          <div class="right-panel-wrapper">
+          <div class="right-panel-wrapper" id ="stop-monitoring-form-wrapper">>
             <div class="col-sm-8 col-xs-12 col-lg-7 right-app-panel">
               <h2 class="text-center"> Construire votre requête Siri</h2>
               <form class="form-horizontal" id ="stop-monitoring-form">
@@ -382,7 +381,7 @@
           </div>
         </div>
       </div>
-          <div id = 'stop-timetable' style = "display: none;">
+        <div id = 'stop-timetable' style = "display: none;">
             <div class="col-xs-12 app-wrapper">
               <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
                 <div class="explaination-text">
@@ -391,8 +390,8 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div id = 'stop-estimated-timetable' style = "display: none;">
+        </div>
+        <div id = 'stop-estimated-timetable' style = "display: none;">
             <div class="col-xs-12 app-wrapper">
               <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
                 <div class="explaination-text">
@@ -401,8 +400,8 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div id = 'service-production-timetable' style = "display: none;">
+        </div>
+        <div id = 'service-production-timetable' style = "display: none;">
             <div class="col-xs-12 app-wrapper">
               <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
                 <div class="explaination-text">
@@ -411,8 +410,8 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div id = 'service-stop-timetable' style = "display: none;">
+        </div>
+        <div id = 'service-stop-timetable' style = "display: none;">
             <div class="col-xs-12 app-wrapper">
               <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
                 <div class="explaination-text">
@@ -421,8 +420,8 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div id = 'service-connection-timetable' style = "display: none;">
+        </div>
+        <div id = 'service-connection-timetable' style = "display: none;">
             <div class="col-xs-12 app-wrapper">
               <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
                 <div class="explaination-text">
@@ -431,7 +430,7 @@
                 </div>
               </div>
             </div>
-          </div><div id = "service-connection-monitoring" style = "display: none;">
+        </div><div id = "service-connection-monitoring" style = "display: none;">
             <div class="col-xs-12 app-wrapper">
               <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
                 <div class="explaination-text">
@@ -440,8 +439,8 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div id = 'service-facility-monitoring' style = "display: none;">
+        </div>
+        <div id = 'service-facility-monitoring' style = "display: none;">
             <div class="col-xs-12 app-wrapper">
               <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
                 <div class="explaination-text">
@@ -450,8 +449,8 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div id = 'service-situation-exchange' style = "display: none;">
+        </div>
+        <div id = 'service-situation-exchange' style = "display: none;">
             <div class="col-xs-12 app-wrapper">
               <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
                 <div class="explaination-text">
@@ -460,25 +459,36 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div style = "display: none;" id = "response">
-            <h2 class= "text-center">Réponse</h2>
-            <h4 class = "response-counter"></h4>
-            <h4 class = "siri-version-display"></h4>
-
-          </div>
-          <div style = "display: none;" id = "fancy-response">
-            <h2 class= "text-center">Réponse</h2>
-            <h4 class = "response-counter"></h4>
-            <h4 class = "siri-version-display"></h4>
-            <ul class="fancy-wrapper" id = "fancy-wrapper"></ul>
-          </div>
-          <div style = "display: none;" id = "xml-response">
-            <h2 class= "text-center">Réponse XML</h2>
-            <div>
-              <textarea rows="20" cols="40" id="xml-response-wrapper" class = "col-xs-12"></textarea>
+        </div>
+        <div class="right-panel-wrapper" id="response-panel-wrapper" style = "display: none;">
+          <div class="col-sm-8 col-xs-12 col-lg-7 right-app-panel">
+            <div id = "response">
+              <h2 class= "text-center">Réponse</h2>
+              <h4 class = "response-counter"></h4>
+              <h4 class = "siri-version-display"></h4>
             </div>
           </div>
+        </div>
+        <div class="right-panel-wrapper" style = "display: none;" id="fancy-response-panel-wrapper">
+          <div class="col-sm-8 col-xs-12 col-lg-7 right-app-panel">
+            <div id = "fancy-response">
+              <h2 class= "text-center">Réponse</h2>
+              <h4 class = "response-counter"></h4>
+              <h4 class = "siri-version-display"></h4>
+              <ul class="fancy-wrapper" id = "fancy-wrapper"></ul>
+            </div>
+          </div>
+        </div>
+        <div class="right-panel-wrapper" style = "display: none;">
+          <div class="col-sm-8 col-xs-12 col-lg-7 right-app-panel">
+            <div  id = "xml-response">
+              <h2 class= "text-center">Réponse XML</h2>
+              <div>
+                <textarea rows="20" cols="40" id="xml-response-wrapper" class = "col-xs-12"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
