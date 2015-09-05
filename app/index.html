@@ -30,17 +30,14 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div class="header">
+    <div class="fancy-header">
       <div class = "container">
-        <ul class="nav nav-pills pull-right">
-          <li >
-            <div class="chouette-action-man">
-              <a href="#" class = "allow-request-action" id = "open-slider">
-                <img src="images/logo_afimb.jpg" class = "chouette-logo">
-              </a>
-          </li>
-        </ul>
         <h3 class="text-muted">Démonstrateur Siri</h3>
+        <div class="chouette-action-man">
+          <a href="#" class = "allow-request-action" id = "open-slider">
+            <img src="images/logo_afimb.jpg" class = "chouette-logo">
+          </a>
+        </div>
       </div>
     </div>
     <div class = "page-wrapper">
@@ -51,8 +48,8 @@
           </div>
         </div>
       </div>
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
+      <nav class="navbar navbar-inverse fancy-navbar">
+        <div class="container">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -65,21 +62,21 @@
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-              <li class="dropdown">
+              <li class="dropdown-inverse">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Stops <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href = "#stop-monitoring" aria-controls = "stop-monitoring" >Service Stop Monitoring (SM)</a></li>
                   <li><a href = "#service-stop-timetable" aria-controls = "service-stop-timetable">Service Stop Timetable</a></li>
                 </ul>
-              <li class="dropdown">
+              <li class="dropdown-inverse">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Connections <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href = "#service-connection-monitoring" aria-controls = "service-connection-monitoring">Service Connection Monitoring (CM)</a></li>
                   <li><a href = "#service-connection-timetable" aria-controls = "service-connection-timetable">Service Connection Timetable (CT)</a></li>
                 </ul>
-              <li class="dropdown">
+              <li class="dropdown-inverse">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Autres Services <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href = "#service--production-timetable" aria-controls = "service--production-timetable">Service Production Timetable (PT)</a></li>
@@ -95,6 +92,7 @@
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
       </nav>
+      <div class="container">
       <div id = 'stop-monitoring' style = "display: none;">
         <div class="app-wrapper">
           <div class="text-wrapper col-xs-12 col-sm-4 col-lg-5">
@@ -517,6 +515,7 @@
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
 
