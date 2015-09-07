@@ -71,7 +71,7 @@ $(document).ready( function() {
     $(el).toggle();
   }
 
-  $('.navbar-nav > li > ul > li > a').on('click', function() {
+  $('.navbar-nav > li > ul > li > a, #stop-monitoring-main').on('click', function() {
     var target = this.getAttribute('href');
     $('.i-m-there').each(function(index, el) {
       $(el).toggle();
@@ -88,7 +88,7 @@ $(document).ready( function() {
 
   });
 
-  $('#stop-monitoring-trigger').on('click', function() {
+  $('#stop-monitoring-trigger, #stop-monitoring-main').on('click', function() {
     if ($('#stop-monitoring-form-wrapper').hasClass('i-m-there') != true) {
       $('#stop-monitoring-form-wrapper').toggle();
       $('#stop-monitoring-form-wrapper').addClass('i-m-there');
