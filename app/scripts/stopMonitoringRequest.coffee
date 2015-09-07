@@ -300,5 +300,5 @@ class stopMonitoringRequest
 
         return
       ).fail ->
-      alert 'epic fail'
+      console.log 'epic fail'
     return

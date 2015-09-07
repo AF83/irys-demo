@@ -264,7 +264,7 @@ stopMonitoringRequest = (function() {
         stopMonitoringCard.prototype.toggleRightThings(responseWrapper);
       }
     }).fail(function() {
-      return alert('epic fail');
+      return console.log('epic fail');
     });
   };
 
