@@ -15,7 +15,7 @@
     request.sendRequest(xmlRequest, request.handleStopMonitoringResponse, responseCard,$('#stop-monitoring-form-wrapper'));
 	});
 
-  $('#get-general-message-form-wrapper').submit(function(e) {
+  $('#canned-requests').submit(function(e) {
     $("#response > .panel").remove()
     var request = new stopMonitoringRequest;
     var responseCard = new stopMonitoringCard;
