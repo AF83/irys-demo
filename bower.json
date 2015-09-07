@@ -4,7 +4,8 @@
   "dependencies": {
     "bootstrap-sass": "~3.3.5",
     "modernizr": "~2.8.3",
-    "mustache": "2.1.2"
+    "mustache": "2.1.2",
+    "jquery-ui": "~1.11.4"
   },
   "overrides": {
     "bootstrap-sass": {
