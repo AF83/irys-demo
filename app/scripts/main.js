@@ -71,6 +71,20 @@ $(document).ready( function() {
       $(el).toggle();
       $(el).removeClass('i-m-there');
     });
+    superToggle(target);
+
+    if ($('#stop-monitoring').hasClass('i-m-there')) {
+      $('#stop-monitoring-form-wrapper').show();
+    };
+
+  });
+
+  $('.backlinking a').on('click', function() {
+    var target = this.getAttribute('href');
+    $('.right-panel .i-m-there').each(function(index, el) {
+      $(el).toggle();
+      $(el).removeClass('i-m-there');
+    });
 
     superToggle(target);
 
