@@ -67,7 +67,7 @@
               <li class="dropdown-inverse">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Stops <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href = "#stop-monitoring" aria-controls = "stop-monitoring" >Service Stop Monitoring (SM)</a></li>
+                  <li><a href = "#stop-monitoring" aria-controls = "stop-monitoring" id = "stop-monitoring-trigger">Service Stop Monitoring (SM)</a></li>
                   <li><a href = "#service-stop-timetable" aria-controls = "service-stop-timetable">Service Stop Timetable</a></li>
                 </ul>
               <li class="dropdown-inverse">
@@ -82,10 +82,10 @@
                   <li><a href = "#service--production-timetable" aria-controls = "service--production-timetable">Service Production Timetable (PT)</a></li>
                   <li><a href = "#service-estimated-timetable" aria-controls = "service-estimated-timetable">Service Estimated Timetable (ET)</a></li>
                   <li><a href = "#service-stop-timetable" aria-controls = "service-stop-timetable">Service Stop Timetable (PT)</a></li>
-                  <li><a href = "#service-general-message" aria-controls = "service-general-message">Service General Message (GM)</a></li>
+                  <li><a href = "#get-general-message" aria-controls = "get-general-message" id = "get-general-message-trigger">Service General Message (GM)</a></li>
                   <li><a href = "#service-facility-monitoring" aria-controls = "service-facility-monitoring">Service Facility Monitoring (FM)</a></li>
                   <li><a href = "#service-situation-exchange" aria-controls = "service-situation-exchange">Service Situation Exchange (SX)</a></li>
-                  <li><a href = "#service-discovery" aria-controls = "service-discovery">Service Discovery</a></li>
+                  <li><a href = "#service-discovery" aria-controls = "service-discovery" id = "service-discovery-trigger">Service Discovery</a></li>
                 </ul>
               <li class="active"><a href = "#stop-monitoring" aria-controls = "stop-monitoring">Stop Monitoring (SM)<span class="sr-only">(current)</span></a></li>
             </ul>
@@ -94,9 +94,9 @@
       </nav>
 
       <div class="page-content">
-        <div class="container">
+        <div class="container" id="explaination-texts">
 
-          <div id = 'stop-monitoring' style = "display: none;">
+          <div id = 'stop-monitoring' style = "display: block;" class = "i-m-there">
             <div class="app-wrapper">
               <div class="text-wrapper">
                 <div class="explaination-text container">
@@ -146,11 +146,7 @@
                     </div>
                   </div>
                 </div>
-<<<<<<< HEAD
               </div>
-=======
-              </div>            
->>>>>>> design-fancystaff
             </div>
           </div><!--#get-general-message-->
 
@@ -268,11 +264,7 @@
                       <h2 class = "text-center">Service Facility Monitoring</h2>
                       <p>Le service SIRI Facility Monitoring permet la mise à jour des informations d'état des équipements et des services (disponibilité des ascenseurs, des escaliers mécaniques, des guichets automatiques, des palettes dans les bus, etc.)</p>
                     </div>
-<<<<<<< HEAD
                   </div>
-=======
-                  </div>                  
->>>>>>> design-fancystaff
                 </div>
               </div>
             </div>
@@ -295,10 +287,11 @@
 
         </div><!--container-->
 
-        <div class="right-panel-wrapper">
-          <a href="#" class="pannel-trigger"><span class="glyphicon glyphicon-option-vertical"></span></a>
+        <div class="right-panel-wrapper" id = "right-panel-wrapper">
+          <div id="forms-wrapper">
+            <a href="#" class="pannel-trigger"><span class="glyphicon glyphicon-option-vertical"></span></a>
 
-          <div id ="stop-monitoring-form-wrapper" style = "display: block">
+            <div id ="stop-monitoring-form-wrapper" style = "display: block;" class = "i-m-there">
             <div class="right-app-panel">
               <h2 class=""> Construire votre requête Siri</h2>
               <form class="form-horizontal" id ="stop-monitoring-form">
@@ -442,8 +435,8 @@
                   </fieldset>
                 </form>
             </div>
-          </div>
-          <div id="get-general-message-form-wrapper" style="display:none;">
+            </div>
+            <div id="get-general-message-form-wrapper" style="display:none;">
             <div class="right-app-panel">
               <h2 class=""> Construire votre requête General Message</h2>
               <form class="form-horizontal" id ="canned-requests">
@@ -489,14 +482,14 @@
                   </div>
                   <div class="form-group">
                     <div class="col-xs-4">
-                      <button type="button" class="btn btn-warning" id="get-general-message">Get General Message</button>
+                      <button type="submit" class="btn btn-warning" id="get-general-message">Get General Message</button>
                     </div>
                   </div>
                 </fieldset>
               </form>
             </div>
-          </div><!--get-general-message rpw-->
-          <div id="service-discovery-form-wrapper"  style="display:none;">
+            </div><!--get-general-message rpw-->
+            <div id="service-discovery-form-wrapper"  style="display:none;">
             <div class="right-app-panel">
               <h2 class=""> Construire votre requête General Message</h2>
               <form class="form-horizontal" id ="canned-requests">
@@ -517,22 +510,24 @@
                     </div>
                     <div class="form-group">
                       <div class="col-xs-4">
-                        <button type="button" class="btn btn-primary" id="stop-discovery">Stop Discovery</button>
+                        <button type="button" class="btn btn-primary" id="stop-discovery-button">Stop Discovery</button>
                       </div>
                       <div class="col-xs-4">
-                        <button type="button" class="btn btn-info" id="line-discovery">Line Discovery</button>
+                        <button type="button" class="btn btn-info" id="line-discovery-button">Line Discovery</button>
                       </div>
                     </div>
                 </fieldset>
               </form>
             </div>
-          </div><!--service-discovery rpw-->
-          <div id="response-panel-wrapper" style = "display: none;">
+            </div><!--service-discovery rpw-->
+          </div>
+          <div id="response-wrapper" >
+            <div id="response-panel-wrapper" style = "display: none;">
             <div class="right-app-panel">
               <div id = "response">
                 <div class = "backlinking">
                   <div class = "pull-left">
-                    <a href="#stop-monitoring-form-wrapper">
+                    <a href="#stop-monitoring-form-wrapper" id = "backlink-form-from-response">
                       <span class="glyphicon glyphicon-chevron-left"></span>
                       <span>Retouner au formulaire</span>
                     </a>
@@ -549,8 +544,8 @@
                 <h4 class = "siri-version-display"></h4>
               </div>
             </div>
-          </div><!---->
-          <div id="fancy-response-panel-wrapper" style = "display: none;">
+            </div><!---->
+            <div id="fancy-response-panel-wrapper" style = "display: none;">
             <div class="right-app-panel">
               <div class = "backlinking">
                 <div class = "pull-left">
@@ -573,8 +568,8 @@
                 <ul class="fancy-wrapper" id = "fancy-wrapper"></ul>
               </div>
             </div>
-          </div><!---->
-          <div id="xml" style = "display: none;">
+            </div><!---->
+            <div id="xml" style = "display: none;">
             <div class="right-app-panel">
               <div  id = "xml-response">
                 <h2 class= "">Réponse XML</h2>
@@ -583,7 +578,8 @@
                 </div>
               </div>
             </div>
-          </div><!---->
+            </div><!---->
+          </div>
         </div><!--right-panel-wrapper-->
       </div>
     </div>
@@ -622,14 +618,16 @@
 
     <!-- build:js scripts/main.js -->
     <script src="lib/codemirror-compressed.js"></script>
-    <script src="scripts/main.js"></script>
     <script src="scripts/animations.js"></script>
     <script type="/bower_components/mustache/mustache.js"></script>
     <script src="scripts/AjaxRequestSender.js"></script>
     <script src="scripts/stopMonitoringRequest.js"></script>
 
+
+
     <script src="scripts/stopMonitoringCard.js"></script>
     <script src="scripts/stopDiscoveryResponse.js"></script>
+    <script src="scripts/main.js"></script>
     <!-- endbuild -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

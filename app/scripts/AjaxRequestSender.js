@@ -1,4 +1,4 @@
-	$('#stop-monitoring').submit(function(e) {
+	$('#stop-monitoring-form').submit(function(e) {
 		e.preventDefault();
     $("#response > .panel").remove()
 
@@ -9,34 +9,34 @@
     }
 
     var request = new stopMonitoringRequest;
-    var xmlRequest = request.getStopMonitoring('#stop-monitoring');
+    var xmlRequest = request.getStopMonitoring('#stop-monitoring-form');
     var responseCard = new stopMonitoringCard;
     console.log(xmlRequest)
-    request.sendRequest(xmlRequest, request.handleStopMonitoringResponse, responseCard);
+    request.sendRequest(xmlRequest, request.handleStopMonitoringResponse, responseCard,$('#stop-monitoring-form-wrapper'));
 	});
 
-  $('#get-general-message').on('click', function(e) {
+  $('#get-general-message-form-wrapper').submit(function(e) {
     $("#response > .panel").remove()
     var request = new stopMonitoringRequest;
     var responseCard = new stopMonitoringCard;
     var generalMessageRequest = request.getGeneralMessage('#canned-requests');
-    request.sendRequest(generalMessageRequest, request.handleGeneralMessageResponse, responseCard);
+    request.sendRequest(generalMessageRequest, request.handleGeneralMessageResponse, responseCard, $('#get-general-message-form-wrapper'));
   });
 
-  $('#stop-discovery').on('click', function(e) {
+  $('#stop-discovery-button').on('click', function(e) {
     $("#response > .panel").remove()
     var request = new stopMonitoringRequest;
     var responseCard = new stopMonitoringCard;
     var stopDscRequest = request.getStopDiscovery();
-    request.sendRequest(stopDscRequest, request.handleStopDiscoveryResponseDisplay, responseCard);
+    request.sendRequest(stopDscRequest, request.handleStopDiscoveryResponseDisplay, responseCard, $('#service-discovery-form-wrapper'));
   });
 
-  $('#line-discovery').on('click', function(e) {
+  $('#line-discovery-button').on('click', function(e) {
     $("#response > .panel").remove()
     var request = new stopMonitoringRequest;
     var responseCard = new stopMonitoringCard;
     var lineDscRequest = request.getLineDiscovery();
-    request.sendRequest(lineDscRequest, request.handleLineDiscoveryResponseDisplay, responseCard);
+    request.sendRequest(lineDscRequest, request.handleLineDiscoveryResponseDisplay, responseCard, $('#service-discovery-form-wrapper'));
   });
 
   $('#smart-request-form').submit(function(e) {

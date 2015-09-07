@@ -231,7 +231,7 @@ stopMonitoringRequest = (function() {
     }
   };
 
-  stopMonitoringRequest.prototype.sendRequest = function(xmlRequest, responseHandler, handler) {
+  stopMonitoringRequest.prototype.sendRequest = function(xmlRequest, responseHandler, handler, responseWrapper) {
     var serverUrl;
     if (this.siriVersionAPI === "2.0") {
       serverUrl = "urlSiriV2";
@@ -261,9 +261,7 @@ stopMonitoringRequest = (function() {
         $('.alert-wrapper').append(errorSpan);
       } else {
         responseHandler(xmlDoc, handler);
-        $('#stop-monitoring-form-wrapper').toggle();
-        $('#response-panel-wrapper').toggle();
-        $('#response-panel-wrapper').addClass('i-m-there');
+        stopMonitoringCard.prototype.toggleRightThings(responseWrapper);
       }
     }).fail(function() {
       return alert('epic fail');

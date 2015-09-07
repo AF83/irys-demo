@@ -269,6 +269,7 @@ class stopMonitoringCard
     else
       object
     object
+
   lineColor:() ->
     lineInventory = Object.keys(@lineColors).length + 1
     if @stopMonitoredVisit.LineRef
@@ -284,6 +285,16 @@ class stopMonitoringCard
       @lineColors[line] = "line-" + lineInventory
 
     @lineColors[line]
+
+  toggleRightThings:(el) ->
+    $(el).toggle()
+    $(el).removeClass('i-m-there')
+
+    if $('#response-panel-wrapper').hasClass('i-m-there') == false
+      $('#response-panel-wrapper').toggle()
+      $('#response-panel-wrapper').addClass('i-m-there')
+
+    return
 
   buildMustacheStopCard:() ->
     for k,v of @stopMonitoredVisit

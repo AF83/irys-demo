@@ -62,7 +62,9 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 .right-panel-wrapper {
   position:absolute;top:0;left:100%;z-index:5;
   height:700px;width:505px;
-  margin-left:-505px;
+  margin-left:-15px;
+};
+#right-panel-wrapper {
   //overflow:hidden;
 
   .pannel-trigger{
@@ -73,6 +75,9 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
     @include border-radius(4px 0px 0px 4px);
     -webkit-box-shadow:-1px 0 2px 0 rgba(0,0,0,0.5);
     box-shadow:-1px 0 2px 0 rgba(0,0,0,0.5);
+    &.open {
+      left: -4px;
+    }
   }
 
   .right-app-panel{
@@ -85,6 +90,9 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
     legend{color:#fff;}
     .form-group p{margin: 5px 0;}
     .form-group .btn[type='submit']{margin-top:30px;}
+  }
+  .panel-body {
+    color:#555;
   }
 }
 

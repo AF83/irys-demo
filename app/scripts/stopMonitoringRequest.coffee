@@ -270,7 +270,7 @@ class stopMonitoringRequest
       $(el).text("Version Siri: " + l)
     return
 
-  sendRequest:(xmlRequest, responseHandler, handler) ->
+  sendRequest:(xmlRequest, responseHandler, handler, responseWrapper) ->
     if @siriVersionAPI == "2.0"
       serverUrl = "urlSiriV2"
     else
@@ -296,9 +296,7 @@ class stopMonitoringRequest
           $('.alert-wrapper').append errorSpan
         else
           responseHandler(xmlDoc, handler)
-          $('#stop-monitoring-form-wrapper').toggle()
-          $('#response-panel-wrapper').toggle()
-          $('#response-panel-wrapper').addClass('i-m-there')
+          stopMonitoringCard.prototype.toggleRightThings responseWrapper
 
         return
       ).fail ->

@@ -201,6 +201,15 @@ stopMonitoringCard = (function() {
     return this.lineColors[line];
   };
 
+  stopMonitoringCard.prototype.toggleRightThings = function(el) {
+    $(el).toggle();
+    $(el).removeClass('i-m-there');
+    if ($('#response-panel-wrapper').hasClass('i-m-there') === false) {
+      $('#response-panel-wrapper').toggle();
+      $('#response-panel-wrapper').addClass('i-m-there');
+    }
+  };
+
   stopMonitoringCard.prototype.buildMustacheStopCard = function() {
     var k, ref, v;
     ref = this.stopMonitoredVisit;
