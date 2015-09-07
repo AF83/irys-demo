@@ -4,7 +4,7 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 // endbower
 @import "stop-results/stop-results.scss";
-@import "code-mirror/code-mirror.css";
+@import "code-mirror/code-mirror.scss";
 
 #stop-monitoring-form, #canned-requests, .xml-validation-form {
   margin-bottom: 10px;
