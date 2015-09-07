@@ -20,14 +20,6 @@ $(document).ready( function() {
         $( "#lineId" ).val("NINOXE:Line:SPOR:" + $(this).val() + ":LOC")
       }
     });
-
-    $( "#inputEndintgPoint" ).autocomplete({
-      source: availableStations
-    });
-    $( "#inputDayDate" ).datepicker();
-    $( "#Start" ).timepicker({
-    	controlType: 'select'
-    });
   });
 
   $('#siriVersionAPI3, #siriGeneralVersionAPI3').on('click', function() {
