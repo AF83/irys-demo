@@ -16,6 +16,7 @@
 	});
 
   $('#canned-requests').submit(function(e) {
+    e.preventDefault();
     $("#response > .panel").remove()
     var request = new stopMonitoringRequest;
     var responseCard = new stopMonitoringCard;
@@ -44,9 +45,7 @@
     $("#response > .panel").remove();
 
     var dataForRequest = $("#xml-request-textarea").val();
-
     var request = new stopMonitoringRequest;
-
     var responseCard = new stopMonitoringCard;
 
     request.sendRequest(dataForRequest, request.handleStopMonitoringResponse, responseCard);
