@@ -296,8 +296,8 @@ class stopMonitoringRequest
           $('.alert-wrapper').append errorSpan
         else
           responseHandler(xmlDoc, handler)
-          stopMonitoringCard.prototype.toggleRightThings responseWrapper
-
+          if handler.constructor.prototype == stopMonitoringCard.prototype
+            stopMonitoringCard.prototype.toggleRightThings responseWrapper
         return
       ).fail ->
       console.log 'epic fail'

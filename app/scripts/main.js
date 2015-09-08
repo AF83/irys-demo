@@ -150,7 +150,7 @@ $(document).ready( function() {
 
   });
 
-  $('.backlinking a').on('click', function() {
+  $('.backlinking a').on('click', function(e) {
     e.preventDefault();
     var target = this.getAttribute('href');
     $('#right-panel-wrapper').find('.i-m-there').each(function(index, el) {

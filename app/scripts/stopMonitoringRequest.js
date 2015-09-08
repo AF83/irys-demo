@@ -261,7 +261,9 @@ stopMonitoringRequest = (function() {
         $('.alert-wrapper').append(errorSpan);
       } else {
         responseHandler(xmlDoc, handler);
-        stopMonitoringCard.prototype.toggleRightThings(responseWrapper);
+        if (handler.constructor.prototype === stopMonitoringCard.prototype) {
+          stopMonitoringCard.prototype.toggleRightThings(responseWrapper);
+        }
       }
     }).fail(function() {
       return console.log('epic fail');
