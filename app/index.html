@@ -309,9 +309,21 @@
         <div class="right-panel-wrapper" id = "right-panel-wrapper">
           <div id="forms-wrapper">
             <a href="#" class="pannel-trigger"><span class="glyphicon glyphicon-option-vertical"></span></a>
-
+              <div class="right-app-panel">
             <div id ="stop-monitoring-form-wrapper" style = "display: block;" class = "i-m-there">
-            <div class="right-app-panel">
+              <div class = "backlinking">
+                <div class = "pull-left">
+                  <a href="#stop-monitoring-form-wrapper">
+                    <span>Retouner au formulaire</span>
+                  </a>
+                </div>
+                <div class = "pull-left">
+                  <a href="#stop-monitoring-xml-form-wrapper">
+                    <span>Requête XML</span>
+                  </a>
+                </div>
+              </div>
+
               <form class="form-horizontal" id ="stop-monitoring-form">
                 <fieldset>
                   <legend>Construire votre requête Siri</legend>
@@ -539,6 +551,33 @@
               </form>
             </div>
             </div><!--service-discovery rpw-->
+            <div id="stop-monitoring-xml-form-wrapper"  style="display:none;">
+              <div class="right-app-panel">
+                <div class = "backlinking">
+                  <div class = "pull-left">
+                    <a href="#stop-monitoring-form-wrapper">
+                      <span>Retouner au formulaire</span>
+                    </a>
+                  </div>
+                  <div class = "pull-left">
+                    <a href="#stop-monitoring-xml-form-wrapper">
+                      <span>Requête XML</span>
+                    </a>
+                  </div>
+                </div>
+                <form class="form-horizontal xml-validation-form" id="smart-request-form">
+                  <legend>Requête XML</legend>
+                  <div class="form-group">
+                    <textarea class = "form-control xml-paste-zone" id="xml-request-textarea" placeholder = "Copier votre requête xml"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <div class="col xs-12 col-sm-6 col-lg-4">
+                      <button type="submit" class="btn btn-success" id="smart-request-submit">Envoyer la requête</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
           <div id="response-wrapper" >
             <div id="response-panel-wrapper" style = "display: none;">
@@ -547,14 +586,17 @@
                 <div class = "backlinking">
                   <div class = "pull-left">
                     <a href="#stop-monitoring-form-wrapper" id = "backlink-form-from-response">
-                      <span class="glyphicon glyphicon-chevron-left"></span>
                       <span>Retouner au formulaire</span>
                     </a>
                   </div>
-                  <div class = "pull-right">
+                  <div class = "pull-left">
+                    <a href="#fancy-response-panel-wrapper" id = "backlink-form-from-response">
+                      <span>Vue réduite</span>
+                    </a>
+                  </div>
+                  <div class = "pull-left">
                     <a href="#xml-response-panel-wrapper">
                       <span>Vue xml</span>
-                      <span class="glyphicon glyphicon-chevron-right"></span>
                     </a>
                   </div>
                 </div>
@@ -568,16 +610,19 @@
               <div class = "backlinking">
                 <div class = "pull-left">
                   <a href="#stop-monitoring-form-wrapper">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
                     <span>Retouner au formulaire</span>
                   </a>
                 </div>
-                <div class = "pull-right">
+                <div class = "pull-left">
                   <a href="#response-panel-wrapper">
                     <span>Vue complète</span>
-                    <span class="glyphicon glyphicon-chevron-right"></span>
                   </a>
                 </div>
+                <div class = "pull-left">
+                    <a href="#xml-response-panel-wrapper" id = "backlink-form-from-response">
+                      <span>Vue xml</span>
+                    </a>
+                  </div>
               </div>
               <div id = "fancy-response">
                 <h4 class = "response-counter"></h4>
@@ -586,19 +631,22 @@
               </div>
             </div>
             </div><!---->
-            <div id="xml-response-panel-wrapper">
+            <div id="xml-response-panel-wrapper" style = "display: none;">
               <div class="right-app-panel">
                 <div class = "backlinking">
                   <div class = "pull-left">
                     <a href="#stop-monitoring-form-wrapper">
-                      <span class="glyphicon glyphicon-chevron-left"></span>
                       <span>Retouner au formulaire</span>
                     </a>
                   </div>
-                  <div class = "pull-right">
+                  <div class = "pull-left">
+                    <a href="#fancy-response-panel-wrapper">
+                      <span>Vue réduite</span>
+                    </a>
+                  </div>
+                  <div class = "pull-left">
                     <a href="#response-panel-wrapper">
                       <span>Vue complète</span>
-                      <span class="glyphicon glyphicon-chevron-right"></span>
                     </a>
                   </div>
                 </div>

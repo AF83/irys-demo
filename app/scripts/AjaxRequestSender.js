@@ -48,5 +48,5 @@
     var request = new stopMonitoringRequest;
     var responseCard = new stopMonitoringCard;
 
-    request.sendRequest(dataForRequest, request.handleStopMonitoringResponse, responseCard);
+    request.sendRequest(dataForRequest, request.handleStopMonitoringResponse, responseCard, $('#stop-monitoring-xml-form-wrapper'));
   });

@@ -99,8 +99,10 @@
   left: 0;
   right: 0;
 }
-#xml-response-wrapper {
+#xml-response {
   height: auto;
+  color: black;
+  min-height: 700px
 }
 .indented-response {
   margin-left: 20px;
