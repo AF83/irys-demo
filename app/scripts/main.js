@@ -57,7 +57,7 @@ $(document).ready( function() {
     $(el).toggle();
   }
 
-  $('.navbar-nav > li > ul > li > a, #stop-monitoring-main').on('click', function(e) {
+  $('.navbar-nav > li > ul > li > a, .navbar-brand, #first-SM-request').on('click', function(e) {
     e.preventDefault();
 
     var target = this.getAttribute('href');
@@ -77,7 +77,7 @@ $(document).ready( function() {
 
   });
 
-  $('#stop-monitoring-trigger, #stop-monitoring-main').on('click', function(e) {
+  $('#stop-monitoring-trigger, #first-SM-request').on('click', function(e) {
     e.preventDefault();
 
     if ($('#stop-monitoring-form-wrapper').hasClass('i-m-there') != true) {

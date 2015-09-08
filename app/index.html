@@ -40,6 +40,11 @@
         </div>
       </div>
     </div>
+    <div class = "notice-wrapper text-center">
+      <span class="text-center">Utiliser Chrome avec l'extension Allow Control Allow Origin
+        <a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi">téléchargeable ici</a>
+      </span>
+    </div>
     <div class = "page-wrapper">
       <div class = "hero-banner">
         <div class = "hero-banner-wrapper">
@@ -57,7 +62,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Services SIRI</a>
+            <a class="navbar-brand" href="#siri-description">Services SIRI</a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
@@ -92,8 +97,24 @@
 
       <div class="page-content">
         <div class="container" id="explaination-texts">
-
-          <div id = 'stop-monitoring' style = "display: block;" class = "i-m-there">
+          <div id = 'siri-description' style = "display: block;" class = "i-m-there">
+            <div class="app-wrapper">
+              <div class="text-wrapper">
+                <div class="explaination-text container">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <h2 class = "text-center">Description Siri</h2>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam expedita cupiditate veniam, natus facere consectetur laborum non sunt illum, recusandae iste culpa impedit, ullam reiciendis molestias voluptate voluptas nisi nemo?</p>
+                      <h3 class="text-center">
+                        <a href="#stop-monitoring" id="first-SM-request"> Faire une requête</a>
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!--#siri-introcudtion-->
+          <div id = 'stop-monitoring' style = "display: none;">
             <div class="app-wrapper">
               <div class="text-wrapper">
                 <div class="explaination-text container">
@@ -291,10 +312,9 @@
 
             <div id ="stop-monitoring-form-wrapper" style = "display: block;" class = "i-m-there">
             <div class="right-app-panel">
-              <h2 class=""> Construire votre requête Siri</h2>
               <form class="form-horizontal" id ="stop-monitoring-form">
                 <fieldset>
-                  <legend>Requête</legend>
+                  <legend>Construire votre requête Siri</legend>
                     <div class="form-group" id = "siriVersionAPI">
                         <label for="siriVersionAPI" class="col-sm-4 control-label">Version Siri
                         </label>
@@ -427,7 +447,7 @@
                     </div>
                     <div class="form-group">
                       <div class = "alert-wrapper"></div>
-                      <div class="col-xs-12 col-sm-6 col-lg-4 text-center">
+                      <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-lg-offset-4 col-lg-4 text-center">
                         <button type="submit" class="btn btn-success">Envoyer la requête</button>
                       </div>
                     </div>
@@ -437,8 +457,8 @@
             </div>
             <div id="get-general-message-form-wrapper" style="display:none;">
             <div class="right-app-panel">
-              <h2 class=""> Construire votre requête General Message</h2>
               <form class="form-horizontal" id ="canned-requests">
+                <legend class=""> Construire votre requête General Message</legend>
                 <fieldset>
                   <div class="form-group" id = "siriGeneralVersionAPI">
                     <label for="siriGeneralVersionAPI" class="col-sm-4 control-label">Version Siri
@@ -490,8 +510,8 @@
             </div><!--get-general-message rpw-->
             <div id="service-discovery-form-wrapper"  style="display:none;">
             <div class="right-app-panel">
-              <h2 class=""> Construire votre requête Stop Discovery</h2>
               <form class="form-horizontal" id ="canned-requests">
+                <legend class=""> Construire votre requête Stop Discovery</legend>
                 <fieldset>
                     <div class="form-group" id = "siriGeneralVersionAPI">
                       <label for="siriGeneralVersionAPI" class="col-sm-4 control-label">Version Siri</label>
@@ -532,13 +552,12 @@
                     </a>
                   </div>
                   <div class = "pull-right">
-                    <a href="#fancy-response-panel-wrapper">
-                      <span>Vue réduite</span>
+                    <a href="#xml-response-panel-wrapper">
+                      <span>Vue xml</span>
                       <span class="glyphicon glyphicon-chevron-right"></span>
                     </a>
                   </div>
                 </div>
-                <h2 class= "text-center">Réponse</h2>
                 <h4 class = "response-counter"></h4>
                 <h4 class = "siri-version-display"></h4>
               </div>
@@ -561,22 +580,34 @@
                 </div>
               </div>
               <div id = "fancy-response">
-                <h2 class= "">Réponse</h2>
                 <h4 class = "response-counter"></h4>
                 <h4 class = "siri-version-display"></h4>
                 <ul class="fancy-wrapper" id = "fancy-wrapper"></ul>
               </div>
             </div>
             </div><!---->
-            <div id="xml" style = "display: none;">
-            <div class="right-app-panel">
-              <div  id = "xml-response">
-                <h2 class= "">Réponse XML</h2>
-                <div>
-                  <textarea rows="20" cols="40" id="xml-response-wrapper" class = "col-xs-12"></textarea>
+            <div id="xml-response-panel-wrapper">
+              <div class="right-app-panel">
+                <div class = "backlinking">
+                  <div class = "pull-left">
+                    <a href="#stop-monitoring-form-wrapper">
+                      <span class="glyphicon glyphicon-chevron-left"></span>
+                      <span>Retouner au formulaire</span>
+                    </a>
+                  </div>
+                  <div class = "pull-right">
+                    <a href="#response-panel-wrapper">
+                      <span>Vue complète</span>
+                      <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                  </div>
+                </div>
+                <div  id = "xml-response">
+                  <div>
+                    <textarea rows="20" cols="40" id="xml-response-wrapper" class = "col-xs-12"></textarea>
+                  </div>
                 </div>
               </div>
-            </div>
             </div><!---->
           </div>
         </div><!--right-panel-wrapper-->

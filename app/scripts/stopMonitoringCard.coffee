@@ -286,7 +286,17 @@ class stopMonitoringCard
 
     @lineColors[line]
 
-  toggleRightThings:(el) ->
+  toggleFancyThings:(el) ->
+    $(el).toggle()
+    $(el).removeClass('i-m-there')
+
+    if $('#fancy-response-panel-wrapper').hasClass('i-m-there') == false
+      $('#fancy-response-panel-wrapper').toggle()
+      $('#fancy-response-panel-wrapper').addClass('i-m-there')
+
+    return
+
+  toggleClassicThings:(el) ->
     $(el).toggle()
     $(el).removeClass('i-m-there')
 

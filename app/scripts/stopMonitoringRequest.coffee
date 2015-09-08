@@ -216,8 +216,9 @@ class stopMonitoringRequest
 
     for node in nodes
       handler.parseSiriResponse(node)
-      handler.buildStopMonitoring()
       handler.buildFancyStopMonitoring()
+      handler.buildStopMonitoring()
+
     stopMonitoringRequest.prototype.renderXML(xmlResponse[0])
     stopMonitoringRequest.prototype.renderNodesLength(nodes.length)
     stopMonitoringRequest.prototype.renderSiriVersion(siriVersionToDisplay)
@@ -297,7 +298,9 @@ class stopMonitoringRequest
         else
           responseHandler(xmlDoc, handler)
           if handler.constructor.prototype == stopMonitoringCard.prototype
-            stopMonitoringCard.prototype.toggleRightThings responseWrapper
+            stopMonitoringCard.prototype.toggleFancyThings responseWrapper
+          else
+              stopMonitoringCard.prototype.toggleClassicThings responseWrapper
         return
       ).fail ->
       console.log 'epic fail'

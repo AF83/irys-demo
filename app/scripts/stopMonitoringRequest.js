@@ -148,8 +148,8 @@ stopMonitoringRequest = (function() {
     for (i = 0, len = nodes.length; i < len; i++) {
       node = nodes[i];
       handler.parseSiriResponse(node);
-      handler.buildStopMonitoring();
       handler.buildFancyStopMonitoring();
+      handler.buildStopMonitoring();
     }
     stopMonitoringRequest.prototype.renderXML(xmlResponse[0]);
     stopMonitoringRequest.prototype.renderNodesLength(nodes.length);
@@ -262,7 +262,9 @@ stopMonitoringRequest = (function() {
       } else {
         responseHandler(xmlDoc, handler);
         if (handler.constructor.prototype === stopMonitoringCard.prototype) {
-          stopMonitoringCard.prototype.toggleRightThings(responseWrapper);
+          stopMonitoringCard.prototype.toggleFancyThings(responseWrapper);
+        } else {
+          stopMonitoringCard.prototype.toggleClassicThings(responseWrapper);
         }
       }
     }).fail(function() {
