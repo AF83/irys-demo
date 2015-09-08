@@ -13,13 +13,6 @@ $(document).ready( function() {
 
     stopDSC.sendRequest(lineDscRequest, stopDSC.handleLineDiscoveryResponse, stopDSCResponse);
 
-    $( "#lineName" ).on('focusout', function() {
-      var regEx = /\d{8}/;
-
-      if ( regEx.exec( $(this).val() ) ) {
-        $( "#lineId" ).val("NINOXE:Line:SPOR:" + $(this).val() + ":LOC")
-      }
-    });
   });
 
   $('#siriVersionAPI3, #siriGeneralVersionAPI3').on('click', function() {
