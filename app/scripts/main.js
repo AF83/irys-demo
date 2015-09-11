@@ -155,18 +155,19 @@ $(document).ready( function() {
 
   });
 
-  $('.pannel-trigger').on('click', function(e) {
-
+  $('.right-panel-wrapper').on('click', '.pannel-trigger', function(e) {
     e.preventDefault();
-    $('#right-panel-wrapper').toggleClass('right-panel-wrapper');
-    $('#right-panel-wrapper, #explaination-texts').toggleClass('col-xs-12 col-sm-6');
-    $('.pannel-trigger').toggleClass('open');
+    $(this).closest('.right-panel-wrapper').toggleClass('open');
 
-    $('.explaination-text').each(function(i, elt) {
-      $(elt).toggleClass('container');
-    })
+    // $('#right-panel-wrapper').toggleClass('right-panel-wrapper');
+    // $('#right-panel-wrapper, #explaination-texts').toggleClass('col-xs-12 col-sm-6');
+    // $('.pannel-trigger').toggleClass('open');
 
-  })
+    // $('.explaination-text').each(function(i, elt) {
+    //   $(elt).toggleClass('container');
+    // })
+
+  });
 
 
 });
