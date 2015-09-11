@@ -15,7 +15,7 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 
 }
 .hero-banner {
-  height: 420px;
+  height: 360px;
   width: 100%;
   position: relative;
   .hero-banner-wrapper {
@@ -25,7 +25,7 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
     left:0;
     right:0;
     .hero-banner-pic {
-      background: url(../images/tramway.png) no-repeat center center;
+      background: url(../images/tramway.png) no-repeat center 42%;
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
