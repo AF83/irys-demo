@@ -313,12 +313,12 @@
             <div id ="stop-monitoring-form-wrapper" style = "display: block;" class = "i-m-there">
               <div class="right-app-panel">
               <div class = "backlinking">
-                <div class = "pull-left">
+                <!-- <div class = "pull-left">
                   <span class="glyphicon glyphicon-chevron-left"></span>
                   <a href="#stop-monitoring-form-wrapper">
                     <span>Retouner au formulaire</span>
                   </a>
-                </div>
+                </div> -->
                 <div class = "pull-right">
                   <a href="#stop-monitoring-xml-form-wrapper" class="badge badge-white">
                     <span>Requête XML</span>
@@ -461,7 +461,7 @@
                     </div>
                     <div class="form-group">
                       <div class = "alert-wrapper"></div>
-                      <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-lg-offset-4 col-lg-4 text-center">
+                      <div class="text-right">
                         <button type="submit" class="btn btn-success">Envoyer la requête</button>
                       </div>
                     </div>
@@ -557,23 +557,25 @@
               <div class="right-app-panel">
                 <div class = "backlinking">
                   <div class = "pull-left">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
                     <a href="#stop-monitoring-form-wrapper">
                       <span>Retouner au formulaire</span>
                     </a>
                   </div>
-                  <div class = "pull-left">
-                    <a href="#stop-monitoring-xml-form-wrapper">
+                  <!-- <div class = "pull-right">
+                    <a href="#stop-monitoring-xml-form-wrapper" class="badge badge-white">
                       <span>Requête XML</span>
                     </a>
-                  </div>
+                  </div> -->
                 </div>
+
                 <form class="form-horizontal xml-validation-form" id="smart-request-form">
                   <legend>Requête XML</legend>
                   <div class="form-group">
                     <textarea class = "form-control xml-paste-zone" id="xml-request-textarea" placeholder = "Copier votre requête xml"></textarea>
                   </div>
                   <div class="form-group">
-                    <div class="col xs-12 col-sm-6 col-lg-4">
+                    <div class="text-right">
                       <button type="submit" class="btn btn-success" id="smart-request-submit">Envoyer la requête</button>
                     </div>
                   </div>
@@ -587,21 +589,23 @@
               <div id = "response">
                 <div class = "backlinking">
                   <div class = "pull-left">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
                     <a href="#stop-monitoring-form-wrapper" id = "backlink-form-from-response">
                       <span>Retouner au formulaire</span>
                     </a>
                   </div>
-                  <div class = "pull-left">
-                    <a href="#fancy-response-panel-wrapper" id = "backlink-form-from-response">
+                  <div class = "pull-right">
+                    <a href="#fancy-response-panel-wrapper" id = "backlink-form-from-response" class="badge badge-white">
                       <span>Vue réduite</span>
                     </a>
                   </div>
-                  <div class = "pull-left">
-                    <a href="#xml-response-panel-wrapper">
+                  <div class = "pull-right">
+                    <a href="#xml-response-panel-wrapper" class="badge badge-white">
                       <span>Vue xml</span>
                     </a>
                   </div>
                 </div>
+
                 <h4 class = "response-counter"></h4>
                 <h4 class = "siri-version-display"></h4>
               </div>
@@ -611,17 +615,18 @@
             <div class="right-app-panel">
               <div class = "backlinking">
                 <div class = "pull-left">
+                  <span class="glyphicon glyphicon-chevron-left"></span>
                   <a href="#stop-monitoring-form-wrapper">
                     <span>Retouner au formulaire</span>
                   </a>
                 </div>
-                <div class = "pull-left">
-                  <a href="#response-panel-wrapper">
+                <div class = "pull-right">
+                  <a href="#response-panel-wrapper" class="badge badge-white">
                     <span>Vue complète</span>
                   </a>
                 </div>
-                <div class = "pull-left">
-                    <a href="#xml-response-panel-wrapper" id = "backlink-form-from-response">
+                <div class = "pull-right">
+                    <a href="#xml-response-panel-wrapper" id = "backlink-form-from-response" class="badge badge-white">
                       <span>Vue xml</span>
                     </a>
                   </div>
@@ -637,17 +642,18 @@
               <div class="right-app-panel">
                 <div class = "backlinking">
                   <div class = "pull-left">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
                     <a href="#stop-monitoring-form-wrapper">
                       <span>Retouner au formulaire</span>
                     </a>
                   </div>
-                  <div class = "pull-left">
-                    <a href="#fancy-response-panel-wrapper">
+                  <div class = "pull-right">
+                    <a href="#fancy-response-panel-wrapper" class="badge badge-white">
                       <span>Vue réduite</span>
                     </a>
                   </div>
-                  <div class = "pull-left">
-                    <a href="#response-panel-wrapper">
+                  <div class = "pull-right">
+                    <a href="#response-panel-wrapper" class="badge badge-white">
                       <span>Vue complète</span>
                     </a>
                   </div>
