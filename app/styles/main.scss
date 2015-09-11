@@ -12,14 +12,6 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
   -o-transition:$time;
   transition:$time;
 }
-
-#forms-wrapper,#response-wrapper,#explaination-texts{
-  >*{
-    display:none;
-    &.i-m-there{display:block;}
-  }
-}
-
 // Helping classes for margins
 .mt-xs{margin-top:5px;}
 .mt-sm{margin-top:10px;}
@@ -30,6 +22,14 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 .mb-sm{margin-bottom:10px;}
 .mb-md{margin-bottom:20px;}
 .mb-lg{margin-bottom:40px;}
+
+/*-- GO! --*/
+#forms-wrapper,#response-wrapper,#explaination-texts{
+  >*{
+    display:none;
+    &.i-m-there{display:block;}
+  }
+}
 
 #stop-monitoring-form, #canned-requests, .xml-validation-form {
   margin-bottom: 10px;
@@ -289,5 +289,48 @@ textarea.xml-paste-zone {
     color:#9d9d9d;
 
     &:hover{background-color:#090909;color:#fff;}
+  }
+}
+
+// Todolist (panel body dl)
+.panel-info{
+  .panel-heading{
+    padding:15px;
+    .panel-title{font-size:20px;}
+  }
+  dl.panel-body{
+    padding:0;margin:0;
+    // Fix for dib white-spaces...
+    letter-spacing:-0.31em;text-rendering:optimizespeed;
+
+    dt,dd{
+      position:relative;
+      display:inline-block;vertical-align:top;padding:10px 15px;
+      //
+      letter-spacing:normal;text-rendering:auto;
+      border-top:1px solid #bce8f1;
+    }
+    dt:first-child,dt:first-child+dd{border-top:none;}
+
+    dt{
+      width:25%;background-color:lighten(#bce8f1,14%);color:#31708f;
+      font-weight:normal;text-transform:uppercase;font-size:0.85em;line-height:20px;
+
+      &:before{
+        content:'';display:block;width:0;height:0;
+        position:absolute;right:-20px;top:0;bottom:0;z-index:1;
+        border-left:20px solid lighten(#bce8f1,14%);
+        border-top:20px solid transparent;
+        border-bottom:20px solid transparent;
+      }
+      &:after{
+        content:'';display:block;width:0;height:0;
+        position:absolute;right:-20.5px;top:0;bottom:0;z-index:0;
+        border-left:20px solid #bce8f1;
+        border-top:20px solid transparent;
+        border-bottom:20px solid transparent;
+      }
+    }
+    dd{width:75%;padding-left:30px;}
   }
 }
