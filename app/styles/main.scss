@@ -12,6 +12,24 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
   -o-transition:$time;
   transition:$time;
 }
+// Helping classes for margins
+.mt-xs{margin-top:5px;}
+.mt-sm{margin-top:10px;}
+.mt-md{margin-top:20px;}
+.mt-lg{margin-top:40px;}
+
+.mb-xs{margin-bottom:5px;}
+.mb-sm{margin-bottom:10px;}
+.mb-md{margin-bottom:20px;}
+.mb-lg{margin-bottom:40px;}
+
+/*-- GO! --*/
+#forms-wrapper,#response-wrapper,#explaination-texts{
+  >*{
+    display:none;
+    &.i-m-there{display:block;}
+  }
+}
 
 #stop-monitoring-form, #canned-requests, .xml-validation-form {
   margin-bottom: 10px;
@@ -46,7 +64,7 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
   font-weight: 300;
   color: grey;
 
-  h2{color:#333;margin-bottom:40px;}
+  h2{color:#333;}
   h5{
     color:#333;margin:20px 0 10px;padding-bottom:5px;
     text-transform:uppercase;
@@ -100,6 +118,8 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
     legend{color:#fff;}
     .form-group p{margin: 5px 0;}
     .form-group .btn[type='submit']{margin-top:30px;}
+    .form-group textarea{width:calc(100% - 30px)}
+    .form-group>.text-right{margin:0 15px;}
 
     >form{
       margin-left:0;margin-right:0;max-width:none;
@@ -111,12 +131,12 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
       
       a{
         color:#fff;
-        &:hover{text-decoration:none;border-bottom:1px dotted;}
+        &:hover,&:focus{text-decoration:none;border-bottom:1px dotted;}
       }
     }
     .badge.badge-white{
       background-color:#fff;color:#3c3c3c;
-      &:hover{border:none;}
+      &:hover,&:focus{border:none;}
     }
   }
   .panel-body {
@@ -126,15 +146,15 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 
 textarea.xml-paste-zone {
   height:400px;
-  box-shadow: 2px 2px 1px #ccc;
-  padding-left:20px;
-  width: 80%;
-  max-width: 600Px;
+  box-shadow:0 0 5px 0 rgba(0,0,0,0.75) inset;
+  //padding-left:20px;
+  max-width: 600px;
   margin: auto;
   border: none;
   &:focus {
     border:none;
-    box-shadow: 2px 2px 1px #ccc;
+    background-color:#f7f7f7;
+    box-shadow:0 0 5px 0 rgba(0,0,0,0.75) inset;
   }
 }
 #close-slider {
@@ -269,5 +289,48 @@ textarea.xml-paste-zone {
     color:#9d9d9d;
 
     &:hover{background-color:#090909;color:#fff;}
+  }
+}
+
+// Todolist (panel body dl)
+.panel-info{
+  .panel-heading{
+    padding:15px;
+    .panel-title{font-size:20px;}
+  }
+  dl.panel-body{
+    padding:0;margin:0;
+    // Fix for dib white-spaces...
+    letter-spacing:-0.31em;text-rendering:optimizespeed;
+
+    dt,dd{
+      position:relative;
+      display:inline-block;vertical-align:top;padding:10px 15px;
+      //
+      letter-spacing:normal;text-rendering:auto;
+      border-top:1px solid #bce8f1;
+    }
+    dt:first-child,dt:first-child+dd{border-top:none;}
+
+    dt{
+      width:25%;background-color:lighten(#bce8f1,14%);color:#31708f;
+      font-weight:normal;text-transform:uppercase;font-size:0.85em;line-height:20px;
+
+      &:before{
+        content:'';display:block;width:0;height:0;
+        position:absolute;right:-20px;top:0;bottom:0;z-index:1;
+        border-left:20px solid lighten(#bce8f1,14%);
+        border-top:20px solid transparent;
+        border-bottom:20px solid transparent;
+      }
+      &:after{
+        content:'';display:block;width:0;height:0;
+        position:absolute;right:-20.5px;top:0;bottom:0;z-index:0;
+        border-left:20px solid #bce8f1;
+        border-top:20px solid transparent;
+        border-bottom:20px solid transparent;
+      }
+    }
+    dd{width:75%;padding-left:30px;}
   }
 }
