@@ -13,12 +13,23 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
   transition:$time;
 }
 
-#forms-wrapper,#response-wrapper{
+#forms-wrapper,#response-wrapper,#explaination-texts{
   >*{
     display:none;
     &.i-m-there{display:block;}
   }
 }
+
+// Helping classes for margins
+.mt-xs{margin-top:5px;}
+.mt-sm{margin-top:10px;}
+.mt-md{margin-top:20px;}
+.mt-lg{margin-top:40px;}
+
+.mb-xs{margin-bottom:5px;}
+.mb-sm{margin-bottom:10px;}
+.mb-md{margin-bottom:20px;}
+.mb-lg{margin-bottom:40px;}
 
 #stop-monitoring-form, #canned-requests, .xml-validation-form {
   margin-bottom: 10px;
@@ -53,7 +64,7 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
   font-weight: 300;
   color: grey;
 
-  h2{color:#333;margin-bottom:40px;}
+  h2{color:#333;}
   h5{
     color:#333;margin:20px 0 10px;padding-bottom:5px;
     text-transform:uppercase;
