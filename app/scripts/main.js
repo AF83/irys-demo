@@ -1,6 +1,7 @@
 // jshint devel:true
 $(document).ready( function() {
 	console.log('\'Allo \'Allo!');
+  
 	$(function() {
     var stopDSC = new stopMonitoringRequest;
     var stopDscRequest = stopDSC.getStopDiscovery();
@@ -43,7 +44,6 @@ $(document).ready( function() {
         elt.addClass('hidden');
       }
     });
-
   });
 
   function superToggle(el) {
@@ -54,7 +54,7 @@ $(document).ready( function() {
       $(el).addClass('i-m-there');
     }
 
-    $(el).toggle();
+    //$(el).toggle();
   }
 
   $('.navbar-nav > li > ul > li > a, .navbar-brand, #first-SM-request').on('click', function(e) {
@@ -62,7 +62,7 @@ $(document).ready( function() {
 
     var target = this.getAttribute('href');
     $('.i-m-there').each(function(index, el) {
-      $(el).toggle();
+      //$(el).toggle();
       $(el).removeClass('i-m-there');
     });
 
@@ -70,84 +70,75 @@ $(document).ready( function() {
 
     if ($('#response-panel-wrapper').hasClass('i-m-there')) {
       $('#response-panel-wrapper').removeClass('i-m-there');
-      $('#response-panel-wrapper').hide();
+      //$('#response-panel-wrapper').hide();
     };
-
-
-
   });
 
   $('#stop-monitoring-trigger, #first-SM-request').on('click', function(e) {
     e.preventDefault();
 
     if ($('#stop-monitoring-form-wrapper').hasClass('i-m-there') != true) {
-      $('#stop-monitoring-form-wrapper').toggle();
+      //$('#stop-monitoring-form-wrapper').toggle();
       $('#stop-monitoring-form-wrapper').addClass('i-m-there');
       $('#stop-monitoring-from-response').attr("href", "#service-discovery-form-wrapper");
     }
 
     if ($('#service-discovery-form-wrapper').hasClass('i-m-there')) {
-      $('#service-discovery-form-wrapper').toggle();
+      //$('#service-discovery-form-wrapper').toggle();
       $('#service-discovery-form-wrapper').removeClass('i-m-there');
     }
 
     if ($('#get-general-message-form-wrapper').hasClass('i-m-there')) {
-      $('#get-general-message-form-wrapper').toggle();
+      //$('#get-general-message-form-wrapper').toggle();
       $('#get-general-message-form-wrapper').removeClass('i-m-there');
     }
-
-
   });
 
   $('#get-general-message-trigger').on('click', function(e) {
     e.preventDefault();
 
     if ($('#get-general-message-form-wrapper').hasClass('i-m-there') != true) {
-      $('#get-general-message-form-wrapper').toggle();
+      //$('#get-general-message-form-wrapper').toggle();
       $('#get-general-message-form-wrapper').addClass('i-m-there');
       $('#backlink-form-from-response').attr("href", "#get-general-message-form-wrapper");
     }
 
     if ($('#service-discovery-form-wrapper').hasClass('i-m-there')) {
-      $('#service-discovery-form-wrapper').toggle();
+      //$('#service-discovery-form-wrapper').toggle();
       $('#service-discovery-form-wrapper').removeClass('i-m-there');
     }
 
     if ($('#stop-monitoring-form-wrapper').hasClass('i-m-there')) {
-      $('#stop-monitoring-form-wrapper').toggle();
+      //$('#stop-monitoring-form-wrapper').toggle();
       $('#stop-monitoring-form-wrapper').removeClass('i-m-there');
     }
-
-
   });
 
   $('#service-discovery-trigger').on('click', function(e) {
     e.preventDefault();
 
     if ($('#service-discovery-form-wrapper').hasClass('i-m-there') != true) {
-      $('#service-discovery-form-wrapper').toggle();
+      //$('#service-discovery-form-wrapper').toggle();
       $('#service-discovery-form-wrapper').addClass('i-m-there');
       $('#backlink-form-from-response').attr("href", "#service-discovery-form-wrapper");
     }
 
     if ($('#get-general-message-form-wrapper').hasClass('i-m-there') == true) {
-      $('#get-general-message-form-wrapper').toggle();
+      //$('#get-general-message-form-wrapper').toggle();
       $('#get-general-message-form-wrapper').removeClass('i-m-there');
     }
 
     if ($('#stop-monitoring-form-wrapper').hasClass('i-m-there') == true) {
-      $('#stop-monitoring-form-wrapper').toggle();
+      //$('#stop-monitoring-form-wrapper').toggle();
       $('#stop-monitoring-form-wrapper').removeClass('i-m-there');
     }
-
-
   });
 
   $('.backlinking a').on('click', function(e) {
     e.preventDefault();
     var target = this.getAttribute('href');
     $('#right-panel-wrapper').find('.i-m-there').each(function(index, el) {
-      $(el).toggle();
+      //$(el).toggle();
       $(el).removeClass('i-m-there');
     });
 

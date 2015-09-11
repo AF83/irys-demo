@@ -13,6 +13,13 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
   transition:$time;
 }
 
+#forms-wrapper,#response-wrapper{
+  >*{
+    display:none;
+    &.i-m-there{display:block;}
+  }
+}
+
 #stop-monitoring-form, #canned-requests, .xml-validation-form {
   margin-bottom: 10px;
   overflow: hidden;
