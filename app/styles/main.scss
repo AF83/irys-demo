@@ -43,6 +43,7 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
   height: 360px;
   width: 100%;
   position: relative;
+
   .hero-banner-wrapper {
     position: absolute;
     top:0;
@@ -83,10 +84,19 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 .app-wrapper{position:relative;}
 
 // Right Panel
-.navbar+.page-content{position:relative;height:740px;}
+.navbar+.page-content{
+  position:relative;
+  white-space:nowrap;
+  
+  >*{
+    display:inline-block;vertical-align:top;white-space:normal;
+
+    &#explaination-texts{width:100%;}
+  }
+}
 .right-panel-wrapper {
-  position:absolute;top:0;left:100%;z-index:5;
-  height:700px;width:505px;
+  position:relative;
+  width:505px;
   margin-left:-15px;
   @include transition(ease-out 0.25s);
 
