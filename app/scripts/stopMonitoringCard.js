@@ -202,19 +202,15 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.toggleFancyThings = function(el) {
-    $(el).toggle();
     $(el).removeClass('i-m-there');
     if ($('#fancy-response-panel-wrapper').hasClass('i-m-there') === false) {
-      $('#fancy-response-panel-wrapper').toggle();
       $('#fancy-response-panel-wrapper').addClass('i-m-there');
     }
   };
 
   stopMonitoringCard.prototype.toggleClassicThings = function(el) {
-    $(el).toggle();
     $(el).removeClass('i-m-there');
     if ($('#response-panel-wrapper').hasClass('i-m-there') === false) {
-      $('#response-panel-wrapper').toggle();
       $('#response-panel-wrapper').addClass('i-m-there');
     }
   };

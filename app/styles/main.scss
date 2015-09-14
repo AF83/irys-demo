@@ -43,6 +43,7 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
   height: 360px;
   width: 100%;
   position: relative;
+
   .hero-banner-wrapper {
     position: absolute;
     top:0;
@@ -83,14 +84,25 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 .app-wrapper{position:relative;}
 
 // Right Panel
-.navbar+.page-content{position:relative;height:740px;}
+.navbar+.page-content{
+  position:relative;
+  white-space:nowrap;
+  
+  >*{
+    display:inline-block;vertical-align:top;white-space:normal;
+
+    &#explaination-texts{width:100%;}
+  }
+}
 .right-panel-wrapper {
-  position:absolute;top:0;left:100%;z-index:5;
-  height:700px;width:505px;
+  position:relative;
   margin-left:-15px;
   @include transition(ease-out 0.25s);
 
-  &.open{margin-left:-505px;}
+  width:800px;
+  
+
+  &.open{margin-left:-800px;}
 }
 #right-panel-wrapper {
   //overflow:hidden;
@@ -118,8 +130,13 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
     legend{color:#fff;}
     .form-group p{margin: 5px 0;}
     .form-group .btn[type='submit']{margin-top:30px;}
-    .form-group textarea{width:calc(100% - 30px)}
+    .form-group textarea{width:calc(100% - 30px);max-width:100%;}
     .form-group>.text-right{margin:0 15px;}
+
+    #response{
+      .siri-version-display{margin-bottom:20px;}
+      .stop-wrapper{width:auto;max-width:100%;margin-left:0;margin-right:0;}
+    }
 
     >form{
       margin-left:0;margin-right:0;max-width:none;
@@ -133,6 +150,7 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
         color:#fff;
         &:hover,&:focus{text-decoration:none;border-bottom:1px dotted;}
       }
+      .pull-right+.pull-right{margin-right:10px;}
     }
     .badge.badge-white{
       background-color:#fff;color:#3c3c3c;
@@ -178,12 +196,6 @@ textarea.xml-paste-zone {
   color: #000;
   padding: 0.2em 0;
 }
-
-/* Space out content a bit */
-// body {
-//   padding-top: 20px;
-//   padding-bottom: 20px;
-// }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
