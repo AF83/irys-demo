@@ -5,7 +5,10 @@
     var regEx = /^\d{8}/;
 
     if ( regEx.exec( $('#stopName').val() ) ) {
-      $( "#stopId" ).val("NINOXE:StopPoint:SPOR:" + $(this).val() + ":LOC")
+      $( "#stopId" ).val("NINOXE:StopPoint:SPOR:" + $(this).val() + ":LOC");
+    }
+    else if ($('#stopName').val() === "") {
+      $( "#stopId" ).val("");
     }
 
     var request = new stopMonitoringRequest;

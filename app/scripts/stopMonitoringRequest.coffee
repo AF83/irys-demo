@@ -16,6 +16,7 @@ class stopMonitoringRequest
   minimumStopVisitPerLineVia: null
   groupOfLinesRef: null
   destinationRef: null
+  perturbationType: null
 
   requestTemplate: """<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
   <SOAP-ENV:Header/>
@@ -108,12 +109,21 @@ class stopMonitoringRequest
         <Request version="{{siriVersion}}">
           <ns2:RequestTimestamp>{{requestDate}}</ns2:RequestTimestamp>
           <ns2:MessageIdentifier>GeneralMessage:Test:0</ns2:MessageIdentifier>
-          {{#stopId}}
-          <ns2:MonitoringRef>{{stopId}}</ns2:MonitoringRef>
-          {{/stopId}}
-          {{#lineId}}
-          <ns2:LineRef>{{lineId}}</ns2:LineRef>
-          {{/lineId}}
+          {{#perturbationType}}
+          <ns2:InfoChannelRef>{{perturbationType}}</ns2:InfoChannelRef>
+          {{/perturbationType}}
+          <ns2:Extensions>
+            <ns2:IDFGeneralMessageRequestFilter>
+            {{#stopId}}
+              <ns2:StopPointRef>{{stopId}}</ns2:StopPointRef>
+            {{/stopId}}
+            {{#lineId}}
+            <ns2:IDFGeneralMessageRequestFilter>
+              <ns2:LineRef>{{lineId}}</ns2:LineRef>
+            </ns2:IDFGeneralMessageRequestFilter>
+            {{/lineId}}
+            </ns2:IDFGeneralMessageRequestFilter>
+          </ns2:Extensions>
           {{#destinationRef}}
           <ns2:DestinationRef>{{destinationRef}}</ns2:DestinationRef>
           {{/destinationRef}}
@@ -163,7 +173,8 @@ class stopMonitoringRequest
     "requestorVersion",
     "requestorName",
     "destinationRef",
-    "groupOfLinesRef"];
+    "groupOfLinesRef",
+    "perturbationType"];
 
     form = $(el)
     this.siriVersionAPI = form.find('input[name="siriVersionAPIOptions"]:checked').val()
