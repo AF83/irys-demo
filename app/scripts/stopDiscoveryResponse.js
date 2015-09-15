@@ -47,16 +47,16 @@ stopDiscoveryResponse = (function() {
   };
 
   stopDiscoveryResponse.prototype.initiateAutocomplete = function(type) {
-    return $('#' + type + 'Name').autocomplete({
+    return $('#stop-monitoring-form #' + type + 'Name, #canned-requests #' + type + 'Name').autocomplete({
       minLength: 0,
       source: this.autocomplete,
       focus: function(event, ui) {
-        $('#' + type + 'Name').val(ui.item.label);
+        this.parentsUntil('form').find('#' + type + 'Name').val(ui.item.label);
         return false;
       },
       select: function(event, ui) {
-        $('#' + type + 'Name').val(ui.item.label);
-        $('#' + type + 'Id').val(ui.item.id);
+        $(this).parentsUntil('.right-app-panel').find('#' + type + 'Name').val(ui.item.label);
+        $(this).parentsUntil('.right-app-panel').find('#' + type + 'Id').val(ui.item.id);
         return false;
       }
     }).autocomplete('instance')._renderItem = function(ul, item) {

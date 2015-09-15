@@ -108,6 +108,12 @@ class stopMonitoringRequest
         <Request version="{{siriVersion}}">
           <ns2:RequestTimestamp>{{requestDate}}</ns2:RequestTimestamp>
           <ns2:MessageIdentifier>GeneralMessage:Test:0</ns2:MessageIdentifier>
+          {{#stopId}}
+          <ns2:MonitoringRef>{{stopId}}</ns2:MonitoringRef>
+          {{/stopId}}
+          {{#lineId}}
+          <ns2:LineRef>{{lineId}}</ns2:LineRef>
+          {{/lineId}}
           {{#destinationRef}}
           <ns2:DestinationRef>{{destinationRef}}</ns2:DestinationRef>
           {{/destinationRef}}
@@ -268,7 +274,7 @@ class stopMonitoringRequest
 
   renderNodesLength:(l) ->
     for el in $('.response-counter')
-      $(el).text("Nombre d'arrêts: " + l)
+      $(el).text("Nombre de réponses: " + l)
     return
   renderSiriVersion:(l) ->
     for el in $('.siri-version-display')

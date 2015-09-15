@@ -71,7 +71,7 @@ class stopMonitoringCard
         </div>
         <div class = "stop-info-value {{monitoredCall.ArrivalStatus}}">
           <p>
-            {{monitoredCall.AimedArrivalTime}}
+            {{setCleanDate}}
           </p>
         </div>
       </div>
@@ -103,7 +103,7 @@ class stopMonitoringCard
               </p>
             </div>
             <div class="stop-info-value {{ArrivalStatus}}">
-              <p>{{AimedArrivalTime}}</p>
+              <p>{{setCleanDate}}</p>
             </div>
           </div>
           <div class="stop-info col-xs-6">
@@ -113,7 +113,7 @@ class stopMonitoringCard
                 <span>Status</span>
               </p>
             </div>
-            <div class="stop-info-value">
+            <div class="stop-info-value {{ArrivalStatus}}">
               <p>{{ArrivalStatus}}</p>
             </div>
           </div>
@@ -285,6 +285,15 @@ class stopMonitoringCard
       @lineColors[line] = "line-" + lineInventory
 
     @lineColors[line]
+
+  setCleanDate:() ->
+
+    if this.monitoredCall != undefined
+      date = new Date(this.monitoredCall.AimedArrivalTime)
+    else
+      date = new Date(this.AimedArrivalTime)
+
+    date.getHours() + ":" +date.getMinutes()
 
   toggleFancyThings:(el) ->
 

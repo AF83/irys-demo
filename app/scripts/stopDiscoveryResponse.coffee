@@ -1954,15 +1954,15 @@ class stopDiscoveryResponse
 
 
   initiateAutocomplete:(type) ->
-    $('#' + type + 'Name').autocomplete(
+    $('#stop-monitoring-form #' + type + 'Name, #canned-requests #' + type + 'Name').autocomplete(
       minLength: 0
       source: @autocomplete
       focus: (event, ui) ->
-        $('#' + type + 'Name').val ui.item.label
+        this.parentsUntil('form').find('#' + type + 'Name').val ui.item.label
         false
       select: (event, ui) ->
-        $('#' + type + 'Name').val ui.item.label
-        $('#' + type + 'Id').val ui.item.id
+        $(this).parentsUntil('.right-app-panel').find('#' + type + 'Name').val ui.item.label
+        $(this).parentsUntil('.right-app-panel').find('#' + type + 'Id').val ui.item.id
         false
     ).autocomplete('instance')._renderItem = (ul, item) ->
       $('<li>').append('<a>' + item.label + '</a>').appendTo ul

@@ -59,6 +59,13 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
       height: 100%;
       width: 100%;
     }
+    .hero-banner-hollow {
+      background-color: rgba(190, 190, 190, 0.7);
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+    }
   }
 }
 .explaination-text {
@@ -87,7 +94,7 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 .navbar+.page-content{
   position:relative;
   white-space:nowrap;
-  
+
   >*{
     display:inline-block;vertical-align:top;white-space:normal;
 
@@ -100,7 +107,7 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
   @include transition(ease-out 0.25s);
 
   width:800px;
-  
+
 
   &.open{margin-left:-800px;}
 }
@@ -145,7 +152,7 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
     .backlinking {
       height: 20px;
       margin-bottom:40px;
-      
+
       a{
         color:#fff;
         &:hover,&:focus{text-decoration:none;border-bottom:1px dotted;}

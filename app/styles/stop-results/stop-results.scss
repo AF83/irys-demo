@@ -201,7 +201,9 @@
         >p{margin:0;}
       }
 
-      .stop-info-value.delayed{color:red;}
+      .stop-info-value.delayed{color:orange;}
+      .stop-info-value.canceled{color:red;}
+      .stop-info-value.early{color:lightgreen;}
     }
   }
 
