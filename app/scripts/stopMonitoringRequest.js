@@ -141,7 +141,7 @@ stopMonitoringRequest = (function() {
     return Mustache.render(template, this);
   };
 
-  stopMonitoringRequest.prototype.handleStopMonitoringResponse = function(xmlResponse, handler) {
+  stopMonitoringRequest.prototype.handleStopMonitoringResponse = function(xmlResponse, handler, responseWrapper) {
     var i, len, node, nodes, siriVersionToDisplay;
     siriVersionToDisplay = xmlResponse.find('StopMonitoringDelivery')[0].getAttribute('version');
     nodes = xmlResponse.find('MonitoredStopVisit');
@@ -153,22 +153,23 @@ stopMonitoringRequest = (function() {
     }
     stopMonitoringRequest.prototype.renderXML(xmlResponse[0]);
     stopMonitoringRequest.prototype.renderNodesLength(nodes.length);
-    return stopMonitoringRequest.prototype.renderSiriVersion(siriVersionToDisplay);
+    stopMonitoringRequest.prototype.renderSiriVersion(siriVersionToDisplay);
+    return stopMonitoringCard.prototype.toggleFancyThings(responseWrapper);
   };
 
-  stopMonitoringRequest.prototype.handleStopDiscoveryResponse = function(xmlResponse, handler) {
+  stopMonitoringRequest.prototype.handleStopDiscoveryResponse = function(xmlResponse, handler, responseWrapper) {
     var nodes;
     nodes = xmlResponse.find('AnnotatedStopPointRef');
     return handler.buildAutocompleteArray(nodes, "Stop");
   };
 
-  stopMonitoringRequest.prototype.handleLineDiscoveryResponse = function(xmlResponse, handler) {
+  stopMonitoringRequest.prototype.handleLineDiscoveryResponse = function(xmlResponse, handler, responseWrapper) {
     var nodes;
     nodes = xmlResponse.find('AnnotatedLineRef');
     return handler.buildAutocompleteArray(nodes, "Line");
   };
 
-  stopMonitoringRequest.prototype.handleStopDiscoveryResponseDisplay = function(xmlResponse, handler) {
+  stopMonitoringRequest.prototype.handleStopDiscoveryResponseDisplay = function(xmlResponse, handler, responseWrapper) {
     var i, len, node, nodes;
     nodes = xmlResponse.find('AnnotatedStopPointRef');
     for (i = 0, len = nodes.length; i < len; i++) {
@@ -176,10 +177,11 @@ stopMonitoringRequest = (function() {
       handler.buildStopDiscoveryJSON(node);
       handler.buildStopDiscovery();
     }
-    return stopMonitoringRequest.prototype.renderXML(xmlResponse[0]);
+    stopMonitoringRequest.prototype.renderXML(xmlResponse[0]);
+    return stopMonitoringCard.prototype.toggleClassicThings(responseWrapper);
   };
 
-  stopMonitoringRequest.prototype.handleLineDiscoveryResponseDisplay = function(xmlResponse, handler) {
+  stopMonitoringRequest.prototype.handleLineDiscoveryResponseDisplay = function(xmlResponse, handler, responseWrapper) {
     var i, len, node, nodes;
     nodes = xmlResponse.find('AnnotatedLineRef');
     for (i = 0, len = nodes.length; i < len; i++) {
@@ -187,10 +189,11 @@ stopMonitoringRequest = (function() {
       handler.buildLineDiscoveryJSON(node);
       handler.buildLineDiscovery(nodes, "Line");
     }
-    return stopMonitoringRequest.prototype.renderXML(xmlResponse[0]);
+    stopMonitoringRequest.prototype.renderXML(xmlResponse[0]);
+    return stopMonitoringCard.prototype.toggleClassicThings(responseWrapper);
   };
 
-  stopMonitoringRequest.prototype.handleGeneralMessageResponse = function(xmlResponse, handler) {
+  stopMonitoringRequest.prototype.handleGeneralMessageResponse = function(xmlResponse, handler, responseWrapper) {
     var errorSpan, i, len, node, nodes;
     nodes = xmlResponse.find('GeneralMessage');
     if (nodes.length > 0) {
@@ -200,7 +203,8 @@ stopMonitoringRequest = (function() {
         handler.buildGeneralMessageJSON(node);
         handler.buildGeneralMessage();
       }
-      return stopMonitoringRequest.prototype.renderXML(xmlResponse[0]);
+      stopMonitoringRequest.prototype.renderXML(xmlResponse[0]);
+      return stopMonitoringCard.prototype.toggleClassicThings(responseWrapper);
     } else {
       errorSpan = "<div class='alert alert-success' role='alert'><a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" + "Tout va bien" + "</div>";
       return $('.alert-wrapper').append(errorSpan);
@@ -260,12 +264,7 @@ stopMonitoringRequest = (function() {
         errorSpan = "<div class='alert alert-danger' role='alert'><a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" + errorText + "</div>";
         $('.alert-wrapper').append(errorSpan);
       } else {
-        responseHandler(xmlDoc, handler);
-        if (handler.constructor.prototype === stopMonitoringCard.prototype) {
-          stopMonitoringCard.prototype.toggleFancyThings(responseWrapper);
-        } else {
-          stopMonitoringCard.prototype.toggleClassicThings(responseWrapper);
-        }
+        responseHandler(xmlDoc, handler, responseWrapper);
       }
     }).fail(function() {
       return console.log('epic fail');

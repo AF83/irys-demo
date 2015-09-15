@@ -210,7 +210,7 @@ class stopMonitoringRequest
     Mustache.parse template
     Mustache.render(template, this)
 
-  handleStopMonitoringResponse: (xmlResponse, handler) ->
+  handleStopMonitoringResponse: (xmlResponse, handler, responseWrapper) ->
     siriVersionToDisplay = xmlResponse.find('StopMonitoringDelivery')[0].getAttribute('version')
     nodes = xmlResponse.find('MonitoredStopVisit')
 
@@ -222,31 +222,34 @@ class stopMonitoringRequest
     stopMonitoringRequest.prototype.renderXML(xmlResponse[0])
     stopMonitoringRequest.prototype.renderNodesLength(nodes.length)
     stopMonitoringRequest.prototype.renderSiriVersion(siriVersionToDisplay)
+    stopMonitoringCard.prototype.toggleFancyThings responseWrapper
 
-  handleStopDiscoveryResponse: (xmlResponse, handler) ->
+  handleStopDiscoveryResponse: (xmlResponse, handler, responseWrapper) ->
     nodes = xmlResponse.find('AnnotatedStopPointRef')
     handler.buildAutocompleteArray(nodes, "Stop")
 
-  handleLineDiscoveryResponse: (xmlResponse, handler) ->
+  handleLineDiscoveryResponse: (xmlResponse, handler, responseWrapper) ->
     nodes = xmlResponse.find('AnnotatedLineRef')
     handler.buildAutocompleteArray(nodes, "Line")
 
-  handleStopDiscoveryResponseDisplay: (xmlResponse, handler) ->
+  handleStopDiscoveryResponseDisplay: (xmlResponse, handler, responseWrapper) ->
     nodes = xmlResponse.find('AnnotatedStopPointRef')
     for node in nodes
       handler.buildStopDiscoveryJSON(node)
       handler.buildStopDiscovery()
     stopMonitoringRequest.prototype.renderXML(xmlResponse[0])
+    stopMonitoringCard.prototype.toggleClassicThings responseWrapper
 
-  handleLineDiscoveryResponseDisplay: (xmlResponse, handler) ->
+  handleLineDiscoveryResponseDisplay: (xmlResponse, handler, responseWrapper) ->
     nodes = xmlResponse.find('AnnotatedLineRef')
     for node in nodes
       handler.buildLineDiscoveryJSON(node)
       handler.buildLineDiscovery(nodes, "Line")
 
     stopMonitoringRequest.prototype.renderXML(xmlResponse[0])
+    stopMonitoringCard.prototype.toggleClassicThings responseWrapper
 
-  handleGeneralMessageResponse: (xmlResponse, handler) ->
+  handleGeneralMessageResponse: (xmlResponse, handler, responseWrapper) ->
     nodes = xmlResponse.find('GeneralMessage')
     if nodes.length > 0
       for node in nodes
@@ -254,6 +257,7 @@ class stopMonitoringRequest
         handler.buildGeneralMessageJSON(node)
         handler.buildGeneralMessage()
       stopMonitoringRequest.prototype.renderXML(xmlResponse[0])
+      stopMonitoringCard.prototype.toggleClassicThings responseWrapper
     else
       errorSpan = "<div class='alert alert-success' role='alert'><a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" + "Tout va bien"+ "</div>"
       $('.alert-wrapper').append errorSpan
@@ -296,11 +300,7 @@ class stopMonitoringRequest
           errorSpan = "<div class='alert alert-danger' role='alert'><a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" + errorText+ "</div>"
           $('.alert-wrapper').append errorSpan
         else
-          responseHandler(xmlDoc, handler)
-          if handler.constructor.prototype == stopMonitoringCard.prototype
-            stopMonitoringCard.prototype.toggleFancyThings responseWrapper
-          else
-              stopMonitoringCard.prototype.toggleClassicThings responseWrapper
+          responseHandler(xmlDoc, handler, responseWrapper)
         return
       ).fail ->
       console.log 'epic fail'
