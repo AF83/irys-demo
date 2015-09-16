@@ -272,6 +272,7 @@ class stopMonitoringRequest
       for node in nodes
         handler.generalMessage = {}
         handler.buildGeneralMessageJSON(node)
+        handler.buildFancyGeneralMessage()
         handler.buildGeneralMessage()
       stopMonitoringRequest.prototype.renderXML(xmlResponse[0])
       stopMonitoringCard.prototype.toggleClassicThings responseWrapper

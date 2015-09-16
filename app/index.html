@@ -72,26 +72,22 @@
           <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
               <li class="dropdown-inverse">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Stops <span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Requêtes<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href = "#stop-monitoring" aria-controls = "stop-monitoring" id = "stop-monitoring-trigger">Service Stop Monitoring (SM)</a></li>
-                  <li><a href = "#service-stop-timetable" aria-controls = "service-stop-timetable">Service Stop Timetable</a></li>
+                  <li><a href = "#service-discovery" aria-controls = "service-discovery" id = "service-discovery-trigger">Service Discovery</a></li>
+                  <li><a href = "#get-general-message" aria-controls = "get-general-message" id = "get-general-message-trigger">Service General Message (GM)</a></li>
                 </ul>
+
               <li class="dropdown-inverse">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Connections <span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Autres services<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href = "#service-connection-monitoring" aria-controls = "service-connection-monitoring">Service Connection Monitoring (CM)</a></li>
                   <li><a href = "#service-connection-timetable" aria-controls = "service-connection-timetable">Service Connection Timetable (CT)</a></li>
-                </ul>
-              <li class="dropdown-inverse">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Autres Services <span class="caret"></span></a>
-                <ul class="dropdown-menu">
                   <li><a href = "#service-production-timetable" aria-controls = "service-production-timetable">Service Production Timetable (PT)</a></li>
                   <li><a href = "#service-stop-timetable" aria-controls = "service-stop-timetable">Service Stop Timetable (PT)</a></li>
-                  <li><a href = "#get-general-message" aria-controls = "get-general-message" id = "get-general-message-trigger">Service General Message (GM)</a></li>
                   <li><a href = "#service-facility-monitoring" aria-controls = "service-facility-monitoring">Service Facility Monitoring (FM)</a></li>
                   <li><a href = "#service-situation-exchange" aria-controls = "service-situation-exchange">Service Situation Exchange (SX)</a></li>
-                  <li><a href = "#service-discovery" aria-controls = "service-discovery" id = "service-discovery-trigger">Service Discovery</a></li>
                 </ul>
             </ul>
           </div><!-- /.navbar-collapse -->
@@ -375,7 +371,7 @@
                 <form class="form-horizontal" id ="stop-monitoring-form">
                   <fieldset>
                     <legend>Construire votre requête Stop Monitoring</legend>
-                      <div class="form-group" id = "siriVersionAPI">
+                      <div class="form-group hidden" id = "siriVersionAPI">
                           <label for="siriVersionAPI" class="col-sm-4 control-label">Version Siri
                           </label>
                           <div class = "col-sm-8">
@@ -390,16 +386,16 @@
                             </label>
                         </div>
                       </div>
-                      <div class="form-group hidden" id = "requestorNameWrapper">
+                      <div class="form-group " id = "requestorNameWrapper">
                           <label for="requestorName" class="col-lg-4 control-label">Profil</label>
                           <div class="col-lg-8">
-                            <input type="text" class="form-control" id="requestorName" placeholder="Profil">
+                            <input type="text" class="form-control" id="requestorName" placeholder="STIF" disabled>
                           </div>
                       </div>
-                      <div class="form-group hidden" id = "requestorVersionWrapper">
+                      <div class="form-group" id = "requestorVersionWrapper">
                           <label for="requestorVersion" class="col-lg-4 control-label">Version du profil</label>
                           <div class="col-lg-8">
-                            <input type="text" class="form-control" id="requestorVersion" placeholder="Version du profil">
+                            <input type="text" class="form-control" id="requestorVersion" placeholder="2.2" disabled>
                           </div>
                       </div>
                       <div class="form-group hidden" id="minimumStopVisitPerLineViaWrapper">

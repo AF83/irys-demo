@@ -203,6 +203,7 @@ stopMonitoringRequest = (function() {
         node = nodes[i];
         handler.generalMessage = {};
         handler.buildGeneralMessageJSON(node);
+        handler.buildFancyGeneralMessage();
         handler.buildGeneralMessage();
       }
       stopMonitoringRequest.prototype.renderXML(xmlResponse[0]);

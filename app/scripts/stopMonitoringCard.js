@@ -44,6 +44,8 @@ stopMonitoringCard = (function() {
 
   stopMonitoringCard.prototype.generalMessageTemplate = "<div class = \"panel panel-default stop-wrapper\">\n  <div class = \"panel-heading\">\n    <div class = \"stop-name\"></div>\n      <h4>General Message</h4>\n  </div>\n  <div class = \"panel-body\">\n    {{#generalMessage}}\n      <h4>General Message</h4>\n      {{#mustacheGeneralMessage}}\n        <div>{{key}} : {{value}}</div>\n      {{/mustacheGeneralMessage}}\n    {{/generalMessage}}\n  </div>\n</div>";
 
+  stopMonitoringCard.prototype.generalMessageFancyTemplate = "<li class = \"fancy-stop-wrapper line-1\">\n  <div class = \"line-header\">\n    <h4>{{generalMessage.InfoChannelRef}}</h4>\n  </div>\n  <div class=\"row\">\n    <div class = \"stop-info col-xs-3\">\n      <div class = \"stop-info-property\">\n        <p>\n          <span class=\"glyphicon glyphicon-road\"></span>\n          {{#generalMessage.StopPointRef}}\n            <span>Arrêt</span>\n          {{/generalMessage.StopPointRef}}\n          {{#generalMessage.LineRef}}\n            <span>Ligne</span>\n          {{/generalMessage.LineRef}}\n        </p>\n      </div>\n      <div class = \"stop-info-value\">\n        {{#generalMessage.StopPointRef}}\n          <p>{{generalMessage.StopPointRef}}</p>\n        {{/generalMessage.StopPointRef}}\n        {{#generalMessage.LineRef}}\n          <p>{{generalMessage.LineRef}}</p>\n        {{/generalMessage.LineRef}}\n      </div>\n    </div>\n    <div class = \"stop-info col-xs-2\">\n      <div class = \"stop-info-property\">\n        <p>\n          <span class=\"glyphicon glyphicon-time\"></span>\n          <span>Validité</span>\n        </p>\n      </div>\n      <div class = \"stop-info-value\">\n        <p>\n          {{setGMCleanDate}}\n        </p>\n      </div>\n    </div>\n    <div class = \"stop-info col-xs-7\">\n      <div class = \"stop-info-property\">\n        <p>\n          <span class=\"glyphicon glyphicon-signal\"></span>\n          <span>Annonce</span>\n        </p>\n      </div>\n      <div class = \"stop-info-value\">\n        <p>{{generalMessage.MessageText}}</p>\n      </div>\n    </div>\n  </div>";
+
   stopMonitoringCard.prototype.stopDiscoveryTemplate = "<div class = \"panel panel-default stop-wrapper {{lineColor}}\">\n  <div class = \"panel-heading\">\n    <div class = \"stop-name\"></div>\n      <h4>{{stopDiscovery.StopName}}</h4>\n  </div>\n  <div class = \"panel-body\">\n    {{#mustacheStopDiscoveries}}\n      <div>{{key}} : {{value}}</div>\n    {{/mustacheStopDiscoveries}}\n    <h4>Lines</h4>\n    {{#mustacheStopLines}}\n      {{#line}}\n        <div class = \"indented-response\">{{key}} : {{value}}</div>\n      {{/line}}\n    {{/mustacheStopLines}}\n  </div>\n</div>";
 
   stopMonitoringCard.prototype.lineDiscoveryTemplate = "<div class = \"panel panel-default stop-wrapper {{lineColor}}\">\n  <div class = \"panel-heading\">\n    <div class = \"stop-name\"></div>\n      <h4>{{lineDiscovery.LineName}}</h4>\n  </div>\n  <div class = \"panel-body\">\n    {{#mustacheLineDiscovery}}\n      <div>{{key}} : {{value}}</div>\n    {{/mustacheLineDiscovery}}\n    <h4>Lines</h4>\n    {{#mustacheLineDirections}}\n      {{#line}}\n        <div class = \"indented-response\">{{key}} : {{value}}</div>\n      {{/line}}\n    {{/mustacheLineDirections}}\n  </div>\n</div>";
@@ -205,9 +207,18 @@ stopMonitoringCard = (function() {
     var date;
     if (this.monitoredCall !== void 0) {
       date = new Date(this.monitoredCall.AimedArrivalTime);
-    } else {
+    } else if (this.AimedArrivalTime !== void 0) {
       date = new Date(this.AimedArrivalTime);
+    } else {
+      date = new Date(this.generalMessage.ValidUntilTime);
+      console.log(date);
     }
+    return date.getHours() + ":" + date.getMinutes();
+  };
+
+  stopMonitoringCard.prototype.setGMCleanDate = function() {
+    var date;
+    date = new Date(this.generalMessage.ValidUntilTime);
     return date.getHours() + ":" + date.getMinutes();
   };
 
@@ -378,6 +389,10 @@ stopMonitoringCard = (function() {
     this.mustacheGeneralMessage = [];
     this.buildMustacheGeneralMessage();
     return this.renderCard(this.generalMessageTemplate);
+  };
+
+  stopMonitoringCard.prototype.buildFancyGeneralMessage = function() {
+    return this.renderFancyCard(this.generalMessageFancyTemplate);
   };
 
   stopMonitoringCard.prototype.buildStopDiscovery = function() {

@@ -140,6 +140,60 @@ class stopMonitoringCard
     </div>
   </div>"""
 
+  generalMessageFancyTemplate: """
+  <li class = "fancy-stop-wrapper line-1">
+    <div class = "line-header">
+      <h4>{{generalMessage.InfoChannelRef}}</h4>
+    </div>
+    <div class="row">
+      <div class = "stop-info col-xs-3">
+        <div class = "stop-info-property">
+          <p>
+            <span class="glyphicon glyphicon-road"></span>
+            {{#generalMessage.StopPointRef}}
+              <span>Arrêt</span>
+            {{/generalMessage.StopPointRef}}
+            {{#generalMessage.LineRef}}
+              <span>Ligne</span>
+            {{/generalMessage.LineRef}}
+          </p>
+        </div>
+        <div class = "stop-info-value">
+          {{#generalMessage.StopPointRef}}
+            <p>{{generalMessage.StopPointRef}}</p>
+          {{/generalMessage.StopPointRef}}
+          {{#generalMessage.LineRef}}
+            <p>{{generalMessage.LineRef}}</p>
+          {{/generalMessage.LineRef}}
+        </div>
+      </div>
+      <div class = "stop-info col-xs-2">
+        <div class = "stop-info-property">
+          <p>
+            <span class="glyphicon glyphicon-time"></span>
+            <span>Validité</span>
+          </p>
+        </div>
+        <div class = "stop-info-value">
+          <p>
+            {{setGMCleanDate}}
+          </p>
+        </div>
+      </div>
+      <div class = "stop-info col-xs-7">
+        <div class = "stop-info-property">
+          <p>
+            <span class="glyphicon glyphicon-signal"></span>
+            <span>Annonce</span>
+          </p>
+        </div>
+        <div class = "stop-info-value">
+          <p>{{generalMessage.MessageText}}</p>
+        </div>
+      </div>
+    </div>
+    """
+
   stopDiscoveryTemplate: """
   <div class = "panel panel-default stop-wrapper {{lineColor}}">
     <div class = "panel-heading">
@@ -290,9 +344,15 @@ class stopMonitoringCard
 
     if this.monitoredCall != undefined
       date = new Date(this.monitoredCall.AimedArrivalTime)
-    else
+    else if this.AimedArrivalTime != undefined
       date = new Date(this.AimedArrivalTime)
+    else
+      date = new Date(this.generalMessage.ValidUntilTime)
+      console.log(date)
+    date.getHours() + ":" +date.getMinutes()
 
+  setGMCleanDate:() ->
+    date = new Date(this.generalMessage.ValidUntilTime)
     date.getHours() + ":" +date.getMinutes()
 
   toggleFancyThings:(el) ->
@@ -418,6 +478,9 @@ class stopMonitoringCard
     this.mustacheGeneralMessage = []
     this.buildMustacheGeneralMessage()
     this.renderCard @generalMessageTemplate
+
+  buildFancyGeneralMessage:() ->
+    this.renderFancyCard @generalMessageFancyTemplate
 
   buildStopDiscovery: () ->
     @mustacheStopDiscoveries = []
