@@ -1,13 +1,13 @@
 	$('#stop-monitoring-form').submit(function(e) {
 		e.preventDefault();
-    $("#response > .panel, #fancy-response > fancy-stop-wrapper").remove()
+    $("#response > .panel, #fancy-response .fancy-stop-wrapper").remove()
 
     var regEx = /^\d{8}/;
 
     if ( regEx.exec( $('#stopName').val() ) ) {
       $( "#stopId" ).val("NINOXE:StopPoint:SPOR:" + $(this).val() + ":LOC");
     }
-    else if ($('#stopName').val() === "") {
+    else if ($('#stopName').val() == "") {
       $( "#stopId" ).val("");
     }
 
