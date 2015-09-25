@@ -138,14 +138,14 @@ class stopMonitoringRequest
   <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
     <SOAP-ENV:Header/>
       <S:Body>
-        <ns5:CheckStatus xmlns="http://wsdl.siri.org.uk" xmlns:siri="http://www.siri.org.uk/siri">
+        <ns7:CheckStatus xmlns:ns2="http://www.siri.org.uk/siri" xmlns:ns3="http://www.ifopt.org.uk/acsb" xmlns:ns4="http://www.ifopt.org.uk/ifopt" xmlns:ns5="http://datex2.eu/schema/2_0RC1/2_0" xmlns:ns6="http://scma/siri" xmlns:ns7="http://wsdl.siri.org.uk">
           <Request>
             <ns2:RequestTimestamp>{{startDate}}</ns2:RequestTimestamp>
             <ns2:RequestorRef>Siri-client</ns2:RequestorRef>
             <ns2:MessageIdentifier>CheckStatus:Test:0</ns2:MessageIdentifier>
           </Request>
           <RequestExtension/>
-        </ns5:CheckStatus>
+        </ns7:CheckStatus>
       </S:Body>
     </S:Envelope>
 """
@@ -267,8 +267,8 @@ class stopMonitoringRequest
     handler.buildAutocompleteArray(nodes, "Line")
 
   handleCheckStatusResponse: (xmlResponse, handler, responseWrapper) ->
-    "<div class='alert alert-success' role='alert'><a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Service OK</div>"
-    $('#check-status-response-wrapper').append(serviceOk)
+    serviceOk = "<div class='alert alert-success' role='alert'><a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Service OK</div>"
+    $('#check-status-response-wrapper').append serviceOk
 
   handleStopDiscoveryResponseDisplay: (xmlResponse, handler, responseWrapper) ->
     nodes = xmlResponse.find('AnnotatedStopPointRef')
@@ -298,8 +298,8 @@ class stopMonitoringRequest
       stopMonitoringRequest.prototype.renderXML(xmlResponse[0])
       stopMonitoringCard.prototype.toggleClassicThings responseWrapper
     else
-      errorSpan = "<div class='alert alert-success' role='alert'><a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" + "Tout va bien"+ "</div>"
-      $('.alert-wrapper').append errorSpan
+      errorSpan = "<div class='alert alert-success' role='alert'><a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Pas de message</div>"
+      $('#get-general-message-form-wrapper .alert-wrapper').append errorSpan
 
   renderXML:(response) ->
     xmlText = new XMLSerializer().serializeToString(response)

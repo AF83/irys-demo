@@ -1958,7 +1958,7 @@ class stopDiscoveryResponse
       minLength: 0
       source: @autocomplete
       focus: (event, ui) ->
-        this.parentsUntil('form').find('#' + type + 'Name').val ui.item.label
+        $(this).parentsUntil('form').find('#' + type + 'Name').val ui.item.label
         false
       select: (event, ui) ->
         $(this).parentsUntil('.right-app-panel').find('#' + type + 'Name').val ui.item.label

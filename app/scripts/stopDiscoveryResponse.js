@@ -51,7 +51,7 @@ stopDiscoveryResponse = (function() {
       minLength: 0,
       source: this.autocomplete,
       focus: function(event, ui) {
-        this.parentsUntil('form').find('#' + type + 'Name').val(ui.item.label);
+        $(this).parentsUntil('form').find('#' + type + 'Name').val(ui.item.label);
         return false;
       },
       select: function(event, ui) {

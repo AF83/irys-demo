@@ -82,7 +82,6 @@
       </nav>
 
       <div class="page-content">
-        <div id = "check-status-response-wrapper"></div>
         <div class="container" id="explaination-texts">
           <div id = 'siri-description' class = "i-m-there">
             <div class="app-wrapper">
@@ -589,6 +588,7 @@
                       <label for="stopName" class="col-lg-4 control-label">Nom arrêt</label>
                       <div class="col-lg-8">
                         <input type="text" class="form-control" id="stopName" placeholder="Nom de l'arrêt ou id">
+                        <p>Utilise les données d'autocompletion issues du service stop discovery</p>
                       </div>
                   </div>
                   <div class="form-group hidden">
@@ -600,7 +600,8 @@
                   <div class="form-group">
                     <label for="lineName" class="col-lg-4 control-label">Nom de la ligne</label>
                       <div class="col-lg-8">
-                        <input type="text" class="form-control" id="lineName" placeholder="id de la ligne">
+                        <input type="text" class="form-control" id="lineName" placeholder="Nom de la ligne">
+                        <p>Utilise les données d'autocompletion issues du service line discovery</p>
                       </div>
                   </div>
                   <div class="form-group hidden">
@@ -621,6 +622,7 @@
                       </div>
                   </div>
                   <div class="form-group">
+                    <div class = "alert-wrapper"></div>
                     <div class="col-xs-4">
                       <button type="submit" class="btn btn-warning" id="get-general-message">Get General Message</button>
                     </div>
@@ -665,6 +667,7 @@
               <form class="form-horizontal" id ="check-status">
                 <legend class=""> Construire votre requête Check Status</legend>
                     <div class="form-group">
+                      <div id = "check-status-response-wrapper"></div>
                       <div class="col-xs-4">
                         <button type="button" class="btn btn-primary" id="check-status-button">Check Status</button>
                       </div>
