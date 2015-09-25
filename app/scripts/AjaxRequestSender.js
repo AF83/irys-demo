@@ -35,6 +35,14 @@
     request.sendRequest(stopDscRequest, request.handleStopDiscoveryResponseDisplay, responseCard, $('#service-discovery-form-wrapper'));
   });
 
+  $('#check-status-button').on('click', function(e) {
+    $("#response > .panel, #fancy-response > fancy-stop-wrapper").remove()
+    var request = new stopMonitoringRequest;
+    var responseCard = new stopMonitoringCard;
+    var checkStatusRequest = request.getCheckStatus();
+    request.sendRequest(checkStatusRequest, request.handleCheckStatusResponse, responseCard, $('#check-status-response-wrapper'));
+  });
+
   $('#line-discovery-button').on('click', function(e) {
     $("#response > .panel, #fancy-response > fancy-stop-wrapper").remove()
     var request = new stopMonitoringRequest;

@@ -195,10 +195,13 @@
       }
 
       .stop-info-property,.stop-info-value{
-        text-align:center;font-size:0.85em;
+        text-align:center;font-size:1em;
         padding:7px 4px 4px 4px;
 
-        >p{margin:0;}
+        >p{margin:0}
+      }
+      .stop-info-property {
+        font-size: 0.85em;
       }
 
       .stop-info-value.delayed{color:orange;}
@@ -220,6 +223,18 @@
         display:block;width:0px;height:0px;
         border-left:20px solid transparent;
       }
+    }
+  }
+  #check-status-response-wrapper {
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:30px;
+    .alert {
+      width: 100%;
+      height: 100%;
+      border: none;
     }
   }
 }

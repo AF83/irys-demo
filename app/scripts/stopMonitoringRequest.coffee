@@ -118,9 +118,7 @@ class stopMonitoringRequest
               <ns2:StopPointRef>{{stopId}}</ns2:StopPointRef>
             {{/stopId}}
             {{#lineId}}
-            <ns2:IDFGeneralMessageRequestFilter>
               <ns2:LineRef>{{lineId}}</ns2:LineRef>
-            </ns2:IDFGeneralMessageRequestFilter>
             {{/lineId}}
             </ns2:IDFGeneralMessageRequestFilter>
           </ns2:Extensions>
@@ -131,12 +129,26 @@ class stopMonitoringRequest
           <ns2:GroupOfLinesRef>{{groupOfLinesRef}}</ns2:GroupOfLinesRef>
           {{/groupOfLinesRef}}
         </Request>
-        <RequestExtension xmlns=""/>
+        <RequestExtension/>
       </ns7:GetGeneralMessage>
     </S:Body>
   </S:Envelope>
 """
-
+  checkStatusTemplate: """
+  <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP-ENV:Header/>
+      <S:Body>
+        <ns5:CheckStatus xmlns="http://wsdl.siri.org.uk" xmlns:siri="http://www.siri.org.uk/siri">
+          <Request>
+            <ns2:RequestTimestamp>{{startDate}}</ns2:RequestTimestamp>
+            <ns2:RequestorRef>Siri-client</ns2:RequestorRef>
+            <ns2:MessageIdentifier>CheckStatus:Test:0</ns2:MessageIdentifier>
+          </Request>
+          <RequestExtension/>
+        </ns5:CheckStatus>
+      </S:Body>
+    </S:Envelope>
+"""
   errorResponse: """<div class="alert alert-danger" role="alert">{{errorText}}</div>"""
 
   requestDate:() ->
@@ -211,7 +223,6 @@ class stopMonitoringRequest
     Mustache.render(template, this)
 
   getStopDiscovery:() ->
-
     template = @stopDiscoveryTemplate
     Mustache.parse template
     Mustache.render(template, this)
@@ -224,6 +235,12 @@ class stopMonitoringRequest
   getGeneralMessage:(form) ->
     this.parseForm(form)
     template = @generalMessageTemplate
+    Mustache.parse template
+    Mustache.render(template, this)
+
+  getCheckStatus:(form) ->
+
+    template = @checkStatusTemplate
     Mustache.parse template
     Mustache.render(template, this)
 
@@ -248,6 +265,10 @@ class stopMonitoringRequest
   handleLineDiscoveryResponse: (xmlResponse, handler, responseWrapper) ->
     nodes = xmlResponse.find('AnnotatedLineRef')
     handler.buildAutocompleteArray(nodes, "Line")
+
+  handleCheckStatusResponse: (xmlResponse, handler, responseWrapper) ->
+    "<div class='alert alert-success' role='alert'><a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Service OK</div>"
+    $('#check-status-response-wrapper').append(serviceOk)
 
   handleStopDiscoveryResponseDisplay: (xmlResponse, handler, responseWrapper) ->
     nodes = xmlResponse.find('AnnotatedStopPointRef')

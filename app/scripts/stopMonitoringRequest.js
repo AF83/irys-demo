@@ -44,7 +44,9 @@ stopMonitoringRequest = (function() {
 
   stopMonitoringRequest.prototype.lineDiscoveryTemplate = "<S:Envelope xmlns:S=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <SOAP-ENV:Header/>\n  <S:Body>\n    <ns7:LinesDiscovery xmlns:ns2=\"http://www.siri.org.uk/siri\"  xmlns:ns7=\"http://wsdl.siri.org.uk\">\n      <Request version=\"1.3\">\n        <ns2:RequestTimestamp>{{requestDate}}</ns2:RequestTimestamp>\n        <ns2:RequestorRef>Siri-client</ns2:RequestorRef>\n        <ns2:MessageIdentifier>Discovery:Test:2</ns2:MessageIdentifier>\n      </Request>\n      <RequestExtension/>\n    </ns7:LinesDiscovery>\n  </S:Body>\n</S:Envelope>";
 
-  stopMonitoringRequest.prototype.generalMessageTemplate = "<S:Envelope xmlns:S=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <SOAP-ENV:Header/>\n  <S:Body>\n    <ns7:GetGeneralMessage xmlns:ns2=\"http://www.siri.org.uk/siri\" xmlns:ns3=\"http://www.ifopt.org.uk/acsb\" xmlns:ns4=\"http://www.ifopt.org.uk/ifopt\" xmlns:ns5=\"http://datex2.eu/schema/2_0RC1/2_0\" xmlns:ns6=\"http://scma/siri\" xmlns:ns7=\"http://wsdl.siri.org.uk\">\n      <ServiceRequestInfo>\n        <ns2:RequestTimestamp>{{requestDate}}</ns2:RequestTimestamp>\n        <ns2:RequestorRef>Siri-client</ns2:RequestorRef>\n        <ns2:MessageIdentifier>GeneralMessage:Test:0</ns2:MessageIdentifier>\n      </ServiceRequestInfo>\n      <Request version=\"{{siriVersion}}\">\n        <ns2:RequestTimestamp>{{requestDate}}</ns2:RequestTimestamp>\n        <ns2:MessageIdentifier>GeneralMessage:Test:0</ns2:MessageIdentifier>\n        {{#perturbationType}}\n        <ns2:InfoChannelRef>{{perturbationType}}</ns2:InfoChannelRef>\n        {{/perturbationType}}\n        <ns2:Extensions>\n          <ns2:IDFGeneralMessageRequestFilter>\n          {{#stopId}}\n            <ns2:StopPointRef>{{stopId}}</ns2:StopPointRef>\n          {{/stopId}}\n          {{#lineId}}\n          <ns2:IDFGeneralMessageRequestFilter>\n            <ns2:LineRef>{{lineId}}</ns2:LineRef>\n          </ns2:IDFGeneralMessageRequestFilter>\n          {{/lineId}}\n          </ns2:IDFGeneralMessageRequestFilter>\n        </ns2:Extensions>\n        {{#destinationRef}}\n        <ns2:DestinationRef>{{destinationRef}}</ns2:DestinationRef>\n        {{/destinationRef}}\n        {{#groupOfLinesRef}}\n        <ns2:GroupOfLinesRef>{{groupOfLinesRef}}</ns2:GroupOfLinesRef>\n        {{/groupOfLinesRef}}\n      </Request>\n      <RequestExtension xmlns=\"\"/>\n    </ns7:GetGeneralMessage>\n  </S:Body>\n</S:Envelope>";
+  stopMonitoringRequest.prototype.generalMessageTemplate = "<S:Envelope xmlns:S=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <SOAP-ENV:Header/>\n  <S:Body>\n    <ns7:GetGeneralMessage xmlns:ns2=\"http://www.siri.org.uk/siri\" xmlns:ns3=\"http://www.ifopt.org.uk/acsb\" xmlns:ns4=\"http://www.ifopt.org.uk/ifopt\" xmlns:ns5=\"http://datex2.eu/schema/2_0RC1/2_0\" xmlns:ns6=\"http://scma/siri\" xmlns:ns7=\"http://wsdl.siri.org.uk\">\n      <ServiceRequestInfo>\n        <ns2:RequestTimestamp>{{requestDate}}</ns2:RequestTimestamp>\n        <ns2:RequestorRef>Siri-client</ns2:RequestorRef>\n        <ns2:MessageIdentifier>GeneralMessage:Test:0</ns2:MessageIdentifier>\n      </ServiceRequestInfo>\n      <Request version=\"{{siriVersion}}\">\n        <ns2:RequestTimestamp>{{requestDate}}</ns2:RequestTimestamp>\n        <ns2:MessageIdentifier>GeneralMessage:Test:0</ns2:MessageIdentifier>\n        {{#perturbationType}}\n        <ns2:InfoChannelRef>{{perturbationType}}</ns2:InfoChannelRef>\n        {{/perturbationType}}\n        <ns2:Extensions>\n          <ns2:IDFGeneralMessageRequestFilter>\n          {{#stopId}}\n            <ns2:StopPointRef>{{stopId}}</ns2:StopPointRef>\n          {{/stopId}}\n          {{#lineId}}\n            <ns2:LineRef>{{lineId}}</ns2:LineRef>\n          {{/lineId}}\n          </ns2:IDFGeneralMessageRequestFilter>\n        </ns2:Extensions>\n        {{#destinationRef}}\n        <ns2:DestinationRef>{{destinationRef}}</ns2:DestinationRef>\n        {{/destinationRef}}\n        {{#groupOfLinesRef}}\n        <ns2:GroupOfLinesRef>{{groupOfLinesRef}}</ns2:GroupOfLinesRef>\n        {{/groupOfLinesRef}}\n      </Request>\n      <RequestExtension/>\n    </ns7:GetGeneralMessage>\n  </S:Body>\n</S:Envelope>";
+
+  stopMonitoringRequest.prototype.checkStatusTemplate = "<S:Envelope xmlns:S=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <SOAP-ENV:Header/>\n    <S:Body>\n      <ns5:CheckStatus xmlns=\"http://wsdl.siri.org.uk\" xmlns:siri=\"http://www.siri.org.uk/siri\">\n        <Request>\n          <ns2:RequestTimestamp>{{startDate}}</ns2:RequestTimestamp>\n          <ns2:RequestorRef>Siri-client</ns2:RequestorRef>\n          <ns2:MessageIdentifier>CheckStatus:Test:0</ns2:MessageIdentifier>\n        </Request>\n        <RequestExtension/>\n      </ns5:CheckStatus>\n    </S:Body>\n  </S:Envelope>";
 
   stopMonitoringRequest.prototype.errorResponse = "<div class=\"alert alert-danger\" role=\"alert\">{{errorText}}</div>";
 
@@ -143,6 +145,13 @@ stopMonitoringRequest = (function() {
     return Mustache.render(template, this);
   };
 
+  stopMonitoringRequest.prototype.getCheckStatus = function(form) {
+    var template;
+    template = this.checkStatusTemplate;
+    Mustache.parse(template);
+    return Mustache.render(template, this);
+  };
+
   stopMonitoringRequest.prototype.handleStopMonitoringResponse = function(xmlResponse, handler, responseWrapper) {
     var i, len, node, nodes, siriVersionToDisplay;
     siriVersionToDisplay = xmlResponse.find('StopMonitoringDelivery')[0].getAttribute('version');
@@ -169,6 +178,11 @@ stopMonitoringRequest = (function() {
     var nodes;
     nodes = xmlResponse.find('AnnotatedLineRef');
     return handler.buildAutocompleteArray(nodes, "Line");
+  };
+
+  stopMonitoringRequest.prototype.handleCheckStatusResponse = function(xmlResponse, handler, responseWrapper) {
+    "<div class='alert alert-success' role='alert'><a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Service OK</div>";
+    return $('#check-status-response-wrapper').append(serviceOk);
   };
 
   stopMonitoringRequest.prototype.handleStopDiscoveryResponseDisplay = function(xmlResponse, handler, responseWrapper) {
