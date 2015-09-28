@@ -55,7 +55,16 @@ $(document).ready( function() {
     }
   }
 
-  $('.navbar-nav > li > ul > li > a, #get-other-services, #first-SM-request, #first-GM-request, #first-SD-request').on('click', function(e) {
+   $('.navbar-nav > li > ul > li > a, #first-SM-request, #first-GM-request, #first-SD-request').on('click', function(e){
+    e.preventDefault();
+    $('.pannel-trigger').show();
+   })
+
+  $('#home-button, #get-other-services').on('click', function(e) {
+    e.preventDefault();
+    $('.pannel-trigger').hide();
+  })
+  $('.navbar-nav > li > ul > li > a, #get-other-services, #first-SM-request, #first-GM-request, #first-SD-request, #home-button').on('click', function(e) {
     e.preventDefault();
 
     var target = this.getAttribute('href');
@@ -75,7 +84,8 @@ $(document).ready( function() {
 
     if ($('#stop-monitoring-form-wrapper').hasClass('i-m-there') != true) {
       $('#stop-monitoring-form-wrapper').addClass('i-m-there');
-      $('#stop-monitoring-from-response').attr("href", "#service-discovery-form-wrapper");
+      $('#backlink-form-from-response').attr("href", "#stop-monitoring-form-wrapper");
+      $('#fancy-backlink-form-from-response').attr("href", "#stop-monitoring-form-wrapper");
     }
 
     if ($('#service-discovery-form-wrapper').hasClass('i-m-there')) {
@@ -97,6 +107,7 @@ $(document).ready( function() {
     if ($('#get-general-message-form-wrapper').hasClass('i-m-there') != true) {
       $('#get-general-message-form-wrapper').addClass('i-m-there');
       $('#backlink-form-from-response').attr("href", "#get-general-message-form-wrapper");
+      $('#fancy-backlink-form-from-response').attr("href", "#get-general-message-form-wrapper");
     }
 
     if ($('#service-discovery-form-wrapper').hasClass('i-m-there')) {
@@ -118,6 +129,7 @@ $(document).ready( function() {
     if ($('#service-discovery-form-wrapper').hasClass('i-m-there') != true) {
       $('#service-discovery-form-wrapper').addClass('i-m-there');
       $('#backlink-form-from-response').attr("href", "#service-discovery-form-wrapper");
+      $('#fancy-backlink-form-from-response').attr("href", "#service-discovery-form-wrapper");
     }
 
     if ($('#get-general-message-form-wrapper').hasClass('i-m-there') == true) {

@@ -58,7 +58,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#siri-description">Services SIRI</a>
+            <a class="navbar-brand" href="#siri-description" id = "home-button">Accueil</a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
@@ -466,9 +466,9 @@
                         <label for="typeVisit" class="col-lg-4 control-label">Type d'arrêt</label>
                           <div class="col-lg-8">
                             <select class = "form-control" id = "typeVisit">
-                              <option>arrivals</option>
-                              <option>departures</option>
-                              <option>all</option>
+                              <option value = "arrivals">Arrivées</option>
+                              <option value = "departures">Départs</option>
+                              <option value = "all">Tous</option>
                             </select>
                           </div>
                       </div>
@@ -545,7 +545,7 @@
               <form class="form-horizontal" id ="canned-requests">
                 <legend class=""> Construire votre requête General Message</legend>
                 <fieldset>
-                  <div class="form-group" id = "siriGeneralVersionAPI">
+                  <div class="form-group hidden" id = "siriGeneralVersionAPI">
                     <label for="siriGeneralVersionAPI" class="col-sm-4 control-label">Version Siri
                     </label>
                     <div class = "col-sm-8">
@@ -636,7 +636,7 @@
               <form class="form-horizontal" id ="canned-requests">
                 <legend class=""> Construire votre requête Stop Discovery ou Line Discovery</legend>
                 <fieldset>
-                    <div class="form-group" id = "siriGeneralVersionAPI">
+                    <div class="form-group hidden" id = "siriGeneralVersionAPI">
                       <label for="siriGeneralVersionAPI" class="col-sm-4 control-label">Version Siri</label>
                       <div class = "col-sm-8">
                         <label class="radio-inline">
@@ -740,7 +740,7 @@
               <div class = "backlinking">
                 <div class = "pull-left">
                   <span class="glyphicon glyphicon-chevron-left"></span>
-                  <a href="#stop-monitoring-form-wrapper">
+                  <a href="#stop-monitoring-form-wrapper" id = "fancy-backlink-form-from-response">
                     <span>Retouner au formulaire</span>
                   </a>
                 </div>

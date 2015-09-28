@@ -370,12 +370,18 @@ textarea.xml-paste-zone {
     dd{width:75%;padding-left:30px;}
   }
 }
+.request-form-opener {
+  font-size: 1.25em;
+}
 #footer {
   padding: 20px;
   background-color: #222222;
   color: #777777;
   font-size: 12px;
   min-height: 200px;
+  ul {
+    list-style-type: none;
+  }
   a {
     color:#fefefe;
   }

@@ -146,27 +146,32 @@ class stopMonitoringCard
       <h4>{{generalMessage.InfoChannelRef}}</h4>
     </div>
     <div class="row">
-      <div class = "stop-info col-xs-3">
-        <div class = "stop-info-property">
-          <p>
-            <span class="glyphicon glyphicon-road"></span>
-            {{#generalMessage.StopPointRef}}
+      {{#generalMessage.StopPointRef}}
+        <div class = "stop-info col-xs-3">
+          <div class = "stop-info-property">
+            <p>
+              <span class="glyphicon glyphicon-road"></span>
               <span>Arrêt</span>
-            {{/generalMessage.StopPointRef}}
-            {{#generalMessage.LineRef}}
-              <span>Ligne</span>
-            {{/generalMessage.LineRef}}
-          </p>
-        </div>
-        <div class = "stop-info-value">
-          {{#generalMessage.StopPointRef}}
+            </p>
+          </div>
+          <div class = "stop-info-value">
             <p>{{generalMessage.StopPointRef}}</p>
-          {{/generalMessage.StopPointRef}}
-          {{#generalMessage.LineRef}}
-            <p>{{generalMessage.LineRef}}</p>
-          {{/generalMessage.LineRef}}
+          </div>
         </div>
-      </div>
+      {{/generalMessage.StopPointRef}}
+      {{#generalMessage.LineRef}}
+        <div class = "stop-info col-xs-3">
+          <div class = "stop-info-property">
+            <p>
+              <span class="glyphicon glyphicon-road"></span>
+              <span>Ligne</span>
+            </p>
+          </div>
+          <div class = "stop-info-value">
+            <p>{{generalMessage.StopPointRef}}</p>
+          </div>
+        </div>
+      {{/generalMessage.LineRef}}
       <div class = "stop-info col-xs-2">
         <div class = "stop-info-property">
           <p>
@@ -180,7 +185,7 @@ class stopMonitoringCard
           </p>
         </div>
       </div>
-      <div class = "stop-info col-xs-7">
+      <div class = "stop-info {{properWidth}}">
         <div class = "stop-info-property">
           <p>
             <span class="glyphicon glyphicon-signal"></span>
@@ -358,6 +363,11 @@ class stopMonitoringCard
     else
         date.getHours() + ":0" + date.getMinutes()
 
+  properWidth:() ->
+    if this.generalMessage.StopPointRef or this.generalMessage.LineRef
+      "col-xs-7"
+    else
+      "col-xs-10"
   toggleFancyThings:(el) ->
 
     $(el).removeClass('i-m-there')

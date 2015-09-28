@@ -269,6 +269,7 @@ class stopMonitoringRequest
   handleCheckStatusResponse: (xmlResponse, handler, responseWrapper) ->
     serviceOk = "<div class='alert alert-success' role='alert'><a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Service OK</div>"
     $('#check-status-response-wrapper').append serviceOk
+    stopMonitoringRequest.prototype.renderXML(xmlResponse[0])
 
   handleStopDiscoveryResponseDisplay: (xmlResponse, handler, responseWrapper) ->
     nodes = xmlResponse.find('AnnotatedStopPointRef')
