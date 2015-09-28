@@ -20,7 +20,7 @@
 
   $('#canned-requests').submit(function(e) {
     e.preventDefault();
-    $("#response > .panel, #fancy-response > .fancy-stop-wrapper").remove()
+    $("#response > .panel, #fancy-response .fancy-stop-wrapper").remove()
     var request = new stopMonitoringRequest;
     var responseCard = new stopMonitoringCard;
     var generalMessageRequest = request.getGeneralMessage('#canned-requests');
@@ -28,7 +28,7 @@
   });
 
   $('#stop-discovery-button').on('click', function(e) {
-    $("#response > .panel, #fancy-response > .fancy-stop-wrapper").remove()
+    $("#response > .panel, #fancy-response .fancy-stop-wrapper").remove()
     var request = new stopMonitoringRequest;
     var responseCard = new stopMonitoringCard;
     var stopDscRequest = request.getStopDiscovery();
@@ -36,7 +36,7 @@
   });
 
   $('#check-status-button').on('click', function(e) {
-    $("#response > .panel, #fancy-response > .fancy-stop-wrapper").remove()
+    $("#response > .panel, #fancy-response .fancy-stop-wrapper").remove()
     var request = new stopMonitoringRequest;
     var responseCard = new stopMonitoringCard;
     var checkStatusRequest = request.getCheckStatus();
