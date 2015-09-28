@@ -357,6 +357,13 @@ class stopMonitoringCard
       date.getHours() + ":" + date.getMinutes()
     else
         date.getHours() + ":0" + date.getMinutes()
+  setGMCleanRefName:() ->
+    if @GeneralMessage.StopPointRef
+      ref = @GeneralMessage
+    else if condition
+      ref = @GeneralMessage.lineRef
+
+    ref.replace('NINOXE:', '')
 
   toggleFancyThings:(el) ->
 

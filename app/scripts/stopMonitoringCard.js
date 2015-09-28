@@ -53,21 +53,21 @@ stopMonitoringCard = (function() {
   stopMonitoringCard.prototype.lineColors = {};
 
   stopMonitoringCard.prototype.parseSiriResponse = function(node) {
-    var child, i, len, ref;
+    var child, i, len, ref1;
     this.stopMonitoredVisit = {};
-    ref = node.children;
-    for (i = 0, len = ref.length; i < len; i++) {
-      child = ref[i];
+    ref1 = node.children;
+    for (i = 0, len = ref1.length; i < len; i++) {
+      child = ref1[i];
       this.buildResponseJSON(child);
     }
   };
 
   stopMonitoringCard.prototype.buildResponseJSON = function(node) {
-    var child, i, len, ref;
+    var child, i, len, ref1;
     if (node.nodeName === 'siri:FramedVehicleJourneyRef' || node.nodeName === 'siri:MonitoredVehicleJourney') {
-      ref = node.children;
-      for (i = 0, len = ref.length; i < len; i++) {
-        child = ref[i];
+      ref1 = node.children;
+      for (i = 0, len = ref1.length; i < len; i++) {
+        child = ref1[i];
         this.buildResponseJSON(child);
       }
     } else if (node.nodeName === 'siri:MonitoredCall') {
@@ -80,11 +80,11 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.buildGeneralMessageJSON = function(node) {
-    var child, i, len, ref;
+    var child, i, len, ref1;
     if (node.nodeName === 'siri:Content' || node.nodeName === 'siri:Message' || node.nodeName === 'siri:GeneralMessage') {
-      ref = node.children;
-      for (i = 0, len = ref.length; i < len; i++) {
-        child = ref[i];
+      ref1 = node.children;
+      for (i = 0, len = ref1.length; i < len; i++) {
+        child = ref1[i];
         this.buildGeneralMessageJSON(child);
       }
     } else {
@@ -93,10 +93,10 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.buildStopDiscoveryJSON = function(node) {
-    var child, i, len, ref;
-    ref = node.children;
-    for (i = 0, len = ref.length; i < len; i++) {
-      child = ref[i];
+    var child, i, len, ref1;
+    ref1 = node.children;
+    for (i = 0, len = ref1.length; i < len; i++) {
+      child = ref1[i];
       if (child.nodeName === 'siri:Lines') {
         this.addStopLine(child);
       } else {
@@ -106,10 +106,10 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.buildLineDiscoveryJSON = function(node) {
-    var child, i, len, ref;
-    ref = node.children;
-    for (i = 0, len = ref.length; i < len; i++) {
-      child = ref[i];
+    var child, i, len, ref1;
+    ref1 = node.children;
+    for (i = 0, len = ref1.length; i < len; i++) {
+      child = ref1[i];
       if (child.nodeName === 'siri:Destinations') {
         this.addLineDirection(child);
       } else {
@@ -119,15 +119,15 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.addLineDirection = function(node) {
-    var child, grandChild, i, j, len, len1, lineDirection, ref, ref1;
+    var child, grandChild, i, j, len, len1, lineDirection, ref1, ref2;
     this.lineDirections = [];
-    ref = node.children;
-    for (i = 0, len = ref.length; i < len; i++) {
-      child = ref[i];
+    ref1 = node.children;
+    for (i = 0, len = ref1.length; i < len; i++) {
+      child = ref1[i];
       lineDirection = {};
-      ref1 = child.children;
-      for (j = 0, len1 = ref1.length; j < len1; j++) {
-        grandChild = ref1[j];
+      ref2 = child.children;
+      for (j = 0, len1 = ref2.length; j < len1; j++) {
+        grandChild = ref2[j];
         lineDirection[this.unSiried(grandChild.nodeName)] = grandChild.innerHTML;
       }
       this.lineDirections.push(lineDirection);
@@ -135,15 +135,15 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.addOnwards = function(node) {
-    var child, grandChild, i, j, len, len1, onward, ref, ref1;
+    var child, grandChild, i, j, len, len1, onward, ref1, ref2;
     this.onwardsCall = [];
-    ref = node.children;
-    for (i = 0, len = ref.length; i < len; i++) {
-      child = ref[i];
+    ref1 = node.children;
+    for (i = 0, len = ref1.length; i < len; i++) {
+      child = ref1[i];
       onward = {};
-      ref1 = child.children;
-      for (j = 0, len1 = ref1.length; j < len1; j++) {
-        grandChild = ref1[j];
+      ref2 = child.children;
+      for (j = 0, len1 = ref2.length; j < len1; j++) {
+        grandChild = ref2[j];
         onward[this.unSiried(grandChild.nodeName)] = grandChild.innerHTML;
       }
       this.onwardsCall.push(onward);
@@ -151,11 +151,11 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.addStopLine = function(node) {
-    var child, i, len, line, ref;
+    var child, i, len, line, ref1;
     this.stopDiscoveryLines = [];
-    ref = node.children;
-    for (i = 0, len = ref.length; i < len; i++) {
-      child = ref[i];
+    ref1 = node.children;
+    for (i = 0, len = ref1.length; i < len; i++) {
+      child = ref1[i];
       line = {};
       line[this.unSiried(child.nodeName)] = child.innerHTML;
       this.stopDiscoveryLines.push(line);
@@ -163,11 +163,11 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.addMonitoredCall = function(node) {
-    var child, i, len, ref;
+    var child, i, len, ref1;
     this.monitoredCall = {};
-    ref = node.children;
-    for (i = 0, len = ref.length; i < len; i++) {
-      child = ref[i];
+    ref1 = node.children;
+    for (i = 0, len = ref1.length; i < len; i++) {
+      child = ref1[i];
       this.monitoredCall[this.unSiried(child.nodeName)] = child.innerHTML;
     }
   };
@@ -226,6 +226,16 @@ stopMonitoringCard = (function() {
     }
   };
 
+  stopMonitoringCard.prototype.setGMCleanRefName = function() {
+    var ref;
+    if (this.GeneralMessage.StopPointRef) {
+      ref = this.GeneralMessage;
+    } else if (condition) {
+      ref = this.GeneralMessage.lineRef;
+    }
+    return ref.replace('NINOXE:', '');
+  };
+
   stopMonitoringCard.prototype.toggleFancyThings = function(el) {
     $(el).removeClass('i-m-there');
     if ($('#fancy-response-panel-wrapper').hasClass('i-m-there') === false) {
@@ -241,10 +251,10 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.buildMustacheStopCard = function() {
-    var k, ref, v;
-    ref = this.stopMonitoredVisit;
-    for (k in ref) {
-      v = ref[k];
+    var k, ref1, v;
+    ref1 = this.stopMonitoredVisit;
+    for (k in ref1) {
+      v = ref1[k];
       if (this.stopMonitoredVisit.hasOwnProperty(k)) {
         this.mustacheStopMonitoredVisit.push({
           'key': k,
@@ -255,11 +265,11 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.buildMustacheMonitoredCall = function() {
-    var k, ref, v;
+    var k, ref1, v;
     this.monitoredCall = this.checkSiriObject(this.monitoredCall);
-    ref = this.monitoredCall;
-    for (k in ref) {
-      v = ref[k];
+    ref1 = this.monitoredCall;
+    for (k in ref1) {
+      v = ref1[k];
       if (this.monitoredCall.hasOwnProperty(k)) {
         this.mustacheMonitoredCall.push({
           'key': k,
@@ -270,10 +280,10 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.buildMustacheOnwards = function() {
-    var i, k, len, onward, ref, tempOnward, v;
-    ref = this.onwardsCall;
-    for (i = 0, len = ref.length; i < len; i++) {
-      onward = ref[i];
+    var i, k, len, onward, ref1, tempOnward, v;
+    ref1 = this.onwardsCall;
+    for (i = 0, len = ref1.length; i < len; i++) {
+      onward = ref1[i];
       tempOnward = {
         'onWard': []
       };
@@ -291,10 +301,10 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.buildMustacheStopDiscovery = function() {
-    var k, ref, v;
-    ref = this.stopDiscovery;
-    for (k in ref) {
-      v = ref[k];
+    var k, ref1, v;
+    ref1 = this.stopDiscovery;
+    for (k in ref1) {
+      v = ref1[k];
       if (this.stopDiscovery.hasOwnProperty(k)) {
         this.mustacheStopDiscoveries.push({
           'key': k,
@@ -305,10 +315,10 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.buildMustacheStopLines = function() {
-    var i, k, len, line, ref, tempLine, v;
-    ref = this.stopDiscoveryLines;
-    for (i = 0, len = ref.length; i < len; i++) {
-      line = ref[i];
+    var i, k, len, line, ref1, tempLine, v;
+    ref1 = this.stopDiscoveryLines;
+    for (i = 0, len = ref1.length; i < len; i++) {
+      line = ref1[i];
       tempLine = {
         'line': []
       };
@@ -326,10 +336,10 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.buildMustacheLineDiscovery = function() {
-    var k, ref, v;
-    ref = this.lineDiscovery;
-    for (k in ref) {
-      v = ref[k];
+    var k, ref1, v;
+    ref1 = this.lineDiscovery;
+    for (k in ref1) {
+      v = ref1[k];
       if (this.lineDiscovery.hasOwnProperty(k)) {
         this.mustacheLineDiscovery.push({
           'key': k,
@@ -340,10 +350,10 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.buildMustacheLineDirections = function() {
-    var i, k, len, line, ref, tempLine, v;
-    ref = this.lineDirections;
-    for (i = 0, len = ref.length; i < len; i++) {
-      line = ref[i];
+    var i, k, len, line, ref1, tempLine, v;
+    ref1 = this.lineDirections;
+    for (i = 0, len = ref1.length; i < len; i++) {
+      line = ref1[i];
       tempLine = {
         'line': []
       };
@@ -361,11 +371,11 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.buildMustacheGeneralMessage = function() {
-    var k, ref, v;
+    var k, ref1, v;
     this.generalMessage = this.checkSiriObject(this.generalMessage);
-    ref = this.generalMessage;
-    for (k in ref) {
-      v = ref[k];
+    ref1 = this.generalMessage;
+    for (k in ref1) {
+      v = ref1[k];
       if (this.generalMessage.hasOwnProperty(k)) {
         this.mustacheGeneralMessage.push({
           'key': k,
