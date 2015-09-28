@@ -160,10 +160,10 @@ class stopMonitoringCard
         </div>
         <div class = "stop-info-value">
           {{#generalMessage.StopPointRef}}
-            <p>{{generalMessage.StopPointRef}}</p>
+            <p>{{setGMCleanRefName}}</p>
           {{/generalMessage.StopPointRef}}
           {{#generalMessage.LineRef}}
-            <p>{{generalMessage.LineRef}}</p>
+            <p>{{setGMCleanRefName}}</p>
           {{/generalMessage.LineRef}}
         </div>
       </div>
@@ -357,9 +357,10 @@ class stopMonitoringCard
       date.getHours() + ":" + date.getMinutes()
     else
         date.getHours() + ":0" + date.getMinutes()
+
   setGMCleanRefName:() ->
     if @GeneralMessage.StopPointRef
-      ref = @GeneralMessage
+      ref = @GeneralMessage.StopPointRef
     else if condition
       ref = @GeneralMessage.lineRef
 
