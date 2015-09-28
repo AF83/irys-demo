@@ -44,7 +44,7 @@ stopMonitoringCard = (function() {
 
   stopMonitoringCard.prototype.generalMessageTemplate = "<div class = \"panel panel-default stop-wrapper\">\n  <div class = \"panel-heading\">\n    <div class = \"stop-name\"></div>\n      <h4>General Message</h4>\n  </div>\n  <div class = \"panel-body\">\n    {{#generalMessage}}\n      <h4>General Message</h4>\n      {{#mustacheGeneralMessage}}\n        <div>{{key}} : {{value}}</div>\n      {{/mustacheGeneralMessage}}\n    {{/generalMessage}}\n  </div>\n</div>";
 
-  stopMonitoringCard.prototype.generalMessageFancyTemplate = "<li class = \"fancy-stop-wrapper line-1\">\n  <div class = \"line-header\">\n    <h4>{{generalMessage.InfoChannelRef}}</h4>\n  </div>\n  <div class=\"row\">\n    <div class = \"stop-info col-xs-3\">\n      <div class = \"stop-info-property\">\n        <p>\n          <span class=\"glyphicon glyphicon-road\"></span>\n          {{#generalMessage.StopPointRef}}\n            <span>Arrêt</span>\n          {{/generalMessage.StopPointRef}}\n          {{#generalMessage.LineRef}}\n            <span>Ligne</span>\n          {{/generalMessage.LineRef}}\n        </p>\n      </div>\n      <div class = \"stop-info-value\">\n        {{#generalMessage.StopPointRef}}\n          <p>{{setGMCleanRefName(generalMessage.StopPointRef)}}</p>\n        {{/generalMessage.StopPointRef}}\n        {{#generalMessage.LineRef}}\n          <p>{{setGMCleanRefName(generalMessage.LineRef)}}</p>\n        {{/generalMessage.LineRef}}\n      </div>\n    </div>\n    <div class = \"stop-info col-xs-2\">\n      <div class = \"stop-info-property\">\n        <p>\n          <span class=\"glyphicon glyphicon-time\"></span>\n          <span>Validité</span>\n        </p>\n      </div>\n      <div class = \"stop-info-value\">\n        <p>\n          {{setGMCleanDate}}\n        </p>\n      </div>\n    </div>\n    <div class = \"stop-info col-xs-7\">\n      <div class = \"stop-info-property\">\n        <p>\n          <span class=\"glyphicon glyphicon-signal\"></span>\n          <span>Annonce</span>\n        </p>\n      </div>\n      <div class = \"stop-info-value\">\n        <p>{{generalMessage.MessageText}}</p>\n      </div>\n    </div>\n  </div>";
+  stopMonitoringCard.prototype.generalMessageFancyTemplate = "<li class = \"fancy-stop-wrapper line-1\">\n  <div class = \"line-header\">\n    <h4>{{generalMessage.InfoChannelRef}}</h4>\n  </div>\n  <div class=\"row\">\n    <div class = \"stop-info col-xs-3\">\n      <div class = \"stop-info-property\">\n        <p>\n          <span class=\"glyphicon glyphicon-road\"></span>\n          {{#generalMessage.StopPointRef}}\n            <span>Arrêt</span>\n          {{/generalMessage.StopPointRef}}\n          {{#generalMessage.LineRef}}\n            <span>Ligne</span>\n          {{/generalMessage.LineRef}}\n        </p>\n      </div>\n      <div class = \"stop-info-value\">\n        {{#generalMessage.StopPointRef}}\n          <p>{{generalMessage.StopPointRef}}</p>\n        {{/generalMessage.StopPointRef}}\n        {{#generalMessage.LineRef}}\n          <p>{{generalMessage.LineRef}}</p>\n        {{/generalMessage.LineRef}}\n      </div>\n    </div>\n    <div class = \"stop-info col-xs-2\">\n      <div class = \"stop-info-property\">\n        <p>\n          <span class=\"glyphicon glyphicon-time\"></span>\n          <span>Validité</span>\n        </p>\n      </div>\n      <div class = \"stop-info-value\">\n        <p>\n          {{setGMCleanDate}}\n        </p>\n      </div>\n    </div>\n    <div class = \"stop-info col-xs-7\">\n      <div class = \"stop-info-property\">\n        <p>\n          <span class=\"glyphicon glyphicon-signal\"></span>\n          <span>Annonce</span>\n        </p>\n      </div>\n      <div class = \"stop-info-value\">\n        <p>{{generalMessage.MessageText}}</p>\n      </div>\n    </div>\n  </div>";
 
   stopMonitoringCard.prototype.stopDiscoveryTemplate = "<div class = \"panel panel-default stop-wrapper {{lineColor}}\">\n  <div class = \"panel-heading\">\n    <div class = \"stop-name\"></div>\n      <h4>{{stopDiscovery.StopName}}</h4>\n  </div>\n  <div class = \"panel-body\">\n    {{#mustacheStopDiscoveries}}\n      <div>{{key}} : {{value}}</div>\n    {{/mustacheStopDiscoveries}}\n    <h4>Lines</h4>\n    {{#mustacheStopLines}}\n      {{#line}}\n        <div class = \"indented-response\">{{key}} : {{value}}</div>\n      {{/line}}\n    {{/mustacheStopLines}}\n  </div>\n</div>";
 
@@ -53,21 +53,21 @@ stopMonitoringCard = (function() {
   stopMonitoringCard.prototype.lineColors = {};
 
   stopMonitoringCard.prototype.parseSiriResponse = function(node) {
-    var child, i, len, ref1;
+    var child, i, len, ref;
     this.stopMonitoredVisit = {};
-    ref1 = node.children;
-    for (i = 0, len = ref1.length; i < len; i++) {
-      child = ref1[i];
+    ref = node.children;
+    for (i = 0, len = ref.length; i < len; i++) {
+      child = ref[i];
       this.buildResponseJSON(child);
     }
   };
 
   stopMonitoringCard.prototype.buildResponseJSON = function(node) {
-    var child, i, len, ref1;
+    var child, i, len, ref;
     if (node.nodeName === 'siri:FramedVehicleJourneyRef' || node.nodeName === 'siri:MonitoredVehicleJourney') {
-      ref1 = node.children;
-      for (i = 0, len = ref1.length; i < len; i++) {
-        child = ref1[i];
+      ref = node.children;
+      for (i = 0, len = ref.length; i < len; i++) {
+        child = ref[i];
         this.buildResponseJSON(child);
       }
     } else if (node.nodeName === 'siri:MonitoredCall') {
@@ -80,11 +80,11 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.buildGeneralMessageJSON = function(node) {
-    var child, i, len, ref1;
+    var child, i, len, ref;
     if (node.nodeName === 'siri:Content' || node.nodeName === 'siri:Message' || node.nodeName === 'siri:GeneralMessage') {
-      ref1 = node.children;
-      for (i = 0, len = ref1.length; i < len; i++) {
-        child = ref1[i];
+      ref = node.children;
+      for (i = 0, len = ref.length; i < len; i++) {
+        child = ref[i];
         this.buildGeneralMessageJSON(child);
       }
     } else {
@@ -93,10 +93,10 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.buildStopDiscoveryJSON = function(node) {
-    var child, i, len, ref1;
-    ref1 = node.children;
-    for (i = 0, len = ref1.length; i < len; i++) {
-      child = ref1[i];
+    var child, i, len, ref;
+    ref = node.children;
+    for (i = 0, len = ref.length; i < len; i++) {
+      child = ref[i];
       if (child.nodeName === 'siri:Lines') {
         this.addStopLine(child);
       } else {
@@ -106,10 +106,10 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.buildLineDiscoveryJSON = function(node) {
-    var child, i, len, ref1;
-    ref1 = node.children;
-    for (i = 0, len = ref1.length; i < len; i++) {
-      child = ref1[i];
+    var child, i, len, ref;
+    ref = node.children;
+    for (i = 0, len = ref.length; i < len; i++) {
+      child = ref[i];
       if (child.nodeName === 'siri:Destinations') {
         this.addLineDirection(child);
       } else {
@@ -119,15 +119,15 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.addLineDirection = function(node) {
-    var child, grandChild, i, j, len, len1, lineDirection, ref1, ref2;
+    var child, grandChild, i, j, len, len1, lineDirection, ref, ref1;
     this.lineDirections = [];
-    ref1 = node.children;
-    for (i = 0, len = ref1.length; i < len; i++) {
-      child = ref1[i];
+    ref = node.children;
+    for (i = 0, len = ref.length; i < len; i++) {
+      child = ref[i];
       lineDirection = {};
-      ref2 = child.children;
-      for (j = 0, len1 = ref2.length; j < len1; j++) {
-        grandChild = ref2[j];
+      ref1 = child.children;
+      for (j = 0, len1 = ref1.length; j < len1; j++) {
+        grandChild = ref1[j];
         lineDirection[this.unSiried(grandChild.nodeName)] = grandChild.innerHTML;
       }
       this.lineDirections.push(lineDirection);
@@ -135,15 +135,15 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.addOnwards = function(node) {
-    var child, grandChild, i, j, len, len1, onward, ref1, ref2;
+    var child, grandChild, i, j, len, len1, onward, ref, ref1;
     this.onwardsCall = [];
-    ref1 = node.children;
-    for (i = 0, len = ref1.length; i < len; i++) {
-      child = ref1[i];
+    ref = node.children;
+    for (i = 0, len = ref.length; i < len; i++) {
+      child = ref[i];
       onward = {};
-      ref2 = child.children;
-      for (j = 0, len1 = ref2.length; j < len1; j++) {
-        grandChild = ref2[j];
+      ref1 = child.children;
+      for (j = 0, len1 = ref1.length; j < len1; j++) {
+        grandChild = ref1[j];
         onward[this.unSiried(grandChild.nodeName)] = grandChild.innerHTML;
       }
       this.onwardsCall.push(onward);
@@ -151,11 +151,11 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.addStopLine = function(node) {
-    var child, i, len, line, ref1;
+    var child, i, len, line, ref;
     this.stopDiscoveryLines = [];
-    ref1 = node.children;
-    for (i = 0, len = ref1.length; i < len; i++) {
-      child = ref1[i];
+    ref = node.children;
+    for (i = 0, len = ref.length; i < len; i++) {
+      child = ref[i];
       line = {};
       line[this.unSiried(child.nodeName)] = child.innerHTML;
       this.stopDiscoveryLines.push(line);
@@ -163,11 +163,11 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.addMonitoredCall = function(node) {
-    var child, i, len, ref1;
+    var child, i, len, ref;
     this.monitoredCall = {};
-    ref1 = node.children;
-    for (i = 0, len = ref1.length; i < len; i++) {
-      child = ref1[i];
+    ref = node.children;
+    for (i = 0, len = ref.length; i < len; i++) {
+      child = ref[i];
       this.monitoredCall[this.unSiried(child.nodeName)] = child.innerHTML;
     }
   };
@@ -226,10 +226,6 @@ stopMonitoringCard = (function() {
     }
   };
 
-  stopMonitoringCard.prototype.setGMCleanRefName = function(ref) {
-    return ref.replace('NINOXE:', '');
-  };
-
   stopMonitoringCard.prototype.toggleFancyThings = function(el) {
     $(el).removeClass('i-m-there');
     if ($('#fancy-response-panel-wrapper').hasClass('i-m-there') === false) {
@@ -245,10 +241,10 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.buildMustacheStopCard = function() {
-    var k, ref1, v;
-    ref1 = this.stopMonitoredVisit;
-    for (k in ref1) {
-      v = ref1[k];
+    var k, ref, v;
+    ref = this.stopMonitoredVisit;
+    for (k in ref) {
+      v = ref[k];
       if (this.stopMonitoredVisit.hasOwnProperty(k)) {
         this.mustacheStopMonitoredVisit.push({
           'key': k,
@@ -259,11 +255,11 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.buildMustacheMonitoredCall = function() {
-    var k, ref1, v;
+    var k, ref, v;
     this.monitoredCall = this.checkSiriObject(this.monitoredCall);
-    ref1 = this.monitoredCall;
-    for (k in ref1) {
-      v = ref1[k];
+    ref = this.monitoredCall;
+    for (k in ref) {
+      v = ref[k];
       if (this.monitoredCall.hasOwnProperty(k)) {
         this.mustacheMonitoredCall.push({
           'key': k,
@@ -274,10 +270,10 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.buildMustacheOnwards = function() {
-    var i, k, len, onward, ref1, tempOnward, v;
-    ref1 = this.onwardsCall;
-    for (i = 0, len = ref1.length; i < len; i++) {
-      onward = ref1[i];
+    var i, k, len, onward, ref, tempOnward, v;
+    ref = this.onwardsCall;
+    for (i = 0, len = ref.length; i < len; i++) {
+      onward = ref[i];
       tempOnward = {
         'onWard': []
       };
@@ -295,10 +291,10 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.buildMustacheStopDiscovery = function() {
-    var k, ref1, v;
-    ref1 = this.stopDiscovery;
-    for (k in ref1) {
-      v = ref1[k];
+    var k, ref, v;
+    ref = this.stopDiscovery;
+    for (k in ref) {
+      v = ref[k];
       if (this.stopDiscovery.hasOwnProperty(k)) {
         this.mustacheStopDiscoveries.push({
           'key': k,
@@ -309,10 +305,10 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.buildMustacheStopLines = function() {
-    var i, k, len, line, ref1, tempLine, v;
-    ref1 = this.stopDiscoveryLines;
-    for (i = 0, len = ref1.length; i < len; i++) {
-      line = ref1[i];
+    var i, k, len, line, ref, tempLine, v;
+    ref = this.stopDiscoveryLines;
+    for (i = 0, len = ref.length; i < len; i++) {
+      line = ref[i];
       tempLine = {
         'line': []
       };
@@ -330,10 +326,10 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.buildMustacheLineDiscovery = function() {
-    var k, ref1, v;
-    ref1 = this.lineDiscovery;
-    for (k in ref1) {
-      v = ref1[k];
+    var k, ref, v;
+    ref = this.lineDiscovery;
+    for (k in ref) {
+      v = ref[k];
       if (this.lineDiscovery.hasOwnProperty(k)) {
         this.mustacheLineDiscovery.push({
           'key': k,
@@ -344,10 +340,10 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.buildMustacheLineDirections = function() {
-    var i, k, len, line, ref1, tempLine, v;
-    ref1 = this.lineDirections;
-    for (i = 0, len = ref1.length; i < len; i++) {
-      line = ref1[i];
+    var i, k, len, line, ref, tempLine, v;
+    ref = this.lineDirections;
+    for (i = 0, len = ref.length; i < len; i++) {
+      line = ref[i];
       tempLine = {
         'line': []
       };
@@ -365,11 +361,11 @@ stopMonitoringCard = (function() {
   };
 
   stopMonitoringCard.prototype.buildMustacheGeneralMessage = function() {
-    var k, ref1, v;
+    var k, ref, v;
     this.generalMessage = this.checkSiriObject(this.generalMessage);
-    ref1 = this.generalMessage;
-    for (k in ref1) {
-      v = ref1[k];
+    ref = this.generalMessage;
+    for (k in ref) {
+      v = ref[k];
       if (this.generalMessage.hasOwnProperty(k)) {
         this.mustacheGeneralMessage.push({
           'key': k,
