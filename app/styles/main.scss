@@ -61,7 +61,7 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
       width: 100%;
     }
     .hero-banner-hollow {
-      background-color: rgba(190, 190, 190, 0.7);
+      background-color: rgba(120, 120, 120, 0.7);
       height: 100%;
       width: 100%;
       position: absolute;
@@ -75,6 +75,17 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
       left: 0;
       right: 0;
       color: white;
+      h3 {
+        font-style: normal;
+        font-weight: 200;
+      }
+
+      a{
+        color: dodgerblue;
+        &:hover {
+          color:lightblue;
+        }
+      }
     }
     .picture-credit {
       position: absolute;
@@ -371,9 +382,11 @@ textarea.xml-paste-zone {
   }
 }
 .request-form-opener {
-  font-size: 1.25em;
+  font-size: 1.25em
+
 }
 #footer {
+  margin-top: 45px;
   padding: 20px;
   background-color: #222222;
   color: #777777;
