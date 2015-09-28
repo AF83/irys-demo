@@ -353,7 +353,10 @@ class stopMonitoringCard
 
   setGMCleanDate:() ->
     date = new Date(this.generalMessage.ValidUntilTime)
-    date.getHours() + ":" +date.getMinutes()
+    if date.getMinutes() > 9
+      date.getHours() + ":" + date.getMinutes()
+    else
+        date.getHours() + ":0" + date.getMinutes()
 
   toggleFancyThings:(el) ->
 

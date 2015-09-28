@@ -219,7 +219,11 @@ stopMonitoringCard = (function() {
   stopMonitoringCard.prototype.setGMCleanDate = function() {
     var date;
     date = new Date(this.generalMessage.ValidUntilTime);
-    return date.getHours() + ":" + date.getMinutes();
+    if (date.getMinutes() > 9) {
+      return date.getHours() + ":" + date.getMinutes();
+    } else {
+      return date.getHours() + ":0" + date.getMinutes();
+    }
   };
 
   stopMonitoringCard.prototype.toggleFancyThings = function(el) {
