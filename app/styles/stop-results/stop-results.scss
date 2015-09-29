@@ -135,8 +135,8 @@
       .line-header,.fancy-stop-wrapper>.line-header{background-color:#2ECC71;color:#fff;}
       .fancy-stop-wrapper>.line-header:before{border-top:40px solid #2ECC71;}
 
-      .stop-info-property{background-color:lighten(#2ECC71,20%);color:darken(#2ECC71,15%);}
-      .stop-info-value{background-color:lighten(#2ECC71,27.5%);color:darken(#2ECC71,5%);}
+      .stop-info-property{background-color:lighten(#2ECC71,20%);color:darken(#2ECC71,25%);}
+      .stop-info-value{background-color:lighten(#2ECC71,27.5%);color:darken(#2ECC71,15%);}
     }
     &.line-3{
       .line-header,.fancy-stop-wrapper>.line-header{background-color:#F5AB35;}
@@ -206,7 +206,7 @@
 
       .stop-info-value.delayed{color:orange;}
       .stop-info-value.canceled{color:red;}
-      .stop-info-value.early{color:lightgreen;}
+      .stop-info-value.early{color:green;}
     }
   }
 
