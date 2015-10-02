@@ -168,7 +168,7 @@ class stopMonitoringCard
             </p>
           </div>
           <div class = "stop-info-value">
-            <p>{{generalMessage.StopPointRef}}</p>
+            <p>{{generalMessage.LineRef}}</p>
           </div>
         </div>
       {{/generalMessage.LineRef}}
@@ -181,7 +181,7 @@ class stopMonitoringCard
         </div>
         <div class = "stop-info-value">
           <p>
-            {{setGMCleanDate}}
+            {{setCleanDate}}
           </p>
         </div>
       </div>
@@ -353,15 +353,11 @@ class stopMonitoringCard
       date = new Date(this.AimedArrivalTime)
     else
       date = new Date(this.generalMessage.ValidUntilTime)
-      console.log(date)
-    date.getHours() + ":" +date.getMinutes()
 
-  setGMCleanDate:() ->
-    date = new Date(this.generalMessage.ValidUntilTime)
     if date.getMinutes() > 9
       date.getHours() + ":" + date.getMinutes()
     else
-        date.getHours() + ":0" + date.getMinutes()
+      date.getHours() + ":0" + date.getMinutes()
 
   properWidth:() ->
     if this.generalMessage.StopPointRef or this.generalMessage.LineRef

@@ -183,6 +183,7 @@ stopMonitoringRequest = (function() {
   stopMonitoringRequest.prototype.handleCheckStatusResponse = function(xmlResponse, handler, responseWrapper) {
     var serviceOk;
     serviceOk = "<div class='alert alert-success' role='alert'><a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Service OK</div>";
+    stopMonitoringCard.prototype.toggleClassicThings(responseWrapper);
     $('#check-status-response-wrapper').append(serviceOk);
     return stopMonitoringRequest.prototype.renderXML(xmlResponse[0]);
   };

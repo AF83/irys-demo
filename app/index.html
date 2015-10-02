@@ -409,13 +409,13 @@
                             </label>
                         </div>
                       </div>
-                      <div class="form-group " id = "requestorNameWrapper">
+                      <div class="form-group hidden" id = "requestorNameWrapper">
                           <label for="requestorName" class="col-lg-4 control-label">Profil</label>
                           <div class="col-lg-8">
                             <input type="text" class="form-control" id="requestorName" placeholder="STIF" disabled>
                           </div>
                       </div>
-                      <div class="form-group" id = "requestorVersionWrapper">
+                      <div class="form-group hidden" id = "requestorVersionWrapper">
                           <label for="requestorVersion" class="col-lg-4 control-label">Version du profil</label>
                           <div class="col-lg-8">
                             <input type="text" class="form-control" id="requestorVersion" placeholder="2.2" disabled>
@@ -614,9 +614,9 @@
                       <div class="col-lg-8">
                         <select class = "form-control" id = "perturbationType">
                           <option value= "" >Tous</option>
-                          <option value= "1" >Perturbation</option>
-                          <option value= "2">Information</option>
-                          <option value= "3">Commercial</option>
+                          <option value= "Perturbation" >Perturbation</option>
+                          <option value= "Information">Information</option>
+                          <option value= "Commercial">Commercial</option>
                         </select>
                       </div>
                   </div>
@@ -666,7 +666,6 @@
               <form class="form-horizontal" id ="check-status">
                 <legend class=""> Construire votre requête Check Status</legend>
                     <div class="form-group">
-                      <div id = "check-status-response-wrapper"></div>
                       <div class="col-xs-4">
                         <button type="button" class="btn btn-primary" id="check-status-button">Check Status</button>
                       </div>
@@ -731,6 +730,7 @@
 
                 <h4 class = "response-counter"></h4>
                 <h4 class = "siri-version-display"></h4>
+                <div id = "check-status-response-wrapper"></div>
               </div>
             </div>
             </div><!---->

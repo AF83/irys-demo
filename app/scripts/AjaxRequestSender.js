@@ -40,7 +40,7 @@
     var request = new stopMonitoringRequest;
     var responseCard = new stopMonitoringCard;
     var checkStatusRequest = request.getCheckStatus();
-    request.sendRequest(checkStatusRequest, request.handleCheckStatusResponse, responseCard, $('#check-status-response-wrapper'));
+    request.sendRequest(checkStatusRequest, request.handleCheckStatusResponse, responseCard, $('#check-status-form-wrapper'));
   });
 
   $('#line-discovery-button').on('click', function(e) {
