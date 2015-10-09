@@ -347,7 +347,7 @@ class stopMonitoringCard
 
   setCleanDate:() ->
 
-    if this.monitoredCall != undefined
+    if this.monitoredCall.AimedArrivalTime != undefined
       date = new Date(this.monitoredCall.AimedArrivalTime)
     else if this.AimedArrivalTime != undefined
       date = new Date(this.AimedArrivalTime)

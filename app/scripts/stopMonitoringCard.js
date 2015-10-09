@@ -205,7 +205,7 @@ stopMonitoringCard = (function() {
 
   stopMonitoringCard.prototype.setCleanDate = function() {
     var date;
-    if (this.monitoredCall !== void 0) {
+    if (this.monitoredCall.AimedArrivalTime !== void 0) {
       date = new Date(this.monitoredCall.AimedArrivalTime);
     } else if (this.AimedArrivalTime !== void 0) {
       date = new Date(this.AimedArrivalTime);
