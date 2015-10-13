@@ -256,11 +256,14 @@ stopMonitoringRequest = (function() {
   };
 
   stopMonitoringRequest.prototype.sendRequest = function(xmlRequest, responseHandler, handler, responseWrapper) {
-    var serverUrl;
+    var errorHandler, serverUrl;
     if (this.siriVersionAPI === "2.0") {
       serverUrl = "urlSiriV2";
     } else {
       serverUrl = 'http://appli.chouette.mobi/irys_server';
+    }
+    if (responseWrapper) {
+      errorHandler = responseWrapper.find('.alert-wrapper');
     }
     $.ajax({
       method: 'POST',
@@ -282,7 +285,7 @@ stopMonitoringRequest = (function() {
       if (isError.length > 0) {
         errorText = isError[0].innerHTML;
         errorSpan = "<div class='alert alert-danger' role='alert'><a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" + errorText + "</div>";
-        $('.alert-wrapper').append(errorSpan);
+        errorHandler.append(errorSpan);
       } else {
         responseHandler(xmlDoc, handler, responseWrapper);
       }

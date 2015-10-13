@@ -11,6 +11,10 @@
       $( "#stopId" ).val("");
     }
 
+    if ($('#lineName').val() == "") {
+      $( "#lineId" ).val("");
+    }
+
     var request = new stopMonitoringRequest;
     var xmlRequest = request.getStopMonitoring('#stop-monitoring-form');
     var responseCard = new stopMonitoringCard;
@@ -20,6 +24,20 @@
 
   $('#canned-requests').submit(function(e) {
     e.preventDefault();
+
+    var regEx = /^\d{8}/;
+
+    if ( regEx.exec( $('#stopName').val() ) ) {
+      $( "#stopId" ).val("NINOXE:StopPoint:SPOR:" + $('#stopName').val() + ":LOC");
+    }
+    else if ($('#stopName').val() == "") {
+      $( "#stopId" ).val("");
+    }
+
+    if ($('#lineName').val() == "") {
+      $( "#lineId" ).val("");
+    }
+
     $("#response > .panel, #fancy-response .fancy-stop-wrapper").remove()
     var request = new stopMonitoringRequest;
     var responseCard = new stopMonitoringCard;

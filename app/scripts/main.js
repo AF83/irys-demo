@@ -187,4 +187,20 @@ $(document).ready( function() {
     $(this).closest('.right-panel-wrapper').toggleClass('open');
   });
 
+  $('.reset-stop-id').on('click', function(e) {
+    e.preventDefault();
+    var parent = $(this).parentsUntil('form')
+    parent.find('#stopId').val('');
+    parent.find('#stopName').val('');
+
+  })
+
+  $('.reset-line-id').on('click', function(e) {
+    e.preventDefault();
+    var parent = $(this).parentsUntil('form')
+    parent.find('#lineId').val('');
+    parent.find('#lineName').val('');
+
+  })
+
 });
