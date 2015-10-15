@@ -205,10 +205,10 @@ stopMonitoringCard = (function() {
 
   stopMonitoringCard.prototype.setCleanDate = function() {
     var date;
-    if (this.monitoredCall.AimedArrivalTime !== void 0) {
-      date = new Date(this.monitoredCall.AimedArrivalTime);
-    } else if (this.AimedArrivalTime !== void 0) {
+    if (this.AimedArrivalTime !== void 0) {
       date = new Date(this.AimedArrivalTime);
+    } else if (this.monitoredCall.AimedArrivalTime !== void 0) {
+      date = new Date(this.monitoredCall.AimedArrivalTime);
     } else {
       date = new Date(this.generalMessage.ValidUntilTime);
     }

@@ -184,7 +184,7 @@ stopMonitoringRequest = (function() {
     var serviceOk;
     serviceOk = "<div class='alert alert-success' role='alert'><a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Service OK</div>";
     stopMonitoringCard.prototype.toggleClassicThings(responseWrapper);
-    $('#check-status-response-wrapper').append(serviceOk);
+    $('#check-status-response-wrapper').append(serviceOk).fadeOut(5000);
     return stopMonitoringRequest.prototype.renderXML(xmlResponse[0]);
   };
 
@@ -285,7 +285,7 @@ stopMonitoringRequest = (function() {
       if (isError.length > 0) {
         errorText = isError[0].innerHTML;
         errorSpan = "<div class='alert alert-danger' role='alert'><a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" + errorText + "</div>";
-        errorHandler.append(errorSpan);
+        errorHandler.append(errorSpan).fadeOut(5000);
       } else {
         responseHandler(xmlDoc, handler, responseWrapper);
       }
