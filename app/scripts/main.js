@@ -86,6 +86,7 @@ $(document).ready( function() {
       $('#stop-monitoring-form-wrapper').addClass('i-m-there');
       $('#backlink-form-from-response').attr("href", "#stop-monitoring-form-wrapper");
       $('#fancy-backlink-form-from-response').attr("href", "#stop-monitoring-form-wrapper");
+      $('#xml-backlink-form-from-response').attr("href", "#stop-monitoring-form-wrapper");
     }
 
     if ($('#service-discovery-form-wrapper').hasClass('i-m-there')) {
@@ -108,6 +109,7 @@ $(document).ready( function() {
       $('#get-general-message-form-wrapper').addClass('i-m-there');
       $('#backlink-form-from-response').attr("href", "#get-general-message-form-wrapper");
       $('#fancy-backlink-form-from-response').attr("href", "#get-general-message-form-wrapper");
+      $('#xml-backlink-form-from-response').attr("href", "#get-general-message-form-wrapper");
     }
 
     if ($('#service-discovery-form-wrapper').hasClass('i-m-there')) {
@@ -130,6 +132,8 @@ $(document).ready( function() {
       $('#service-discovery-form-wrapper').addClass('i-m-there');
       $('#backlink-form-from-response').attr("href", "#service-discovery-form-wrapper");
       $('#fancy-backlink-form-from-response').attr("href", "#service-discovery-form-wrapper");
+      $('#xml-backlink-form-from-response').attr("href", "#service-discovery-form-wrapper");
+
     }
 
     if ($('#get-general-message-form-wrapper').hasClass('i-m-there') == true) {
