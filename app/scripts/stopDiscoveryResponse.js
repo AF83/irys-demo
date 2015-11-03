@@ -14,17 +14,18 @@ stopDiscoveryResponse = (function() {
     if (type === 'Stop') {
       type = type + 'Point';
     }
-    return type;
+    return type + 'Ref';
   };
 
   stopDiscoveryResponse.prototype.handleFallbackResponse = function(type) {
-    var file, nodes;
+    var file, nodes, ref;
     if (type === 'Stop') {
       file = this.fallbackStopResponse;
     } else {
       file = this.fallbackLineResponse;
     }
-    nodes = $($.parseXML(file)).find('Annotated' + this.typeRef(type) + 'Ref');
+    ref = 'Annotated' + this.typeRef(type);
+    nodes = $($.parseXML(file)).find("siri\\:" + ref + ',' + ref);
     return this.buildAutocompleteArray(nodes, type);
   };
 
@@ -34,9 +35,9 @@ stopDiscoveryResponse = (function() {
     for (i = 0, len = nodes.length; i < len; i++) {
       node = nodes[i];
       this.autocomplete.push({
-        id: $(node).find(this.typeRef(type) + 'Ref')[0].innerHTML,
-        label: $(node).find(type + 'Name')[0].innerHTML + ' ' + $(node).find(this.typeRef(type) + 'Ref')[0].innerHTML.replace('NINOXE:StopPoint:SP:', ''),
-        value: $(node).find(type + 'Name')[0].innerHTML + ' ' + $(node).find(this.typeRef(type) + 'Ref')[0].innerHTML
+        id: $(node).find("siri\\:" + this.typeRef(type) + ',' + this.typeRef(type))[0].innerHTML,
+        label: $(node).find("siri\\:" + type + 'Name' + ',' + type + 'Name')[0].innerHTML + ' ' + $(node).find("siri\\:" + this.typeRef(type) + ',' + this.typeRef(type))[0].innerHTML.replace('NINOXE:StopPoint:SP:', ''),
+        value: $(node).find("siri\\:" + type + 'Name' + ',' + type + 'Name')[0].innerHTML + ' ' + $(node).find("siri\\:" + this.typeRef(type) + ',' + this.typeRef(type))[0].innerHTML
       });
     }
     if (type === 'Stop') {

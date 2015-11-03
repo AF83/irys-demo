@@ -1924,7 +1924,7 @@ class stopDiscoveryResponse
   typeRef:(type) ->
     if type == 'Stop'
       type = type + 'Point'
-    type
+    type + 'Ref'
 
   handleFallbackResponse:(type) ->
 
@@ -1932,7 +1932,8 @@ class stopDiscoveryResponse
       file = @fallbackStopResponse
     else
       file = @fallbackLineResponse
-    nodes = $($.parseXML(file)).find('Annotated'+ this.typeRef(type) + 'Ref')
+    ref = 'Annotated'+ this.typeRef(type)
+    nodes = $($.parseXML(file)).find("siri\\:" + ref + ',' + ref)
 
     this.buildAutocompleteArray nodes, type
 
@@ -1941,9 +1942,9 @@ class stopDiscoveryResponse
 
     for node in nodes
       @autocomplete.push({
-        id: $(node).find(this.typeRef(type) + 'Ref')[0].innerHTML,
-        label: $(node).find(type + 'Name')[0].innerHTML + ' ' + $(node).find(this.typeRef(type) + 'Ref')[0].innerHTML.replace('NINOXE:StopPoint:SP:',''),
-        value: $(node).find(type + 'Name')[0].innerHTML + ' ' + $(node).find(this.typeRef(type) + 'Ref')[0].innerHTML
+        id: $(node).find("siri\\:" + this.typeRef(type)+','+ this.typeRef(type))[0].innerHTML,
+        label: $(node).find("siri\\:" + type + 'Name' +','+ type + 'Name')[0].innerHTML + ' ' + $(node).find("siri\\:" + this.typeRef(type)+','+ this.typeRef(type))[0].innerHTML.replace('NINOXE:StopPoint:SP:',''),
+        value: $(node).find("siri\\:" + type + 'Name' +','+ type + 'Name')[0].innerHTML + ' ' + $(node).find("siri\\:" + this.typeRef(type)+','+ this.typeRef(type))[0].innerHTML
         })
 
     if type == 'Stop'
