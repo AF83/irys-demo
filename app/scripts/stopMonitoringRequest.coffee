@@ -245,8 +245,8 @@ class stopMonitoringRequest
     Mustache.render(template, this)
 
   handleStopMonitoringResponse: (xmlResponse, handler, responseWrapper) ->
-    siriVersionToDisplay = xmlResponse.find('StopMonitoringDelivery')[0].getAttribute('version')
-    nodes = xmlResponse.find('MonitoredStopVisit')
+    siriVersionToDisplay = xmlResponse.find('siri\\:StopMonitoringDelivery, StopMonitoringDelivery')[0].getAttribute('version')
+    nodes = xmlResponse.find('siri\\:MonitoredStopVisit, MonitoredStopVisit')
 
     for node in nodes
       handler.parseSiriResponse(node)
@@ -259,11 +259,11 @@ class stopMonitoringRequest
     stopMonitoringCard.prototype.toggleFancyThings responseWrapper
 
   handleStopDiscoveryResponse: (xmlResponse, handler, responseWrapper) ->
-    nodes = xmlResponse.find('AnnotatedStopPointRef')
+    nodes = xmlResponse.find('siri\\:AnnotatedStopPointRef, AnnotatedStopPointRef')
     handler.buildAutocompleteArray(nodes, "Stop")
 
   handleLineDiscoveryResponse: (xmlResponse, handler, responseWrapper) ->
-    nodes = xmlResponse.find('AnnotatedLineRef')
+    nodes = xmlResponse.find('siri\\:AnnotatedLineRef, AnnotatedLineRef')
     handler.buildAutocompleteArray(nodes, "Line")
 
   handleCheckStatusResponse: (xmlResponse, handler, responseWrapper) ->
@@ -273,7 +273,7 @@ class stopMonitoringRequest
     stopMonitoringRequest.prototype.renderXML(xmlResponse[0])
 
   handleStopDiscoveryResponseDisplay: (xmlResponse, handler, responseWrapper) ->
-    nodes = xmlResponse.find('AnnotatedStopPointRef')
+    nodes = xmlResponse.find('siri\\:AnnotatedStopPointRef, AnnotatedStopPointRef')
     for node in nodes
       handler.buildStopDiscoveryJSON(node)
       handler.buildStopDiscovery()
@@ -281,7 +281,7 @@ class stopMonitoringRequest
     stopMonitoringCard.prototype.toggleClassicThings responseWrapper
 
   handleLineDiscoveryResponseDisplay: (xmlResponse, handler, responseWrapper) ->
-    nodes = xmlResponse.find('AnnotatedLineRef')
+    nodes = xmlResponse.find('siri\\:AnnotatedLineRef, AnnotatedLineRef')
     for node in nodes
       handler.buildLineDiscoveryJSON(node)
       handler.buildLineDiscovery(nodes, "Line")
@@ -290,7 +290,7 @@ class stopMonitoringRequest
     stopMonitoringCard.prototype.toggleClassicThings responseWrapper
 
   handleGeneralMessageResponse: (xmlResponse, handler, responseWrapper) ->
-    nodes = xmlResponse.find('GeneralMessage')
+    nodes = xmlResponse.find('siri\\:GeneralMessage, GeneralMessage')
     if nodes.length > 0
       for node in nodes
         handler.generalMessage = {}

@@ -154,8 +154,8 @@ stopMonitoringRequest = (function() {
 
   stopMonitoringRequest.prototype.handleStopMonitoringResponse = function(xmlResponse, handler, responseWrapper) {
     var i, len, node, nodes, siriVersionToDisplay;
-    siriVersionToDisplay = xmlResponse.find('StopMonitoringDelivery')[0].getAttribute('version');
-    nodes = xmlResponse.find('MonitoredStopVisit');
+    siriVersionToDisplay = xmlResponse.find('siri\\:StopMonitoringDelivery, StopMonitoringDelivery')[0].getAttribute('version');
+    nodes = xmlResponse.find('siri\\:MonitoredStopVisit, MonitoredStopVisit');
     for (i = 0, len = nodes.length; i < len; i++) {
       node = nodes[i];
       handler.parseSiriResponse(node);
@@ -170,13 +170,13 @@ stopMonitoringRequest = (function() {
 
   stopMonitoringRequest.prototype.handleStopDiscoveryResponse = function(xmlResponse, handler, responseWrapper) {
     var nodes;
-    nodes = xmlResponse.find('AnnotatedStopPointRef');
+    nodes = xmlResponse.find('siri\\:AnnotatedStopPointRef, AnnotatedStopPointRef');
     return handler.buildAutocompleteArray(nodes, "Stop");
   };
 
   stopMonitoringRequest.prototype.handleLineDiscoveryResponse = function(xmlResponse, handler, responseWrapper) {
     var nodes;
-    nodes = xmlResponse.find('AnnotatedLineRef');
+    nodes = xmlResponse.find('siri\\:AnnotatedLineRef, AnnotatedLineRef');
     return handler.buildAutocompleteArray(nodes, "Line");
   };
 
@@ -190,7 +190,7 @@ stopMonitoringRequest = (function() {
 
   stopMonitoringRequest.prototype.handleStopDiscoveryResponseDisplay = function(xmlResponse, handler, responseWrapper) {
     var i, len, node, nodes;
-    nodes = xmlResponse.find('AnnotatedStopPointRef');
+    nodes = xmlResponse.find('siri\\:AnnotatedStopPointRef, AnnotatedStopPointRef');
     for (i = 0, len = nodes.length; i < len; i++) {
       node = nodes[i];
       handler.buildStopDiscoveryJSON(node);
@@ -202,7 +202,7 @@ stopMonitoringRequest = (function() {
 
   stopMonitoringRequest.prototype.handleLineDiscoveryResponseDisplay = function(xmlResponse, handler, responseWrapper) {
     var i, len, node, nodes;
-    nodes = xmlResponse.find('AnnotatedLineRef');
+    nodes = xmlResponse.find('siri\\:AnnotatedLineRef, AnnotatedLineRef');
     for (i = 0, len = nodes.length; i < len; i++) {
       node = nodes[i];
       handler.buildLineDiscoveryJSON(node);
@@ -214,7 +214,7 @@ stopMonitoringRequest = (function() {
 
   stopMonitoringRequest.prototype.handleGeneralMessageResponse = function(xmlResponse, handler, responseWrapper) {
     var errorSpan, i, len, node, nodes;
-    nodes = xmlResponse.find('GeneralMessage');
+    nodes = xmlResponse.find('siri\\:GeneralMessage, GeneralMessage');
     if (nodes.length > 0) {
       for (i = 0, len = nodes.length; i < len; i++) {
         node = nodes[i];
