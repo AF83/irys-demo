@@ -386,7 +386,19 @@ module.exports = function (grunt) {
         'imagemin',
         'svgmin'
       ]
+    },
+    
+    coffee: {
+        compile: {
+          expand: true,
+          flatten: true,
+          cwd: 'app/scripts',
+          src: ['*.coffee'],
+          dest: 'app/scripts/',
+          ext: '.js'
+        }
     }
+    
   });
 
 
@@ -446,5 +458,8 @@ module.exports = function (grunt) {
     'newer:eslint',
     'test',
     'build'
-  ]);
+  ]);  
+  
+  grunt.loadNpmTasks('grunt-contrib-coffee');
+
 };

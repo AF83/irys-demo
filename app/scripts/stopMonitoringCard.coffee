@@ -1,4 +1,4 @@
-class stopMonitoringCard
+class window.stopMonitoringCard
 
   stopMonitoredVisit: {}
   onwardsCall: []
@@ -248,79 +248,92 @@ class stopMonitoringCard
 
   buildResponseJSON: (node) ->
 
-    if node.nodeName == 'siri:FramedVehicleJourneyRef' or node.nodeName == 'siri:MonitoredVehicleJourney'
-
-      for child in node.children
+    if node.localName == 'FramedVehicleJourneyRef' or node.localName == 'MonitoredVehicleJourney'
+      for child in node.children      
         this.buildResponseJSON  child
-
-    else if node.nodeName == 'siri:MonitoredCall'
-      this.addMonitoredCall node
-    else if node.nodeName == 'siri:OnwardCalls'
-      this.addOnwards node
+    else if node.localName == 'MonitoredCall'
+      this.monitoredCall = {}
+      for child in node.children
+        this.addMonitoredCall child
+    else if node.localName == 'OnwardCalls'
+      this.onwardsCall = []
+      for child in node.children
+        this.addOnwards child           
     else
-      this.stopMonitoredVisit[this.unSiried(node.nodeName)] = node.innerHTML
-
+      this.stopMonitoredVisit[node.localName] = node.innerHTML
 
     return
 
   buildGeneralMessageJSON: (node) ->
-    if node.nodeName == 'siri:Content' or node.nodeName == 'siri:Message' or node.nodeName == 'siri:GeneralMessage'
+    if node.localName == 'Content' or node.localName == 'Message' or node.localName == 'GeneralMessage'
       for child in node.children
         this.buildGeneralMessageJSON  child
     else
-      this.generalMessage[this.unSiried(node.nodeName)] = node.innerHTML
+      this.generalMessage[node.localName] = node.innerHTML
     return
 
   buildStopDiscoveryJSON: (node) ->
     for child in node.children
-      if child.nodeName == 'siri:Lines'
+      if child.localName == 'Lines'
         this.addStopLine child
+      else if child.localName == 'Location'
+         this.addLocation child         
       else
-        @stopDiscovery[this.unSiried(child.nodeName)] = child.innerHTML
+        @stopDiscovery[child.localName] = child.innerHTML
     return
 
   buildLineDiscoveryJSON: (node) ->
     for child in node.children
-      if child.nodeName == 'siri:Destinations'
+      if child.localName == 'Destinations'
         this.addLineDirection child
       else
-        @lineDiscovery[this.unSiried(child.nodeName)] = child.innerHTML
+        @lineDiscovery[child.localName] = child.innerHTML
     return
 
+  addLocation:(node) ->
+    for child in node.children
+    	@stopDiscovery[child.localName] = child.innerHTML      
+    return
+    
   addLineDirection:(node) ->
     @lineDirections = []
     for child in node.children
       lineDirection= {}
       for grandChild in child.children
-        lineDirection[this.unSiried(grandChild.nodeName)] = grandChild.innerHTML
+        lineDirection[grandChild.localName] = grandChild.innerHTML
       @lineDirections.push(lineDirection)
     return
-
+ 
   addOnwards: (node) ->
-    this.onwardsCall = []
+    onward = {}
     for child in node.children
-      onward = {}
-      for grandChild in child.children
-        onward[this.unSiried(grandChild.nodeName)] = grandChild.innerHTML
-      @onwardsCall.push(onward)
+       this.addOnward(child, onward)
+    @onwardsCall.push(onward)
     return
-
+   
+  addOnward: (node, onward) ->
+    if node.localName == 'ArrivalStopAssignment' or node.localName == 'DepartureStopAssignment'
+    	for child in node.children  
+    	  this.addOnward(child, onward)
+    else
+      onward[node.localName] = node.innerHTML
+    return
+    
   addStopLine: (node) ->
     @stopDiscoveryLines = []
     for child in node.children
       line= {}
-      line[this.unSiried(child.nodeName)] = child.innerHTML
+      line[child.localName] = child.innerHTML
       @stopDiscoveryLines.push(line)
     return
 
   addMonitoredCall: (node) ->
-    this.monitoredCall = {}
-    for child in node.children
-      @monitoredCall[this.unSiried(child.nodeName)] = child.innerHTML
+    if node.localName == 'ArrivalStopAssignment' or node.localName == 'DepartureStopAssignment'
+    	for child in node.children  
+          this.addMonitoredCall child
+    else
+      @monitoredCall[node.localName] = node.innerHTML
     return
-
-  unSiried: (node) ->
-    return node.replace('siri:', '')
 
   checkSiriObject:(object) ->
     if jQuery.isEmptyObject object

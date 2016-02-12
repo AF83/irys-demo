@@ -1,51 +1,18 @@
 // jshint devel:true
 $(document).ready( function() {
 	console.log('\'Allo \'Allo!');
-
-	$(function() {
-    var stopDSC = new stopMonitoringRequest;
-    var stopDscRequest = stopDSC.getStopDiscovery();
-    var lineDscRequest = stopDSC.getLineDiscovery();
-    var stopDSCResponse = new stopDiscoveryResponse;
-
-
-    var availableStations;
-    stopDSC.sendRequest(stopDscRequest, stopDSC.handleStopDiscoveryResponse, stopDSCResponse);
-
-    stopDSC.sendRequest(lineDscRequest, stopDSC.handleLineDiscoveryResponse, stopDSCResponse);
-
-  });
-
-  $('#siriVersionAPI3, #siriGeneralVersionAPI3').on('click', function() {
-    var hiddenFields = []
-    hiddenFields = $(this).parentsUntil('.form-horizontal').find('.hidden')
-    hiddenFields.each(function(index, elt) {
-      $(elt).removeClass('hidden');
-    });
-  });
-
-  $('#siriVersionAPI2, #siriVersionAPI1, #siriGeneralVersionAPI2, #siriGeneralVersionAPI1').on('click', function() {
-
-    var nodeName = $(this).parentsUntil('.form-horizontal').find('#requestorNameWrapper')
-    var nodeVersion = $(this).parentsUntil('.form-horizontal').find('#requestorVersionWrapper')
-    var hiddenArray = [nodeName, nodeVersion];
-
-    if ($(this).prop('id') == "siriGeneralVersionAPI1" || $(this).prop('id') == "siriGeneralVersionAPI2") {
-      var nodeDestinationRef =  $(this).parentsUntil('.form-horizontal').find('#destinationRefWrapper')
-      var nodeGroupDestination = $(this).parentsUntil('.form-horizontal').find('#groupOfLinesRefWrapper')
-      hiddenArray = hiddenArray.concat([nodeDestinationRef, nodeGroupDestination]);
-    } else {
-      var nodeMinimumStopVisitPerLine = $(this).parentsUntil('.form-horizontal').find('#minimumStopVisitPerLineViaWrapper')
-      hiddenArray = hiddenArray.concat([nodeMinimumStopVisitPerLine]);
-    };
-
-    hiddenArray.forEach(function(elt) {
-      if (elt.hasClass('hidden') == false) {
-        elt.addClass('hidden');
-      }
-    });
-  });
-
+    $(".siri_24").css("display", "none");
+    autocomplete();
+    
+ function autocomplete() {
+    var request = new stopMonitoringRequest;
+    request.siriVersionAPI = $("#siri-server-value").attr('data-version');
+    request.requestorRef = $("#siri-server-value").attr('data-requestor');
+    var response = new stopDiscoveryResponse;
+    request.sendRequest(request.getStopDiscovery(), request.handleStopDiscoveryResponse, response);
+    request.sendRequest(request.getLineDiscovery(), request.handleLineDiscoveryResponse, response);    
+  }
+  
   function superToggle(el) {
     if ($(el).hasClass('i-m-there')) {
       $(el).removeClass('i-m-there');
@@ -181,11 +148,12 @@ $(document).ready( function() {
     superToggle(target);
 
   });
+  
   $('.request-form-opener').on('click', function(e){
-    e.preventDefault();
+    e.preventDefault();   
     $('.right-panel-wrapper').toggleClass('open');
-
   });
+  
   $('.right-panel-wrapper').on('click', '.pannel-trigger', function(e) {
     e.preventDefault();
     $(this).closest('.right-panel-wrapper').toggleClass('open');
@@ -198,6 +166,14 @@ $(document).ready( function() {
     parent.find('#stopName').val('');
 
   })
+  
+  $('.reset-destination-id').on('click', function(e) {
+    e.preventDefault();
+    var parent = $(this).parentsUntil('form')
+    parent.find('#destinationId').val('');
+    parent.find('#destinationName').val('');
+
+  })
 
   $('.reset-line-id').on('click', function(e) {
     e.preventDefault();
@@ -206,5 +182,27 @@ $(document).ready( function() {
     parent.find('#lineName').val('');
 
   })
-
+  
+  $('#siri-server-choice').on('click','ul li a', function(e) {
+	  var text = $(this).text();
+	  var value = $(this).attr('data-value');
+	  var version = $(this).attr('data-version');
+	  var requestor = $(this).attr('data-requestor');
+	  
+	  var node = $("#siri-server-value");
+	  node.text(text).append('<span class="caret"></span>');
+	  node.attr('data-value', value);
+	  node.attr('data-version', version);
+	  node.attr('data-requestor', requestor);
+	  	  
+	  if(version == '1.3'){
+		  $(".siri_24").css("display", "none");
+	  }else{
+		  $(".siri_24").css("display", "block");
+	  }  
+	  
+	  autocomplete();
+	  
+	  $('.pannel-trigger').hide();
+  });
 });
