@@ -78,20 +78,17 @@
 						<!-- [DSU] -->
 						<li id="siri-server-choice" class="dropdown-inverse"><a
 							id="siri-server-value" data-version="2.0:FR-IDF-2.4"
-							data-requestor="NINOXE:default"
-							data-value="../siri_france/siri" href="#"
-							class="dropdown-toggle" data-toggle="dropdown" role="button"
-							aria-haspopup="true" aria-expanded="false">SIRI profile
-								2.4 <span class="caret"></span>
+							data-requestor="NINOXE:default" data-value="../siri_france/siri"
+							href="#" class="dropdown-toggle" data-toggle="dropdown"
+							role="button" aria-haspopup="true" aria-expanded="false">SIRI
+								profile 2.4 <span class="caret"></span>
 						</a>
-							<ul class="dropdown-menu">								
+							<ul class="dropdown-menu">
 								<li><a href="#siri-description"
 									data-version="2.0:FR-IDF-2.4" data-requestor="NINOXE:default"
-									data-value="../siri_france/siri">SIRI
-										profile 2.4</a></li>
+									data-value="../siri_france/siri">SIRI profile 2.4</a></li>
 								<li><a href="#siri-description" data-version="1.3"
-									data-requestor="Siri-client"
-									data-value="../siri/irys_server">SIRI
+									data-requestor="Siri-client" data-value="../siri/irys_server">SIRI
 										profile 2.2</a></li>
 							</ul></li>
 						<!-- [DSU] -->
@@ -136,9 +133,9 @@
 										<p>
 											Depuis votre navigateur WEB, vous pouvez interroger des
 											serveurs SIRI qui implémentent les services Discovery, Check
-											Status, Stop Monitoring, General Message selon les profils STIF
-											2.2 ou 2.4, en mode requête/réponse. Le site s'appuie sur des
-											logiciels libres : <a
+											Status, Stop Monitoring, General Message selon les profils
+											STIF 2.2 ou 2.4, en mode requête/réponse. Le site s'appuie
+											sur des logiciels libres : <a
 												href="https://github.com/afimb/irys-demo">un client
 												html/js</a>, un <a href="https://github.com/afimb/irys-chouette">
 												serveur IRYS</a> qui fournit l'offre temps réel de transport à
@@ -210,33 +207,38 @@
 												<h3 class="panel-title">Mode d'emploi</h3>
 											</div>
 											<dl class="panel-body">
-												<dt>Nom Arrêt</dt>
+												<dt>Nom de l'arrêt</dt>
 												<dd>Arrêt de référence pour la requête. Renseigner soit
-													le nom de l'arrêt, soit son id (8 chiffres)</dd>
+													le nom de l'arrêt, soit son identifiant SIRI</dd>
 												<dt>Nom de la ligne</dt>
 												<dd>Filtre les résultats pour la ligne choisie.
-													Renseigner soit le nom de la ligne, soit son id (8
-													chiffres)</dd>
+													Renseigner soit le nom de la ligne, soit son identifiant
+													SIRI</dd>
 												<dt>Heure</dt>
-												<dd>Heure de début de la requête</dd>
-												<dt>Type d'arrêt</dt>
-												<dd>Filtre les résultats sur le type d'arrête
-													sélectionné</dd>
-
+												<dd>Heure de début de la plage horaire observée (non
+													renseignée = heure courante)</dd>
+												<dt>Type d'horaires</dt>
+												<dd>Filtre les résultats sur le type d'horaire retourné
+													(arrivée, départ ou les 2)</dd>
 												<dt>Intervalle Temporel</dt>
-												<dd>Filtre les résultats sur le le laps de temps voulu.
-													Le poit de départ est soit l'instant de la requête, soit
-													l'heure choisie</dd>
+												<dd>Durée de la plage horaire observée (non renseignée
+													= jusqu'à fin de service)</dd>
 												<dt>Limite de passages</dt>
-												<dd>Nombre de passages maximums affichés</dd>
-												<dt>Minimum d'arrêts par ligne</dt>
-												<dd>Nombre minimum d'arrêts par ligne</dd>
+												<dd>Nombre de passages à l'arrêt de référence maximum
+													affichés</dd>
+												<dt>Minimum de passages par ligne</dt>
+												<dd>Nombre de passages à l'arrêt de référence répartis
+													par lignes</dd>
 												<dt>Arrêts suivants</dt>
-												<dd>Nombre d'onwards par arrêt</dd>												
+												<dd>Nombre d'arrêts au dela de l'arrêt de référence à
+													retourner par course.</dd>
 												<dt>Arrêt de destination</dt>
-												<dd>Filtre les résultats pour la destination choisie. Renseigner soit le nom de l'arrêt, soit son identifiant SIRI</dd>												
+												<dd>Filtre les résultats pour la destination choisie.
+													Renseigner soit le nom de l'arrêt, soit son identifiant
+													SIRI</dd>
 												<dt>Minimum de passages par via</dt>
-												<dd>Nombre de passages à l'arrêt de référence répartis par alternatives de trajets</dd>
+												<dd>Nombre de passages à l'arrêt de référence répartis
+													par alternatives de trajets</dd>
 											</dl>
 										</div>
 									</div>
@@ -286,6 +288,27 @@
 											périodes de validité sont affectées aux messages. <a href="#"
 												class="request-form-opener"> Accéder au formulaire</a>
 										</p>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="panel panel-info mt-lg">
+											<div class="panel-heading text-center">
+												<h3 class="panel-title">Mode d'emploi</h3>
+											</div>
+											<dl class="panel-body">
+												<dt>Nom de l'arrêt</dt>
+												<dd>Filtre les résultats pour l'arrêt choisi.
+													Renseigner soit le nom de l'arrêt, soit son identifiant
+													SIRI</dd>
+												<dt>Nom de la ligne</dt>
+												<dd>Filtre les résultats pour la ligne choisie.
+													Renseigner soit le nom de la ligne, soit son identifiant
+													SIRI</dd>
+												<dt>Canal d'information</dt>
+												<dd>Filtre les résultats pour un canal de messages</dd>
+											</dl>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -611,7 +634,7 @@
 
 							<form class="form-horizontal" id="stop-monitoring-form">
 								<fieldset>
-									<legend>Construire votre requête Stop Monitoring</legend>									
+									<legend>Construire votre requête Stop Monitoring</legend>
 									<div class="form-group">
 										<label for="stopName" class="col-lg-4 control-label">Nom
 											arrêt</label>
@@ -734,8 +757,8 @@
 												<option>5</option>
 											</datalist>
 										</div>
-									</div>				
-										<!--  [DSU] -->					
+									</div>
+									<!--  [DSU] -->
 									<div class="form-group siri_24">
 										<label for="minimumStopVisitPerLineVia"
 											class="col-lg-4 control-label">Minimum de passages
@@ -745,8 +768,8 @@
 												id="minimumStopVisitPerLineVia"
 												placeholder="Minimum de passages par itinéraire">
 										</div>
-									</div>						
-										<!--  [DSU] -->			
+									</div>
+									<!--  [DSU] -->
 									<div class="form-group">
 										<label for="onward" class="col-lg-4 control-label">Arrêts
 											suivants</label>
